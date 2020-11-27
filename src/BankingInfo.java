@@ -27,6 +27,14 @@ public class BankingInfo {
 	 */
 	private String cardExpirationDate;
 	
+	public BankingInfo(String c, String ct, String cn, String cs, String ce) {
+		customerName = c;
+		cardType = ct;
+		cardNumber = cn;
+		cardSVS = cs;
+		cardExpirationDate = ce;
+	}
+	
 	// Getters and Setters
 	public String getCardExpirationDate() {
 		return cardExpirationDate;
