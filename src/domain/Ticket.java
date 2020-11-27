@@ -6,15 +6,16 @@ public class Ticket {
 	private Movie the_movie;
 	private Showtime showtime;
 	private Seat seat;
-	
-	public Ticket() {}
-	
-	// This method sends the voucher code to the 
+
+	public Ticket() {
+	}
+
+	// This method sends the voucher code to the
 	// email id in the argument
 	public void emailTicket(String email) {
 		// Needs to be implemented still
 	}
-	
+
 	// Getters and Setters
 	public int getTicketID() {
 		return ticketID;
@@ -54,6 +55,6 @@ public class Ticket {
 
 	public void setSeat(Seat seat) {
 		this.seat = seat;
-	}		
+	}
 
 }

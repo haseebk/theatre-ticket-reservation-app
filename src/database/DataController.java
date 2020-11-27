@@ -3,6 +3,7 @@ package database;
 import java.util.ArrayList;
 
 import domain.Announcement;
+import domain.Auditorium;
 import domain.Movie;
 import domain.RegisteredUser;
 import domain.Showtime;
@@ -11,17 +12,18 @@ import domain.Ticket;
 
 public class DataController {
 	private static DataController onlyInstance;
-	
+
 	/**
 	 * Array lists of stored data
 	 */
-	private ArrayList<Movie>movieList;
-	private ArrayList<Showtime>showtimeList;
-	private ArrayList<Theatre>theatreList;
-	private ArrayList<Ticket>ticketList;
-	private ArrayList<RegisteredUser>userList;
-	private ArrayList<Announcement>announcementList;
-	
+	private ArrayList<Movie> movieList;
+	private ArrayList<Showtime> showtimeList;
+	private ArrayList<Theatre> theatreList;
+	private ArrayList<Ticket> ticketList;
+	private ArrayList<RegisteredUser> userList;
+	private ArrayList<Announcement> announcementList;
+	private ArrayList<Auditorium> auditoriumList;
+
 	/**
 	 * Methods to create instances
 	 */
@@ -32,21 +34,24 @@ public class DataController {
 		setTicketList(new ArrayList<Ticket>());
 		setUserList(new ArrayList<RegisteredUser>());
 		setAnnouncementList(new ArrayList<Announcement>());
+		setAuditoriumList(new ArrayList<Auditorium>());
+
 	}
-	
+
 	public static DataController getOnlyInstance() {
 		if (onlyInstance == null) {
 			onlyInstance = new DataController();
 		}
 		return onlyInstance;
 	}
-	
+
 	public static void setOnlyInstance(DataController onlyInstance) {
 		DataController.onlyInstance = onlyInstance;
 	}
-	
+
 	/**
 	 * Getter for list of movies
+	 * 
 	 * @return arraylist of movies
 	 */
 	public ArrayList<Movie> getMovieList() {
@@ -56,12 +61,12 @@ public class DataController {
 	public void setMovieList(ArrayList<Movie> movieList) {
 		this.movieList = movieList;
 	}
-	
+
 	public void addMovie(Movie movie) {
 		movieList.add(movie);
 	}
-	
-	public void removeMovie(Movie movie){
+
+	public void removeMovie(Movie movie) {
 		movieList.remove(movie);
 	}
 
@@ -72,11 +77,11 @@ public class DataController {
 	public void setShowtimeList(ArrayList<Showtime> showtimeList) {
 		this.showtimeList = showtimeList;
 	}
-	
+
 	public void addShowtime(Showtime showtime) {
 		showtimeList.add(showtime);
 	}
-	
+
 	public void removeShowtime(Showtime showtime) {
 		showtimeList.remove(showtime);
 	}
@@ -88,11 +93,11 @@ public class DataController {
 	public void setTheatreList(ArrayList<Theatre> theatreList) {
 		this.theatreList = theatreList;
 	}
-	
+
 	public void addTheatre(Theatre theatre) {
 		theatreList.add(theatre);
 	}
-	
+
 	public void removeTheatre(Theatre theatre) {
 		theatreList.remove(theatre);
 	}
@@ -104,11 +109,11 @@ public class DataController {
 	public void setTicketList(ArrayList<Ticket> ticketList) {
 		this.ticketList = ticketList;
 	}
-	
+
 	public void addTicket(Ticket ticket) {
 		ticketList.add(ticket);
 	}
-	
+
 	public void removeTicket(Ticket ticket) {
 		ticketList.remove(ticket);
 	}
@@ -120,11 +125,11 @@ public class DataController {
 	public void setUserList(ArrayList<RegisteredUser> userList) {
 		this.userList = userList;
 	}
-	
+
 	public void addUser(RegisteredUser user) {
 		userList.add(user);
 	}
-	
+
 	public void removeUser(RegisteredUser user) {
 		userList.remove(user);
 	}
@@ -136,12 +141,16 @@ public class DataController {
 	public void setAnnouncementList(ArrayList<Announcement> announcementList) {
 		this.announcementList = announcementList;
 	}
-	
+
 	public void addAnnouncement(Announcement announcement) {
 		announcementList.add(announcement);
 	}
-	
+
 	public void removeAnnouncement(Announcement announcement) {
 		announcementList.remove(announcement);
+	}
+	
+	private void setAuditoriumList(ArrayList<Auditorium> arrayList) {
+		
 	}
 }

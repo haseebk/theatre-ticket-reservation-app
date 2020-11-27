@@ -4,9 +4,10 @@ public class Seat {
 	private int row;
 	private int seatNum;
 	private boolean seatTaken;
-	
-	public Seat() {}
-	
+
+	public Seat() {
+	}
+
 	// This method shows the seat selection?
 	public void showSeatSelection() {
 		// To be implemented

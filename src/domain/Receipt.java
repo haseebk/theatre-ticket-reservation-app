@@ -5,23 +5,25 @@ public class Receipt {
 	private Payment payment;
 	private Date date;
 	private Ticket ticket;
-	
-	public Receipt() {}
-	
+
+	public Receipt() {
+	}
+
 	// This method will print the receipt to the screen?
 	public void printReceipt() {
 		System.out.println(receiptToString());
 	}
-	
-	// This method emails the receipt created 
+
+	// This method emails the receipt created
 	public void emailReceipt(String email) {
 		// to be implemented
 	}
-	
+
 	public String receiptToString() {
-		return "Receipt:\n" + "Customer: " + "\n" + "Movie: " + "\n" + "Theatre: " + "\n" + "Seat: " + "\n" + "Date: " + "\n";
+		return "Receipt:\n" + "Customer: " + "\n" + "Movie: " + "\n" + "Theatre: " + "\n" + "Seat: " + "\n" + "Date: "
+				+ "\n";
 	}
-	
+
 	// Getters and Setters
 	public int getReceiptID() {
 		return receiptID;
