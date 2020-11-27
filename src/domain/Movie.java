@@ -25,25 +25,43 @@ public class Movie {
 	/**
 	 * Length of movie in minutes
 	 */
-	private double m_length;
+	private double movieLength;
 	
 	/**
 	 * Rating of the movie
 	 */
-	private String rating;
+	private double rating;
 	
-	// Getters and Setters
-	public String getRating() {
-		return rating;
+	private Movie() {
+		this.title = "";
+		this.genre = "";
+		this.year = 0;
+		this.director = "";
+		this.movieLength = 0;
+		this.rating = 0.0;
 	}
-	public void setRating(String rating) {
+	
+	public Movie(String title, String genre, int year, String director, int movieLength, double rating) {
+		this.title = title;
+		this.genre = genre;
+		this.year = year;
+		this.director = director;
+		this.movieLength = movieLength;
 		this.rating = rating;
 	}
-	public double getM_length() {
-		return m_length;
+	
+	// Getters and Setters
+	public double getRating() {
+		return rating;
 	}
-	public void setM_length(double m_length) {
-		this.m_length = m_length;
+	public void setRating(double rating) {
+		this.rating = rating;
+	}
+	public double getMovieLength() {
+		return movieLength;
+	}
+	public void setMovieLength(double movieLength) {
+		this.movieLength = movieLength;
 	}
 	public String getDirector() {
 		return director;
