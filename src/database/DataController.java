@@ -233,7 +233,7 @@ public class DataController {
 		auditoriumList.add(auditorium);
 	}
 
-	public void removeAnnouncement(Auditorium auditorium) {
+	public void removeAuditorium(Auditorium auditorium) {
 		auditoriumList.remove(auditorium);
 	}
 
