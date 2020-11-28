@@ -2,13 +2,13 @@ package database;
 
 import java.util.ArrayList;
 
-import domain.Announcement;
-import domain.Auditorium;
-import domain.Movie;
-import domain.RegisteredUser;
-import domain.Showtime;
-import domain.Theatre;
-import domain.Ticket;
+import domain.model.Announcement;
+import domain.model.Auditorium;
+import domain.model.Movie;
+import domain.model.RegisteredUser;
+import domain.model.Showtime;
+import domain.model.Theatre;
+import domain.model.Ticket;
 
 public class DataController {
 	private static DataController onlyInstance;
@@ -180,35 +180,67 @@ public class DataController {
 	public void setTicketList(ArrayList<Ticket> ticketList) {
 		this.ticketList = ticketList;
 	}
-
+	
+	/**
+	 * Add ticket to list of tickets
+	 * @param ticket ticket to be added
+	 */
 	public void addTicket(Ticket ticket) {
 		ticketList.add(ticket);
 	}
-
+	
+	/**
+	 * Remove ticket from list of tickets
+	 * @param ticket ticket to be removed
+	 */
 	public void removeTicket(Ticket ticket) {
 		ticketList.remove(ticket);
 	}
-
+	
+	/**
+	 * Getter for list of users
+	 * @return arraylist of users
+	 */
 	public ArrayList<RegisteredUser> getUserList() {
 		return userList;
 	}
-
+	
+	/**
+	 * Setter for list of users
+	 * @param userList arraylist of users
+	 */
 	public void setUserList(ArrayList<RegisteredUser> userList) {
 		this.userList = userList;
 	}
-
+	
+	/**
+	 * Add user to list of users
+	 * @param user user to be added
+	 */
 	public void addUser(RegisteredUser user) {
 		userList.add(user);
 	}
-
+	
+	/**
+	 * Remove user from list of users
+	 * @param user user to be removed
+	 */
 	public void removeUser(RegisteredUser user) {
 		userList.remove(user);
 	}
-
+	
+	/**
+	 * Getter for list of announcements
+	 * @return list of announcements
+	 */
 	public ArrayList<Announcement> getAnnouncementList() {
 		return announcementList;
 	}
-
+	
+	/**
+	 * 
+	 * @param announcementList
+	 */
 	public void setAnnouncementList(ArrayList<Announcement> announcementList) {
 		this.announcementList = announcementList;
 	}

@@ -1,6 +1,6 @@
 package database;
 
-import domain.Movie;
+import domain.model.Movie;
 
 public class DatabasePopulator {
 	DataController dbController;
