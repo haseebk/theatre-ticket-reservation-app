@@ -15,8 +15,16 @@ public class FrontEnd extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	public FrontEnd(BackEnd backend) {
+		setMainFrame(new JFrame());
 		loginPanel = new LoginPage(getMainFrame(), backend);
-
+		getMainFrame().setTitle("Ticket Reservation System");
+		getMainFrame().setResizable(false);
+		getMainFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getMainFrame().setSize(1366, 768);
+		getMainFrame().setContentPane(loginPanel);
+		getMainFrame().revalidate();
+		getMainFrame().setLocationRelativeTo(null);
+		getMainFrame().setLayout(null);
 	}
 
 	public void addSubmitLoginMouseClicked(MouseListener e) {
@@ -29,6 +37,10 @@ public class FrontEnd extends JFrame {
 
 	public void setMainFrame(JFrame mainFrame) {
 		MainFrame = mainFrame;
+	}
+
+	public void displayGUI() {
+		getMainFrame().setVisible(true);		
 	}
 
 }

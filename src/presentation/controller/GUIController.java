@@ -4,10 +4,39 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 
-import presentation.view.FrontEnd;
+
+import presentation.view.*;
+import domain.model.*;
+
 
 public class GUIController {
+	private FrontEnd frontEnd;
+	
+	public GUIController(FrontEnd frontEnd) {
+		this.setFrontEnd(frontEnd);
+	}
+	
+	public static void main(String[] args){
+		FrontEnd frontEnd = null;
+		BackEnd backEnd = new BackEnd();
+		frontEnd = new FrontEnd(backEnd);
+		
+		
+		GUIController controller = new GUIController(frontEnd);
+		controller.runClient();
+	}
+	
+	public FrontEnd getFrontEnd() {
+		return frontEnd;
+	}
 
+	public void setFrontEnd(FrontEnd frontEnd) {
+		this.frontEnd = frontEnd;
+	}
+	
+	public void runClient() {
+		getFrontEnd().displayGUI();
+	}
 
 }
 
