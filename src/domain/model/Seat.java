@@ -1,10 +1,11 @@
 package domain.model;
 
 public class Seat {
+	private int row;
+	private int seatNum;
 	private boolean seatTaken;
 
 	public Seat() {
-		seatTaken = false;
 	}
 
 	// This method shows the seat selection?
@@ -12,16 +13,30 @@ public class Seat {
 		// To be implemented
 	}
 
-	// Getters and Setters
-
-	//Returns true if the seat was vacant, and was successfully able to book the seat
-	//Returns false of the seat was already taken
-	public void bookSeat(){
+	public void bookSeat() {
 		seatTaken = true;
 	}
-
-	public void vacateSeat(){
+	
+	public void vacateSeat() {
 		seatTaken = false;
+	}
+	
+	
+	// Getters and Setters
+	public int getRow() {
+		return row;
+	}
+
+	public void setRow(int row) {
+		this.row = row;
+	}
+
+	public int getSeatNum() {
+		return seatNum;
+	}
+
+	public void setSeatNum(int seatNum) {
+		this.seatNum = seatNum;
 	}
 
 	public boolean isSeatTaken() {

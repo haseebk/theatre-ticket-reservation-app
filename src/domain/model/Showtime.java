@@ -25,6 +25,7 @@ public class Showtime {
 		row = a.getNum_of_rows();
 		col = a.getNum_of_cols();
 		seats = new Seat[row][col];
+		//seats = Seat()[row][col];
 		totalAvaliableSeats = row * col;
 	}
 
@@ -36,19 +37,20 @@ public class Showtime {
 		row = a.getNum_of_rows();
 		col = a.getNum_of_cols();
 		seats = new Seat[row][col];
+		//seats = Seat()[row][col];
 		totalAvaliableSeats = row * col;
 	}
 
 	// PROMISES: returns the seat avaliability
 	// REQUIRES: the row and column of the seat
-	public boolean getSeatAvaliability(int r, int c) {
+	public Boolean getSeatAvaliability(int r, int c) {
 		return seats[r][c].isSeatTaken();
 	}
 
 	// PROMISES: books the seat if it is vacant, returns true if successful.
 	// returns false is unsuccessful since the seat was already taken
 	// REQUIRES: the row and column of the seat
-	public boolean bookSeat(int r, int c) {
+	public Boolean bookSeat(int r, int c) {
 		if (seats[r][c].isSeatTaken() == false) {
 			seats[r][c].bookSeat();
 			totalAvaliableSeats--;

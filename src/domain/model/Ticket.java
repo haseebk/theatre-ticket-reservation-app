@@ -7,7 +7,12 @@ public class Ticket {
 	private Showtime showtime;
 	private Seat seat;
 
-	public Ticket() {
+	public Ticket(int id, Payment p, Movie m, Showtime s, Seat s1) {
+		ticketID = id;
+		payment = p;
+		the_movie = m;
+		showtime = s;
+		seat = s1;
 	}
 
 	// This method sends the voucher code to the
