@@ -72,6 +72,18 @@ public class HomePage extends JPanel {
 		announcementButton.setIcon(new ImageIcon(HomePage.class.getResource("/megaphoneButton.png")));
 		add(announcementButton);
 
+		// CREATE MOVIE CARD VIEW
+		JLabel movieCard = new JLabel("");
+		movieCard.setBounds(40, 132, 401, 564);
+		movieCard.setIcon(new ImageIcon(HomePage.class.getResource("/movieCard.png")));
+		add(movieCard);
+
+		// CREATE AUDITORIUM CARD VIEW
+		JLabel auditoriumCard = new JLabel("");
+		auditoriumCard.setBounds(525, 132, 801, 564);
+		auditoriumCard.setIcon(new ImageIcon(HomePage.class.getResource("/auditoriumCard.png")));
+		add(auditoriumCard);
+
 		// CREATE BACKGROUND VIEW
 		JLabel homeBackground = new JLabel("");
 		homeBackground.setBounds(-2, -1, 1366, 768);
