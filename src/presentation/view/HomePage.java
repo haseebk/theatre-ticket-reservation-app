@@ -26,9 +26,12 @@ public class HomePage extends JPanel {
 	private JLabel announcementButton;
 
 	public HomePage(JFrame frame, BackEnd backend) {
+		setLayout(null);
+
 		// CREATE LOGOUT BUTTON
 		logoutButton = new JLabel("");
 		logoutButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		logoutButton.setToolTipText("Logout");
 		logoutButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -37,33 +40,35 @@ public class HomePage extends JPanel {
 				frame.revalidate();
 			}
 		});
-		logoutButton.setBounds(30, 30, 50, 50);
+		logoutButton.setBounds(30, 5, 50, 50);
 		logoutButton.setIcon(new ImageIcon(HomePage.class.getResource("/backButton.png")));
 		add(logoutButton);
 
 		// CREATE CART BUTTON
 		cartButton = new JLabel("");
 		cartButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		cartButton.setToolTipText("View Cart");
 		cartButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
 			}
 		});
-		cartButton.setBounds(30, 30, 50, 50);
+		cartButton.setBounds(1366 - 32 - 30, 14, 32, 32);
 		cartButton.setIcon(new ImageIcon(HomePage.class.getResource("/cartButton.png")));
 		add(cartButton);
 
-		// CREATE BACK BUTTON
+		// CREATE ACCOUNCEMENT BUTTON
 		announcementButton = new JLabel("");
 		announcementButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		announcementButton.setToolTipText("View Announcements");
 		announcementButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
 			}
 		});
-		announcementButton.setBounds(30, 30, 50, 50);
+		announcementButton.setBounds(1366 - 32 - 90, 14, 32, 32);
 		announcementButton.setIcon(new ImageIcon(HomePage.class.getResource("/megaphoneButton.png")));
 		add(announcementButton);
 
