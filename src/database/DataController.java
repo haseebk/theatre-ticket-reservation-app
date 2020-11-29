@@ -12,6 +12,7 @@ import domain.model.Ticket;
 
 public class DataController {
 	private static DataController onlyInstance;
+	private DatabasePopulator populator;
 
 	/**
 	 * Array lists of stored data
@@ -35,7 +36,6 @@ public class DataController {
 		setUserList(new ArrayList<RegisteredUser>());
 		setAnnouncementList(new ArrayList<Announcement>());
 		setAuditoriumList(new ArrayList<Auditorium>());
-
 	}
 
 	/**

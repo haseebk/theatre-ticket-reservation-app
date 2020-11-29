@@ -10,6 +10,7 @@ import javax.swing.JPasswordField;
 import javax.swing.border.MatteBorder;
 
 import domain.model.BackEnd;
+import domain.model.User;
 
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
@@ -154,7 +155,13 @@ public class LoginPage extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				String user = usernameTextField.getText();
 				String pass = String.valueOf(passwordField.getPassword());
-				invalidLoginErrorLabel.setVisible(true);
+				System.out.println("User inputed:" + user + " " + pass);
+				if(backend.verifyLogin(user,pass) != null) {
+					HomePage homePanel = new HomePage(frame, backend);
+					frame.setContentPane(homePanel);
+				}else{
+					invalidLoginErrorLabel.setVisible(true);
+				}
 				frame.revalidate();
 			}
 		});
