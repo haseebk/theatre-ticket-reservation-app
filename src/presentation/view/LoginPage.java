@@ -62,12 +62,22 @@ public class LoginPage extends JPanel {
 	public LoginPage(JFrame frame, BackEnd backend) {
 		setLayout(null);
 
-		// CREATE GUEST CHECKOUT BUTTON
+		// CREATE GUEST LOGIN BUTTON
 		guestButton = new JLabel("CONTINUE AS GUEST");
 		guestButton.setHorizontalAlignment(SwingConstants.CENTER);
 		guestButton.setForeground(Color.GRAY);
 		guestButton.setFont(new Font("Arial", Font.BOLD, 11));
 		guestButton.setBounds(632, 502, 118, 14);
+		guestButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		guestButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+//					Register registerPanel = new Register(frame, backend, auth);
+				RegisterPage registerPanel = new RegisterPage(frame, backend);
+				frame.setContentPane(registerPanel);
+				frame.revalidate();
+			}
+		});
 		add(guestButton);
 
 		// CREATE REGISTER BUTTON
@@ -111,14 +121,16 @@ public class LoginPage extends JPanel {
 
 		// CREATE USERNAME TEXT LABEL
 		usernameLabel = new JLabel("Username");
-		usernameLabel.setForeground(Color.GRAY);
+		usernameLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		usernameLabel.setForeground(Color.WHITE);
 		usernameLabel.setFont(new Font("Arial", Font.PLAIN, 16));
 		usernameLabel.setBounds(653, 299, 77, 14);
 		add(usernameLabel);
 
 		// CREATE PASSWORD TEXT LABEL
 		passwordLabel = new JLabel("Password");
-		passwordLabel.setForeground(Color.GRAY);
+		passwordLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		passwordLabel.setForeground(Color.WHITE);
 		passwordLabel.setFont(new Font("Arial", Font.PLAIN, 16));
 		passwordLabel.setBounds(653, 372, 77, 14);
 		add(passwordLabel);
