@@ -1,6 +1,8 @@
 package presentation.view;
 
+import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -8,6 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import domain.model.BackEnd;
 
@@ -27,7 +30,29 @@ public class HomePage extends JPanel {
 
 	public HomePage(JFrame frame, BackEnd backend) {
 		setLayout(null);
-
+		
+		// CREATE NO DATE SELECTED TEXT LABEL
+		JLabel noDateSelectedLabel = new JLabel("<html>"
+				+ "Please select a date."
+				+ "</html>");
+		noDateSelectedLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		noDateSelectedLabel.setForeground(Color.RED);
+		noDateSelectedLabel.setFont(new Font("Arial", Font.PLAIN, 13));
+		noDateSelectedLabel.setBounds(564, 235, 254, 45);
+//		noDateSelectedLabel.setVisible(false);
+		add(noDateSelectedLabel);
+		
+		// CREATE NO MOVIE SELECTED TEXT LABEL
+		JLabel noMovieSelectedLabel = new JLabel("<html>"
+				+ "Please select a movie."
+				+ "</html>");
+		noMovieSelectedLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		noMovieSelectedLabel.setForeground(Color.RED);
+		noMovieSelectedLabel.setFont(new Font("Arial", Font.PLAIN, 13));
+		noMovieSelectedLabel.setBounds(564, 235, 254, 45);
+//		noDateSelectedLabel.setVisible(false);
+		add(noMovieSelectedLabel);
+		
 		// CREATE LOGOUT BUTTON
 		logoutButton = new JLabel("");
 		logoutButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
