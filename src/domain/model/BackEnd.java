@@ -8,7 +8,8 @@ public class BackEnd implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private DataController dataController;
-	private User currentUser;
+
+	private RegisteredUser currentUser;
 
 	public BackEnd() {
 		dataController = DataController.getOnlyInstance();
@@ -16,7 +17,7 @@ public class BackEnd implements Serializable{
 
 	//Sets the current user to a Guest User
 	public void guestUser(){
-		currentUser = new GuestUser();
+		currentUser = null;
 	}
 
 	//Verifies the login credentials of the current user
@@ -27,11 +28,23 @@ public class BackEnd implements Serializable{
 		for(int i = 0; i < dataController.getUserList().size(); i++){
 			System.out.println("The system's info: " + dataController.getUserList().get(i).username + " " + dataController.getUserList().get(i).password);
 			if(dataController.getUserList().get(i).username.compareTo(username) == 0 && dataController.getUserList().get(i).password.compareTo(password) == 0){
+				currentUser = dataController.getUserList().get(i);
 				return dataController.getUserList().get(i);
 			}
 		}
 		return null;
 	}
+
+	//Clears the current user
+	public void userLogout(){
+		currentUser = null;
+	}
+
+
+	//Getters and setters
+	public RegisteredUser getCurrentUser() { return currentUser; }
+
+	public void setCurrentUser(RegisteredUser currentUser) { this.currentUser = currentUser; }
 
 
 }

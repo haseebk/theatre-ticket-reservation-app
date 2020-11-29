@@ -6,11 +6,8 @@ import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
+import javax.swing.*;
+import javax.swing.border.MatteBorder;
 
 import domain.model.BackEnd;
 
@@ -52,7 +49,15 @@ public class HomePage extends JPanel {
 		noMovieSelectedLabel.setBounds(564, 235, 254, 45);
 //		noDateSelectedLabel.setVisible(false);
 		add(noMovieSelectedLabel);
-		
+
+		// CREATE WELCOME TEXT LABEL
+		JLabel welcomeLabel = new JLabel("Welcome " + backend.getCurrentUser().getF_name() + " " + backend.getCurrentUser().getL_name());
+		welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		welcomeLabel.setForeground(Color.WHITE);
+		welcomeLabel.setFont(new Font("Arial", Font.PLAIN, 25));
+		welcomeLabel.setBounds(20, 20, 500, 20);
+		add(welcomeLabel);
+
 		// CREATE LOGOUT BUTTON
 		logoutButton = new JLabel("");
 		logoutButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -60,6 +65,7 @@ public class HomePage extends JPanel {
 		logoutButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				backend.userLogout();
 				LoginPage loginPanel = new LoginPage(frame, backend);
 				frame.setContentPane(loginPanel);
 				frame.revalidate();
