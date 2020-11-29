@@ -1,9 +1,10 @@
-package domain;
+package domain.model;
 
 import java.util.ArrayList;
 
 public class Theatre {
 
+	private String t_name;
 	/**
 	 * The id of the theatre
 	 */
@@ -24,7 +25,8 @@ public class Theatre {
 		setAuditoriums(new ArrayList<Auditorium>());
 	}
 
-	public Theatre(int theatreID, ArrayList<Auditorium> auditoriums, String phoneNumber) {
+	public Theatre(String t, int theatreID, ArrayList<Auditorium> auditoriums, String phoneNumber) {
+		this.t_name = t;
 		this.theatreID = theatreID;
 		this.setAuditoriums(auditoriums);
 		this.phoneNumber = phoneNumber;
@@ -53,6 +55,14 @@ public class Theatre {
 
 	public void setAuditoriums(ArrayList<Auditorium> auditoriums) {
 		this.auditoriums = auditoriums;
+	}
+	
+	public String getT_name() {
+		return t_name;
+	}
+
+	public void setT_name(String t_name) {
+		this.t_name = t_name;
 	}
 
 };

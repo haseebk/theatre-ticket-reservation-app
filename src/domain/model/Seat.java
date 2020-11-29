@@ -1,4 +1,4 @@
-package domain;
+package domain.model;
 
 public class Seat {
 	private int row;
@@ -13,6 +13,15 @@ public class Seat {
 		// To be implemented
 	}
 
+	public void bookSeat() {
+		seatTaken = true;
+	}
+	
+	public void vacateSeat() {
+		seatTaken = false;
+	}
+	
+	
 	// Getters and Setters
 	public int getRow() {
 		return row;

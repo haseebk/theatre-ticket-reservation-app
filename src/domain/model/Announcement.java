@@ -1,6 +1,6 @@
-package domain;
+package domain.model;
 
-import domain.Date;
+import domain.model.Date;
 
 public class Announcement {
 	private Date announceDate;
