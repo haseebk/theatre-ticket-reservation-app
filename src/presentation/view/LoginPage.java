@@ -72,9 +72,8 @@ public class LoginPage extends JPanel {
 		guestButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-//					Register registerPanel = new Register(frame, backend, auth);
-				RegisterPage registerPanel = new RegisterPage(frame, backend);
-				frame.setContentPane(registerPanel);
+				HomePage homePanel = new HomePage(frame, backend);
+				frame.setContentPane(homePanel);
 				frame.revalidate();
 			}
 		});
