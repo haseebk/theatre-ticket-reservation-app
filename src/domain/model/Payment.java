@@ -2,14 +2,20 @@ package domain.model;
 
 public class Payment {
 	private int paymentID;
-	private int amount;
+	private double amount;
 	BankingInfo card;
 	
+	public Payment(int pId, double a, BankingInfo c) {
+		paymentID = pId;
+		amount = a;
+		card = c;
+	}
+	
 	// Getters and Setters
-	public int getAmount() {
+	public double getAmount() {
 		return amount;
 	}
-	public void setAmount(int amount) {
+	public void setAmount(double amount) {
 		this.amount = amount;
 	}
 	public int getPaymentID() {
