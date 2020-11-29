@@ -51,7 +51,12 @@ public class HomePage extends JPanel {
 		add(noMovieSelectedLabel);
 
 		// CREATE WELCOME TEXT LABEL
-		JLabel welcomeLabel = new JLabel("Welcome " + backend.getCurrentUser().getF_name() + " " + backend.getCurrentUser().getL_name());
+		JLabel welcomeLabel;
+		if(backend.getCurrentUser() == null){
+			welcomeLabel = new JLabel("Welcome Guest");
+		}else {
+			welcomeLabel = new JLabel("Welcome " + backend.getCurrentUser().getF_name() + " " + backend.getCurrentUser().getL_name());
+		}
 		welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		welcomeLabel.setForeground(Color.WHITE);
 		welcomeLabel.setFont(new Font("Arial", Font.PLAIN, 25));
