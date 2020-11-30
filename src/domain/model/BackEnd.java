@@ -25,11 +25,11 @@ public class BackEnd implements Serializable {
 	// and will return the User's ID;
 	// If the login failed return -1;
 	public RegisteredUser verifyLogin(String username, String password) {
-		System.out.println("Verifying login from list of " + dataController.getUserList().size() + " users.");
+		System.out.println("verify login" + dataController.getUserList().size());
 		for (int i = 0; i < dataController.getUserList().size(); i++) {
 			System.out.println("The system's info: " + dataController.getUserList().get(i).username + " "
 					+ dataController.getUserList().get(i).password);
-			if (dataController.getUserList().get(i).username.toLowerCase().compareTo(username.toLowerCase()) == 0
+			if (dataController.getUserList().get(i).username.compareTo(username) == 0
 					&& dataController.getUserList().get(i).password.compareTo(password) == 0) {
 				currentUser = dataController.getUserList().get(i);
 				return dataController.getUserList().get(i);

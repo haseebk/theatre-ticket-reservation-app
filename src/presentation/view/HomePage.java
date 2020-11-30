@@ -3,15 +3,6 @@ package presentation.view;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -337,23 +328,29 @@ public class HomePage extends JPanel {
 				if (currentTheatre != null) {
 					theatreDetailsLabel.setText("Name: " + currentTheatre.getT_name() + "\nAddress: "
 							+ currentTheatre.getAddress() + "\nPhone: " + currentTheatre.getPhoneNumber());
-					theatreDetailsLabel.setVisible(true);
+					currentTheatre = backend.getDataController()
+							.findTheatre((String) theatreSelectComboBox.getSelectedItem());
+					if (currentTheatre != null) {
+						theatreDetailsLabel.setText("Name: " + currentTheatre.getT_name() + "\nAddress: "
+								+ currentTheatre.getAddress() + "\nPhone: " + currentTheatre.getPhoneNumber());
+						theatreDetailsLabel.setVisible(true);
 
-					DefaultComboBoxModel model2 = (DefaultComboBoxModel) showtimeSelectComboBox.getModel();
-					model2.removeAllElements();
-					ArrayList<Showtime> showtimeList = backend.getDataController().findAllShowtime(currentMovie,
-							currentTheatre);
-					for (int i = 0; i < showtimeList.size(); i++) {
-						System.out.println(showtimeList.get(i).getShowDate().getDate());
-						model2.addElement(showtimeList.get(i).getShowDate().getDate());
+						DefaultComboBoxModel model2 = (DefaultComboBoxModel) showtimeSelectComboBox.getModel();
+						model2.removeAllElements();
+						ArrayList<Showtime> showtimeList = backend.getDataController().findAllShowtime(currentMovie,
+								currentTheatre);
+						for (int i = 0; i < showtimeList.size(); i++) {
+							System.out.println(showtimeList.get(i).getShowDate().getDate());
+							model2.addElement(showtimeList.get(i).getShowDate().getDate());
+						}
+						showtimeSelectComboBox.setModel(model2);
+						showtimeSelectComboBox.setVisible(true);
+						noShowTimeSelectedLabel.setVisible(true);
+						selectShowtimeLabel.setVisible(true);
+					} else {
+						System.out.println("No theatre found");
+						theatreDetailsLabel.setVisible(false);
 					}
-					showtimeSelectComboBox.setModel(model2);
-					showtimeSelectComboBox.setVisible(true);
-					noShowTimeSelectedLabel.setVisible(true);
-					selectShowtimeLabel.setVisible(true);
-				} else {
-					System.out.println("No theatre found");
-					theatreDetailsLabel.setVisible(false);
 				}
 			}
 		});
@@ -374,7 +371,7 @@ public class HomePage extends JPanel {
 		// CREATE MOVIE DETAILS TEXT
 		JTextArea movieDetailsLabel = new JTextArea("");
 		movieDetailsLabel.setForeground(Color.WHITE);
-		movieDetailsLabel.setFont(new Font("HelveticaNeue", Font.PLAIN, 15));
+		movieDetailsLabel.setFont(new Font("Arial", Font.PLAIN, 15));
 		movieDetailsLabel.setBounds(273, 233, 123, 268);
 		movieDetailsLabel.setVisible(false);
 		movieDetailsLabel.setLineWrap(true);
@@ -390,7 +387,7 @@ public class HomePage extends JPanel {
 		add(posterCard);
 
 		// CREATE MOVIE SELECTOR
-		Vector movieList = new Vector();
+		Vector<String> movieList = new Vector<String>();
 		for (int i = 0; i < backend.getDataController().getMovieList().size(); i++) {
 			movieList.add(backend.getDataController().getMovieList().get(i).getTitle());
 		}
@@ -411,10 +408,10 @@ public class HomePage extends JPanel {
 				currentMovie = backend.getDataController().findMovie(temp);
 				currentTheatre = null;
 
-				movieDetailsLabel.setText("Title: " + currentMovie.getTitle() + "\nGenre: " + currentMovie.getGenre()
-						+ "\nYear: " + currentMovie.getYear() + "\nDirector: " + currentMovie.getDirector()
-						+ "\nMovie Length: " + currentMovie.getMovieLength() + " mins\nRating: "
-						+ currentMovie.getRating());
+				movieDetailsLabel.setText(currentMovie.getTitle() + "\n\nGenre: "
+						+ currentMovie.getGenre() + "\n\nYear: " + currentMovie.getYear() + "\n\nDirector: "
+						+ currentMovie.getDirector() + "\n\nMovie Length: " + currentMovie.getMovieLength()
+						+ " mins\n\nRating: " + currentMovie.getRating());
 				posterCard.setIcon(new ImageIcon(HomePage.class.getResource("/" + currentMovie.getPoster() + ".jpg")));
 
 				movieDetailsLabel.setVisible(true);
@@ -478,7 +475,6 @@ public class HomePage extends JPanel {
 		cartButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-
 				System.out.println("View Cart");
 			}
 		});
@@ -493,7 +489,6 @@ public class HomePage extends JPanel {
 		announcementButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-
 				System.out.println("Announcement");
 			}
 		});
