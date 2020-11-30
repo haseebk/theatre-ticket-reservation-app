@@ -4,8 +4,11 @@ public class Seat {
 	private int row;
 	private int seatNum;
 	private boolean seatTaken;
-
-	public Seat() {
+	
+	public Seat(int r, int n, boolean s) {
+		row = r;
+		seatNum = n;
+		seatTaken = s;
 	}
 
 	// This method shows the seat selection?
