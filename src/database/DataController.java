@@ -169,7 +169,7 @@ public class DataController {
 	}
 
 	/**
-	 * >>>>>>> 894e77af10f4a039a72e9a3bf4b3d8bff9f91556 Setter for list of movies
+	 * Setter for list of movies
 	 * 
 	 * @param movieList arraylist of movies
 	 */
