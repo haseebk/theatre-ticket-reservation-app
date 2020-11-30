@@ -21,7 +21,7 @@ public class DatabasePopulator {
 	private Showtime s1;
 	private Showtime s2;
 	
-	private DatabasePopulator() {
+	public DatabasePopulator() {
 		dbController = DataController.getOnlyInstance();
 	}
 	
