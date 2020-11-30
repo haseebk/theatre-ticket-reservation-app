@@ -22,6 +22,11 @@ public class Theatre {
 	 */
 	private String phoneNumber;
 
+	/**
+	 * The address of the theatre
+	 */
+	private String address;
+
 	public Theatre() {
 		theatreID = 0;
 		setAuditoriums(new ArrayList<Auditorium>());
@@ -62,5 +67,9 @@ public class Theatre {
 	public void setAuditoriums(ArrayList<Auditorium> auditoriums) {
 		this.auditoriums = auditoriums;
 	}
+
+	public String getAddress() { return address; }
+
+	public void setAddress(String address) { this.address = address; }
 
 };
