@@ -12,7 +12,7 @@ public class Date {
     }
 
     public String getDate(){
-        return (month + " " + day + ", " + year);
+        return (month + "/" + day + "/" + year);
     }
 
     public void setDate(int d, String m, int y){

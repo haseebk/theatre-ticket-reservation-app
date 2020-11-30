@@ -5,7 +5,10 @@ public class Seat {
 	private int seatNum;
 	private boolean seatTaken;
 
-	public Seat() {
+	public Seat(int row, int seatNum) {
+		this.row = row;
+		this.seatNum = seatNum;
+		seatTaken = false;
 	}
 
 	// This method shows the seat selection?

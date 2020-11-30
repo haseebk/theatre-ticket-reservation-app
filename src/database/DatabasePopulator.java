@@ -35,10 +35,10 @@ public class DatabasePopulator {
 	}
 	
 	public void loadMovies() {
-		Movie spiderverse = new Movie("Spider-Man: Into the Spider-Verse","Action", 2018, "Peter Ramsey", 116, 8.4);
-		Movie getout = new Movie("Get Out","Thriller", 2017, "Peter Ramsey", 104, 7.7);
-		Movie hereditary = new Movie("Hereditary","Horror", 2018, "Ari Aster", 127, 7.3);
-		Movie paddington = new Movie("Paddington 2","Adventure", 2017, "Paul King", 104, 7.8);
+		spiderverse = new Movie("Spider-Man: Into the Spider-Verse","Action", 2018, "Peter Ramsey", 116, 8.4);
+		getout = new Movie("Get Out","Thriller", 2017, "Peter Ramsey", 104, 7.7);
+		hereditary = new Movie("Hereditary","Horror", 2018, "Ari Aster", 127, 7.3);
+		paddington = new Movie("Paddington 2","Adventure", 2017, "Paul King", 104, 7.8);
 
 		dbController.addMovie(spiderverse);
 		dbController.addMovie(getout);
@@ -50,14 +50,29 @@ public class DatabasePopulator {
 		
 		ArrayList<Auditorium> a1 = new ArrayList<Auditorium>(2);
 		ArrayList<Auditorium> a2 = new ArrayList<Auditorium>(2);
+<<<<<<< HEAD
 		a1.add(new Auditorium(6, 6));
 		a1.add(new Auditorium(6, 6));
 		a2.add(new Auditorium(7, 7));
 		a2.add(new Auditorium(7, 7));
+=======
+		a1.add(new Auditorium(4, 6));
+		a1.add(new Auditorium(6, 6));
+		a2.add(new Auditorium(9, 7));
+		a2.add(new Auditorium(7, 8));
+>>>>>>> 894e77af10f4a039a72e9a3bf4b3d8bff9f91556
 		
 		Theatre t1 = new Theatre("Theatre 1", 1, a1, "123456789");
 		Theatre t2 = new Theatre("Theatre 2", 2, a2, "987654321");
 		loadShowtimes(a1, a2);
+<<<<<<< HEAD
+=======
+
+		a1.get(0).setTheatre(t1);
+		a1.get(1).setTheatre(t1);
+		a2.get(0).setTheatre(t2);
+		a2.get(1).setTheatre(t2);
+>>>>>>> 894e77af10f4a039a72e9a3bf4b3d8bff9f91556
 		
 		dbController.addTheatre(t1);
 		dbController.addTheatre(t2);
