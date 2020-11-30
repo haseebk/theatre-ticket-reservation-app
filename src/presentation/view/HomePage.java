@@ -3,15 +3,6 @@ package presentation.view;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -53,25 +44,33 @@ public class HomePage extends JPanel {
 	public HomePage(JFrame frame, BackEnd backend) {
 		setLayout(null);
 
-		JLabel noDateSelectedLabel = new JLabel("<html>" + "Please select a date." + "</html>");
+		/*
+		// CREATE NO DATE SELECTED TEXT LABEL
+		JLabel noDateSelectedLabel = new JLabel("<html>"
+				+ "Please select a date."
+				+ "</html>");
 		noDateSelectedLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		noDateSelectedLabel.setForeground(Color.RED);
 		noDateSelectedLabel.setFont(new Font("Arial", Font.PLAIN, 13));
-		noDateSelectedLabel.setBounds(564, 235, 254, 45); // noDateSelectedLabel.setVisible(false);
-															// add(noDateSelectedLabel);
-
+		noDateSelectedLabel.setBounds(564, 235, 254, 45);
+//		noDateSelectedLabel.setVisible(false);
+		add(noDateSelectedLabel);
+		
 		// CREATE NO MOVIE SELECTED TEXT LABEL
-		JLabel noMovieSelectedLabel = new JLabel("<html>" + "Please select a movie." + "</html>");
+		JLabel noMovieSelectedLabel = new JLabel("<html>"
+				+ "Please select a movie."
+				+ "</html>");
 		noMovieSelectedLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		noMovieSelectedLabel.setForeground(Color.RED);
 		noMovieSelectedLabel.setFont(new Font("Arial", Font.PLAIN, 13));
-		noMovieSelectedLabel.setBounds(564, 235, 254, 45); //
-		noDateSelectedLabel.setVisible(false);
+		noMovieSelectedLabel.setBounds(564, 235, 254, 45);
+//		noDateSelectedLabel.setVisible(false);
 		add(noMovieSelectedLabel);
+		*/
 
-		// =========================================
+		//=========================================
 		// SELECT SEAT
-		// =========================================
+		//=========================================
 
 		// CREATE ROW TEXT FIELD
 		JTextField rowTextField = new JTextField();
@@ -129,16 +128,13 @@ public class HomePage extends JPanel {
 				try {
 					int tempRow = Integer.parseInt(rowTextField.getText());
 					int tempCol = Integer.parseInt(colTextField.getText());
-					if (tempRow < currentShowtime.getRow() && tempCol < currentShowtime.getCol()) {
-						boolean booking = backend.getDataController().getShowtimeList()
-								.get(currentShowtime.getShowtimeID()).bookSeat(tempRow, tempCol);
+					if(tempRow < currentShowtime.getRow() && tempCol < currentShowtime.getCol()) {
+						boolean booking = backend.getDataController().getShowtimeList().get(currentShowtime.getShowtimeID()).bookSeat(tempRow, tempCol);
 						if (booking == true) {
-							System.out.println("Added ticket To Cart for:\nMovie: " + currentMovie.getTitle()
-									+ "\nTheatre: " + currentTheatre.getT_name() + "\nDate: "
-									+ currentShowtime.getShowDate().getDate() + "\nSeat Row: " + tempRow
-									+ ", Seat Column: " + tempCol);
-							currentShowtime = backend.getDataController().getShowtimeList()
-									.get(currentShowtime.getShowtimeID());
+							System.out.println("Added ticket To Cart for:\nMovie: " + currentMovie.getTitle() +
+									"\nTheatre: " + currentTheatre.getT_name() + "\nDate: " + currentShowtime.getShowDate().getDate() +
+									"\nSeat Row: " + tempRow + ", Seat Column: " + tempCol);
+							currentShowtime = backend.getDataController().getShowtimeList().get(currentShowtime.getShowtimeID());
 
 							String tempGraphic = "";
 							for (int i = 0; i < currentShowtime.getRow(); i++) {
@@ -153,27 +149,27 @@ public class HomePage extends JPanel {
 							}
 							seatGraphicLabel.setText(tempGraphic);
 							seatGraphicLabel.setVisible(true);
-						} else {
+						}else {
 							System.out.println("Seat already taken");
 						}
-					} else {
+					}else{
 						System.out.println("Invalid row or column value");
 					}
 					frame.revalidate();
-				} catch (NumberFormatException f) {
+				}catch(NumberFormatException f){
 					System.out.println(f);
 				}
 			}
 		});
 		AddToCartButton.setBounds(1100, 420, 254, 50);
 		AddToCartButton.setVisible(false);
-		// AddToCartButton.setIcon(new
-		// ImageIcon(LoginPage.class.getResource("/enterButton.png")));
+		//AddToCartButton.setIcon(new ImageIcon(LoginPage.class.getResource("/enterButton.png")));
 		add(AddToCartButton);
 
-		// ==========================================
+
+		//==========================================
 		// SELECT SHOWTIME
-		// ==========================================
+		//==========================================
 
 		// CREATE SELECT SEAT TEXT
 		JLabel selectSeatLabel = new JLabel("Please Select Seat");
@@ -195,9 +191,9 @@ public class HomePage extends JPanel {
 		seatGraphicLabel.setEditable(false);
 		add(seatGraphicLabel);
 
-		// ==========================================
+		//==========================================
 		// SELECT SHOWTIME
-		// ==========================================
+		//==========================================
 
 		// CREATE SELECT SHOWTIME TEXT
 		JLabel selectShowtimeLabel = new JLabel("Please Select Showtime");
@@ -230,17 +226,16 @@ public class HomePage extends JPanel {
 		showtimeSelectComboBox.setBounds(900, 180, 200, 28);
 		showtimeSelectComboBox.setOpaque(true);
 		showtimeSelectComboBox.setVisible(false);
-		showtimeSelectComboBox.addActionListener(new ActionListener() {
+		showtimeSelectComboBox.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Date Combo Box Pressed: " + showtimeSelectComboBox.getSelectedItem());
-				String tempString = (String) showtimeSelectComboBox.getSelectedItem();
-				if (tempString != null) {
+				String tempString = (String)showtimeSelectComboBox.getSelectedItem();
+				if(tempString != null) {
 					String[] tempStringArray = tempString.split("/");
-					Date tempDate = new Date(Integer.parseInt(tempStringArray[1]), tempStringArray[0],
-							Integer.parseInt(tempStringArray[2]));
-					currentShowtime = backend.getDataController().findShowtime(currentMovie, currentTheatre, tempDate);
-					if (currentShowtime != null) {
+					Date tempDate = new Date(Integer.parseInt(tempStringArray[1]),tempStringArray[0],Integer.parseInt(tempStringArray[2]));
+					currentShowtime = backend.getDataController().findShowtime(currentMovie,currentTheatre,tempDate);
+					if(currentShowtime != null) {
 						System.out.println("Showtime found");
 						showtimeDetailsLabel.setText("Auditorium: " + currentShowtime.getAuditorium().getAuditoriumID()
 								+ "\nNumber of Avaliable Seats: " + currentShowtime.getTotalAvaliableSeats());
@@ -253,11 +248,11 @@ public class HomePage extends JPanel {
 						AddToCartButton.setVisible(true);
 
 						String tempGraphic = "";
-						for (int i = 0; i < currentShowtime.getRow(); i++) {
-							for (int j = 0; j < currentShowtime.getCol(); j++) {
-								if (currentShowtime.getSeatAvaliability(i, j) == true) {
+						for(int i = 0; i < currentShowtime.getRow(); i++){
+							for(int j = 0; j < currentShowtime.getCol(); j++){
+								if(currentShowtime.getSeatAvaliability(i,j) == true){
 									tempGraphic += "X   ";
-								} else {
+								}else{
 									tempGraphic += "O   ";
 								}
 							}
@@ -266,11 +261,11 @@ public class HomePage extends JPanel {
 						seatGraphicLabel.setText(tempGraphic);
 						seatGraphicLabel.setVisible(true);
 						selectSeatLabel.setVisible(true);
-					} else {
+					}else{
 						System.out.println("No showtime found");
 						showtimeDetailsLabel.setVisible(false);
 					}
-				} else {
+				}else{
 					System.out.println("No showtime found");
 					showtimeDetailsLabel.setVisible(false);
 				}
@@ -278,9 +273,9 @@ public class HomePage extends JPanel {
 		});
 		add(showtimeSelectComboBox);
 
-		// ==========================================
+		//==========================================
 		// SELECT THEATRE
-		// ==========================================
+		//==========================================
 
 		// CREATE SELECT THEATRE TEXT
 		JLabel selectTheatreLabel = new JLabel("Please Select Theatre");
@@ -313,29 +308,28 @@ public class HomePage extends JPanel {
 		theatreSelectComboBox.setBounds(600, 180, 200, 28);
 		theatreSelectComboBox.setOpaque(true);
 		theatreSelectComboBox.setVisible(false);
-		theatreSelectComboBox.addActionListener(new ActionListener() {
+		theatreSelectComboBox.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Theatre Combo Box Pressed: " + theatreSelectComboBox.getSelectedItem());
-				currentTheatre = backend.getDataController()
-						.findTheatre((String) theatreSelectComboBox.getSelectedItem());
-				if (currentTheatre != null) {
-					theatreDetailsLabel.setText("Name: " + currentTheatre.getT_name() + "\nAddress: "
-							+ currentTheatre.getAddress() + "\nPhone: " + currentTheatre.getPhoneNumber());
+				currentTheatre = backend.getDataController().findTheatre((String)theatreSelectComboBox.getSelectedItem());
+				if(currentTheatre != null) {
+					theatreDetailsLabel.setText("Name: " + currentTheatre.getT_name()
+							+ "\nAddress: " + currentTheatre.getAddress()
+							+ "\nPhone: " + currentTheatre.getPhoneNumber());
 					theatreDetailsLabel.setVisible(true);
 
-					DefaultComboBoxModel model2 = (DefaultComboBoxModel) showtimeSelectComboBox.getModel();
+					DefaultComboBoxModel model2 = (DefaultComboBoxModel)showtimeSelectComboBox.getModel();
 					model2.removeAllElements();
-					ArrayList<Showtime> showtimeList = backend.getDataController().findAllShowtime(currentMovie,
-							currentTheatre);
-					for (int i = 0; i < showtimeList.size(); i++) {
+					ArrayList<Showtime> showtimeList= backend.getDataController().findAllShowtime(currentMovie,currentTheatre);
+					for(int i = 0; i < showtimeList.size(); i++){
 						System.out.println(showtimeList.get(i).getShowDate().getDate());
 						model2.addElement(showtimeList.get(i).getShowDate().getDate());
 					}
 					showtimeSelectComboBox.setModel(model2);
 					showtimeSelectComboBox.setVisible(true);
 					selectShowtimeLabel.setVisible(true);
-				} else {
+				}else{
 					System.out.println("No theatre found");
 					theatreDetailsLabel.setVisible(false);
 				}
@@ -343,9 +337,9 @@ public class HomePage extends JPanel {
 		});
 		add(theatreSelectComboBox);
 
-		// ==========================================
+		//==========================================
 		// SELECT MOVIE
-		// ==========================================
+		//==========================================
 
 		// CREATE SELECT MOVIE TEXT
 		JLabel selectMovieLabel = new JLabel("Please Select Movie");
@@ -369,7 +363,7 @@ public class HomePage extends JPanel {
 
 		// CREATE MOVIE SELECTOR
 		Vector<String> movieList = new Vector<String>();
-		for (int i = 0; i < backend.getDataController().getMovieList().size(); i++) {
+		for(int i = 0; i < backend.getDataController().getMovieList().size(); i++){
 			movieList.add(backend.getDataController().getMovieList().get(i).getTitle());
 		}
 		JComboBox movieSelectComboBox = new JComboBox(movieList);
@@ -380,7 +374,7 @@ public class HomePage extends JPanel {
 		movieSelectComboBox.setBackground(Color.WHITE);
 		movieSelectComboBox.setBounds(100, 180, 254, 28);
 		movieSelectComboBox.setOpaque(true);
-		movieSelectComboBox.addActionListener(new ActionListener() {
+		movieSelectComboBox.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Movie Combo Box Pressed: " + movieSelectComboBox.getSelectedItem());
@@ -389,19 +383,22 @@ public class HomePage extends JPanel {
 				currentMovie = backend.getDataController().findMovie(temp);
 				currentTheatre = null;
 
-				movieDetailsLabel.setText("Title: " + currentMovie.getTitle() + "\nGenre: " + currentMovie.getGenre()
-						+ "\nYear: " + currentMovie.getYear() + "\nDirector: " + currentMovie.getDirector()
-						+ "\nMovie Length: " + currentMovie.getMovieLength() + "\nRating: " + currentMovie.getRating());
+				movieDetailsLabel.setText("Title: " + currentMovie.getTitle()
+						+ "\nGenre: " + currentMovie.getGenre()
+						+ "\nYear: " + currentMovie.getYear()
+						+ "\nDirector: " + currentMovie.getDirector()
+						+ "\nMovie Length: " + currentMovie.getMovieLength()
+						+ "\nRating: " + currentMovie.getRating());
 				movieDetailsLabel.setVisible(true);
 				selectTheatreLabel.setVisible(true);
 				theatreDetailsLabel.setVisible(false);
 				showtimeSelectComboBox.setVisible(false);
 				selectShowtimeLabel.setVisible(false);
 
-				DefaultComboBoxModel model = (DefaultComboBoxModel) theatreSelectComboBox.getModel();
+				DefaultComboBoxModel model = (DefaultComboBoxModel)theatreSelectComboBox.getModel();
 				model.removeAllElements();
-				ArrayList<Theatre> theatreList = backend.getDataController().findTheatresPlayingMovie(currentMovie);
-				for (int i = 0; i < theatreList.size(); i++) {
+				ArrayList<Theatre> theatreList= backend.getDataController().findTheatresPlayingMovie(currentMovie);
+				for(int i = 0; i < theatreList.size(); i++){
 					System.out.println(theatreList.get(i).getT_name());
 					model.addElement(theatreList.get(i).getT_name());
 				}
@@ -414,11 +411,10 @@ public class HomePage extends JPanel {
 
 		// CREATE WELCOME TEXT LABEL
 		JLabel welcomeLabel;
-		if (backend.getCurrentUser() == null) {
+		if(backend.getCurrentUser() == null){
 			welcomeLabel = new JLabel("Welcome Guest");
-		} else {
-			welcomeLabel = new JLabel(
-					"Welcome " + backend.getCurrentUser().getF_name() + " " + backend.getCurrentUser().getL_name());
+		}else {
+			welcomeLabel = new JLabel("Welcome " + backend.getCurrentUser().getF_name() + " " + backend.getCurrentUser().getL_name());
 		}
 		welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		welcomeLabel.setForeground(Color.WHITE);
@@ -450,7 +446,6 @@ public class HomePage extends JPanel {
 		cartButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-
 				System.out.println("View Cart");
 			}
 		});
@@ -465,7 +460,6 @@ public class HomePage extends JPanel {
 		announcementButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-
 				System.out.println("Announcement");
 			}
 		});
