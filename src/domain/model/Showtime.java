@@ -25,15 +25,12 @@ public class Showtime {
 		row = a.getNum_of_rows();
 		col = a.getNum_of_cols();
 		seats = new Seat[row][col];
-<<<<<<< HEAD:src/domain/model/Showtime.java
-		//seats = Seat()[row][col];
-=======
-		for(int i = 0; i < row; i++){
-			for (int j = 0; j < col; j++){
-				seats[i][j] = new Seat(row,col);
+
+		for (int i = 0; i < row; i++) {
+			for (int j = 0; j < col; j++) {
+				seats[i][j] = new Seat(row, col);
 			}
 		}
->>>>>>> 894e77af10f4a039a72e9a3bf4b3d8bff9f91556:src/domain/Showtime.java
 		totalAvaliableSeats = row * col;
 	}
 
@@ -45,27 +42,22 @@ public class Showtime {
 		row = a.getNum_of_rows();
 		col = a.getNum_of_cols();
 		seats = new Seat[row][col];
-<<<<<<< HEAD:src/domain/model/Showtime.java
-		//seats = Seat()[row][col];
-=======
-		for(int i = 0; i < row; i++){
-			for (int j = 0; j < col; j++){
-				seats[i][j] = new Seat(row,col);
+
+		for (int i = 0; i < row; i++) {
+			for (int j = 0; j < col; j++) {
+				seats[i][j] = new Seat(row, col);
 			}
 		}
->>>>>>> 894e77af10f4a039a72e9a3bf4b3d8bff9f91556:src/domain/Showtime.java
 		totalAvaliableSeats = row * col;
 	}
 
 	// PROMISES: returns the seat avaliability, true if taken, false if empty
 	// REQUIRES: the row and column of the seat
 	public Boolean getSeatAvaliability(int r, int c) {
-<<<<<<< HEAD:src/domain/model/Showtime.java
-=======
-		if(r > row || c > col){
+
+		if (r > row || c > col) {
 			return false;
 		}
->>>>>>> 894e77af10f4a039a72e9a3bf4b3d8bff9f91556:src/domain/Showtime.java
 		return seats[r][c].isSeatTaken();
 	}
 

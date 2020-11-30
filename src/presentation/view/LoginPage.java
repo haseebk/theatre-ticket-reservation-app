@@ -10,10 +10,8 @@ import javax.swing.JPasswordField;
 import javax.swing.border.MatteBorder;
 
 import domain.model.BackEnd;
-<<<<<<< HEAD
-=======
+
 import domain.model.User;
->>>>>>> 894e77af10f4a039a72e9a3bf4b3d8bff9f91556
 
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
@@ -76,10 +74,8 @@ public class LoginPage extends JPanel {
 		guestButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-<<<<<<< HEAD
-=======
+
 				backend.guestUser();
->>>>>>> 894e77af10f4a039a72e9a3bf4b3d8bff9f91556
 				HomePage homePanel = new HomePage(frame, backend);
 				frame.setContentPane(homePanel);
 				frame.revalidate();
@@ -162,17 +158,14 @@ public class LoginPage extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				String user = usernameTextField.getText();
 				String pass = String.valueOf(passwordField.getPassword());
-<<<<<<< HEAD
 				invalidLoginErrorLabel.setVisible(true);
-=======
 				System.out.println("User inputed:" + user + " " + pass);
-				if(backend.verifyLogin(user,pass) != null) {
+				if (backend.verifyLogin(user, pass) != null) {
 					HomePage homePanel = new HomePage(frame, backend);
 					frame.setContentPane(homePanel);
-				}else{
+				} else {
 					invalidLoginErrorLabel.setVisible(true);
 				}
->>>>>>> 894e77af10f4a039a72e9a3bf4b3d8bff9f91556
 				frame.revalidate();
 			}
 		});

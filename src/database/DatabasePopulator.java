@@ -31,7 +31,7 @@ public class DatabasePopulator {
 		//loadShowtimes();
 		loadAnnouncements();
 		loadUsers();
-		loadTickets();
+//		loadTickets();
 	}
 	
 	public void loadMovies() {
@@ -50,29 +50,20 @@ public class DatabasePopulator {
 		
 		ArrayList<Auditorium> a1 = new ArrayList<Auditorium>(2);
 		ArrayList<Auditorium> a2 = new ArrayList<Auditorium>(2);
-<<<<<<< HEAD
-		a1.add(new Auditorium(6, 6));
-		a1.add(new Auditorium(6, 6));
-		a2.add(new Auditorium(7, 7));
-		a2.add(new Auditorium(7, 7));
-=======
+
 		a1.add(new Auditorium(4, 6));
 		a1.add(new Auditorium(6, 6));
 		a2.add(new Auditorium(9, 7));
 		a2.add(new Auditorium(7, 8));
->>>>>>> 894e77af10f4a039a72e9a3bf4b3d8bff9f91556
 		
 		Theatre t1 = new Theatre("Theatre 1", 1, a1, "123456789");
 		Theatre t2 = new Theatre("Theatre 2", 2, a2, "987654321");
-		loadShowtimes(a1, a2);
-<<<<<<< HEAD
-=======
+
 
 		a1.get(0).setTheatre(t1);
 		a1.get(1).setTheatre(t1);
 		a2.get(0).setTheatre(t2);
 		a2.get(1).setTheatre(t2);
->>>>>>> 894e77af10f4a039a72e9a3bf4b3d8bff9f91556
 		
 		dbController.addTheatre(t1);
 		dbController.addTheatre(t2);
