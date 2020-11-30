@@ -23,6 +23,10 @@ import domain.model.*;
 
 public class HomePage extends JPanel {
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
 	 * Back button
 	 */
 	private JLabel logoutButton;
@@ -53,20 +57,31 @@ public class HomePage extends JPanel {
 	public HomePage(JFrame frame, BackEnd backend) {
 		setLayout(null);
 
-		JLabel noDateSelectedLabel = new JLabel("<html>" + "Please select a date." + "</html>");
-		noDateSelectedLabel.setHorizontalAlignment(SwingConstants.LEFT);
-		noDateSelectedLabel.setForeground(Color.RED);
-		noDateSelectedLabel.setFont(new Font("Arial", Font.PLAIN, 13));
-		noDateSelectedLabel.setBounds(564, 235, 254, 45); // noDateSelectedLabel.setVisible(false);
-															// add(noDateSelectedLabel);
+		// CREATE NO THEATRE SELECTED TEXT LABEL
+		JLabel noTheatreSelectedLabel = new JLabel("<html>" + "Please select a theatre." + "</html>");
+		noTheatreSelectedLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		noTheatreSelectedLabel.setForeground(Color.RED);
+		noTheatreSelectedLabel.setFont(new Font("HelveticaNeue", Font.PLAIN, 15));
+		noTheatreSelectedLabel.setBounds(798, 392, 254, 45);
+		noTheatreSelectedLabel.setVisible(false);
+		add(noTheatreSelectedLabel);
+
+		// CREATE NO SHOWTIME SELECTED TEXT LABEL
+		JLabel noShowTimeSelectedLabel = new JLabel("<html>" + "Please select a show time." + "</html>");
+		noShowTimeSelectedLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		noShowTimeSelectedLabel.setForeground(Color.RED);
+		noShowTimeSelectedLabel.setFont(new Font("HelveticaNeue", Font.PLAIN, 15));
+		noShowTimeSelectedLabel.setBounds(798, 392, 254, 45);
+		noShowTimeSelectedLabel.setVisible(false);
+		add(noShowTimeSelectedLabel);
 
 		// CREATE NO MOVIE SELECTED TEXT LABEL
 		JLabel noMovieSelectedLabel = new JLabel("<html>" + "Please select a movie." + "</html>");
 		noMovieSelectedLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		noMovieSelectedLabel.setForeground(Color.RED);
-		noMovieSelectedLabel.setFont(new Font("Arial", Font.PLAIN, 13));
-		noMovieSelectedLabel.setBounds(564, 235, 254, 45); //
-		noDateSelectedLabel.setVisible(false);
+		noMovieSelectedLabel.setFont(new Font("HelveticaNeue", Font.PLAIN, 15));
+		noMovieSelectedLabel.setBounds(156, 392, 168, 45); //
+		noMovieSelectedLabel.setVisible(true);
 		add(noMovieSelectedLabel);
 
 		// =========================================
@@ -76,7 +91,7 @@ public class HomePage extends JPanel {
 		// CREATE ROW TEXT FIELD
 		JTextField rowTextField = new JTextField();
 		rowTextField.setToolTipText("Enter row");
-		rowTextField.setFont(new Font("Arial", Font.PLAIN, 13));
+		rowTextField.setFont(new Font("HelveticaNeue", Font.PLAIN, 15));
 		rowTextField.setBorder(new MatteBorder(0, 0, 3, 0, (Color) Color.LIGHT_GRAY));
 		rowTextField.setForeground(Color.DARK_GRAY);
 		rowTextField.setBackground(Color.WHITE);
@@ -89,7 +104,7 @@ public class HomePage extends JPanel {
 		// CREATE COLUMN TEXT FIELD
 		JTextField colTextField = new JTextField();
 		colTextField.setToolTipText("Enter column");
-		colTextField.setFont(new Font("Arial", Font.PLAIN, 13));
+		colTextField.setFont(new Font("HelveticaNeue", Font.PLAIN, 15));
 		colTextField.setBorder(new MatteBorder(0, 0, 3, 0, (Color) Color.LIGHT_GRAY));
 		colTextField.setForeground(Color.DARK_GRAY);
 		colTextField.setBackground(Color.WHITE);
@@ -103,7 +118,7 @@ public class HomePage extends JPanel {
 		JLabel selectRowLabel = new JLabel("Select Row: ");
 		selectRowLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		selectRowLabel.setForeground(Color.WHITE);
-		selectRowLabel.setFont(new Font("Arial", Font.PLAIN, 15));
+		selectRowLabel.setFont(new Font("HelveticaNeue", Font.PLAIN, 15));
 		selectRowLabel.setBounds(1100, 280, 200, 45);
 		selectRowLabel.setVisible(false);
 		add(selectRowLabel);
@@ -112,7 +127,7 @@ public class HomePage extends JPanel {
 		JLabel selectColLabel = new JLabel("Select Column: ");
 		selectColLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		selectColLabel.setForeground(Color.WHITE);
-		selectColLabel.setFont(new Font("Arial", Font.PLAIN, 15));
+		selectColLabel.setFont(new Font("HelveticaNeue", Font.PLAIN, 15));
 		selectColLabel.setBounds(1100, 340, 200, 45);
 		selectColLabel.setVisible(false);
 		add(selectColLabel);
@@ -167,8 +182,7 @@ public class HomePage extends JPanel {
 		});
 		AddToCartButton.setBounds(1100, 420, 254, 50);
 		AddToCartButton.setVisible(false);
-		// AddToCartButton.setIcon(new
-		// ImageIcon(LoginPage.class.getResource("/enterButton.png")));
+		AddToCartButton.setIcon(new ImageIcon(LoginPage.class.getResource("/enterButton.png")));
 		add(AddToCartButton);
 
 		// ==========================================
@@ -176,17 +190,17 @@ public class HomePage extends JPanel {
 		// ==========================================
 
 		// CREATE SELECT SEAT TEXT
-		JLabel selectSeatLabel = new JLabel("Please Select Seat");
+		JLabel selectSeatLabel = new JLabel("Seat");
 		selectSeatLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		selectSeatLabel.setForeground(Color.WHITE);
-		selectSeatLabel.setFont(new Font("Arial", Font.PLAIN, 15));
+		selectSeatLabel.setFont(new Font("HelveticaNeue", Font.PLAIN, 15));
 		selectSeatLabel.setBounds(600, 280, 254, 45);
 		selectSeatLabel.setVisible(false);
 		add(selectSeatLabel);
 
 		// CREATE SHOWTIME DETAILS TEXT
 		seatGraphicLabel.setForeground(Color.WHITE);
-		seatGraphicLabel.setFont(new Font("Arial", Font.PLAIN, 15));
+		seatGraphicLabel.setFont(new Font("HelveticaNeue", Font.PLAIN, 15));
 		seatGraphicLabel.setBounds(600, 310, 254, 254);
 		seatGraphicLabel.setVisible(false);
 		seatGraphicLabel.setLineWrap(true);
@@ -200,10 +214,10 @@ public class HomePage extends JPanel {
 		// ==========================================
 
 		// CREATE SELECT SHOWTIME TEXT
-		JLabel selectShowtimeLabel = new JLabel("Please Select Showtime");
+		JLabel selectShowtimeLabel = new JLabel("Show Time");
 		selectShowtimeLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		selectShowtimeLabel.setForeground(Color.WHITE);
-		selectShowtimeLabel.setFont(new Font("Arial", Font.PLAIN, 15));
+		selectShowtimeLabel.setFont(new Font("HelveticaNeue", Font.PLAIN, 15));
 		selectShowtimeLabel.setBounds(900, 140, 254, 45);
 		selectShowtimeLabel.setVisible(false);
 		add(selectShowtimeLabel);
@@ -211,7 +225,7 @@ public class HomePage extends JPanel {
 		// CREATE SHOWTIME DETAILS TEXT
 		JTextArea showtimeDetailsLabel = new JTextArea("");
 		showtimeDetailsLabel.setForeground(Color.WHITE);
-		showtimeDetailsLabel.setFont(new Font("Arial", Font.PLAIN, 15));
+		showtimeDetailsLabel.setFont(new Font("HelveticaNeue", Font.PLAIN, 15));
 		showtimeDetailsLabel.setBounds(900, 215, 254, 100);
 		showtimeDetailsLabel.setVisible(false);
 		showtimeDetailsLabel.setLineWrap(true);
@@ -223,7 +237,7 @@ public class HomePage extends JPanel {
 		// CREATE SHOWTIME SELECTOR
 		JComboBox showtimeSelectComboBox = new JComboBox(new String[0]);
 		showtimeSelectComboBox.setToolTipText("Select Date");
-		showtimeSelectComboBox.setFont(new Font("Arial", Font.PLAIN, 15));
+		showtimeSelectComboBox.setFont(new Font("HelveticaNeue", Font.PLAIN, 15));
 		showtimeSelectComboBox.setBorder(new MatteBorder(0, 0, 3, 0, (Color) Color.LIGHT_GRAY));
 		showtimeSelectComboBox.setForeground(Color.DARK_GRAY);
 		showtimeSelectComboBox.setBackground(Color.WHITE);
@@ -235,6 +249,7 @@ public class HomePage extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Date Combo Box Pressed: " + showtimeSelectComboBox.getSelectedItem());
 				String tempString = (String) showtimeSelectComboBox.getSelectedItem();
+				noShowTimeSelectedLabel.setVisible(false);
 				if (tempString != null) {
 					String[] tempStringArray = tempString.split("/");
 					Date tempDate = new Date(Integer.parseInt(tempStringArray[1]), tempStringArray[0],
@@ -245,7 +260,6 @@ public class HomePage extends JPanel {
 						showtimeDetailsLabel.setText("Auditorium: " + currentShowtime.getAuditorium().getAuditoriumID()
 								+ "\nNumber of Avaliable Seats: " + currentShowtime.getTotalAvaliableSeats());
 						showtimeDetailsLabel.setVisible(true);
-
 						rowTextField.setVisible(true);
 						colTextField.setVisible(true);
 						selectRowLabel.setVisible(true);
@@ -283,10 +297,10 @@ public class HomePage extends JPanel {
 		// ==========================================
 
 		// CREATE SELECT THEATRE TEXT
-		JLabel selectTheatreLabel = new JLabel("Please Select Theatre");
+		JLabel selectTheatreLabel = new JLabel("Theatre");
 		selectTheatreLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		selectTheatreLabel.setForeground(Color.WHITE);
-		selectTheatreLabel.setFont(new Font("Arial", Font.PLAIN, 15));
+		selectTheatreLabel.setFont(new Font("HelveticaNeue", Font.PLAIN, 15));
 		selectTheatreLabel.setBounds(600, 140, 254, 45);
 		selectTheatreLabel.setVisible(false);
 		add(selectTheatreLabel);
@@ -294,7 +308,7 @@ public class HomePage extends JPanel {
 		// CREATE THEATRE DETAILS TEXT
 		JTextArea theatreDetailsLabel = new JTextArea("");
 		theatreDetailsLabel.setForeground(Color.WHITE);
-		theatreDetailsLabel.setFont(new Font("Arial", Font.PLAIN, 15));
+		theatreDetailsLabel.setFont(new Font("HelveticaNeue", Font.PLAIN, 15));
 		theatreDetailsLabel.setBounds(600, 215, 254, 100);
 		theatreDetailsLabel.setVisible(false);
 		theatreDetailsLabel.setLineWrap(true);
@@ -306,7 +320,7 @@ public class HomePage extends JPanel {
 		// CREATE THEATRE SELECTOR
 		JComboBox theatreSelectComboBox = new JComboBox(new String[0]);
 		theatreSelectComboBox.setToolTipText("Select Theatre");
-		theatreSelectComboBox.setFont(new Font("Arial", Font.PLAIN, 15));
+		theatreSelectComboBox.setFont(new Font("HelveticaNeue", Font.PLAIN, 15));
 		theatreSelectComboBox.setBorder(new MatteBorder(0, 0, 3, 0, (Color) Color.LIGHT_GRAY));
 		theatreSelectComboBox.setForeground(Color.DARK_GRAY);
 		theatreSelectComboBox.setBackground(Color.WHITE);
@@ -319,6 +333,7 @@ public class HomePage extends JPanel {
 				System.out.println("Theatre Combo Box Pressed: " + theatreSelectComboBox.getSelectedItem());
 				currentTheatre = backend.getDataController()
 						.findTheatre((String) theatreSelectComboBox.getSelectedItem());
+				noTheatreSelectedLabel.setVisible(false);
 				if (currentTheatre != null) {
 					theatreDetailsLabel.setText("Name: " + currentTheatre.getT_name() + "\nAddress: "
 							+ currentTheatre.getAddress() + "\nPhone: " + currentTheatre.getPhoneNumber());
@@ -334,6 +349,7 @@ public class HomePage extends JPanel {
 					}
 					showtimeSelectComboBox.setModel(model2);
 					showtimeSelectComboBox.setVisible(true);
+					noShowTimeSelectedLabel.setVisible(true);
 					selectShowtimeLabel.setVisible(true);
 				} else {
 					System.out.println("No theatre found");
@@ -348,18 +364,18 @@ public class HomePage extends JPanel {
 		// ==========================================
 
 		// CREATE SELECT MOVIE TEXT
-		JLabel selectMovieLabel = new JLabel("Please Select Movie");
+		JLabel selectMovieLabel = new JLabel("Movie");
 		selectMovieLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		selectMovieLabel.setForeground(Color.WHITE);
-		selectMovieLabel.setFont(new Font("Arial", Font.PLAIN, 15));
-		selectMovieLabel.setBounds(100, 140, 254, 45);
+		selectMovieLabel.setFont(new Font("HelveticaNeue", Font.PLAIN, 20));
+		selectMovieLabel.setBounds(85, 140, 67, 32);
 		add(selectMovieLabel);
 
 		// CREATE MOVIE DETAILS TEXT
 		JTextArea movieDetailsLabel = new JTextArea("");
 		movieDetailsLabel.setForeground(Color.WHITE);
-		movieDetailsLabel.setFont(new Font("Arial", Font.PLAIN, 15));
-		movieDetailsLabel.setBounds(100, 230, 254, 500);
+		movieDetailsLabel.setFont(new Font("HelveticaNeue", Font.PLAIN, 15));
+		movieDetailsLabel.setBounds(273, 233, 123, 268);
 		movieDetailsLabel.setVisible(false);
 		movieDetailsLabel.setLineWrap(true);
 		movieDetailsLabel.setWrapStyleWord(true);
@@ -367,18 +383,24 @@ public class HomePage extends JPanel {
 		movieDetailsLabel.setEditable(false);
 		add(movieDetailsLabel);
 
+		// CREATE POSTER CARD VIEW
+		JLabel posterCard = new JLabel("");
+		posterCard.setBounds(85, 235, 182, 268);
+		posterCard.setVisible(true);
+		add(posterCard);
+
 		// CREATE MOVIE SELECTOR
-		Vector<String> movieList = new Vector<String>();
+		Vector movieList = new Vector();
 		for (int i = 0; i < backend.getDataController().getMovieList().size(); i++) {
 			movieList.add(backend.getDataController().getMovieList().get(i).getTitle());
 		}
 		JComboBox movieSelectComboBox = new JComboBox(movieList);
 		movieSelectComboBox.setToolTipText("Select Movie");
-		movieSelectComboBox.setFont(new Font("Arial", Font.PLAIN, 15));
+		movieSelectComboBox.setFont(new Font("HelveticaNeue", Font.PLAIN, 15));
 		movieSelectComboBox.setBorder(new MatteBorder(0, 0, 3, 0, (Color) Color.LIGHT_GRAY));
 		movieSelectComboBox.setForeground(Color.DARK_GRAY);
 		movieSelectComboBox.setBackground(Color.WHITE);
-		movieSelectComboBox.setBounds(100, 180, 254, 28);
+		movieSelectComboBox.setBounds(85, 180, 311, 28);
 		movieSelectComboBox.setOpaque(true);
 		movieSelectComboBox.addActionListener(new ActionListener() {
 			@Override
@@ -391,12 +413,18 @@ public class HomePage extends JPanel {
 
 				movieDetailsLabel.setText("Title: " + currentMovie.getTitle() + "\nGenre: " + currentMovie.getGenre()
 						+ "\nYear: " + currentMovie.getYear() + "\nDirector: " + currentMovie.getDirector()
-						+ "\nMovie Length: " + currentMovie.getMovieLength() + "\nRating: " + currentMovie.getRating());
+						+ "\nMovie Length: " + currentMovie.getMovieLength() + " mins\nRating: "
+						+ currentMovie.getRating());
+				posterCard.setIcon(new ImageIcon(HomePage.class.getResource("/" + currentMovie.getPoster() + ".jpg")));
+
 				movieDetailsLabel.setVisible(true);
 				selectTheatreLabel.setVisible(true);
 				theatreDetailsLabel.setVisible(false);
 				showtimeSelectComboBox.setVisible(false);
 				selectShowtimeLabel.setVisible(false);
+				noMovieSelectedLabel.setVisible(false);
+				noTheatreSelectedLabel.setVisible(true);
+				posterCard.setVisible(true);
 
 				DefaultComboBoxModel model = (DefaultComboBoxModel) theatreSelectComboBox.getModel();
 				model.removeAllElements();
@@ -422,7 +450,7 @@ public class HomePage extends JPanel {
 		}
 		welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		welcomeLabel.setForeground(Color.WHITE);
-		welcomeLabel.setFont(new Font("Arial", Font.PLAIN, 25));
+		welcomeLabel.setFont(new Font("HelveticaNeue", Font.PLAIN, 25));
 		welcomeLabel.setBounds(20, 20, 500, 20);
 		add(welcomeLabel);
 

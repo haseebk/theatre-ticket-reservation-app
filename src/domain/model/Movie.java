@@ -32,6 +32,8 @@ public class Movie {
 	 */
 	private double rating;
 	
+	private String poster;
+	
 	private Movie() {
 		this.title = "";
 		this.genre = "";
@@ -39,15 +41,17 @@ public class Movie {
 		this.director = "";
 		this.movieLength = 0;
 		this.rating = 0.0;
+		this.setPoster("");
 	}
 	
-	public Movie(String title, String genre, int year, String director, int movieLength, double rating) {
+	public Movie(String title, String genre, int year, String director, int movieLength, double rating, String poster) {
 		this.title = title;
 		this.genre = genre;
 		this.year = year;
 		this.director = director;
 		this.movieLength = movieLength;
 		this.rating = rating;
+		this.setPoster(poster);
 	}
 	
 	// Getters and Setters
@@ -86,5 +90,13 @@ public class Movie {
 	}
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public String getPoster() {
+		return poster;
+	}
+
+	public void setPoster(String poster) {
+		this.poster = poster;
 	}
 };

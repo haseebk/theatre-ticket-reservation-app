@@ -57,10 +57,7 @@ public class LoginPage extends JPanel {
 	 * 
 	 * @param frame   frame that the panel is being placed onto
 	 * @param backend backend to obtain information and apply logic
-	 * @param auth    authorizer
 	 */
-//		public Login(JFrame frame, BackEnd backend, Authenticator auth) (to be added)
-
 	public LoginPage(JFrame frame, BackEnd backend) {
 		setLayout(null);
 
@@ -89,7 +86,6 @@ public class LoginPage extends JPanel {
 		registerButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-//					Register registerPanel = new Register(frame, backend, auth);
 				RegisterPage registerPanel = new RegisterPage(frame, backend);
 				frame.setContentPane(registerPanel);
 				frame.revalidate();
