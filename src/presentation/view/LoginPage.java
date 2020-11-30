@@ -10,6 +10,7 @@ import javax.swing.JPasswordField;
 import javax.swing.border.MatteBorder;
 
 import domain.model.BackEnd;
+import domain.model.User;
 
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
@@ -62,12 +63,22 @@ public class LoginPage extends JPanel {
 	public LoginPage(JFrame frame, BackEnd backend) {
 		setLayout(null);
 
-		// CREATE GUEST CHECKOUT BUTTON
+		// CREATE GUEST LOGIN BUTTON
 		guestButton = new JLabel("CONTINUE AS GUEST");
 		guestButton.setHorizontalAlignment(SwingConstants.CENTER);
 		guestButton.setForeground(Color.GRAY);
 		guestButton.setFont(new Font("Arial", Font.BOLD, 11));
 		guestButton.setBounds(632, 502, 118, 14);
+		guestButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		guestButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				backend.guestUser();
+				HomePage homePanel = new HomePage(frame, backend);
+				frame.setContentPane(homePanel);
+				frame.revalidate();
+			}
+		});
 		add(guestButton);
 
 		// CREATE REGISTER BUTTON
@@ -111,14 +122,16 @@ public class LoginPage extends JPanel {
 
 		// CREATE USERNAME TEXT LABEL
 		usernameLabel = new JLabel("Username");
-		usernameLabel.setForeground(Color.GRAY);
+		usernameLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		usernameLabel.setForeground(Color.WHITE);
 		usernameLabel.setFont(new Font("Arial", Font.PLAIN, 16));
 		usernameLabel.setBounds(653, 299, 77, 14);
 		add(usernameLabel);
 
 		// CREATE PASSWORD TEXT LABEL
 		passwordLabel = new JLabel("Password");
-		passwordLabel.setForeground(Color.GRAY);
+		passwordLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		passwordLabel.setForeground(Color.WHITE);
 		passwordLabel.setFont(new Font("Arial", Font.PLAIN, 16));
 		passwordLabel.setBounds(653, 372, 77, 14);
 		add(passwordLabel);
@@ -143,7 +156,13 @@ public class LoginPage extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				String user = usernameTextField.getText();
 				String pass = String.valueOf(passwordField.getPassword());
-				invalidLoginErrorLabel.setVisible(true);
+				System.out.println("User inputed:" + user + " " + pass);
+				if(backend.verifyLogin(user,pass) != null) {
+					HomePage homePanel = new HomePage(frame, backend);
+					frame.setContentPane(homePanel);
+				}else{
+					invalidLoginErrorLabel.setVisible(true);
+				}
 				frame.revalidate();
 			}
 		});
