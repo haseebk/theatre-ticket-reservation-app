@@ -1,18 +1,12 @@
 package database;
 
 import java.util.ArrayList;
+import java.util.Vector;
 
-import domain.model.Announcement;
-import domain.model.Auditorium;
-import domain.model.Movie;
-import domain.model.RegisteredUser;
-import domain.model.Showtime;
-import domain.model.Theatre;
-import domain.model.Ticket;
+import domain.model.*;
 
 public class DataController {
 	private static DataController onlyInstance;
-	private DatabasePopulator populator;
 
 	/**
 	 * Array lists of stored data
@@ -67,6 +61,101 @@ public class DataController {
 	 */
 	public ArrayList<Movie> getMovieList() {
 		return movieList;
+	}
+
+	/**
+	 * Finds the movie with the desired title
+	 * @param title Title of desired movie
+	 * @return Returns the movie if found, null if not found
+	 */
+	public Movie findMovie(String title){
+		if(title == null){
+			return null;
+		}
+		for(int i = 0; i < movieList.size(); i++){
+			if(movieList.get(i).getTitle().compareTo(title) == 0){
+				return movieList.get(i);
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Finds the theatre with the desired name
+	 * @param name Name of desired theatre
+	 * @return Returns the theatre if found, null if not found
+	 */
+	public Theatre findTheatre(String name){
+		if(name == null){
+			return null;
+		}
+		for(int i = 0; i < theatreList.size(); i++){
+			if(theatreList.get(i).getT_name().compareTo(name) == 0){
+				return theatreList.get(i);
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Finds the all showtimes with playing the movies and the specific theatre
+	 * @param searchMovie desired movie
+	 * @param searchTheatre desired theatre
+	 * @return List of all showtimes playing the movie at the theatre
+	 */
+	public ArrayList<Showtime> findAllShowtime(Movie searchMovie, Theatre searchTheatre){
+		if(searchTheatre == null || searchMovie == null){
+			return null;
+		}
+		ArrayList<Showtime> tempShowtime = new ArrayList<>();
+		for(int i = 0; i < showtimeList.size(); i++){
+			if(showtimeList.get(i).getMovie() == searchMovie && showtimeList.get(i).getAuditorium().getTheatre() == searchTheatre){
+				tempShowtime.add(showtimeList.get(i));
+			}
+		}
+		return tempShowtime;
+	}
+
+	/**
+	 * Finds the specific with playing the movies and the specific theatre on the specific date
+	 * @param searchMovie desired movie
+	 * @param searchTheatre desired theatre
+	 * @param date desired date
+	 * @return List of all showtimes playing the movie at the theatre
+	 */
+	public Showtime findShowtime(Movie searchMovie, Theatre searchTheatre, Date date){
+		if(searchTheatre == null || searchMovie == null){
+			return null;
+		}
+		ArrayList<Showtime> tempShowtime = new ArrayList<>();
+		for(int i = 0; i < showtimeList.size(); i++){
+			if(showtimeList.get(i).getMovie() == searchMovie && showtimeList.get(i).getAuditorium().getTheatre() == searchTheatre &&
+				showtimeList.get(i).getShowDate().getDate().compareTo(date.getDate()) == 0){
+				return showtimeList.get(i);
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Finds the theatres are currently playing this movie
+	 * @param searchMovie movie we are searching which theatres are currently playing
+	 * @return all the theatres playing the movie
+	 */
+	public ArrayList<Theatre> findTheatresPlayingMovie(Movie searchMovie){
+		if(searchMovie == null){
+			return null;
+		}
+		ArrayList<Theatre> searchList = new ArrayList<Theatre>();
+		for(int i = 0; i < showtimeList.size(); i++){
+			System.out.println(showtimeList.get(i).getMovie().getTitle());
+			if(showtimeList.get(i).getMovie() == searchMovie){
+				if(!searchList.contains(showtimeList.get(i).getAuditorium().getTheatre())){
+					searchList.add(showtimeList.get(i).getAuditorium().getTheatre());
+				}
+			}
+		}
+		return searchList;
 	}
 
 	/**

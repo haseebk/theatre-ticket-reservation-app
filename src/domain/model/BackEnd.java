@@ -46,5 +46,5 @@ public class BackEnd implements Serializable{
 
 	public void setCurrentUser(RegisteredUser currentUser) { this.currentUser = currentUser; }
 
-
+	public DataController getDataController() { return dataController; }
 }
