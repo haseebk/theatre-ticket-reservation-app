@@ -42,6 +42,26 @@ public class BackEnd implements Serializable {
 	public void userLogout() {
 		currentUser = null;
 	}
+<<<<<<< HEAD
+=======
+	
+	public void registerUser(String username, String password, String f_name, String l_name, String email, String name, String cardType, String cardNum, String cardSVS, String expirationDate) {
+		LocalDate todaysDate = LocalDate.now();
+		BankingInfo bankInfo = new BankingInfo(name, cardType, cardNum, cardSVS, expirationDate);
+		dataController.getUserList().add(new RegisteredUser(username, password, f_name, l_name, email, bankInfo, new Date(todaysDate.getDayOfMonth(), todaysDate.getMonth().toString(), todaysDate.getYear())));
+	}
+	
+	public boolean checkExisting(String username) {
+		for(int i = 0; i < dataController.getUserList().size(); i++){
+			System.out.println("The system's info: " + dataController.getUserList().get(i).username);
+			if(dataController.getUserList().get(i).username.compareTo(username) == 0){
+				return true;
+			}
+		}
+		return false;
+	}
+
+>>>>>>> d3dc2c3ec2fe3566c7dcdcc94436918732b44c1b
 
 	// Getters and setters
 	public RegisteredUser getCurrentUser() {

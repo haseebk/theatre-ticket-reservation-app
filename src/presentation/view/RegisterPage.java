@@ -25,6 +25,32 @@ public class RegisterPage extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	/**
+	 * Email text field
+	 */
+	private JTextField emailTextField;
+
+	/**
+	 * Card type field
+	 */
+	private JTextField cardTypeTextField;
+
+	/**
+	 * Card number text field
+	 */
+	private JTextField cardNumberTextField;
+
+	private JPasswordField cardSVSPasswordField;
+
+	private JTextField cardExpirationDateTextField;
+
+	private JLabel emailTextLabel;
+
+	private JLabel cardTypeLabel;
+	private JLabel cardNumberLabel;
+	private JLabel cardSVSLabel;
+	private JLabel cardExpirationLabel;
+
+	/**
 	 * Username text field
 	 */
 	private JTextField usernameTextField;
@@ -200,17 +226,39 @@ public class RegisterPage extends JPanel {
 				String user = usernameTextField.getText();
 				String pass = String.valueOf(passwordField.getPassword());
 				String confirmPass = String.valueOf(passwordField2.getPassword());
+
+				String email = emailTextField.getText();
+				String cardType = cardTypeTextField.getText();
+				String cardNum = cardNumberTextField.getText();
+				String cardSVS = String.valueOf(cardSVSPasswordField.getPassword());
+				String cardExp = cardExpirationDateTextField.getText();
+
+				// Dont need these for now
 				Boolean validName = true;
 				Boolean samePasswords = true;
 				Boolean uniqueUser = true;
 
+				// Check if username is available
+				if (!backend.checkExisting(user)) {
+					if (pass.matches(confirmPass)) {
+						if (name.length == 2) {
+							backend.registerUser(user, pass, name[0], name[1], email, fullname, cardType, cardNum,
+									cardSVS, cardExp);
+							LoginPage loginPanel = new LoginPage(frame, backend);
+							frame.setContentPane(loginPanel);
+							frame.revalidate();
+						} else {
+							invalidNameErrorLabel.setVisible(true);
+						}
+					} else {
+						invalidPasswordErrorLabel.setVisible(true);
+					}
+				} else {
+					invalidUsernameErrorLabel.setVisible(true);
+				}
 				/**
 				 * verify sign up details and update backend + database
 				 */
-
-				LoginPage loginPanel = new LoginPage(frame, backend);
-				frame.setContentPane(loginPanel);
-				frame.revalidate();
 
 			}
 		});
