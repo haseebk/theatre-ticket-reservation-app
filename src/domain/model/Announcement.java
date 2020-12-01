@@ -8,10 +8,14 @@ public class Announcement {
 	private Date publicAnnounceDate;
 	private String announceMessage;
 
-	public Announcement(Date privateD, Date publicD, String m) {
+	private Movie movieAnnouncement;
+
+	public Announcement(Date privateD, Date publicD, String m, Movie mov) {
 		privateAnnounceDate = privateD;
 		publicAnnounceDate = publicD;
 		announceMessage = m;
+		movieAnnouncement = mov;
+		mov.setMovieAnnouncement(this);
 	}
 
 	public String getAnnounceMessage() {
