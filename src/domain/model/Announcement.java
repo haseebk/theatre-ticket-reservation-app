@@ -11,7 +11,7 @@ public class Announcement {
 		announceMessage = m;
 	}
 
-	public Announcement(int day, String month, int year, String m) {
+	public Announcement(int day, int month, int year, String m) {
 		announceDate = new Date(day, month, year);
 		announceMessage = m;
 	}

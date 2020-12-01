@@ -160,7 +160,7 @@ public class HomePage extends JPanel {
 						if (avaliable == false) {
 							System.out.println("Added ticket To Cart for:\nMovie: " + currentMovie.getTitle()
 									+ "\nTheatre: " + currentTheatre.getT_name() + "\nDate: "
-									+ currentShowtime.getShowDate().getDate() + "\nSeat Row: " + tempRow
+									+ currentShowtime.getShowDate().toString() + "\nSeat Row: " + tempRow
 									+ ", Seat Column: " + tempCol);
 
 							backend.getCurrentUser().getCart().addToCart(new Booking(currentMovie, currentShowtime,
@@ -281,7 +281,7 @@ public class HomePage extends JPanel {
 				noShowTimeSelectedLabel.setVisible(false);
 				if (tempString != null) {
 					String[] tempStringArray = tempString.split("/");
-					Date tempDate = new Date(Integer.parseInt(tempStringArray[1]), tempStringArray[0],
+					Date tempDate = new Date(Integer.parseInt(tempStringArray[0]), Integer.parseInt(tempStringArray[1]),
 							Integer.parseInt(tempStringArray[2]));
 					currentShowtime = backend.getDataController().findShowtime(currentMovie, currentTheatre, tempDate);
 					if (currentShowtime != null) {
@@ -396,8 +396,8 @@ public class HomePage extends JPanel {
 						ArrayList<Showtime> showtimeList = backend.getDataController().findAllShowtime(currentMovie,
 								currentTheatre);
 						for (int i = 0; i < showtimeList.size(); i++) {
-							System.out.println(showtimeList.get(i).getShowDate().getDate());
-							model2.addElement(showtimeList.get(i).getShowDate().getDate());
+							System.out.println(showtimeList.get(i).getShowDate().toString());
+							model2.addElement(showtimeList.get(i).getShowDate().toString());
 						}
 						showtimeSelectComboBox.setModel(model2);
 						showtimeSelectComboBox.setVisible(true);

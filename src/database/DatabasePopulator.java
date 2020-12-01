@@ -78,10 +78,10 @@ public class DatabasePopulator {
 	}
 
 	public void loadShowtimes(ArrayList<Auditorium> x, ArrayList<Auditorium> y) {
-		Date d1 = new Date(10, "December", 2020);
-		Date d2 = new Date(12, "December", 2020);
-		Date d3 = new Date(14, "December", 2020);
-		Date d4 = new Date(16, "December", 2020);
+		Date d1 = new Date(30, 11, 2020);
+		Date d2 = new Date(7, 12, 2020);
+		Date d3 = new Date(1, 12, 2020);
+		Date d4 = new Date(19, 12, 2020);
 		
 		s1 = new Showtime(d1, x.get(0), spiderverse);
 		Showtime s11 = new Showtime(d3, x.get(0), spiderverse);
@@ -144,10 +144,10 @@ public class DatabasePopulator {
 		BankingInfo b2 = new BankingInfo("William Kerr", "VISA", "2222222222222222", "222", "02/22");
 		BankingInfo b3 = new BankingInfo("Eddie Kim", "VISA", "3333333333333333", "333", "03/22");
 		BankingInfo b4 = new BankingInfo("Haseeb Khan", "MASTER", "4444444444444444", "444", "04/22");
-		Date d1 = new Date(1, "April", 2020);
-		Date d2 = new Date(2, "May", 2020);
-		Date d3 = new Date(3, "June", 2020);
-		Date d4 = new Date(4, "July", 2020);
+		Date d1 = new Date(1, 4, 2020);
+		Date d2 = new Date(2, 5, 2020);
+		Date d3 = new Date(3, 6, 2020);
+		Date d4 = new Date(4, 7, 2020);
 		RegisteredUser u1 = new RegisteredUser("V.Kapoor", "1234", "Vaibhav", "Kapoor", "vk@email.com", b1, d1);
 		RegisteredUser u2 = new RegisteredUser("W.Kerr", "1234", "William", "Kerr", "wk@email.com", b2, d2);
 		RegisteredUser u3 = new RegisteredUser("E.Kim", "1234", "Eddie", "Kim", "ek@email.com", b3, d3);
@@ -160,8 +160,8 @@ public class DatabasePopulator {
 	}
 
 	public void loadAnnouncements() {
-		Date da1 = new Date(7, "December", 2020);
-		Date da2 = new Date(8, "December", 2020);
+		Date da1 = new Date(29, 11, 2020);
+		Date da2 = new Date(19, 12, 2020);
 		Announcement an1 = new Announcement(da1, "This is the first announcement.");
 		Announcement an2 = new Announcement(da2, "This is the second announcement.");
 

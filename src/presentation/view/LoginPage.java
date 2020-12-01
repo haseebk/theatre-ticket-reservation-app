@@ -84,10 +84,8 @@ public class LoginPage extends JPanel {
 		registerButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// RegisterPage registerPanel = new RegisterPage(frame, backend);
-				// frame.setContentPane(registerPanel);
-				PaymentPage paymentPanel = new PaymentPage(frame, backend);
-				frame.setContentPane(paymentPanel);
+				RegisterPage registerPanel = new RegisterPage(frame, backend);
+				frame.setContentPane(registerPanel);
 				frame.revalidate();
 			}
 		});

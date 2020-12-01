@@ -139,7 +139,7 @@ public class DataController {
 		for (int i = 0; i < showtimeList.size(); i++) {
 			if (showtimeList.get(i).getMovie() == searchMovie
 					&& showtimeList.get(i).getAuditorium().getTheatre() == searchTheatre
-					&& showtimeList.get(i).getShowDate().getDate().compareTo(date.getDate()) == 0) {
+					&& showtimeList.get(i).getShowDate().toString().compareTo(date.toString()) == 0) {
 				return showtimeList.get(i);
 			}
 		}

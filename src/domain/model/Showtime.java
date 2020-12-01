@@ -33,7 +33,7 @@ public class Showtime {
 		totalAvaliableSeats = row * col;
 	}
 
-	public Showtime(int day, String month, int year, Auditorium a, Movie m) {
+	public Showtime(int day, int month, int year, Auditorium a, Movie m) {
 		showtimeID = showtimeCounter++;
 		showDate = new Date(day, month, year);
 		auditorium = a;
