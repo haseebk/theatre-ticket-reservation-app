@@ -116,7 +116,7 @@ public class PaymentPage extends JPanel {
 		// CREATE CARDTYPE TEXT FIELD
 		Vector<String> cardTypes = new Vector<String>();
 		cardTypes.add("MasterCard");
-		cardTypes.add("Visa");
+		cardTypes.add("VISA");
 		JComboBox cardTypeSelectComboBox = new JComboBox(cardTypes);
 		cardTypeSelectComboBox.setBounds(433, 350, 118, 28);
 		cardTypeSelectComboBox.setToolTipText("Select Card Type");
@@ -332,7 +332,7 @@ public class PaymentPage extends JPanel {
 						if(finalTotal < 0){
 							finalTotal = 0;
 						}
-						processPayment(frame,backend, finalTotal);
+						processPayment(frame,backend, finalTotal,backend.getCurrentRegisteredUser().getBankInfo());
 					}else if(cardValid == false){
 						invalidCardErrorLabel.setVisible(true);
 					}else if(voucherValid == false){
@@ -401,7 +401,7 @@ public class PaymentPage extends JPanel {
 					if(finalTotal < 0){
 						finalTotal = 0;
 					}
-					processPayment(frame,backend,finalTotal);
+					processPayment(frame,backend,finalTotal,new BankingInfo(name,cardType,cardNum,cardCCV,cardExp));
 				} else if(cardValid == false){
 					invalidCardErrorLabel.setVisible(true);
 				}else if(voucherValid == false){
@@ -421,12 +421,11 @@ public class PaymentPage extends JPanel {
 
 	}
 
-	public void processPayment(JFrame frame, BackEnd backend, double costAmount){
+	public void processPayment(JFrame frame, BackEnd backend, double costAmount, BankingInfo bankingInfo){
 		System.out.println("entered payment");
 		// Cart c = backend.getCurrentUser().getCart();
 		backend.getCurrentUser().getCart()
-				.setPayment(new Payment(costAmount,
-						backend.getCurrentRegisteredUser().getBankInfo()));
+				.setPayment(new Payment(costAmount, bankingInfo));
 		String ticketNumbers = "";
 		for (int i = 0; i < backend.getCurrentUser().getCart().getItems_in_cart().size(); i++) {
 			Movie movie = backend.getCurrentUser().getCart().getItems_in_cart().get(i).getBookedMovie();
@@ -443,6 +442,7 @@ public class PaymentPage extends JPanel {
 		}
 		/* Add prompt to show ticket and success message */
 		JOptionPane.showMessageDialog(null, "Ticket has been successfully purchased. Purchase Cost: " + String.format("%.2f",backend.getCurrentUser().getCart().getPayment().getAmount()) +"\nThe following tickets have been emailed to the email provided:\n" + ticketNumbers, "Ticket Has Been Purchased", JOptionPane.INFORMATION_MESSAGE);
+		backend.getCurrentUser().setCart(new Cart());
 		HomePage homePanel = new HomePage(frame, backend);
 		frame.setContentPane(homePanel);
 		frame.revalidate();

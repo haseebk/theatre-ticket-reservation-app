@@ -15,7 +15,7 @@ public class GUIController {
 		this.setFrontEnd(frontEnd);
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException{
 		FrontEnd frontEnd = null;
 		BackEnd backEnd = new BackEnd();
 		frontEnd = new FrontEnd(backEnd);

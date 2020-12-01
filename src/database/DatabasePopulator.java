@@ -8,13 +8,18 @@ import domain.model.FinancialInstitution;
 import domain.model.Showtime;
 import domain.model.Theatre;
 import domain.model.Auditorium;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import domain.model.Ticket;
 import domain.model.Announcement;
 import domain.model.Payment;
 import domain.model.Voucher;
 
-public class DatabasePopulator {
+public class DatabasePopulator{
 	DataController dbController;
 	private Movie spiderverse;
 	private Movie getout;
@@ -33,10 +38,9 @@ public class DatabasePopulator {
 		dbController = DataController.getOnlyInstance();
 	}
 
-	public void loadDatabase() {
+	public void loadDatabase() throws IOException{
 		loadMovies();
 		loadTheatres();
-		// loadShowtimes();
 		loadAnnouncements();
 		loadTickets();
 		loadUsers();
@@ -55,21 +59,27 @@ public class DatabasePopulator {
 		dbController.setInst(inst);
 	}
 	
-	public void loadMovies() {
-		String s= "After gaining superpowers from a spider bite, Miles Morales protects the cirty as Spider-Man. Soon, he meets alternate version of himself and gets embroiled in an epic battle to save the multiverse.";
-		String g = "Chris, an African-American man, decides to visit his Caucasian girlfriend's parents during a weekend getaway. Although they seem normal at first, he is not prepared to experience the horrors ahead.";
-		String h = "When the matriarch of the Graham family passes away, her daughter and grandchildren begin to unravel cryptic and increasingly terrifying secrets about their ancestry, tyring to outrun the sinister fate they have inherited.";
-		String p = "Paddington takes up a job to accumulate enough money to buy the perfect gift for his anunt on her 100th birthday, but it gets stolen.";
-		spiderverse = new Movie("Spider-Man: Into the Spider-Verse", "Action", 2018, "Peter Ramsey", 116, 8.4,
-				"spm-poster-183x268", 12.99, s);
-		getout = new Movie("Get Out", "Thriller", 2017, "Peter Ramsey", 104, 7.7, "get-poster-183x268", 12.99, g);
-		hereditary = new Movie("Hereditary", "Horror", 2018, "Ari Aster", 127, 7.3, "her-poster-183x268",12.99, h);
-		paddington = new Movie("Paddington 2", "Adventure", 2017, "Paul King", 104, 7.8, "pd2-poster-183x268",12.99, p);
+	public void loadMovies() throws IOException {
+		FileInputStream fstream = new FileInputStream("data/movie_data.txt");
+		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 
-		dbController.addMovie(spiderverse);
-		dbController.addMovie(getout);
-		dbController.addMovie(hereditary);
-		dbController.addMovie(paddington);
+		String line;
+		String[] argList = new String[11];
+
+		while((line = br.readLine()) != null) {
+			argList = line.split(":");
+			for(int i = 0; i < argList.length; i++){
+				System.out.println(argList[i]);
+			}
+			dbController.addMovie(new Movie(Integer.parseInt(argList[0]),argList[1],argList[2],Integer.parseInt(argList[3]),
+					argList[4],Integer.parseInt(argList[5]),Double.parseDouble(argList[6]),argList[7],Double.parseDouble(argList[8]),argList[9]));
+		}
+		fstream.close();
+
+		spiderverse = dbController.getMovieList().get(0);
+		getout = dbController.getMovieList().get(1);
+		hereditary = dbController.getMovieList().get(2);
+		paddington = dbController.getMovieList().get(3);
 	}
 
 	public void loadTheatres() {

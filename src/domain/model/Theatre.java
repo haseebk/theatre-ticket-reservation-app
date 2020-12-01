@@ -11,7 +11,7 @@ public class Theatre {
 	 * The id of the theatre
 	 */
 	private int theatreID;
-
+	private static int theatreCounter = 2000;
 	/**
 	 * List of auditoriums in the theatre
 	 */
@@ -27,13 +27,15 @@ public class Theatre {
 	 */
 	private String address;
 
-	public Theatre() {
-		theatreID = 0;
-		setAuditoriums(new ArrayList<Auditorium>());
+	public Theatre(String theatreName, ArrayList<Auditorium> auditoriums, String phoneNumber, String ad) {
+		this.t_name = theatreName;
+		this.theatreID = theatreCounter++;
+		this.setAuditoriums(auditoriums);
+		this.phoneNumber = phoneNumber;
+		this.address = ad;
 	}
 
-	public Theatre(String theatreName, int theatreID, ArrayList<Auditorium> auditoriums, String phoneNumber,
-			String ad) {
+	public Theatre(int theatreID, String theatreName, ArrayList<Auditorium> auditoriums, String phoneNumber, String ad) {
 		this.t_name = theatreName;
 		this.theatreID = theatreID;
 		this.setAuditoriums(auditoriums);
