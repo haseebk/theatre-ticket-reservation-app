@@ -132,7 +132,7 @@ public class RegisterPage extends JPanel {
 		fullNameTextField.setBorder(new MatteBorder(0, 0, 3, 0, (Color) Color.LIGHT_GRAY));
 		fullNameTextField.setForeground(Color.DARK_GRAY);
 		fullNameTextField.setBackground(Color.WHITE);
-		fullNameTextField.setBounds(565, 266, 254, 28);
+		fullNameTextField.setBounds(436, 269, 254, 28);
 		fullNameTextField.setOpaque(true);
 		fullNameTextField.setColumns(10);
 		fullNameTextField.setOpaque(true);
@@ -145,7 +145,7 @@ public class RegisterPage extends JPanel {
 		usernameTextField.setBorder(new MatteBorder(0, 0, 3, 0, (Color) Color.LIGHT_GRAY));
 		usernameTextField.setForeground(Color.DARK_GRAY);
 		usernameTextField.setBackground(Color.WHITE);
-		usernameTextField.setBounds(565, 340, 254, 28);
+		usernameTextField.setBounds(700, 269, 254, 28);
 		usernameTextField.setOpaque(true);
 		usernameTextField.setColumns(10);
 		usernameTextField.setOpaque(true);
@@ -158,7 +158,7 @@ public class RegisterPage extends JPanel {
 		emailTextField.setBorder(new MatteBorder(0, 0, 3, 0, (Color) Color.LIGHT_GRAY));
 		emailTextField.setForeground(Color.DARK_GRAY);
 		emailTextField.setBackground(Color.WHITE);
-		emailTextField.setBounds(565, 340, 254, 28);
+		emailTextField.setBounds(436, 373, 518, 28);
 		emailTextField.setOpaque(true);
 		emailTextField.setColumns(10);
 		emailTextField.setOpaque(true);
@@ -184,7 +184,7 @@ public class RegisterPage extends JPanel {
 		cardNumberTextField.setBorder(new MatteBorder(0, 0, 3, 0, (Color) Color.LIGHT_GRAY));
 		cardNumberTextField.setForeground(Color.DARK_GRAY);
 		cardNumberTextField.setBackground(Color.WHITE);
-		cardNumberTextField.setBounds(565, 340, 254, 28);
+		cardNumberTextField.setBounds(436, 425, 254, 28);
 		cardNumberTextField.setOpaque(true);
 		cardNumberTextField.setColumns(10);
 		cardNumberTextField.setOpaque(true);
@@ -195,7 +195,7 @@ public class RegisterPage extends JPanel {
 		cardSVSPasswordField.setToolTipText("Enter your card SVS.");
 		cardSVSPasswordField.setBorder(new MatteBorder(0, 0, 3, 0, (Color) Color.LIGHT_GRAY));
 		cardSVSPasswordField.setForeground(Color.BLACK);
-		cardSVSPasswordField.setBounds(565, 488, 254, 28);
+		cardSVSPasswordField.setBounds(904, 426, 50, 28);
 		add(cardSVSPasswordField);
 		
 		// CREATE CARDEXPIRATIONDATE TEXT FIELD
@@ -205,7 +205,7 @@ public class RegisterPage extends JPanel {
 		cardExpirationDateTextField.setBorder(new MatteBorder(0, 0, 3, 0, (Color) Color.LIGHT_GRAY));
 		cardExpirationDateTextField.setForeground(Color.DARK_GRAY);
 		cardExpirationDateTextField.setBackground(Color.WHITE);
-		cardExpirationDateTextField.setBounds(565, 340, 254, 28);
+		cardExpirationDateTextField.setBounds(726, 485, 254, 28);
 		cardExpirationDateTextField.setOpaque(true);
 		cardExpirationDateTextField.setColumns(10);
 		cardExpirationDateTextField.setOpaque(true);
@@ -216,7 +216,7 @@ public class RegisterPage extends JPanel {
 		passwordField.setToolTipText("Enter your password.");
 		passwordField.setBorder(new MatteBorder(0, 0, 3, 0, (Color) Color.LIGHT_GRAY));
 		passwordField.setForeground(Color.BLACK);
-		passwordField.setBounds(565, 488, 254, 28);
+		passwordField.setBounds(436, 321, 254, 28);
 		add(passwordField);
 
 		// CREATE CONFIRM PASSWORD TEXT FIELD
@@ -224,7 +224,7 @@ public class RegisterPage extends JPanel {
 		passwordField2.setToolTipText("Re-enter your password.");
 		passwordField2.setBorder(new MatteBorder(0, 0, 3, 0, (Color) Color.LIGHT_GRAY));
 		passwordField2.setForeground(Color.BLACK);
-		passwordField2.setBounds(565, 414, 254, 28);
+		passwordField2.setBounds(700, 321, 254, 28);
 		add(passwordField2);
 
 		// CREATE USERNAME TEXT LABEL
@@ -232,7 +232,7 @@ public class RegisterPage extends JPanel {
 		fullNameLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		fullNameLabel.setForeground(Color.WHITE);
 		fullNameLabel.setFont(new Font("Arial", Font.PLAIN, 16));
-		fullNameLabel.setBounds(653, 250, 77, 14);
+		fullNameLabel.setBounds(524, 254, 77, 14);
 		add(fullNameLabel);
 
 		// CREATE USERNAME TEXT LABEL
@@ -240,7 +240,7 @@ public class RegisterPage extends JPanel {
 		usernameLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		usernameLabel.setForeground(Color.WHITE);
 		usernameLabel.setFont(new Font("Arial", Font.PLAIN, 16));
-		usernameLabel.setBounds(653, 324, 77, 14);
+		usernameLabel.setBounds(788, 254, 77, 14);
 		add(usernameLabel);
 		
 		// CREATE EMAIL TEXT LABEL
@@ -248,39 +248,39 @@ public class RegisterPage extends JPanel {
 		emailLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		emailLabel.setForeground(Color.WHITE);
 		emailLabel.setFont(new Font("Arial", Font.PLAIN, 16));
-		emailLabel.setBounds(653, 324, 77, 14); // edit location
+		emailLabel.setBounds(663, 359, 57, 14); // edit location
 		add(emailLabel);
 		
-		// CREATE CARDTYPE TEXT LABEL -------------------------------- implement as a dropdown menu?
-		cardTypeLabel = new JLabel("CardType");
+		// CREATE CARDTYPE TEXT LABEL 
+		cardTypeLabel = new JLabel("Type");
 		cardTypeLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		cardTypeLabel.setForeground(Color.WHITE);
 		cardTypeLabel.setFont(new Font("Arial", Font.PLAIN, 16));
-		cardTypeLabel.setBounds(653, 324, 77, 14);
+		cardTypeLabel.setBounds(436, 488, 77, 14);
 		add(cardTypeLabel);
 		
 		// CREATE CARDNUMBER TEXT LABEL 
-		cardNumberLabel = new JLabel("CardNumber");
+		cardNumberLabel = new JLabel("Card Number");
 		cardNumberLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		cardNumberLabel.setForeground(Color.WHITE);
 		cardNumberLabel.setFont(new Font("Arial", Font.PLAIN, 16));
-		cardNumberLabel.setBounds(653, 324, 77, 14);
+		cardNumberLabel.setBounds(508, 411, 108, 14);
 		add(cardNumberLabel);
 		
-		// CREATE CARDSVS TEXT LABEL 
-		cardSVSLabel = new JLabel("CardSVS");
+		// CREATE CARD SVS TEXT LABEL 
+		cardSVSLabel = new JLabel("CCV");
 		cardSVSLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		cardSVSLabel.setForeground(Color.WHITE);
 		cardSVSLabel.setFont(new Font("Arial", Font.PLAIN, 16));
-		cardSVSLabel.setBounds(653, 324, 77, 14);
+		cardSVSLabel.setBounds(904, 411, 50, 14);
 		add(cardSVSLabel);
 		
 		// CREATE CARDEXPIRATIONDATE TEXT LABEL 
-		cardExpirationDateLabel = new JLabel("CardExpirationDate");
+		cardExpirationDateLabel = new JLabel("EXP");
 		cardExpirationDateLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		cardExpirationDateLabel.setForeground(Color.WHITE);
 		cardExpirationDateLabel.setFont(new Font("Arial", Font.PLAIN, 16));
-		cardExpirationDateLabel.setBounds(653, 324, 77, 14);
+		cardExpirationDateLabel.setBounds(1023, 308, 77, 14);
 		add(cardExpirationDateLabel);
 		
 		// CREATE PASSWORD TEXT LABEL
@@ -288,7 +288,7 @@ public class RegisterPage extends JPanel {
 		passwordLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		passwordLabel.setForeground(Color.WHITE);
 		passwordLabel.setFont(new Font("Arial", Font.PLAIN, 16));
-		passwordLabel.setBounds(653, 398, 77, 14);
+		passwordLabel.setBounds(524, 307, 77, 14);
 		add(passwordLabel);
 
 		// CREATE PASSWORD TEXT LABEL
@@ -296,7 +296,7 @@ public class RegisterPage extends JPanel {
 		passwordLabel2.setHorizontalAlignment(SwingConstants.CENTER);
 		passwordLabel2.setForeground(Color.WHITE);
 		passwordLabel2.setFont(new Font("Arial", Font.PLAIN, 16));
-		passwordLabel2.setBounds(625, 472, 134, 14);
+		passwordLabel2.setBounds(760, 307, 134, 14);
 		add(passwordLabel2);
 
 		// CREATE USERNAME ERROR TEXT LABEL
