@@ -18,6 +18,8 @@ public class DataController {
 	private ArrayList<RegisteredUser> userList;
 	private ArrayList<Announcement> announcementList;
 	private ArrayList<Auditorium> auditoriumList;
+	private ArrayList<Voucher> voucherList;
+	private FinancialInstitution inst;
 
 	/**
 	 * Methods to create instances
@@ -30,6 +32,8 @@ public class DataController {
 		setUserList(new ArrayList<RegisteredUser>());
 		setAnnouncementList(new ArrayList<Announcement>());
 		setAuditoriumList(new ArrayList<Auditorium>());
+		setVoucherList(new ArrayList<Voucher>());
+		inst = new FinancialInstitution("");
 	}
 
 	/**
@@ -377,6 +381,34 @@ public class DataController {
 
 	public void removeAuditorium(Auditorium auditorium) {
 		auditoriumList.remove(auditorium);
+	}
+	
+	public void addVoucher(Voucher voucher) {
+		voucherList.add(voucher);
+	}
+	
+	public ArrayList<Voucher> getVoucherList() {
+		return voucherList;
+	}
+	
+	public void setVoucherList(ArrayList<Voucher> voucherList) {
+		this.voucherList = voucherList;
+	}
+	
+	public void removeVoucher(Voucher voucher) {
+		voucherList.remove(voucher);
+	}
+	public Boolean checkTicketID() {
+		
+		return false;
+	}
+
+	public FinancialInstitution getInst() {
+		return inst;
+	}
+
+	public void setInst(FinancialInstitution inst) {
+		this.inst = inst;
 	}
 
 }

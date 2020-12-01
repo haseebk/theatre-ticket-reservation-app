@@ -6,9 +6,11 @@ public class Ticket {
 	private Movie the_movie;
 	private Showtime showtime;
 	private Seat seat;
+	
+	private static int ticketCounter = 0;
 
-	public Ticket(int id, Payment p, Movie m, Showtime s, Seat s1) {
-		ticketID = id;
+	public Ticket(Payment p, Movie m, Showtime s, Seat s1) {
+		ticketID = ticketCounter++;
 		payment = p;
 		the_movie = m;
 		showtime = s;
