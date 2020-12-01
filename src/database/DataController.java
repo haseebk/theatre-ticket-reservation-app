@@ -19,6 +19,7 @@ public class DataController {
 	private ArrayList<Announcement> announcementList;
 	private ArrayList<Auditorium> auditoriumList;
 	private ArrayList<Voucher> voucherList;
+	private FinancialInstitution inst;
 
 	/**
 	 * Methods to create instances
@@ -32,6 +33,7 @@ public class DataController {
 		setAnnouncementList(new ArrayList<Announcement>());
 		setAuditoriumList(new ArrayList<Auditorium>());
 		setVoucherList(new ArrayList<Voucher>());
+		inst = new FinancialInstitution("");
 	}
 
 	/**
@@ -139,7 +141,7 @@ public class DataController {
 		for (int i = 0; i < showtimeList.size(); i++) {
 			if (showtimeList.get(i).getMovie() == searchMovie
 					&& showtimeList.get(i).getAuditorium().getTheatre() == searchTheatre
-					&& showtimeList.get(i).getShowDate().toString().compareTo(date.toString()) == 0) {
+					&& showtimeList.get(i).getShowDate().getDate().compareTo(date.getDate()) == 0) {
 				return showtimeList.get(i);
 			}
 		}
@@ -388,22 +390,25 @@ public class DataController {
 	public ArrayList<Voucher> getVoucherList() {
 		return voucherList;
 	}
-
-	public void setVoucherList(ArrayList<Voucher> v) {
-		voucherList = v;
+	
+	public void setVoucherList(ArrayList<Voucher> voucherList) {
+		this.voucherList = voucherList;
 	}
 	
 	public void removeVoucher(Voucher voucher) {
 		voucherList.remove(voucher);
 	}
+	public Boolean checkTicketID() {
+		
+		return false;
+	}
 
-    public int checkTicket(int id) {
-		for(int i = 0; i < ticketList.size(); i++) {
-			if(ticketList.get(i).getTicketID() == id) {
-				return i;
-			}
-		}
+	public FinancialInstitution getInst() {
+		return inst;
+	}
 
-		return -1;
-    }
+	public void setInst(FinancialInstitution inst) {
+		this.inst = inst;
+	}
+
 }

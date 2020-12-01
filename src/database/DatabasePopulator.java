@@ -23,6 +23,11 @@ public class DatabasePopulator {
 	private Showtime s1;
 	private Showtime s2;
 	private FinancialInstitution inst;
+	private BankingInfo b1;
+	private BankingInfo b2;
+	private BankingInfo b3;
+	private BankingInfo b4;
+	
 
 	public DatabasePopulator() {
 		dbController = DataController.getOnlyInstance();
@@ -36,8 +41,19 @@ public class DatabasePopulator {
 		loadUsers();
 		loadTickets();
 		loadVouchers();
+		loadInst();
 	}
 
+	public void loadInst() {
+		inst = new FinancialInstitution("Cash Money Bank");
+		BankingInfo b5 = new BankingInfo("Random Person", "VISA", "5555555555555555", "555", "05/22");
+		inst.addAccount(b1);
+		inst.addAccount(b2);
+		inst.addAccount(b3);
+		inst.addAccount(b4);
+		inst.addAccount(b5);
+	}
+	
 	public void loadMovies() {
 		String s= "After gaining superpowers from a spider bite, Miles Morales protects the cirty as Spider-Man. Soon, he meets alternate version of himself and gets embroiled in an epic battle to save the multiverse.";
 		String g = "Chris, an African-American man, decides to visit his Caucasian girlfriend's parents during a weekend getaway. Although they seem normal at first, he is not prepared to experience the horrors ahead.";
@@ -78,34 +94,34 @@ public class DatabasePopulator {
 	}
 
 	public void loadShowtimes(ArrayList<Auditorium> x, ArrayList<Auditorium> y) {
-		Date d1 = new Date(30, 11, 2020);
-		Date d2 = new Date(7, 12, 2020);
-		Date d3 = new Date(1, 12, 2020);
-		Date d4 = new Date(19, 12, 2020);
+		Date d1 = new Date(10, "December", 2020);
+		Date d2 = new Date(12, "December", 2020);
+		Date d3 = new Date(14, "December", 2020);
+		Date d4 = new Date(16, "December", 2020);
 		
-		s1 = new Showtime(d1, x.get(0), spiderverse, 13, 0);
-		Showtime s11 = new Showtime(d3, x.get(0), spiderverse, 8,30);
+		s1 = new Showtime(d1, x.get(0), spiderverse);
+		Showtime s11 = new Showtime(d3, x.get(0), spiderverse);
 		
-		s2 = new Showtime(d2, x.get(1), getout, 9,15);
-		Showtime s12 = new Showtime(d4, x.get(0), getout, 11,45);
+		s2 = new Showtime(d2, x.get(1), getout);
+		Showtime s12 = new Showtime(d4, x.get(0), getout);
 		
-		Showtime s3 = new Showtime(d3, x.get(0), hereditary, 14,0);
-		Showtime s13 = new Showtime(d1, x.get(1), hereditary, 16,30);
+		Showtime s3 = new Showtime(d3, x.get(0), hereditary);
+		Showtime s13 = new Showtime(d1, x.get(1), hereditary);
 		
-		Showtime s4 = new Showtime(d4, x.get(1), paddington, 20,30);
-		Showtime s9 = new Showtime(d2, x.get(1), paddington,16,15);
+		Showtime s4 = new Showtime(d4, x.get(1), paddington);
+		Showtime s9 = new Showtime(d2, x.get(1), paddington);
 		
-		Showtime s5 = new Showtime(d1, y.get(0), spiderverse,17,45);
-		Showtime s10 = new Showtime(d3, y.get(1), spiderverse,12,00);
+		Showtime s5 = new Showtime(d1, y.get(0), spiderverse);
+		Showtime s10 = new Showtime(d3, y.get(1), spiderverse);
 		
-		Showtime s6 = new Showtime(d2, y.get(1), getout,16,15);
-		Showtime s14 = new Showtime(d3, y.get(1), getout,9,15);
+		Showtime s6 = new Showtime(d2, y.get(1), getout);
+		Showtime s14 = new Showtime(d3, y.get(1), getout);
 		
-		Showtime s7 = new Showtime(d3, y.get(0), hereditary,8,0);
-		Showtime s15 = new Showtime(d1, y.get(1), hereditary,14,0);
+		Showtime s7 = new Showtime(d3, y.get(0), hereditary);
+		Showtime s15 = new Showtime(d1, y.get(1), hereditary);
 		
-		Showtime s8 = new Showtime(d4, y.get(1), paddington,14,15);
-		Showtime s16 = new Showtime(d2, y.get(1), paddington,15,0);
+		Showtime s8 = new Showtime(d4, y.get(1), paddington);
+		Showtime s16 = new Showtime(d2, y.get(1), paddington);
 
 		dbController.addShowtime(s1);
 		dbController.addShowtime(s2);
@@ -126,28 +142,28 @@ public class DatabasePopulator {
 	}
 
 	public void loadTickets() {
-		BankingInfo b1 = new BankingInfo("Vaibhav Kapoor", "MASTER", "1111111111111111", "111", "01/22");
-		BankingInfo b2 = new BankingInfo("William Kerr", "VISA", "2222222222222222", "222", "02/22");
-		Payment p1 = new Payment(1, 13.99, b1);
-		Payment p2 = new Payment(2, 15.99, b2);
-		Ticket t1 = new Ticket(12, p1, s1.getMovie(), s1, s1.getSeats()[1][2]);
-		Ticket t2 = new Ticket(13, p2, s2.getMovie(), s2, s2.getSeats()[3][3]);
-		s1.bookSeat(2,3);
-		s2.bookSeat(3,1);
+		b1 = new BankingInfo("Vaibhav Kapoor", "MASTER", "1111111111111111", "111", "01/22");
+		b2 = new BankingInfo("William Kerr", "VISA", "2222222222222222", "222", "02/22");
+		Payment p1 = new Payment(13.99, b1);
+		Payment p2 = new Payment(15.99, b2);
+		Ticket t1 = new Ticket(p1, s1.getMovie(), s1, s1.getSeats()[1][2]);
+		Ticket t2 = new Ticket(p2, s2.getMovie(), s2, s2.getSeats()[3][3]);
+		s1.getSeats()[1][2].bookSeat();
+		s2.getSeats()[3][3].bookSeat();
 
 		dbController.addTicket(t1);
 		dbController.addTicket(t2);
 	}
 
 	public void loadUsers() {
-		BankingInfo b1 = new BankingInfo("Vaibhav Kapoor", "MASTER", "1111111111111111", "111", "01/22");
-		BankingInfo b2 = new BankingInfo("William Kerr", "VISA", "2222222222222222", "222", "02/22");
-		BankingInfo b3 = new BankingInfo("Eddie Kim", "VISA", "3333333333333333", "333", "03/22");
-		BankingInfo b4 = new BankingInfo("Haseeb Khan", "MASTER", "4444444444444444", "444", "04/22");
-		Date d1 = new Date(1, 4, 2020);
-		Date d2 = new Date(2, 5, 2020);
-		Date d3 = new Date(3, 6, 2020);
-		Date d4 = new Date(4, 7, 2020);
+		//b1 = new BankingInfo("Vaibhav Kapoor", "MASTER", "1111111111111111", "111", "01/22");
+		//b2 = new BankingInfo("William Kerr", "VISA", "2222222222222222", "222", "02/22");
+		b3 = new BankingInfo("Eddie Kim", "VISA", "3333333333333333", "333", "03/22");
+		b4 = new BankingInfo("Haseeb Khan", "MASTER", "4444444444444444", "444", "04/22");
+		Date d1 = new Date(1, "April", 2020);
+		Date d2 = new Date(2, "May", 2020);
+		Date d3 = new Date(3, "June", 2020);
+		Date d4 = new Date(4, "July", 2020);
 		RegisteredUser u1 = new RegisteredUser("V.Kapoor", "1234", "Vaibhav", "Kapoor", "vk@email.com", b1, d1);
 		RegisteredUser u2 = new RegisteredUser("W.Kerr", "1234", "William", "Kerr", "wk@email.com", b2, d2);
 		RegisteredUser u3 = new RegisteredUser("E.Kim", "1234", "Eddie", "Kim", "ek@email.com", b3, d3);
@@ -160,8 +176,8 @@ public class DatabasePopulator {
 	}
 
 	public void loadAnnouncements() {
-		Date da1 = new Date(29, 11, 2020);
-		Date da2 = new Date(19, 12, 2020);
+		Date da1 = new Date(7, "December", 2020);
+		Date da2 = new Date(8, "December", 2020);
 		Announcement an1 = new Announcement(da1, "This is the first announcement.");
 		Announcement an2 = new Announcement(da2, "This is the second announcement.");
 

@@ -33,9 +33,9 @@ public class Movie {
 	private double rating;
 
 	private String poster;
-
+	
 	private double price;
-
+	
 	private String synopsis;
 
 	private Movie() {
@@ -48,8 +48,7 @@ public class Movie {
 		this.setPoster("");
 	}
 
-	public Movie(String title, String genre, int year, String director, int movieLength, double rating, String poster,
-			double p, String syn) {
+	public Movie(String title, String genre, int year, String director, int movieLength, double rating, String poster, double p, String syn) {
 		this.title = title;
 		this.genre = genre;
 		this.year = year;
@@ -117,7 +116,7 @@ public class Movie {
 	public void setPoster(String poster) {
 		this.poster = poster;
 	}
-
+	
 	public double getPrice() {
 		return price;
 	}
@@ -125,17 +124,12 @@ public class Movie {
 	public void setPrice(double price) {
 		this.price = price;
 	}
-
+	
 	public String getSynopsis() {
 		return synopsis;
 	}
 
 	public void setSynopsis(String synopsis) {
 		this.synopsis = synopsis;
-	}
-
-	@Override
-	public String toString() {
-		return String.format(title);
 	}
 };

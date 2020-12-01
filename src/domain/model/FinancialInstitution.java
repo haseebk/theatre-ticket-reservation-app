@@ -28,6 +28,17 @@ public class FinancialInstitution {
 		}
 		return;
 	}
+	
+	public boolean verifyCardInfo(String name, String type, String num, String svs, String exp) {
+		Iterator<BankingInfo> it = bankAccounts.iterator(); 
+        while (it.hasNext()) {
+        	BankingInfo currentAccount = (BankingInfo)it.next();
+            if(name == currentAccount.getCustomerName() && type == currentAccount.getCardType() && num == currentAccount.getCardNumber() && svs == currentAccount.getCardSVS() && exp == currentAccount.getCardExpirationDate()) {
+            	return true;
+            }
+        }
+		return false;
+	}
 
 	// Getters and Setters
 	public String getName() {
