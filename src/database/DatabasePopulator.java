@@ -22,22 +22,25 @@ import domain.model.Announcement;
 import domain.model.Payment;
 import domain.model.Voucher;
 
+/**
+ * Populates the data from text files
+ * @author Eddie
+ *
+ */
 public class DatabasePopulator {
 	DataController dbController;
-	/*private Movie spiderverse;
-	private Movie getout;
-	private Movie hereditary;
-	private Movie paddington;
-	private Showtime s1;
-	private Showtime s2;
-	private FinancialInstitution inst;*/
 
 	public DatabasePopulator() {
 		dbController = DataController.getOnlyInstance();
 	}
 
+	/**
+	 * Constructor to load all the different data fields
+	 * @throws IOException
+	 */
 	public void loadDatabase() throws IOException{
 		loadMovies();
+		loadAuditoriums();
 		loadTheatres();
 		loadShowtimes();
 		loadAnnouncements();
@@ -47,6 +50,10 @@ public class DatabasePopulator {
 		loadVouchers();
 	}
 
+	/**
+	 * Loads movie data from movie_data.txt file
+	 * @throws IOException
+	 */
 	public void loadMovies() throws IOException {
 		
 		FileInputStream fstream = new FileInputStream("data/movie_data.txt");
@@ -58,18 +65,20 @@ public class DatabasePopulator {
 		while((line = br.readLine()) != null) {
 			argList.add(line);
 		}
-		fstream.close();
 		
 		for(int i = 0; i < argList.size(); i+=9) {
 			Movie tempMovie = new Movie(argList.get(i), argList.get(i+1), Integer.parseInt(argList.get(i+2)), argList.get(i+3), Integer.parseInt(argList.get(i+4)), 
 												Double.parseDouble(argList.get(i+5)), argList.get(i+6), Double.parseDouble(argList.get(i+7)), argList.get(i+8));
 			dbController.addMovie(tempMovie);
 		}
-		
+		fstream.close();
 	}
 
-	public void loadTheatres() throws IOException {
-
+	/**
+	 * Loads auditorium data from auditorium_data.txt file
+	 * @throws IOException
+	 */
+	public void loadAuditoriums() throws IOException{
 		FileInputStream fstream = new FileInputStream("data/auditorium_data.txt");
 		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 		
@@ -78,26 +87,41 @@ public class DatabasePopulator {
 		while((line = br.readLine()) != null) {
 			argList.add(line);
 		}
-		fstream.close();
 		for(int i = 0; i < argList.size(); i+=2) {
 			Auditorium a = new Auditorium(Integer.parseInt(argList.get(i)), Integer.parseInt(argList.get(i+1)));
 			dbController.addAuditorium(a);
 		}
-		argList.clear();
+		fstream.close();
+	}
+	
+	/**
+	 * Loads theatre data from theatre_data.txt file
+	 * @throws IOException
+	 */
+	public void loadTheatres() throws IOException {
+
+		FileInputStream fstream = new FileInputStream("data/theatre_data.txt");
+		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 		
-		fstream = new FileInputStream("data/theatre_data.txt");
-		br = new BufferedReader(new InputStreamReader(fstream));
+		String line;
+		ArrayList<String> argList = new ArrayList<String>();
+		
 		while((line = br.readLine()) != null) {
 			argList.add(line);
 		}
-		fstream.close();
+		
 		for(int i = 0; i < argList.size(); i+=3) {
 			ArrayList<Auditorium> a1 = dbController.getAuditoriumList();
 			Theatre t = new Theatre(argList.get(i),1000+i, a1, argList.get(i+1), argList.get(i+2));
 			dbController.addTheatre(t);
 		}
+		fstream.close();
 	}
 
+	/**
+	 * Loads showtime data from showtime_date.txt and showtime_data.txt files
+	 * @throws IOException
+	 */
 	public void loadShowtimes() throws IOException {
 		
 		ArrayList<Date> d = new ArrayList<Date>();
@@ -109,7 +133,6 @@ public class DatabasePopulator {
 		while((line = br.readLine()) != null) {
 			argList.add(line);
 		}
-		fstream.close();
 		for(int i = 0; i < argList.size(); i+=3) {
 			Date setD = new Date(Integer.parseInt(argList.get(i)), Integer.parseInt(argList.get(i+1)), Integer.parseInt(argList.get(i+2)));
 			d.add(setD);
@@ -120,7 +143,6 @@ public class DatabasePopulator {
 		while((line = br.readLine()) != null) {
 			argList.add(line);
 		}
-		fstream.close();
 		
 		for(int i = 0; i < dbController.getMovieList().size() ; i++) {
 			for(int j = 0; j < dbController.getAuditoriumList().size(); j++) {
@@ -131,8 +153,13 @@ public class DatabasePopulator {
 				}
 			}
 		}
+		fstream.close();
 	}
 
+	/**
+	 * Loads ticket data from payment_data.txt and ticket_data.txt files
+	 * @throws IOException
+	 */
 	public void loadTickets() throws IOException {
 
 		ArrayList<Payment> pList = new ArrayList<Payment>();
@@ -162,6 +189,10 @@ public class DatabasePopulator {
 		}
 	}
 	
+	/**
+	 * Loads bank account data from banking_data.txt
+	 * @throws IOException
+	 */
 	public void loadBankAccount() throws IOException{
 		FileInputStream fstream = new FileInputStream("data/banking_data.txt");
 		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
@@ -178,6 +209,10 @@ public class DatabasePopulator {
 		}
 	}
 
+	/**
+	 * Loads currently registered user information from registration_date.txt and registration_data.txt files
+	 * @throws IOException
+	 */
 	public void loadUsers() throws IOException {
 
 		ArrayList<Date> dList = new ArrayList<Date>();
@@ -211,6 +246,10 @@ public class DatabasePopulator {
 		}
 	}
 
+	/**
+	 * Loads announcement information from announcement_date.txt and announcement_data.txt files
+	 * @throws IOException
+	 */
 	public void loadAnnouncements() throws IOException {
 		ArrayList<Date> dList = new ArrayList<Date>();
 		ArrayList<Date> dList2 = new ArrayList<Date>();
@@ -223,7 +262,7 @@ public class DatabasePopulator {
 			argList.add(line);
 		}
 		fstream.close();
-		for(int i = 0; i < argList.size(); i+=3) {
+		for(int i = 0; i < argList.size(); i+=6) {
 			Date d = new Date(Integer.parseInt(argList.get(i)), Integer.parseInt(argList.get(i+1)), Integer.parseInt(argList.get(i+2)));
 			dList.add(d);
 			Date d2 = new Date(Integer.parseInt(argList.get(i+3)), Integer.parseInt(argList.get(i+4)), Integer.parseInt(argList.get(i+5)));
@@ -243,6 +282,10 @@ public class DatabasePopulator {
 		
 	}
 	
+	/**
+	 * Loads existing voucher information from voucher_data.txt file
+	 * @throws IOException
+	 */
 	public void loadVouchers() throws IOException {
 		FileInputStream fstream = new FileInputStream("data/voucher_data.txt");
 		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
