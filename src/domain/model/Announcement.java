@@ -31,4 +31,10 @@ public class Announcement {
 	public void setAnnounceMessage(String m) {
 		announceMessage = m;
 	}
+	
+	@Override
+	public String toString() {
+		return String.format(getAnnounceDate().month + " " + getAnnounceDate().day + ", " + getAnnounceDate().year + "        " + getAnnounceMessage());
+	}
+	
 }

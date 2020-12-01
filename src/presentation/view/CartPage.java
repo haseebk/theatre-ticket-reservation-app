@@ -8,11 +8,9 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 import javax.swing.*;
-import javax.swing.border.MatteBorder;
-
 import domain.model.*;
 import java.awt.Dimension;
-import java.awt.BorderLayout;
+
 
 public class CartPage extends JPanel {
 	/**
@@ -87,10 +85,9 @@ public class CartPage extends JPanel {
 
 		// CREATE MOVIE CARD VIEW
 		JPanel imagePanels = new JPanel();
-		imagePanels.setBounds(20, 87, 1304, 560);
+		imagePanels.setPreferredSize(new Dimension(1304, 1800));
 
 		ArrayList<Booking> cartItems = backend.getCurrentUser().getCart().getItems_in_cart();
-
 		JLabel[] ticketCards = new JLabel[cartItems.size()];
 		JLabel[] deleteTicket = new JLabel[cartItems.size()];
 		JLabel[] ticketDetails = new JLabel[cartItems.size()];
@@ -122,7 +119,7 @@ public class CartPage extends JPanel {
 			ticketDetails[i].setFont(new Font("Arial", Font.PLAIN, 20));
 			ticketDetails[i].setBounds(60, 70 + (170 * i), 1000, 32);
 			imagePanels.add(ticketDetails[i]);
-
+			
 			ticketCards[i] = new JLabel("");
 			ticketCards[i].setVerticalAlignment(SwingConstants.TOP);
 			ticketCards[i].setHorizontalAlignment(SwingConstants.LEFT);
@@ -131,12 +128,10 @@ public class CartPage extends JPanel {
 			imagePanels.add(ticketCards[i]);
 		}
 		add(imagePanels);
-		imagePanels.setLayout(new BorderLayout(0, 0));
 		imagePanels.setOpaque(false);
 
 		JScrollPane scrollPane = new JScrollPane(imagePanels);
-
-		scrollPane.setPreferredSize(new Dimension(1304, 560));
+		imagePanels.setLayout(null);
 		scrollPane.setBounds(20, 87, 1304, 560);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
