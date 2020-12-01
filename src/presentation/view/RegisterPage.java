@@ -341,8 +341,14 @@ public class RegisterPage extends JPanel {
 				String user = usernameTextField.getText();
 				String pass = String.valueOf(passwordField.getPassword());
 				String confirmPass = String.valueOf(passwordField2.getPassword());
-				String email = "";
-				Boolean validName = true;
+				String email = emailTextField.getText();
+				String cardType = cardTypeTextField.getText();
+				String cardNum = cardNumberTextField.getText();
+				String cardSVS = String.valueOf(cardSVSPasswordField.getPassword());
+				String cardExp = cardExpirationDateTextField.getText();
+				
+				// Dont need these for now
+				Boolean validName = true;		
 				Boolean samePasswords = true;
 				Boolean uniqueUser = true;
 				
@@ -358,7 +364,7 @@ public class RegisterPage extends JPanel {
 				if(!backend.checkExisting(user)) {
 					if(pass.matches(confirmPass)) {
 						if(name.length == 2) {
-							backend.registerUser(user, pass, name[0], name[1], email);
+							backend.registerUser(user, pass, name[0], name[1], email, fullname, cardType, cardNum, cardSVS, cardExp);
 							LoginPage loginPanel = new LoginPage(frame, backend);
 							frame.setContentPane(loginPanel);
 						}
