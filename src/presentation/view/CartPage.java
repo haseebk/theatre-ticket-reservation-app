@@ -45,6 +45,7 @@ public class CartPage extends JPanel {
 		setLayout(null);
 
 		// CREATE WELCOME TEXT LABEL
+
 		JLabel welcomeLabel = new JLabel("");
 		if (backend.getCurrentUser() == null) {
 			welcomeLabel = new JLabel("Welcome, Guest!");
@@ -55,20 +56,43 @@ public class CartPage extends JPanel {
 		welcomeLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		welcomeLabel.setForeground(Color.WHITE);
 		welcomeLabel.setFont(new Font("Arial", Font.PLAIN, 25));
-		welcomeLabel.setBounds(140, 5, 264, 50);
+		welcomeLabel.setBounds(140, 5, 571, 50);
 		add(welcomeLabel);
 
 		// CREATE MOVIE CARD VIEW
-		JLabel[] ticketCards = new JLabel[2]; // 3 is supposed to be num of items in cart
-		for (int i = 0; i < ticketCards.length; i++) {
+		ArrayList<Booking> cartItems = backend.getCurrentUser().getCart().getItems_in_cart();
+		
+		JLabel[] ticketCards = new JLabel[cartItems.size()];
+		JLabel[] movieDetails = new JLabel[cartItems.size()];
+		for (int i = 0; i < cartItems.size(); i++) {
 			ticketCards[i] = new JLabel("");
 			ticketCards[i].setVerticalAlignment(SwingConstants.TOP);
 			ticketCards[i].setHorizontalAlignment(SwingConstants.LEFT);
 			ticketCards[i].setBounds(39, 100 + (170 * i), 1285, 164);
 			ticketCards[i].setIcon(new ImageIcon(HomePage.class.getResource("/ticketCard.png")));
 			add(ticketCards[i]);
+			
+			movieDetails[i] = new JLabel("");
+			movieDetails[i].setVerticalAlignment(SwingConstants.TOP);
+			movieDetails[i].setHorizontalAlignment(SwingConstants.LEFT);
+			movieDetails[i].setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			movieDetails[i].setIcon(new ImageIcon(HomePage.class.getResource("/deleteButton.png")));
+			movieDetails[i].setBounds(39, 100 + (170 * i), 1285, 164);
+			
+			
+//			private Movie bookedMovie;
+//			/**
+//			 * The show time that's being booked
+//			 */
+//			private Showtime bookedTime;
+//			/**
+//			 * The seat that's being booked
+//			 */
+//			private Seat bookedSeat;
 		}
-
+		
+		
+		
 		// CREATE BACK BUTTON
 		backButton = new JLabel("");
 		backButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

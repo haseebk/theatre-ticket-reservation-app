@@ -460,7 +460,7 @@ public class HomePage extends JPanel {
 		welcomeLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		welcomeLabel.setForeground(Color.WHITE);
 		welcomeLabel.setFont(new Font("Arial", Font.PLAIN, 25));
-		welcomeLabel.setBounds(140, 5, 264, 50);
+		welcomeLabel.setBounds(140, 5, 571, 50);
 		add(welcomeLabel);
 
 		// CREATE LOGOUT BUTTON
