@@ -19,6 +19,7 @@ public class DataController {
 	private ArrayList<Announcement> announcementList;
 	private ArrayList<Auditorium> auditoriumList;
 	private ArrayList<Voucher> voucherList;
+	private FinancialInstitution inst;
 
 	/**
 	 * Methods to create instances
@@ -302,6 +303,7 @@ public class DataController {
 	public void removeTicket(Ticket ticket) {
 		ticketList.remove(ticket);
 	}
+	
 
 	/**
 	 * Getter for list of users
@@ -390,6 +392,37 @@ public class DataController {
 	
 	public void removeVoucher(Voucher voucher) {
 		voucherList.remove(voucher);
+	}
+	
+	public Boolean checkvoucher(int id) {
+		
+		
+		
+		return false;
+	}
+	
+	public Boolean checkTicketID() {
+		
+		return false;
+	}
+	
+	public FinancialInstitution getInst() {
+		return inst;
+	}
+
+	public void setInst(FinancialInstitution instList) {
+		this.inst = instList;
+	}
+	
+	public int checkTicket(int id) {
+		
+		for(int i = 0; i < ticketList.size(); i++) {
+			if(ticketList.get(i).getTicketID() == id) {
+				return i;
+			}
+		}
+		
+		return -1;
 	}
 
 }

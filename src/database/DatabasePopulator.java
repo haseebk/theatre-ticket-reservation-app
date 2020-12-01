@@ -23,6 +23,11 @@ public class DatabasePopulator {
 	private Showtime s1;
 	private Showtime s2;
 	private FinancialInstitution inst;
+	private BankingInfo b1;
+	private BankingInfo b2;
+	private BankingInfo b3;
+	private BankingInfo b4;
+	
 
 	public DatabasePopulator() {
 		dbController = DataController.getOnlyInstance();
@@ -36,8 +41,19 @@ public class DatabasePopulator {
 		loadUsers();
 		loadTickets();
 		loadVouchers();
+		loadInst();
 	}
 
+	public void loadInst() {
+		inst = new FinancialInstitution("Cash Money Bank");
+		BankingInfo b5 = new BankingInfo("Random Person", "VISA", "5555555555555555", "555", "05/22");
+		inst.addAccount(b1);
+		inst.addAccount(b2);
+		inst.addAccount(b3);
+		inst.addAccount(b4);
+		inst.addAccount(b5);
+	}
+	
 	public void loadMovies() {
 		String s= "After gaining superpowers from a spider bite, Miles Morales protects the cirty as Spider-Man. Soon, he meets alternate version of himself and gets embroiled in an epic battle to save the multiverse.";
 		String g = "Chris, an African-American man, decides to visit his Caucasian girlfriend's parents during a weekend getaway. Although they seem normal at first, he is not prepared to experience the horrors ahead.";
@@ -126,8 +142,8 @@ public class DatabasePopulator {
 	}
 
 	public void loadTickets() {
-		BankingInfo b1 = new BankingInfo("Vaibhav Kapoor", "MASTER", "1111111111111111", "111", "01/22");
-		BankingInfo b2 = new BankingInfo("William Kerr", "VISA", "2222222222222222", "222", "02/22");
+		b1 = new BankingInfo("Vaibhav Kapoor", "MASTER", "1111111111111111", "111", "01/22");
+		b2 = new BankingInfo("William Kerr", "VISA", "2222222222222222", "222", "02/22");
 		Payment p1 = new Payment(1, 13.99, b1);
 		Payment p2 = new Payment(2, 15.99, b2);
 		Ticket t1 = new Ticket(12, p1, s1.getMovie(), s1, s1.getSeats()[1][2]);
@@ -140,10 +156,10 @@ public class DatabasePopulator {
 	}
 
 	public void loadUsers() {
-		BankingInfo b1 = new BankingInfo("Vaibhav Kapoor", "MASTER", "1111111111111111", "111", "01/22");
-		BankingInfo b2 = new BankingInfo("William Kerr", "VISA", "2222222222222222", "222", "02/22");
-		BankingInfo b3 = new BankingInfo("Eddie Kim", "VISA", "3333333333333333", "333", "03/22");
-		BankingInfo b4 = new BankingInfo("Haseeb Khan", "MASTER", "4444444444444444", "444", "04/22");
+		//b1 = new BankingInfo("Vaibhav Kapoor", "MASTER", "1111111111111111", "111", "01/22");
+		//b2 = new BankingInfo("William Kerr", "VISA", "2222222222222222", "222", "02/22");
+		b3 = new BankingInfo("Eddie Kim", "VISA", "3333333333333333", "333", "03/22");
+		b4 = new BankingInfo("Haseeb Khan", "MASTER", "4444444444444444", "444", "04/22");
 		Date d1 = new Date(1, "April", 2020);
 		Date d2 = new Date(2, "May", 2020);
 		Date d3 = new Date(3, "June", 2020);

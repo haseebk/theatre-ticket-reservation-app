@@ -101,7 +101,12 @@ public class CancelTicketPage extends JPanel {
 		registerButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-
+				String temp = ticketCodeTextField.getText();
+				int t = backend.getDataController().checkTicket(Integer.parseInt(temp));
+				if(t != -1) {
+					backend.getDataController().getTicketList().get(t).getSeat().vacateSeat();
+					backend.getDataController().removeTicket(backend.getDataController().getTicketList().get(t));
+				}
 			}
 		});
 		registerButton.setBounds(565, 539, 254, 50);
