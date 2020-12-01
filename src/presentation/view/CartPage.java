@@ -46,11 +46,11 @@ public class CartPage extends JPanel {
 
 		// CREATE WELCOME TEXT LABEL
 		JLabel welcomeLabel = new JLabel("");
-		if (backend.getCurrentUser() == null) {
-			welcomeLabel = new JLabel("Welcome, Guest!");
+		if (backend.getCurrentRegisteredUser() != null) {
+			welcomeLabel = new JLabel("Welcome, " + backend.getCurrentRegisteredUser().getF_name() + " "
+					+ backend.getCurrentRegisteredUser().getL_name() + "!");
 		} else {
-			welcomeLabel = new JLabel("Welcome, " + backend.getCurrentUser().getF_name() + " "
-					+ backend.getCurrentUser().getL_name() + "!");
+			welcomeLabel = new JLabel("Welcome, Guest!");
 		}
 		welcomeLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		welcomeLabel.setForeground(Color.WHITE);

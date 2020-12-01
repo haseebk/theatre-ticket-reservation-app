@@ -10,7 +10,9 @@ public class BackEnd implements Serializable {
 
 	private DataController dataController;
 
-	private RegisteredUser currentUser;
+	private RegisteredUser currentRegisteredUser;
+
+	private GuestUser currentGuestUser;
 
 	public BackEnd() {
 		dataController = DataController.getOnlyInstance();
@@ -18,13 +20,14 @@ public class BackEnd implements Serializable {
 
 	// Sets the current user to a Guest User
 	public void guestUser() {
-		currentUser = null;
+		currentGuestUser = new GuestUser();
+		currentRegisteredUser = null;
 	}
 
 	// Verifies the login credentials of the current user
 	// If the login is successful will set the current user to the registered user
 	// and will return the User's ID;
-	// If the login failed return -1;
+	// If the login failed return null;
 	public RegisteredUser verifyLogin(String username, String password) {
 		System.out.println("verify login" + dataController.getUserList().size());
 		for (int i = 0; i < dataController.getUserList().size(); i++) {
@@ -32,7 +35,8 @@ public class BackEnd implements Serializable {
 					+ dataController.getUserList().get(i).password);
 			if (dataController.getUserList().get(i).username.compareTo(username) == 0
 					&& dataController.getUserList().get(i).password.compareTo(password) == 0) {
-				currentUser = dataController.getUserList().get(i);
+				currentRegisteredUser = dataController.getUserList().get(i);
+				currentGuestUser = null;
 				return dataController.getUserList().get(i);
 			}
 		}
@@ -41,7 +45,8 @@ public class BackEnd implements Serializable {
 
 	// Clears the current user
 	public void userLogout() {
-		currentUser = null;
+		currentGuestUser = null;
+		currentRegisteredUser = null;
 	}
 	
 	public void registerUser(String username, String password, String f_name, String l_name, String email, String name, String cardType, String cardNum, String cardSVS, String expirationDate) {
@@ -61,15 +66,23 @@ public class BackEnd implements Serializable {
 	}
 
 	// Getters and setters
-	public RegisteredUser getCurrentUser() {
-		return currentUser;
-	}
+	public RegisteredUser getCurrentRegisteredUser() { return currentRegisteredUser; }
 
-	public void setCurrentUser(RegisteredUser currentUser) {
-		this.currentUser = currentUser;
-	}
+	public void setCurrentRegisteredUser(RegisteredUser currentRegisteredUser) { this.currentRegisteredUser = currentRegisteredUser; }
 
 	public DataController getDataController() {
 		return dataController;
 	}
+
+	public GuestUser getCurrentGuestUser() { return currentGuestUser; }
+
+	public User getCurrentUser(){
+		if(currentRegisteredUser != null){
+			return currentRegisteredUser;
+		}else{
+			return currentGuestUser;
+		}
+	}
+
+	public void setCurrentGuestUser(GuestUser currentGuestUser) { this.currentGuestUser = currentGuestUser; }
 }

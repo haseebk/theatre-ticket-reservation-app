@@ -13,6 +13,7 @@ public class User {
 	 */
 	User(String t){
 		this.userType = t;
+		this.cart = new Cart();
 	}
 	
 	// Getters and Setters

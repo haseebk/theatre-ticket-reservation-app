@@ -18,6 +18,8 @@ public class Booking {
 	 */
 	private int bookingID;
 
+	private static int bookingCounter = 0;
+
 	// Constructors
 	public Booking() {
 		bookedMovie = null;
@@ -27,11 +29,11 @@ public class Booking {
 
 	}
 
-	public Booking(Movie m, Showtime t, Seat s, int i) {
+	public Booking(Movie m, Showtime t, Seat s) {
 		bookedMovie = m;
 		bookedTime = t;
 		bookedSeat = s;
-		bookingID = i;
+		bookingID = bookingCounter++;
 	}
 
 	// Getters and Setters

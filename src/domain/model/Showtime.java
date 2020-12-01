@@ -27,7 +27,7 @@ public class Showtime {
 		seats = new Seat[row][col];
 		for (int i = 0; i < row; i++) {
 			for (int j = 0; j < col; j++) {
-				seats[i][j] = new Seat(row, col);
+				seats[i][j] = new Seat(i, j);
 			}
 		}
 		totalAvaliableSeats = row * col;
@@ -43,7 +43,7 @@ public class Showtime {
 		seats = new Seat[row][col];
 		for (int i = 0; i < row; i++) {
 			for (int j = 0; j < col; j++) {
-				seats[i][j] = new Seat(row, col);
+				seats[i][j] = new Seat(i, j);
 			}
 		}
 		totalAvaliableSeats = row * col;

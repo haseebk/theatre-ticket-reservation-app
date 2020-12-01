@@ -136,21 +136,34 @@ public class HomePage extends JPanel {
 					int tempRow = Integer.parseInt(rowTextField.getText());
 					int tempCol = Integer.parseInt(colTextField.getText());
 					if (tempRow < currentShowtime.getRow() && tempCol < currentShowtime.getCol()) {
-						boolean booking = backend.getDataController().getShowtimeList()
-								.get(currentShowtime.getShowtimeID()).bookSeat(tempRow, tempCol);
-						if (booking == true) {
+						//boolean booking = currentShowtime.bookSeat(tempRow, tempCol);
+						boolean avaliable = currentShowtime.getSeatAvaliability(tempRow,tempCol);
+						if (avaliable == false) {
 							System.out.println("Added ticket To Cart for:\nMovie: " + currentMovie.getTitle()
 									+ "\nTheatre: " + currentTheatre.getT_name() + "\nDate: "
 									+ currentShowtime.getShowDate().getDate() + "\nSeat Row: " + tempRow
 									+ ", Seat Column: " + tempCol);
-							currentShowtime = backend.getDataController().getShowtimeList()
-									.get(currentShowtime.getShowtimeID());
+
+							backend.getCurrentUser().getCart().addToCart(new Booking(currentMovie,currentShowtime,currentShowtime.getSeats()[tempRow][tempCol]));
 
 							String tempGraphic = "";
 							for (int i = 0; i < currentShowtime.getRow(); i++) {
 								for (int j = 0; j < currentShowtime.getCol(); j++) {
 									if (currentShowtime.getSeatAvaliability(i, j) == true) {
 										tempGraphic += "X   ";
+									} else if (backend.getCurrentUser() != null) {
+										boolean tempFlag = false;
+										for(int k = 0; k < backend.getCurrentUser().getCart().getItems_in_cart().size(); k++) {
+											if (backend.getCurrentUser().getCart().getItems_in_cart().get(k).getBookedSeat().getRow() == i &&
+													backend.getCurrentUser().getCart().getItems_in_cart().get(k).getBookedSeat().getSeatNum() == j &&
+													backend.getCurrentUser().getCart().getItems_in_cart().get(k).getBookedTime().getShowtimeID() == currentShowtime.getShowtimeID()) {
+												tempGraphic += "-  ";
+												tempFlag = true;
+											}
+										}
+										if(tempFlag == false){
+											tempGraphic += "O  ";
+										}
 									} else {
 										tempGraphic += "O   ";
 									}
@@ -191,7 +204,7 @@ public class HomePage extends JPanel {
 
 		// CREATE SHOWTIME DETAILS TEXT
 		seatGraphicLabel.setForeground(Color.WHITE);
-		seatGraphicLabel.setFont(new Font("HelveticaNeue", Font.PLAIN, 15));
+		seatGraphicLabel.setFont(new Font("Courier New", Font.PLAIN, 15));
 		seatGraphicLabel.setBounds(600, 310, 254, 254);
 		seatGraphicLabel.setVisible(false);
 		seatGraphicLabel.setLineWrap(true);
@@ -262,6 +275,19 @@ public class HomePage extends JPanel {
 							for (int j = 0; j < currentShowtime.getCol(); j++) {
 								if (currentShowtime.getSeatAvaliability(i, j) == true) {
 									tempGraphic += "X   ";
+								}else if (backend.getCurrentUser() != null) {
+									boolean tempFlag = false;
+									for(int k = 0; k < backend.getCurrentUser().getCart().getItems_in_cart().size(); k++) {
+										if (backend.getCurrentUser().getCart().getItems_in_cart().get(k).getBookedSeat().getRow() == i &&
+												backend.getCurrentUser().getCart().getItems_in_cart().get(k).getBookedSeat().getSeatNum() == j &&
+												backend.getCurrentUser().getCart().getItems_in_cart().get(k).getBookedTime().getShowtimeID() == currentShowtime.getShowtimeID()) {
+											tempGraphic += "-  ";
+											tempFlag = true;
+										}
+									}
+									if(tempFlag == false){
+										tempGraphic += "O  ";
+									}
 								} else {
 									tempGraphic += "O   ";
 								}
@@ -451,11 +477,11 @@ public class HomePage extends JPanel {
 
 		// CREATE WELCOME TEXT LABEL
 		JLabel welcomeLabel = new JLabel("");
-		if (backend.getCurrentUser() == null) {
-			welcomeLabel = new JLabel("Welcome, Guest!");
+		if (backend.getCurrentRegisteredUser() != null) {
+			welcomeLabel = new JLabel("Welcome, " + backend.getCurrentRegisteredUser().getF_name() + " "
+					+ backend.getCurrentRegisteredUser().getL_name() + "!");
 		} else {
-			welcomeLabel = new JLabel("Welcome, " + backend.getCurrentUser().getF_name() + " "
-					+ backend.getCurrentUser().getL_name() + "!");
+			welcomeLabel = new JLabel("Welcome Guest!");
 		}
 		welcomeLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		welcomeLabel.setForeground(Color.WHITE);
