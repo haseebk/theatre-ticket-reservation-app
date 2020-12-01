@@ -5,9 +5,11 @@ import java.util.*;
 public class Cart {
 	private ArrayList<Booking> items_in_cart;
 	private Payment payment;
+	private float cartCost;
 	
 	public Cart () {
 		items_in_cart =  new ArrayList<Booking>(); 
+		cartCost = 0;
 	}
 	
 	public Cart (ArrayList<Booking> items, Payment pay) {
@@ -16,6 +18,9 @@ public class Cart {
 			items_in_cart.add(items.get(i));
 		}
 		setPayment(pay);
+		for (Booking cartItem : items_in_cart) {
+			cartCost += 13.99;
+		}
 	}
 	
 	// This method adds a ticket from the argument to the cart items list
@@ -51,5 +56,21 @@ public class Cart {
 
 	public void setPayment(Payment payment) {
 		this.payment = payment;
+	}
+
+	public float getCartCost() {
+		return cartCost;
+	}
+	
+	public float calculateCartCost() {
+		cartCost = 0;
+		for (Booking cartItem : items_in_cart) {
+			cartCost += 13.99;
+		}
+		return cartCost;
+	}
+
+	public void setCartCost(float cartCost) {
+		this.cartCost = cartCost;
 	}
 }
