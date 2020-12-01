@@ -450,17 +450,17 @@ public class HomePage extends JPanel {
 		add(movieSelectComboBox);
 
 		// CREATE WELCOME TEXT LABEL
-		JLabel welcomeLabel;
+		JLabel welcomeLabel = new JLabel("");
 		if (backend.getCurrentUser() == null) {
 			welcomeLabel = new JLabel("Welcome, Guest!");
 		} else {
 			welcomeLabel = new JLabel("Welcome, " + backend.getCurrentUser().getF_name() + " "
 					+ backend.getCurrentUser().getL_name() + "!");
 		}
-		welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		welcomeLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		welcomeLabel.setForeground(Color.WHITE);
 		welcomeLabel.setFont(new Font("Arial", Font.PLAIN, 25));
-		welcomeLabel.setBounds(140, 5, 541, 50);
+		welcomeLabel.setBounds(140, 5, 264, 50);
 		add(welcomeLabel);
 
 		// CREATE LOGOUT BUTTON
