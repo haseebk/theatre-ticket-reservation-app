@@ -85,7 +85,8 @@ public class CartPage extends JPanel {
 
 		// CREATE MOVIE CARD VIEW
 		JPanel imagePanels = new JPanel();
-		imagePanels.setBounds(20, 87, 1304, 560); 
+		imagePanels.setPreferredSize(new Dimension(1304, 1800));
+
 		ArrayList<Booking> cartItems = backend.getCurrentUser().getCart().getItems_in_cart();
 		JLabel[] ticketCards = new JLabel[cartItems.size()];
 		JLabel[] deleteTicket = new JLabel[cartItems.size()];
@@ -131,8 +132,6 @@ public class CartPage extends JPanel {
 
 		JScrollPane scrollPane = new JScrollPane(imagePanels);
 		imagePanels.setLayout(null);
-//	    scrollPane.getViewport().setPreferredSize(new Dimension(1304, 560));
-//	    scrollPane.setLocation(20,87);
 		scrollPane.setBounds(20, 87, 1304, 560);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);

@@ -63,7 +63,8 @@ public class AnnouncementPage extends JPanel {
 
 		// CREATE MOVIE CARD VIEW
 		JPanel imagePanels = new JPanel();
-		imagePanels.setBounds(20, 87, 1304, 560);
+//		imagePanels.setBounds(20, 87, 1304, 560);
+		
 
 		ArrayList<Announcement> announcementItems = backend.getDataController().getAnnouncementList();
 		JLabel[] announcementCard = new JLabel[announcementItems.size()];
@@ -86,6 +87,8 @@ public class AnnouncementPage extends JPanel {
 		}
 		add(imagePanels);
 		imagePanels.setLayout(new BorderLayout(0, 0));
+		imagePanels.setPreferredSize(new Dimension(1304, 1800));
+
 		imagePanels.setOpaque(false);
 
 		JScrollPane scrollPane = new JScrollPane(imagePanels);
