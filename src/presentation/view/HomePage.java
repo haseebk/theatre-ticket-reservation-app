@@ -75,6 +75,25 @@ public class HomePage extends JPanel {
 		noMovieSelectedLabel.setVisible(true);
 		add(noMovieSelectedLabel);
 
+		// CREATE ADD TO CART BUTTON
+		JLabel cancelTicketButton = new JLabel("Cancel Ticket");
+		cancelTicketButton.setToolTipText("Cancel Ticket");
+		cancelTicketButton.setForeground(Color.WHITE);
+		cancelTicketButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		cancelTicketButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				CancelTicketPage cancelTicketPage = new CancelTicketPage(frame,backend);
+				frame.setContentPane(cancelTicketPage);
+				frame.revalidate();
+
+			}
+		});
+		cancelTicketButton.setBounds(1100, 5, 100, 50);
+		cancelTicketButton.setVisible(true);
+		cancelTicketButton.setIcon(new ImageIcon(LoginPage.class.getResource("/enterButton.png")));
+		add(cancelTicketButton);
+
 		// =========================================
 		// SELECT SEAT
 		// =========================================
