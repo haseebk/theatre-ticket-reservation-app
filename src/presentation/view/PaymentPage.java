@@ -138,8 +138,8 @@ public class PaymentPage extends JPanel {
 
 		// CREATE CARDTYPE TEXT FIELD
 		Vector<String> cardTypes = new Vector<String>();
-		cardTypes.add("MasterCard");
-		cardTypes.add("Visa");
+		cardTypes.add("MASTERCARD");
+		cardTypes.add("VISA");
 		JComboBox cardTypeSelectComboBox = new JComboBox(cardTypes);
 		cardTypeSelectComboBox.setBounds(433, 350, 118, 28);
 		cardTypeSelectComboBox.setToolTipText("Select Card Type");
@@ -297,7 +297,7 @@ public class PaymentPage extends JPanel {
 		registerButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.out.println("Payment details entered");
+				System.out.println("Payment Clicked");
 				String cardType = (String)cardTypeSelectComboBox.getSelectedItem();
 				String cardNum = cardNumberTextField.getText();
 				String cardExp = cardExpirationDateTextField.getText();
@@ -310,13 +310,16 @@ public class PaymentPage extends JPanel {
 				invalidCardErrorLabel.setVisible(false);
 				invalidVoucherErrorLabel.setVisible(false);
 				//ArrayList<Ticket> ticketsCreated = new ArrayList<Ticket>();
-				
+				System.out.println(name + " " + cardType + " " + cardCCV + " " + cardNum + " " + cardExp);
 				// Validate Card info
 				if(backend.getDataController().getInst().verifyCardInfo(name, cardType, cardNum, cardCCV, cardExp)) {
 					cardValid = true;
+					System.out.println("valid card");
 				}
 				else {
+					cardValid = false;
 					invalidCardErrorLabel.setVisible(true);
+					System.out.println("invalid card");
 				}
 				// Validate voucher
 				if(voucher != "") {
@@ -324,20 +327,26 @@ public class PaymentPage extends JPanel {
 						if(voucher == backend.getDataController().getVoucherList().get(i).getVoucherCode()) {
 							if(!backend.getDataController().getVoucherList().get(i).isUsed()) {
 								voucherValid = true;
+								System.out.println("valid voucher");
+								backend.getCurrentUser().getCart().setCartCost((float)(backend.getCurrentUser().getCart().getCartCost() - backend.getDataController().getVoucherList().get(i).getAmount()));
+								break;
 							}
 							else {
+								voucherValid = false;
 								invalidVoucherErrorLabel.setVisible(true);
+								System.out.println("invalid voucher");
 							}
 						}
 					}
 				}
 				else {
+					System.out.println("valid voucher");
 					voucherValid = true;
 				}
 				
 				// All information is valid
 				if(voucherValid && cardValid) {
-					System.out.println("entered payment");
+					System.out.println("valid details");
 					//Cart c = backend.getCurrentUser().getCart();
 					backend.getCurrentUser().getCart().setPayment(new Payment(backend.getCurrentUser().getCart().getPayment().getAmount(), new BankingInfo(name, cardType, cardNum, cardCCV, cardExp)));
 					for(int i=0; i<backend.getCurrentUser().getCart().getItems_in_cart().size(); i++) {
@@ -346,8 +355,9 @@ public class PaymentPage extends JPanel {
 						Seat seat = backend.getCurrentUser().getCart().getItems_in_cart().get(i).getBookedSeat();
 						Ticket t = new Ticket(backend.getCurrentUser().getCart().getPayment(), movie, showtime, seat);
 						//ticketsCreated.add(t);
-						t.emailTicket(email);
+						//t.emailTicket(email);
 						backend.getDataController().addTicket(t);
+						System.out.println("entered payment");
 					}						
 					/* Add prompt to show ticket and success message*/
 					
