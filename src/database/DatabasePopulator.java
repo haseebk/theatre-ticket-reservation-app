@@ -74,15 +74,47 @@ public class DatabasePopulator {
 		Date d2 = new Date(12, "December", 2020);
 		Date d3 = new Date(14, "December", 2020);
 		Date d4 = new Date(16, "December", 2020);
+		
 		s1 = new Showtime(d1, x.get(0), spiderverse);
+		Showtime s11 = new Showtime(d3, x.get(0), spiderverse);
+		
 		s2 = new Showtime(d2, x.get(1), getout);
-		Showtime s3 = new Showtime(d3, y.get(0), hereditary);
-		Showtime s4 = new Showtime(d4, y.get(1), paddington);
+		Showtime s12 = new Showtime(d4, x.get(0), getout);
+		
+		Showtime s3 = new Showtime(d3, x.get(0), hereditary);
+		Showtime s13 = new Showtime(d1, x.get(1), hereditary);
+		
+		Showtime s4 = new Showtime(d4, x.get(1), paddington);
+		Showtime s9 = new Showtime(d2, x.get(1), paddington);
+		
+		Showtime s5 = new Showtime(d1, y.get(0), spiderverse);
+		Showtime s10 = new Showtime(d3, y.get(1), spiderverse);
+		
+		Showtime s6 = new Showtime(d2, y.get(1), getout);
+		Showtime s14 = new Showtime(d3, y.get(1), getout);
+		
+		Showtime s7 = new Showtime(d3, y.get(0), hereditary);
+		Showtime s15 = new Showtime(d1, y.get(1), hereditary);
+		
+		Showtime s8 = new Showtime(d4, y.get(1), paddington);
+		Showtime s16 = new Showtime(d2, y.get(1), paddington);
 
 		dbController.addShowtime(s1);
 		dbController.addShowtime(s2);
 		dbController.addShowtime(s3);
 		dbController.addShowtime(s4);
+		dbController.addShowtime(s5);
+		dbController.addShowtime(s6);
+		dbController.addShowtime(s7);
+		dbController.addShowtime(s8);
+		dbController.addShowtime(s9);
+		dbController.addShowtime(s10);
+		dbController.addShowtime(s11);
+		dbController.addShowtime(s12);
+		dbController.addShowtime(s13);
+		dbController.addShowtime(s14);
+		dbController.addShowtime(s15);
+		dbController.addShowtime(s16);
 	}
 
 	public void loadTickets() {
