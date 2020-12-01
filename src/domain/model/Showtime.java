@@ -5,6 +5,9 @@ import domain.model.Date;
 import domain.model.Movie;
 import domain.model.Seat;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 public class Showtime {
 	private int showtimeID;
 	private Date showDate;
@@ -84,6 +87,63 @@ public class Showtime {
 		if (seats[r][c].isSeatTaken() == true)
 			totalAvaliableSeats++;
 		seats[r][c].vacateSeat();
+	}
+
+	//PROMISES: to check if the showtime is 72 hours before the time,
+	//			returns true if it is, returns false if it is not
+	public boolean is72HoursBefore(){
+		LocalDate todaysDate = LocalDate.now();
+		LocalTime todaysTime = LocalTime.now();
+		//Make a date 72 hours before the showtime
+		Date beforeDate72 = getShowDate();
+		if(beforeDate72.getDay() <= 3){
+			if(beforeDate72.getMonth() == 1){
+				beforeDate72.setYear(beforeDate72.getYear() - 1);
+				beforeDate72.setMonth(12);
+			}else{
+				beforeDate72.setMonth(beforeDate72.getMonth() - 1);
+			}
+		}else{
+			beforeDate72.setDay(beforeDate72.getDay() - 3);
+		}
+
+		//Check it is before the 72 hours before
+		System.out.println(todaysDate.getYear() + " vs. " + beforeDate72.getYear());
+		if(beforeDate72.getYear() > todaysDate.getYear()){
+			return true;
+		}
+		if(beforeDate72.getYear() < todaysDate.getYear()){
+			return false;
+		}
+		System.out.println(todaysDate.getMonthValue() + " vs. " + beforeDate72.getMonth());
+		if(beforeDate72.getMonth() > todaysDate.getMonthValue()){
+			return true;
+		}
+		if(beforeDate72.getMonth() < todaysDate.getMonthValue()){
+			return false;
+		}
+		System.out.println(todaysDate.getDayOfMonth() + " vs. " + beforeDate72.getDay());
+		if(beforeDate72.getDay() > todaysDate.getDayOfMonth()){
+			return true;
+		}
+		if(beforeDate72.getDay() < todaysDate.getDayOfMonth()){
+			return false;
+		}
+		System.out.println(todaysTime.getHour() + " vs. " + getHour());
+		if(todaysTime.getHour() > this.getHour()){
+			return true;
+		}
+		if(todaysTime.getHour() < this.getHour()){
+			return false;
+		}
+		System.out.println(todaysTime.getMinute() + " vs. " + getMinutes());
+		if(todaysTime.getMinute() > this.getMinutes()){
+			return true;
+		}
+		if(todaysTime.getMinute() < this.getMinutes()){
+			return false;
+		}
+		return true;
 	}
 
 	public int getShowtimeID() {

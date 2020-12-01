@@ -259,7 +259,7 @@ public class HomePage extends JPanel {
 					invalidSeatErrorLabel.setVisible(false);
 					takenSeatErrorLabel.setVisible(false);
 					addedToCartLabel.setVisible(false);
-					// If user entered a valid row and columb
+					// If user entered a valid row and column
 					if (userRow < currentShowtime.getRow() && userCol < currentShowtime.getCol()) {
 						boolean available = currentShowtime.getSeatAvaliability(userRow, userCol);
 						if (available == false) {

@@ -1,6 +1,5 @@
 package domain.model;
 
-import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 
@@ -21,25 +20,25 @@ public class Date {
 	 */
 	public boolean beforeCurrentDate(){
 		LocalDate todaysDate = LocalDate.now();
-		System.out.println(todaysDate.getYear() + " vs. " + year);
-		if(year < todaysDate.getYear()){
+		System.out.println("Before Current Date: " + year + " vs. " + todaysDate.getYear());
+		if(year > todaysDate.getYear()){
 			return true;
 		}
-		if(year > todaysDate.getYear()){
+		if(year < todaysDate.getYear()){
 			return false;
 		}
 		System.out.println(todaysDate.getMonthValue() + " vs. " + month);
-		if(month < todaysDate.getMonthValue()){
+		if(month > todaysDate.getMonthValue()){
 			return true;
 		}
-		if(month > todaysDate.getMonthValue()){
+		if(month < todaysDate.getMonthValue()){
 			return false;
 		}
 		System.out.println(todaysDate.getDayOfMonth() + " vs. " + day);
-		if(day < todaysDate.getDayOfMonth()){
+		if(day > todaysDate.getDayOfMonth()){
 			return true;
 		}
-		if(day > todaysDate.getDayOfMonth()){
+		if(day < todaysDate.getDayOfMonth()){
 			return false;
 		}
 		return true;
@@ -50,6 +49,20 @@ public class Date {
 		month = m;
 		year = y;
 	}
+
+	//Getters and setters
+	public int getDay() { return day; }
+
+	public int getMonth() { return month; }
+
+	public int getYear() { return year; }
+
+	public void setDay(int day) { this.day = day; }
+
+	public void setMonth(int month) { this.month = month; }
+
+	public void setYear(int year) { this.year = year; }
+
 
 	@Override
 	public String toString() {

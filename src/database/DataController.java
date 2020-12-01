@@ -403,7 +403,13 @@ public class DataController {
 
 		for(int i = 0; i < ticketList.size(); i++) {
 			if(ticketList.get(i).getTicketID() == id) {
-				return i;
+				if(ticketList.get(i).getShowtime().getShowDate().beforeCurrentDate() && !ticketList.get(i).getShowtime().is72HoursBefore()){
+					return -2;
+				}else if(ticketList.get(i).getShowtime().getShowDate().beforeCurrentDate()){
+					return i;
+				}else{
+					return -3;
+				}
 			}
 		}
 

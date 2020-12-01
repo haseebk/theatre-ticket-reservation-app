@@ -95,8 +95,8 @@ public class DatabasePopulator {
 
 	public void loadShowtimes(ArrayList<Auditorium> x, ArrayList<Auditorium> y) {
 		Date d1 = new Date(29, 11, 2020);
-		Date d2 = new Date(1, 12, 2020);
-		Date d3 = new Date(2, 12, 2020);
+		Date d2 = new Date(2, 12, 2020);
+		Date d3 = new Date(29, 11, 2020);
 		Date d4 = new Date(17, 12, 2020);
 		
 		s1 = new Showtime(d1, x.get(0), spiderverse, 7, 15);

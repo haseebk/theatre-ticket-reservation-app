@@ -30,6 +30,14 @@ public class CancelTicketPage extends JPanel {
 	 */
 	private JLabel cancelErrorLabel;
 	/**
+	 * Display text label on Too Late to Cancel
+	 */
+	private JLabel cancelTooLateLabel;
+	/**
+	 * Display text label on Ticket Used
+	 */
+	private JLabel cancelTicketUsedLabel;
+	/**
 	 * ticketCodeTextField text field
 	 */
 	private JTextField ticketCodeTextField;
@@ -83,6 +91,24 @@ public class CancelTicketPage extends JPanel {
 		cancelSuccessLabel.setVisible(false);
 		add(cancelSuccessLabel);
 
+		// CREATE UNDER 72 HOURS LABEL
+		cancelTooLateLabel = new JLabel("<html>" + "It is under 72 Hours before the Showtime, cannot cancel" + "</html>");
+		cancelTooLateLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		cancelTooLateLabel.setForeground(Color.RED);
+		cancelTooLateLabel.setFont(new Font("Arial", Font.PLAIN, 13));
+		cancelTooLateLabel.setBounds(581, 235, 196, 45);
+		cancelTooLateLabel.setVisible(false);
+		add(cancelTooLateLabel);
+
+		// CREATE UNDER 72 HOURS LABEL
+		cancelTicketUsedLabel = new JLabel("<html>" + "The ticket has already been used" + "</html>");
+		cancelTicketUsedLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		cancelTicketUsedLabel.setForeground(Color.RED);
+		cancelTicketUsedLabel.setFont(new Font("Arial", Font.PLAIN, 13));
+		cancelTicketUsedLabel.setBounds(581, 235, 196, 45);
+		cancelTicketUsedLabel.setVisible(false);
+		add(cancelTicketUsedLabel);
+
 		// CREATE CANCEL ERROR LABEL
 		cancelErrorLabel = new JLabel("<html>" + "Could not find the ticket" + "</html>");
 		cancelErrorLabel.setHorizontalAlignment(SwingConstants.LEFT);
@@ -120,8 +146,16 @@ public class CancelTicketPage extends JPanel {
 				String temp = ticketCodeTextField.getText();
 				cancelSuccessLabel.setVisible(false);
 				cancelErrorLabel.setVisible(false);
+				cancelTooLateLabel.setVisible(false);
+				cancelTicketUsedLabel.setVisible(false);
 				int t = backend.getDataController().checkTicket(Integer.parseInt(temp));
-				if (t != -1) {
+				if (t == -2){
+					//Showtime is under 72 hours away
+					cancelTooLateLabel.setVisible(true);
+				} else if (t == -3) {
+					//Showtime has already passed
+					cancelTicketUsedLabel.setVisible(true);
+				} else if (t != -1) {
 					if (backend.getCurrentGuestUser() != null) {
 						Voucher newVoucher = new Voucher(
 								backend.getDataController().getTicketList().get(t).getPayment().getAmount() * 0.85);
@@ -133,6 +167,7 @@ public class CancelTicketPage extends JPanel {
 					backend.getDataController().removeTicket(backend.getDataController().getTicketList().get(t));
 					cancelSuccessLabel.setVisible(true);
 				} else {
+					//Couldn't find ticket
 					cancelErrorLabel.setVisible(true);
 				}
 				frame.validate();
