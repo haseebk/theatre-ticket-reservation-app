@@ -48,4 +48,8 @@ public class Seat {
 	public void setSeatTaken(boolean seatTaken) {
 		this.seatTaken = seatTaken;
 	}
+	 @Override
+	    public String toString() { 
+	        return String.format("C" + seatNum + "R" + row); 
+	    } 
 }
