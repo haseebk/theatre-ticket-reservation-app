@@ -4,23 +4,31 @@ public class User {
 	/**
 	 * Type of User
 	 */
-	String userType;
-
+	private String userType;
+	private Cart cart;
+	
 	/**
 	 * Constructor to set the type of user
-	 * 
 	 * @param t the user type
 	 */
-	User(String t) {
+	User(String t){
 		this.userType = t;
 	}
-
+	
 	// Getters and Setters
 	public String getUserType() {
 		return userType;
 	}
-
+	
 	public void setUserType(String userType) {
 		this.userType = userType;
+	}
+
+	public Cart getCart() {
+		return cart;
+	}
+
+	public void setCart(Cart cart) {
+		this.cart = cart;
 	}
 }
