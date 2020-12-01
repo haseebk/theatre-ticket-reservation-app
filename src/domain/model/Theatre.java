@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Theatre {
 
-	//Name of the theatre
+	// Name of the theatre
 	private String t_name;
 
 	/**
@@ -22,23 +22,33 @@ public class Theatre {
 	 */
 	private String phoneNumber;
 
+	/**
+	 * The address of the theatre
+	 */
+	private String address;
+
 	public Theatre() {
 		theatreID = 0;
 		setAuditoriums(new ArrayList<Auditorium>());
 	}
 
-	public Theatre(String theatreName, int theatreID, ArrayList<Auditorium> auditoriums, String phoneNumber) {
+	public Theatre(String theatreName, int theatreID, ArrayList<Auditorium> auditoriums, String phoneNumber, String ad) {
 		this.t_name = theatreName;
 		this.theatreID = theatreID;
 		this.setAuditoriums(auditoriums);
 		this.phoneNumber = phoneNumber;
+		this.address = ad;
 	}
 
 	// Getters and Setters
-	public String getT_name() {return t_name; }
-
-	public void setT_name(String t_name) {this.t_name = t_name;
+	public String getT_name() {
+		return t_name;
 	}
+
+	public void setT_name(String t_name) {
+		this.t_name = t_name;
+	}
+
 	public int getTheatreID() {
 		return theatreID;
 	}
@@ -61,6 +71,14 @@ public class Theatre {
 
 	public void setAuditoriums(ArrayList<Auditorium> auditoriums) {
 		this.auditoriums = auditoriums;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 };
