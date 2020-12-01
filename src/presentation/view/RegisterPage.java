@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -23,32 +24,6 @@ public class RegisterPage extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
-	/**
-	 * Email text field
-	 */
-	private JTextField emailTextField;
-
-	/**
-	 * Card type field
-	 */
-	private JTextField cardTypeTextField;
-
-	/**
-	 * Card number text field
-	 */
-	private JTextField cardNumberTextField;
-
-	private JPasswordField cardSVSPasswordField;
-
-	private JTextField cardExpirationDateTextField;
-
-	private JLabel emailTextLabel;
-
-	private JLabel cardTypeLabel;
-	private JLabel cardNumberLabel;
-	private JLabel cardSVSLabel;
-	private JLabel cardExpirationLabel;
 
 	/**
 	 * Username text field
@@ -86,6 +61,46 @@ public class RegisterPage extends JPanel {
 	 * Fullname text field
 	 */
 	private JTextField fullNameTextField;
+	/**
+	 * Email text field
+	 */
+	private JTextField emailTextField;
+	/**
+	 * Display text label "Email"
+	 */
+	private JLabel emailLabel;
+	/**
+	 * CardType text field
+	 */
+	private JTextField cardTypeTextField;
+	/**
+	 * Display text label "CardType"
+	 */
+	private JLabel cardTypeLabel;
+	/**
+	 * cardNumberField text field
+	 */
+	private JTextField cardNumberTextField;
+	/**
+	 * Display text label "cardNumberField"
+	 */
+	private JLabel cardNumberLabel;
+	/**
+	 * cardSVS password field
+	 */
+	private JPasswordField cardSVSPasswordField;
+	/**
+	 * Display text label "cardSVSField"
+	 */
+	private JLabel cardSVSLabel;
+	/**
+	 * cardExpirationDate text field
+	 */
+	private JTextField cardExpirationDateTextField;
+	/**
+	 * Display text label "cardExpirationDate"
+	 */
+	private JLabel cardExpirationDateLabel;
 	/**
 	 * Back button
 	 */
@@ -135,6 +150,66 @@ public class RegisterPage extends JPanel {
 		usernameTextField.setColumns(10);
 		usernameTextField.setOpaque(true);
 		add(usernameTextField);
+		
+		// CREATE EMAIL TEXT FIELD
+		emailTextField = new JTextField();
+		emailTextField.setToolTipText("Enter your emailID.");
+		emailTextField.setFont(new Font("Arial", Font.PLAIN, 13));
+		emailTextField.setBorder(new MatteBorder(0, 0, 3, 0, (Color) Color.LIGHT_GRAY));
+		emailTextField.setForeground(Color.DARK_GRAY);
+		emailTextField.setBackground(Color.WHITE);
+		emailTextField.setBounds(565, 340, 254, 28);
+		emailTextField.setOpaque(true);
+		emailTextField.setColumns(10);
+		emailTextField.setOpaque(true);
+		add(emailTextField);
+		
+		// CREATE CARDTYPE TEXT FIELD
+		cardTypeTextField = new JTextField();
+		cardTypeTextField.setToolTipText("Enter your card type.");
+		cardTypeTextField.setFont(new Font("Arial", Font.PLAIN, 13));
+		cardTypeTextField.setBorder(new MatteBorder(0, 0, 3, 0, (Color) Color.LIGHT_GRAY));
+		cardTypeTextField.setForeground(Color.DARK_GRAY);
+		cardTypeTextField.setBackground(Color.WHITE);
+		cardTypeTextField.setBounds(565, 340, 254, 28);
+		cardTypeTextField.setOpaque(true);
+		cardTypeTextField.setColumns(10);
+		cardTypeTextField.setOpaque(true);
+		add(usernameTextField);
+		
+		// CREATE CARDNUMBER TEXT FIELD
+		cardNumberTextField = new JTextField();
+		cardNumberTextField.setToolTipText("Enter your card number.");
+		cardNumberTextField.setFont(new Font("Arial", Font.PLAIN, 13));
+		cardNumberTextField.setBorder(new MatteBorder(0, 0, 3, 0, (Color) Color.LIGHT_GRAY));
+		cardNumberTextField.setForeground(Color.DARK_GRAY);
+		cardNumberTextField.setBackground(Color.WHITE);
+		cardNumberTextField.setBounds(565, 340, 254, 28);
+		cardNumberTextField.setOpaque(true);
+		cardNumberTextField.setColumns(10);
+		cardNumberTextField.setOpaque(true);
+		add(cardNumberTextField);
+		
+		// CREATE CARDSVS TEXT FIELD
+		cardSVSPasswordField = new JPasswordField();
+		cardSVSPasswordField.setToolTipText("Enter your card SVS.");
+		cardSVSPasswordField.setBorder(new MatteBorder(0, 0, 3, 0, (Color) Color.LIGHT_GRAY));
+		cardSVSPasswordField.setForeground(Color.BLACK);
+		cardSVSPasswordField.setBounds(565, 488, 254, 28);
+		add(cardSVSPasswordField);
+		
+		// CREATE CARDEXPIRATIONDATE TEXT FIELD
+		cardExpirationDateTextField = new JTextField();
+		cardExpirationDateTextField.setToolTipText("Enter your card expiration date.");
+		cardExpirationDateTextField.setFont(new Font("Arial", Font.PLAIN, 13));
+		cardExpirationDateTextField.setBorder(new MatteBorder(0, 0, 3, 0, (Color) Color.LIGHT_GRAY));
+		cardExpirationDateTextField.setForeground(Color.DARK_GRAY);
+		cardExpirationDateTextField.setBackground(Color.WHITE);
+		cardExpirationDateTextField.setBounds(565, 340, 254, 28);
+		cardExpirationDateTextField.setOpaque(true);
+		cardExpirationDateTextField.setColumns(10);
+		cardExpirationDateTextField.setOpaque(true);
+		add(cardExpirationDateTextField);
 
 		// CREATE PASSWORD TEXT FIELD
 		passwordField = new JPasswordField();
@@ -167,7 +242,47 @@ public class RegisterPage extends JPanel {
 		usernameLabel.setFont(new Font("Arial", Font.PLAIN, 16));
 		usernameLabel.setBounds(653, 324, 77, 14);
 		add(usernameLabel);
-
+		
+		// CREATE EMAIL TEXT LABEL
+		emailLabel = new JLabel("Email");
+		emailLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		emailLabel.setForeground(Color.WHITE);
+		emailLabel.setFont(new Font("Arial", Font.PLAIN, 16));
+		emailLabel.setBounds(653, 324, 77, 14); // edit location
+		add(emailLabel);
+		
+		// CREATE CARDTYPE TEXT LABEL -------------------------------- implement as a dropdown menu?
+		cardTypeLabel = new JLabel("CardType");
+		cardTypeLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		cardTypeLabel.setForeground(Color.WHITE);
+		cardTypeLabel.setFont(new Font("Arial", Font.PLAIN, 16));
+		cardTypeLabel.setBounds(653, 324, 77, 14);
+		add(cardTypeLabel);
+		
+		// CREATE CARDNUMBER TEXT LABEL 
+		cardNumberLabel = new JLabel("CardNumber");
+		cardNumberLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		cardNumberLabel.setForeground(Color.WHITE);
+		cardNumberLabel.setFont(new Font("Arial", Font.PLAIN, 16));
+		cardNumberLabel.setBounds(653, 324, 77, 14);
+		add(cardNumberLabel);
+		
+		// CREATE CARDSVS TEXT LABEL 
+		cardSVSLabel = new JLabel("CardSVS");
+		cardSVSLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		cardSVSLabel.setForeground(Color.WHITE);
+		cardSVSLabel.setFont(new Font("Arial", Font.PLAIN, 16));
+		cardSVSLabel.setBounds(653, 324, 77, 14);
+		add(cardSVSLabel);
+		
+		// CREATE CARDEXPIRATIONDATE TEXT LABEL 
+		cardExpirationDateLabel = new JLabel("CardExpirationDate");
+		cardExpirationDateLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		cardExpirationDateLabel.setForeground(Color.WHITE);
+		cardExpirationDateLabel.setFont(new Font("Arial", Font.PLAIN, 16));
+		cardExpirationDateLabel.setBounds(653, 324, 77, 14);
+		add(cardExpirationDateLabel);
+		
 		// CREATE PASSWORD TEXT LABEL
 		passwordLabel = new JLabel("Password");
 		passwordLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -226,40 +341,44 @@ public class RegisterPage extends JPanel {
 				String user = usernameTextField.getText();
 				String pass = String.valueOf(passwordField.getPassword());
 				String confirmPass = String.valueOf(passwordField2.getPassword());
-
 				String email = emailTextField.getText();
 				String cardType = cardTypeTextField.getText();
 				String cardNum = cardNumberTextField.getText();
 				String cardSVS = String.valueOf(cardSVSPasswordField.getPassword());
 				String cardExp = cardExpirationDateTextField.getText();
-
+				
 				// Dont need these for now
-				Boolean validName = true;
+				Boolean validName = true;		
 				Boolean samePasswords = true;
 				Boolean uniqueUser = true;
-
-				// Check if username is available
-				if (!backend.checkExisting(user)) {
-					if (pass.matches(confirmPass)) {
-						if (name.length == 2) {
-							backend.registerUser(user, pass, name[0], name[1], email, fullname, cardType, cardNum,
-									cardSVS, cardExp);
-							LoginPage loginPanel = new LoginPage(frame, backend);
-							frame.setContentPane(loginPanel);
-							frame.revalidate();
-						} else {
-							invalidNameErrorLabel.setVisible(true);
-						}
-					} else {
-						invalidPasswordErrorLabel.setVisible(true);
-					}
-				} else {
-					invalidUsernameErrorLabel.setVisible(true);
-				}
+				
+				// Clear previous error messages
+				invalidNameErrorLabel.setVisible(false);
+				invalidPasswordErrorLabel.setVisible(false);
+				invalidUsernameErrorLabel.setVisible(false);
+				
 				/**
 				 * verify sign up details and update backend + database
 				 */
-
+				// Check if username is available
+				if(!backend.checkExisting(user)) {
+					if(pass.matches(confirmPass)) {
+						if(name.length == 2) {
+							backend.registerUser(user, pass, name[0], name[1], email, fullname, cardType, cardNum, cardSVS, cardExp);
+							LoginPage loginPanel = new LoginPage(frame, backend);
+							frame.setContentPane(loginPanel);
+						}
+						else {
+							invalidNameErrorLabel.setVisible(true);
+						}
+					}
+					else {
+						invalidPasswordErrorLabel.setVisible(true);
+					}
+				}else{
+					invalidUsernameErrorLabel.setVisible(true);
+				}				
+				frame.revalidate();				
 			}
 		});
 		registerButton.setBounds(565, 539, 254, 50);
