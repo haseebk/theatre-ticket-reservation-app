@@ -42,10 +42,10 @@ public class BackEnd implements Serializable{
 		currentUser = null;
 	}
 	
-	public void registerUser(String username, String password, String f_name, String l_name, String email) {
+	public void registerUser(String username, String password, String f_name, String l_name, String email, String name, String cardType, String cardNum, String cardSVS, String expirationDate) {
 		LocalDate todaysDate = LocalDate.now();
-		BankingInfo bankInfo;
-		dataController.getUserList().add(new RegisteredUser(username, password, f_name, l_name, email, null, new Date(todaysDate.getDayOfMonth(), todaysDate.getMonth().toString(), todaysDate.getYear())));
+		BankingInfo bankInfo = new BankingInfo(name, cardType, cardNum, cardSVS, expirationDate);
+		dataController.getUserList().add(new RegisteredUser(username, password, f_name, l_name, email, bankInfo, new Date(todaysDate.getDayOfMonth(), todaysDate.getMonth().toString(), todaysDate.getYear())));
 	}
 	
 	public boolean checkExisting(String username) {
