@@ -51,6 +51,6 @@ public class Seat {
 
 	@Override
 	public String toString() {
-		return String.format("C" + seatNum + "R" + row);
+		return String.format("Row: " + row + " Seat: " + seatNum);
 	}
 }

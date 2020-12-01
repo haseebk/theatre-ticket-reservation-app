@@ -140,4 +140,9 @@ public class Movie {
 
 	public void setMovieAnnouncement(Announcement movieAnnouncement) { this.movieAnnouncement = movieAnnouncement; }
 
+	@Override
+	public String toString() {
+		return String.format(title);
+	}
+
 };

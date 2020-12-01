@@ -1,6 +1,7 @@
 package domain.model;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 
 public class Date {
@@ -52,7 +53,11 @@ public class Date {
 
 	@Override
 	public String toString() {
-		return (day + "/" + month + "/" + year);
+		DecimalFormat formatter = new DecimalFormat("00");
+		String dayFormat = formatter.format(day);
+		String monthFormat = formatter.format(month);
+		String yearFormat = formatter.format(year);
+		return (dayFormat + "/" + monthFormat + "/" + yearFormat);
 	}
 
 }

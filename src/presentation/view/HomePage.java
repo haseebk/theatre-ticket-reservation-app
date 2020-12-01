@@ -13,43 +13,120 @@ import javax.swing.border.MatteBorder;
 import domain.model.*;
 
 public class HomePage extends JPanel {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
-	/**
-	 * Back button
-	 */
+
+	// Back button
 	private JLabel logoutButton;
-	/**
-	 * Cart button
-	 */
+
+	// Cart button
 	private JLabel cartButton;
-	/**
-	 * Announcement button
-	 */
+
+	// Announcement button
 	private JLabel announcementButton;
 
-	/**
-	 * Current movie being chosen
-	 */
+	// Label displaying No Theatre Selected
+	private JLabel noTheatreSelectedLabel;
+
+	// Label displaying No Showtime Selected
+	private JLabel noShowTimeSelectedLabel;
+
+	// Label displaying No Movie Selected
+	private JLabel noMovieSelectedLabel;
+
+	// Button to Cancel Ticket
+	private JLabel cancelTicketButton;
+
+	// Textfield for user to enter their desired row for their seat
+	private JTextField rowTextField;
+
+	// Textfield for user to enter their desired column for their seat
+	private JTextField colTextField;
+
+	// Label displaying Select Row
+	private JLabel selectRowLabel;
+
+	// Label displaying Select Column
+	private JLabel selectColLabel;
+
+	// Label displaying Invalid Seat was Selected
+	private JLabel invalidSeatErrorLabel;
+
+	// Label displaying Taken Seat was Selected
+	private JLabel takenSeatErrorLabel;
+
+	// Label displaying Added to Cart
+	private JLabel addedToCartLabel;
+
+	// TextArea which depicts the Graphic of Seat Avaliability, X if booked, O if avaliable, - if Selected
+	private JTextArea seatGraphicLabel;
+
+	// Button that adds seat selection to Cart
+	private JLabel AddToCartButton;
+
+	// Label displaying Select Seat
+	private JLabel selectSeatLabel;
+
+	// Label displaying Select Showtime
+	private JLabel selectShowtimeLabel;
+
+	// TextArea displaying the selected Showtime details
+	private JTextArea showtimeDetailsLabel;
+
+	// ComboBox to selected desired Showtime
+	private JComboBox showtimeSelectComboBox;
+
+	// Label displaying Select Theatre
+	private JLabel selectTheatreLabel;
+	// TextArea displaying details of the selected Theatre
+
+	private JTextArea theatreDetailsLabel;
+	// ComboBox that select desired Theatre
+
+	JComboBox theatreSelectComboBox;
+	// Label displaying Select Movie
+
+	private JLabel selectMovieLabel;
+	// TextArea displaying selected Movie details
+
+	private JTextArea movieDetailsLabel;
+	// TextArea displaying selected Movie's Synopsis
+
+	private JTextArea movieSynopsisLabel;
+	// Label displaying the Movie's Poster
+
+	private JLabel posterCard;
+	// Combobox for selecting desired movie
+
+	private JComboBox movieSelectComboBox;
+	// Label displaying Welcome to the User
+
+	private JLabel welcomeLabel;
+	// Displays Movie Card
+
+	private JLabel movieCard;
+	// Displays Auditorium Card
+
+	private JLabel auditoriumCard;
+	// Displays the Background Graphic
+
+	private JLabel homeBackground;
+
+	// Current movie being chosen
 	private Movie currentMovie;
 
-	/**
-	 * Current theatre being chosen
-	 */
+	// Current theatre being chosen
 	private Theatre currentTheatre;
 
-	/**
-	 * Current showtime being chosen
-	 */
+	// Current showtime being chosen
 	private Showtime currentShowtime;
 
 	public HomePage(JFrame frame, BackEnd backend) {
 		setLayout(null);
 
 		// CREATE NO THEATRE SELECTED TEXT LABEL
-		JLabel noTheatreSelectedLabel = new JLabel("<html>" + "Please select a theatre." + "</html>");
+		// Label displaying No Theatre Selected
+		noTheatreSelectedLabel = new JLabel("<html>" + "Please select a theatre." + "</html>");
 		noTheatreSelectedLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		noTheatreSelectedLabel.setForeground(Color.RED);
 		noTheatreSelectedLabel.setFont(new Font("HelveticaNeue", Font.PLAIN, 15));
@@ -58,7 +135,8 @@ public class HomePage extends JPanel {
 		add(noTheatreSelectedLabel);
 
 		// CREATE NO SHOWTIME SELECTED TEXT LABEL
-		JLabel noShowTimeSelectedLabel = new JLabel("<html>" + "Please select a show time." + "</html>");
+		// Label displaying No Showtime Selected
+		noShowTimeSelectedLabel = new JLabel("<html>" + "Please select a show time." + "</html>");
 		noShowTimeSelectedLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		noShowTimeSelectedLabel.setForeground(Color.RED);
 		noShowTimeSelectedLabel.setFont(new Font("HelveticaNeue", Font.PLAIN, 15));
@@ -67,42 +145,22 @@ public class HomePage extends JPanel {
 		add(noShowTimeSelectedLabel);
 
 		// CREATE NO MOVIE SELECTED TEXT LABEL
-		JLabel noMovieSelectedLabel = new JLabel("<html>" + "Please select a movie." + "</html>");
+		// Label displaying No Movie Selected
+		noMovieSelectedLabel = new JLabel("<html>" + "Please select a movie." + "</html>");
 		noMovieSelectedLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		noMovieSelectedLabel.setForeground(Color.RED);
 		noMovieSelectedLabel.setFont(new Font("HelveticaNeue", Font.PLAIN, 15));
 		noMovieSelectedLabel.setBounds(156, 392, 168, 45); //
-		noMovieSelectedLabel.setVisible(true);
+		noMovieSelectedLabel.setVisible(false);
 		add(noMovieSelectedLabel);
-
-		// CREATE CANCEL TICKET BUTTON
-		JLabel cancelTicketButton = new JLabel("Cancel Ticket");
-		cancelTicketButton.setToolTipText("Cancel Ticket");
-		cancelTicketButton.setForeground(Color.WHITE);
-		cancelTicketButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		/**
-		 * When cancel ticket button is pressed, change the view to cancel ticket page
-		 */
-		cancelTicketButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				CancelTicketPage cancelTicketPage = new CancelTicketPage(frame, backend);
-				frame.setContentPane(cancelTicketPage);
-				frame.revalidate();
-
-			}
-		});
-		cancelTicketButton.setBounds(1366 - 32 - 90 - 60, 14, 32, 32);
-		cancelTicketButton.setVisible(true);
-		cancelTicketButton.setIcon(new ImageIcon(LoginPage.class.getResource("/refundButton.png")));
-		add(cancelTicketButton);
 
 		// =========================================
 		// SELECT SEAT
 		// =========================================
 
 		// CREATE ROW TEXT FIELD
-		JTextField rowTextField = new JTextField();
+		// Textfield for user to enter their desired row for their seat
+		rowTextField = new JTextField();
 		rowTextField.setToolTipText("Enter row");
 		rowTextField.setFont(new Font("HelveticaNeue", Font.PLAIN, 15));
 		rowTextField.setBorder(new MatteBorder(0, 0, 3, 0, (Color) Color.LIGHT_GRAY));
@@ -115,8 +173,9 @@ public class HomePage extends JPanel {
 		add(rowTextField);
 
 		// CREATE COLUMN TEXT FIELD
-		JTextField colTextField = new JTextField();
-		colTextField.setToolTipText("Enter column");
+		// Textfield for user to enter their desired column for their seat
+		colTextField = new JTextField();
+		colTextField.setToolTipText("Enter Seat Number");
 		colTextField.setFont(new Font("HelveticaNeue", Font.PLAIN, 15));
 		colTextField.setBorder(new MatteBorder(0, 0, 3, 0, (Color) Color.LIGHT_GRAY));
 		colTextField.setForeground(Color.DARK_GRAY);
@@ -128,7 +187,8 @@ public class HomePage extends JPanel {
 		add(colTextField);
 
 		// CREATE SELECT ROW TEXT
-		JLabel selectRowLabel = new JLabel("Select Row: ");
+		// Label displaying Select Row
+		selectRowLabel = new JLabel("Select Row: ");
 		selectRowLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		selectRowLabel.setForeground(Color.WHITE);
 		selectRowLabel.setFont(new Font("HelveticaNeue", Font.PLAIN, 15));
@@ -137,7 +197,8 @@ public class HomePage extends JPanel {
 		add(selectRowLabel);
 
 		// CREATE SELECT COLUMN TEXT
-		JLabel selectColLabel = new JLabel("Select Column: ");
+		// Label displaying Select Column
+		selectColLabel = new JLabel("Select Seat Number: ");
 		selectColLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		selectColLabel.setForeground(Color.WHITE);
 		selectColLabel.setFont(new Font("HelveticaNeue", Font.PLAIN, 15));
@@ -145,9 +206,40 @@ public class HomePage extends JPanel {
 		selectColLabel.setVisible(false);
 		add(selectColLabel);
 
+		// CREATE INVALID SEAT ERROR TEXT LABEL
+		// Label displaying Invalid Seat was Selected Error
+		invalidSeatErrorLabel = new JLabel("<html>" + "Invalid Row or Seat Number was Selected" + "</html>");
+		invalidSeatErrorLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		invalidSeatErrorLabel.setForeground(Color.RED);
+		invalidSeatErrorLabel.setFont(new Font("HelveticaNeue", Font.PLAIN, 15));
+		invalidSeatErrorLabel.setBounds(1100, 500, 192, 45);
+		invalidSeatErrorLabel.setVisible(false);
+		add(invalidSeatErrorLabel);
+
+		// CREATE TAKEN SEAT ERROR TEXT LABEL
+		// Label displaying Taken Seat was Selected Error
+		takenSeatErrorLabel = new JLabel("<html>" + "The Seat Selected is already Booked" + "</html>");
+		takenSeatErrorLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		takenSeatErrorLabel.setForeground(Color.RED);
+		takenSeatErrorLabel.setFont(new Font("HelveticaNeue", Font.PLAIN, 15));
+		takenSeatErrorLabel.setBounds(1100, 500, 192, 45);
+		takenSeatErrorLabel.setVisible(false);
+		add(takenSeatErrorLabel);
+
+		// CREATE ADDED TO CART TEXT LABEL
+		// Label displaying Added to Cart
+		addedToCartLabel = new JLabel("<html>" + "Added To Cart" + "</html>");
+		addedToCartLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		addedToCartLabel.setForeground(Color.RED);
+		addedToCartLabel.setFont(new Font("HelveticaNeue", Font.PLAIN, 15));
+		addedToCartLabel.setBounds(1100, 500, 192, 45);
+		addedToCartLabel.setVisible(false);
+		add(addedToCartLabel);
+
 		// CREATE ADD TO CART BUTTON
-		JTextArea seatGraphicLabel = new JTextArea("");
-		JLabel AddToCartButton = new JLabel("Add To Cart");
+		// Button that adds seat selection to Cart
+		seatGraphicLabel = new JTextArea("");
+		AddToCartButton = new JLabel("Add To Cart");
 		AddToCartButton.setToolTipText("Add To Cart");
 		AddToCartButton.setForeground(Color.WHITE);
 		AddToCartButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -160,56 +252,35 @@ public class HomePage extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				try {
-					int tempRow = Integer.parseInt(rowTextField.getText());
-					int tempCol = Integer.parseInt(colTextField.getText());
-					if (tempRow < currentShowtime.getRow() && tempCol < currentShowtime.getCol()) {
-						// boolean booking = currentShowtime.bookSeat(tempRow, tempCol);
-						boolean avaliable = currentShowtime.getSeatAvaliability(tempRow, tempCol);
-						if (avaliable == false) {
+					// Get user entered row and column
+					int userRow = Integer.parseInt(rowTextField.getText());
+					int userCol = Integer.parseInt(colTextField.getText());
+
+					invalidSeatErrorLabel.setVisible(false);
+					takenSeatErrorLabel.setVisible(false);
+					addedToCartLabel.setVisible(false);
+					// If user entered a valid row and columb
+					if (userRow < currentShowtime.getRow() && userCol < currentShowtime.getCol()) {
+						boolean available = currentShowtime.getSeatAvaliability(userRow, userCol);
+						if (available == false) {
 							System.out.println("Added ticket To Cart for:\nMovie: " + currentMovie.getTitle()
 									+ "\nTheatre: " + currentTheatre.getT_name() + "\nDate: "
-									+ currentShowtime.getShowDate().toString() + "\nSeat Row: " + tempRow
-									+ ", Seat Column: " + tempCol);
+									+ currentShowtime.getShowDate().toString() + "\nSeat Row: " + userRow
+									+ ", Seat Column: " + userCol);
 
 							backend.getCurrentUser().getCart().addToCart(new Booking(currentMovie, currentShowtime,
-									currentShowtime.getSeats()[tempRow][tempCol]));
-
-							String tempGraphic = "";
-							for (int i = 0; i < currentShowtime.getRow(); i++) {
-								for (int j = 0; j < currentShowtime.getCol(); j++) {
-									if (currentShowtime.getSeatAvaliability(i, j) == true) {
-										tempGraphic += "X  ";
-									} else if (backend.getCurrentUser() != null) {
-										boolean tempFlag = false;
-										for (int k = 0; k < backend.getCurrentUser().getCart().getItems_in_cart()
-												.size(); k++) {
-											if (backend.getCurrentUser().getCart().getItems_in_cart().get(k)
-													.getBookedSeat().getRow() == i
-													&& backend.getCurrentUser().getCart().getItems_in_cart().get(k)
-															.getBookedSeat().getSeatNum() == j
-													&& backend.getCurrentUser().getCart().getItems_in_cart().get(k)
-															.getBookedTime()
-															.getShowtimeID() == currentShowtime.getShowtimeID()) {
-												tempGraphic += "-  ";
-												tempFlag = true;
-											}
-										}
-										if (tempFlag == false) {
-											tempGraphic += "O  ";
-										}
-									} else {
-										tempGraphic += "O  ";
-									}
-								}
-								tempGraphic += "\n";
-							}
-							seatGraphicLabel.setText(tempGraphic);
-							seatGraphicLabel.setVisible(true);
+									currentShowtime.getSeats()[userRow][userCol]));
+							addedToCartLabel.setVisible(true);
+							createSeatGraphic(frame,backend);
 						} else {
+							//Seat already taken
 							System.out.println("Seat already taken");
+							takenSeatErrorLabel.setVisible(true);
 						}
 					} else {
+						//Invalid row or column
 						System.out.println("Invalid row or column value");
+						invalidSeatErrorLabel.setVisible(true);
 					}
 					frame.revalidate();
 				} catch (NumberFormatException f) {
@@ -217,17 +288,14 @@ public class HomePage extends JPanel {
 				}
 			}
 		});
-		AddToCartButton.setBounds(797, 625, 254, 50);
+		AddToCartButton.setBounds(1050, 425, 254, 50);
 		AddToCartButton.setVisible(false);
 		AddToCartButton.setIcon(new ImageIcon(LoginPage.class.getResource("/addToCartButton.png")));
 		add(AddToCartButton);
 
-		// ==========================================
-		// SELECT SHOWTIME
-		// ==========================================
-
 		// CREATE SELECT SEAT TEXT
-		JLabel selectSeatLabel = new JLabel("Seat");
+		// Label displaying Select Seat
+		selectSeatLabel = new JLabel("Please Enter Seat");
 		selectSeatLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		selectSeatLabel.setForeground(Color.WHITE);
 		selectSeatLabel.setFont(new Font("HelveticaNeue", Font.PLAIN, 15));
@@ -235,10 +303,11 @@ public class HomePage extends JPanel {
 		selectSeatLabel.setVisible(false);
 		add(selectSeatLabel);
 
-		// CREATE SHOWTIME DETAILS TEXT
+		// CREATE SEAT GRAPHIC DETAILS TEXT
+		// TextArea which depicts the Graphic of Seat Avaliability, X if booked, O if avaliable, - if Selected
 		seatGraphicLabel.setForeground(Color.WHITE);
 		seatGraphicLabel.setFont(new Font("Courier New", Font.PLAIN, 15));
-		seatGraphicLabel.setBounds(600, 310, 254, 254);
+		seatGraphicLabel.setBounds(600, 310, 500, 500);
 		seatGraphicLabel.setVisible(false);
 		seatGraphicLabel.setLineWrap(true);
 		seatGraphicLabel.setWrapStyleWord(true);
@@ -246,12 +315,14 @@ public class HomePage extends JPanel {
 		seatGraphicLabel.setEditable(false);
 		add(seatGraphicLabel);
 
+
 		// ==========================================
 		// SELECT SHOWTIME
 		// ==========================================
 
 		// CREATE SELECT SHOWTIME TEXT
-		JLabel selectShowtimeLabel = new JLabel("Show Time");
+		// Label displaying Select Showtime
+		selectShowtimeLabel = new JLabel("Show Time");
 		selectShowtimeLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		selectShowtimeLabel.setForeground(Color.WHITE);
 		selectShowtimeLabel.setFont(new Font("HelveticaNeue", Font.PLAIN, 15));
@@ -260,7 +331,8 @@ public class HomePage extends JPanel {
 		add(selectShowtimeLabel);
 
 		// CREATE SHOWTIME DETAILS TEXT
-		JTextArea showtimeDetailsLabel = new JTextArea("");
+		// TextArea displaying the selected Showtime details
+		showtimeDetailsLabel = new JTextArea("");
 		showtimeDetailsLabel.setForeground(Color.WHITE);
 		showtimeDetailsLabel.setFont(new Font("HelveticaNeue", Font.PLAIN, 15));
 		showtimeDetailsLabel.setBounds(900, 215, 254, 100);
@@ -272,7 +344,8 @@ public class HomePage extends JPanel {
 		add(showtimeDetailsLabel);
 
 		// CREATE SHOWTIME SELECTOR
-		JComboBox showtimeSelectComboBox = new JComboBox(new String[0]);
+		// ComboBox to select desired Showtime
+		showtimeSelectComboBox = new JComboBox(new String[0]);
 		showtimeSelectComboBox.setToolTipText("Select Date");
 		showtimeSelectComboBox.setFont(new Font("HelveticaNeue", Font.PLAIN, 15));
 		showtimeSelectComboBox.setBorder(new MatteBorder(0, 0, 3, 0, (Color) Color.LIGHT_GRAY));
@@ -291,6 +364,9 @@ public class HomePage extends JPanel {
 				System.out.println("Date Combo Box Pressed: " + showtimeSelectComboBox.getSelectedItem());
 				String tempString = (String) showtimeSelectComboBox.getSelectedItem();
 				noShowTimeSelectedLabel.setVisible(false);
+				invalidSeatErrorLabel.setVisible(false);
+				takenSeatErrorLabel.setVisible(false);
+				addedToCartLabel.setVisible(false);
 				if (tempString != null) {
 					String[] tempStringArray = tempString.split("/");
 					Date tempDate = new Date(Integer.parseInt(tempStringArray[0]), Integer.parseInt(tempStringArray[1]),
@@ -302,6 +378,7 @@ public class HomePage extends JPanel {
 								.setText("Time: " + currentShowtime.getHour() + ":" + currentShowtime.getMinutes()
 										+ "\nAuditorium: " + currentShowtime.getAuditorium().getAuditoriumID()
 										+ "\nNumber of Avaliable Seats: " + currentShowtime.getTotalAvaliableSeats());
+
 						showtimeDetailsLabel.setVisible(true);
 						rowTextField.setVisible(true);
 						colTextField.setVisible(true);
@@ -309,37 +386,7 @@ public class HomePage extends JPanel {
 						selectColLabel.setVisible(true);
 						AddToCartButton.setVisible(true);
 
-						String tempGraphic = "";
-						for (int i = 0; i < currentShowtime.getRow(); i++) {
-							for (int j = 0; j < currentShowtime.getCol(); j++) {
-								if (currentShowtime.getSeatAvaliability(i, j) == true) {
-									tempGraphic += "X  ";
-								} else if (backend.getCurrentUser() != null) {
-									boolean tempFlag = false;
-									for (int k = 0; k < backend.getCurrentUser().getCart().getItems_in_cart()
-											.size(); k++) {
-										if (backend.getCurrentUser().getCart().getItems_in_cart().get(k).getBookedSeat()
-												.getRow() == i
-												&& backend.getCurrentUser().getCart().getItems_in_cart().get(k)
-														.getBookedSeat().getSeatNum() == j
-												&& backend.getCurrentUser().getCart().getItems_in_cart().get(k)
-														.getBookedTime()
-														.getShowtimeID() == currentShowtime.getShowtimeID()) {
-											tempGraphic += "-  ";
-											tempFlag = true;
-										}
-									}
-									if (tempFlag == false) {
-										tempGraphic += "O  ";
-									}
-								} else {
-									tempGraphic += "O  ";
-								}
-							}
-							tempGraphic += "\n";
-						}
-						seatGraphicLabel.setText(tempGraphic);
-						seatGraphicLabel.setVisible(true);
+						createSeatGraphic(frame,backend);
 						selectSeatLabel.setVisible(true);
 					} else {
 						System.out.println("No showtime found");
@@ -358,7 +405,8 @@ public class HomePage extends JPanel {
 		// ==========================================
 
 		// CREATE SELECT THEATRE TEXT
-		JLabel selectTheatreLabel = new JLabel("Theatre");
+		// Label displaying Select Theatre
+		selectTheatreLabel = new JLabel("Theatre");
 		selectTheatreLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		selectTheatreLabel.setForeground(Color.WHITE);
 		selectTheatreLabel.setFont(new Font("HelveticaNeue", Font.PLAIN, 15));
@@ -367,7 +415,8 @@ public class HomePage extends JPanel {
 		add(selectTheatreLabel);
 
 		// CREATE THEATRE DETAILS TEXT
-		JTextArea theatreDetailsLabel = new JTextArea("");
+		// TextArea displaying details of the selected Theatre
+		theatreDetailsLabel = new JTextArea("");
 		theatreDetailsLabel.setForeground(Color.WHITE);
 		theatreDetailsLabel.setFont(new Font("HelveticaNeue", Font.PLAIN, 15));
 		theatreDetailsLabel.setBounds(600, 215, 254, 100);
@@ -379,7 +428,8 @@ public class HomePage extends JPanel {
 		add(theatreDetailsLabel);
 
 		// CREATE THEATRE SELECTOR
-		JComboBox theatreSelectComboBox = new JComboBox(new String[0]);
+		// ComboBox that select desired Theatre
+		theatreSelectComboBox = new JComboBox(new String[0]);
 		theatreSelectComboBox.setToolTipText("Select Theatre");
 		theatreSelectComboBox.setFont(new Font("HelveticaNeue", Font.PLAIN, 15));
 		theatreSelectComboBox.setBorder(new MatteBorder(0, 0, 3, 0, (Color) Color.LIGHT_GRAY));
@@ -419,7 +469,7 @@ public class HomePage extends JPanel {
 						}
 						showtimeSelectComboBox.setModel(model2);
 						showtimeSelectComboBox.setVisible(true);
-						noShowTimeSelectedLabel.setVisible(true);
+						//noShowTimeSelectedLabel.setVisible(true);
 						selectShowtimeLabel.setVisible(true);
 					} else {
 						System.out.println("No theatre found");
@@ -435,7 +485,8 @@ public class HomePage extends JPanel {
 		// ==========================================
 
 		// CREATE SELECT MOVIE TEXT
-		JLabel selectMovieLabel = new JLabel("Movie");
+		// Label displaying Select Movie
+		selectMovieLabel = new JLabel("Movie");
 		selectMovieLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		selectMovieLabel.setForeground(Color.WHITE);
 		selectMovieLabel.setFont(new Font("HelveticaNeue", Font.PLAIN, 20));
@@ -443,7 +494,8 @@ public class HomePage extends JPanel {
 		add(selectMovieLabel);
 
 		// CREATE MOVIE DETAILS TEXT
-		JTextArea movieDetailsLabel = new JTextArea("");
+		// TextArea displaying selected Movie details
+		movieDetailsLabel = new JTextArea("");
 		movieDetailsLabel.setForeground(Color.WHITE);
 		movieDetailsLabel.setFont(new Font("Arial", Font.PLAIN, 15));
 		movieDetailsLabel.setBounds(273, 233, 123, 268);
@@ -454,7 +506,9 @@ public class HomePage extends JPanel {
 		movieDetailsLabel.setEditable(false);
 		add(movieDetailsLabel);
 
-		JTextArea movieSynopsisLabel = new JTextArea("");
+		// CREATE MOVIE SYNOPSIS TEXT
+		// TextArea displaying selected Movie's Synopsis
+		movieSynopsisLabel = new JTextArea("");
 		movieSynopsisLabel.setForeground(Color.WHITE);
 		movieSynopsisLabel.setFont(new Font("Arial", Font.PLAIN, 15));
 		movieSynopsisLabel.setBounds(85, 525, 311, 134);
@@ -466,17 +520,19 @@ public class HomePage extends JPanel {
 		add(movieSynopsisLabel);
 
 		// CREATE POSTER CARD VIEW
-		JLabel posterCard = new JLabel("");
+		// Label displaying the Movie's Poster
+		posterCard = new JLabel("");
 		posterCard.setBounds(85, 235, 182, 268);
 		posterCard.setVisible(true);
 		add(posterCard);
 
 		// CREATE MOVIE SELECTOR
+		// Combobox for selecting desired movie
 		Vector<String> movieList = new Vector<String>();
 		for (int i = 0; i < backend.getDataController().getMovieList().size(); i++) {
 			movieList.add(backend.getDataController().getMovieList().get(i).getTitle());
 		}
-		JComboBox movieSelectComboBox = new JComboBox(movieList);
+		movieSelectComboBox = new JComboBox(movieList);
 		movieSelectComboBox.setToolTipText("Select Movie");
 		movieSelectComboBox.setFont(new Font("HelveticaNeue", Font.PLAIN, 15));
 		movieSelectComboBox.setBorder(new MatteBorder(0, 0, 3, 0, (Color) Color.LIGHT_GRAY));
@@ -506,10 +562,6 @@ public class HomePage extends JPanel {
 
 				movieDetailsLabel.setVisible(true);
 				selectTheatreLabel.setVisible(true);
-				theatreDetailsLabel.setVisible(false);
-				showtimeSelectComboBox.setVisible(false);
-				selectShowtimeLabel.setVisible(false);
-				noMovieSelectedLabel.setVisible(false);
 				noTheatreSelectedLabel.setVisible(true);
 				posterCard.setVisible(true);
 
@@ -527,8 +579,13 @@ public class HomePage extends JPanel {
 		});
 		add(movieSelectComboBox);
 
+		//=======================================
+		// MENU BUTTONS AND LABELS
+		//=======================================
+
 		// CREATE WELCOME TEXT LABEL
-		JLabel welcomeLabel = new JLabel("");
+		// Label displaying Welcome to the User
+		welcomeLabel = new JLabel("");
 		if (backend.getCurrentRegisteredUser() != null) {
 			welcomeLabel = new JLabel("Welcome, " + backend.getCurrentRegisteredUser().getF_name() + " "
 					+ backend.getCurrentRegisteredUser().getL_name() + "!");
@@ -541,7 +598,31 @@ public class HomePage extends JPanel {
 		welcomeLabel.setBounds(140, 5, 571, 50);
 		add(welcomeLabel);
 
+		// CREATE CANCEL TICKET BUTTON
+		// Button to Cancel Ticket
+		cancelTicketButton = new JLabel("Cancel Ticket");
+		cancelTicketButton.setToolTipText("Cancel Ticket");
+		cancelTicketButton.setForeground(Color.WHITE);
+		cancelTicketButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		/**
+		 * When cancel ticket button is pressed, change the view to cancel ticket page
+		 */
+		cancelTicketButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				CancelTicketPage cancelTicketPage = new CancelTicketPage(frame, backend);
+				frame.setContentPane(cancelTicketPage);
+				frame.revalidate();
+
+			}
+		});
+		cancelTicketButton.setBounds(1366 - 32 - 90 - 60, 14, 32, 32);
+		cancelTicketButton.setVisible(true);
+		cancelTicketButton.setIcon(new ImageIcon(LoginPage.class.getResource("/refundButton.png")));
+		add(cancelTicketButton);
+
 		// CREATE LOGOUT BUTTON
+		// Button to Logout the User
 		logoutButton = new JLabel("");
 		logoutButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		logoutButton.setToolTipText("Logout");
@@ -563,6 +644,7 @@ public class HomePage extends JPanel {
 		add(logoutButton);
 
 		// CREATE CART BUTTON
+		// Button to view current cart
 		cartButton = new JLabel("");
 		cartButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		cartButton.setToolTipText("View Cart");
@@ -583,6 +665,7 @@ public class HomePage extends JPanel {
 		add(cartButton);
 
 		// CREATE ACCOUNCEMENT BUTTON
+		// Button to view current Announcements
 		announcementButton = new JLabel("");
 		announcementButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		announcementButton.setToolTipText("View Announcements");
@@ -600,21 +683,74 @@ public class HomePage extends JPanel {
 		add(announcementButton);
 
 		// CREATE MOVIE CARD VIEW
-		JLabel movieCard = new JLabel("");
+		// Displays Movie Card
+		movieCard = new JLabel("");
 		movieCard.setBounds(40, 132, 401, 564);
 		movieCard.setIcon(new ImageIcon(HomePage.class.getResource("/movieCard.png")));
 		add(movieCard);
 
 		// CREATE AUDITORIUM CARD VIEW
-		JLabel auditoriumCard = new JLabel("");
+		// Displays Auditorium Card
+		auditoriumCard = new JLabel("");
 		auditoriumCard.setBounds(525, 132, 801, 564);
 		auditoriumCard.setIcon(new ImageIcon(HomePage.class.getResource("/auditoriumCard.png")));
 		add(auditoriumCard);
 
 		// CREATE BACKGROUND VIEW
-		JLabel homeBackground = new JLabel("");
+		// Displays the Background Graphic
+		homeBackground = new JLabel("");
 		homeBackground.setBounds(-2, -1, 1366, 768);
 		homeBackground.setIcon(new ImageIcon(HomePage.class.getResource("/backgroundD.png")));
 		add(homeBackground);
+	}
+
+	public void createSeatGraphic(JFrame frame, BackEnd backend){
+		String tempGraphic = "";
+		for (int i = 0; i < currentShowtime.getRow(); i++) {
+			if(i == 0){
+				tempGraphic += "     ";
+				for(int j = 0; j < currentShowtime.getCol(); j++){
+					tempGraphic += j + "  ";
+				}
+				tempGraphic += "Seat Num";
+				tempGraphic += "\n   --";
+				for(int j = 0; j < currentShowtime.getCol(); j++){
+					tempGraphic += "---";
+				}
+				tempGraphic += "\n";
+			}
+			for (int j = 0; j < currentShowtime.getCol(); j++) {
+				if(j == 0){
+					tempGraphic += i + "  | ";
+				}
+				if (currentShowtime.getSeatAvaliability(i, j) == true) {
+					tempGraphic += "X  ";
+				} else if (backend.getCurrentUser() != null) {
+					boolean tempFlag = false;
+					for (int k = 0; k < backend.getCurrentUser().getCart().getItems_in_cart()
+							.size(); k++) {
+						if (backend.getCurrentUser().getCart().getItems_in_cart().get(k)
+								.getBookedSeat().getRow() == i
+								&& backend.getCurrentUser().getCart().getItems_in_cart().get(k)
+								.getBookedSeat().getSeatNum() == j
+								&& backend.getCurrentUser().getCart().getItems_in_cart().get(k)
+								.getBookedTime()
+								.getShowtimeID() == currentShowtime.getShowtimeID()) {
+							tempGraphic += "-  ";
+							tempFlag = true;
+						}
+					}
+					if (tempFlag == false) {
+						tempGraphic += "O  ";
+					}
+				} else {
+					tempGraphic += "O  ";
+				}
+			}
+			tempGraphic += "\n";
+		}
+		tempGraphic += "Row\nO = Avaliable, X = Booked, - = Selected";
+		seatGraphicLabel.setText(tempGraphic);
+		seatGraphicLabel.setVisible(true);
 	}
 }
