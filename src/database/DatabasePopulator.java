@@ -4,6 +4,7 @@ import domain.model.Movie;
 import domain.model.RegisteredUser;
 import domain.model.BankingInfo;
 import domain.model.Date;
+import domain.model.FinancialInstitution;
 import domain.model.Showtime;
 import domain.model.Theatre;
 import domain.model.Auditorium;
@@ -20,6 +21,7 @@ public class DatabasePopulator {
 	private Movie paddington;
 	private Showtime s1;
 	private Showtime s2;
+	private FinancialInstitution inst;
 
 	public DatabasePopulator() {
 		dbController = DataController.getOnlyInstance();
@@ -36,10 +38,10 @@ public class DatabasePopulator {
 
 	public void loadMovies() {
 		spiderverse = new Movie("Spider-Man: Into the Spider-Verse", "Action", 2018, "Peter Ramsey", 116, 8.4,
-				"spm-poster-183x268");
-		getout = new Movie("Get Out", "Thriller", 2017, "Peter Ramsey", 104, 7.7, "get-poster-183x268");
-		hereditary = new Movie("Hereditary", "Horror", 2018, "Ari Aster", 127, 7.3, "her-poster-183x268");
-		paddington = new Movie("Paddington 2", "Adventure", 2017, "Paul King", 104, 7.8, "pd2-poster-183x268");
+				"spm-poster-183x268", 12.99);
+		getout = new Movie("Get Out", "Thriller", 2017, "Peter Ramsey", 104, 7.7, "get-poster-183x268", 12.99);
+		hereditary = new Movie("Hereditary", "Horror", 2018, "Ari Aster", 127, 7.3, "her-poster-183x268",12.99);
+		paddington = new Movie("Paddington 2", "Adventure", 2017, "Paul King", 104, 7.8, "pd2-poster-183x268",12.99);
 
 		dbController.addMovie(spiderverse);
 		dbController.addMovie(getout);
@@ -141,9 +143,9 @@ public class DatabasePopulator {
 		Date d3 = new Date(3, "June", 2020);
 		Date d4 = new Date(4, "July", 2020);
 		RegisteredUser u1 = new RegisteredUser("V.Kapoor", "1234", "Vaibhav", "Kapoor", "vk@email.com", b1, d1);
-		RegisteredUser u2 = new RegisteredUser("W.Kerr", "1235", "William", "Kerr", "wk@email.com", b2, d2);
-		RegisteredUser u3 = new RegisteredUser("E.Kim", "1236", "Eddie", "Kim", "ek@email.com", b3, d3);
-		RegisteredUser u4 = new RegisteredUser("H.Khan", "1237", "Haseeb", "Khan", "hk@email.com", b4, d4);
+		RegisteredUser u2 = new RegisteredUser("W.Kerr", "1234", "William", "Kerr", "wk@email.com", b2, d2);
+		RegisteredUser u3 = new RegisteredUser("E.Kim", "1234", "Eddie", "Kim", "ek@email.com", b3, d3);
+		RegisteredUser u4 = new RegisteredUser("H.Khan", "1234", "Haseeb", "Khan", "hk@email.com", b4, d4);
 
 		dbController.addUser(u1);
 		dbController.addUser(u2);

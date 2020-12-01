@@ -45,6 +45,7 @@ public class CartPage extends JPanel {
 		setLayout(null);
 
 		// CREATE WELCOME TEXT LABEL
+
 		JLabel welcomeLabel = new JLabel("");
 		if (backend.getCurrentRegisteredUser() != null) {
 			welcomeLabel = new JLabel("Welcome, " + backend.getCurrentRegisteredUser().getF_name() + " "
@@ -55,18 +56,33 @@ public class CartPage extends JPanel {
 		welcomeLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		welcomeLabel.setForeground(Color.WHITE);
 		welcomeLabel.setFont(new Font("Arial", Font.PLAIN, 25));
-		welcomeLabel.setBounds(140, 5, 264, 50);
+		welcomeLabel.setBounds(140, 5, 571, 50);
 		add(welcomeLabel);
 
 		// CREATE MOVIE CARD VIEW
-		JLabel[] ticketCards = new JLabel[2]; // 3 is supposed to be num of items in cart
-		for (int i = 0; i < ticketCards.length; i++) {
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(39, 87, 1285, 560);
+
+		ArrayList<Booking> cartItems = backend.getCurrentUser().getCart().getItems_in_cart();
+
+		JLabel[] ticketCards = new JLabel[cartItems.size()];
+		JLabel[] movieDetails = new JLabel[cartItems.size()];
+		for (int i = 0; i < cartItems.size(); i++) {
 			ticketCards[i] = new JLabel("");
 			ticketCards[i].setVerticalAlignment(SwingConstants.TOP);
 			ticketCards[i].setHorizontalAlignment(SwingConstants.LEFT);
 			ticketCards[i].setBounds(39, 100 + (170 * i), 1285, 164);
 			ticketCards[i].setIcon(new ImageIcon(HomePage.class.getResource("/ticketCard.png")));
-			add(ticketCards[i]);
+			scrollPane.add(ticketCards[i]);
+
+			movieDetails[i] = new JLabel("");
+			movieDetails[i].setVerticalAlignment(SwingConstants.TOP);
+			movieDetails[i].setHorizontalAlignment(SwingConstants.LEFT);
+			movieDetails[i].setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			movieDetails[i].setIcon(new ImageIcon(HomePage.class.getResource("/deleteButton.png")));
+			movieDetails[i].setBounds(39, 100 + (170 * i), 1285, 164);
+			scrollPane.add(movieDetails[i]);
+
 		}
 
 		// CREATE BACK BUTTON
@@ -105,13 +121,14 @@ public class CartPage extends JPanel {
 		ticketCard.setHorizontalAlignment(SwingConstants.LEFT);
 		ticketCard.setBounds(39, 100, 1285, 164);
 		ticketCard.setIcon(new ImageIcon(HomePage.class.getResource("/ticketCard.png")));
-		add(ticketCard);
+		scrollPane.add(ticketCard);
 
 		// CREATE BACKGROUND VIEW
 		JLabel homeBackground = new JLabel("");
 		homeBackground.setBounds(-2, -1, 1366, 768);
 		homeBackground.setIcon(new ImageIcon(HomePage.class.getResource("/backgroundD.png")));
 		add(homeBackground);
-	}
 
+		add(scrollPane);
+	}
 }

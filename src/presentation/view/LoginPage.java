@@ -150,7 +150,7 @@ public class LoginPage extends JPanel {
 		submitLoginButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				String user = usernameTextField.getText();
+				String user = usernameTextField.getText().toLowerCase();
 				String pass = String.valueOf(passwordField.getPassword());
 				System.out.println("User inputed:" + user + " " + pass);
 				if (backend.verifyLogin(user, pass) != null) {
