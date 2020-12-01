@@ -17,6 +17,9 @@ public class Booking {
 	 * Booking ID
 	 */
 	private int bookingID;
+	
+	private double moviePrice;
+
 
 	// Constructors
 	public Booking() {
@@ -32,6 +35,7 @@ public class Booking {
 		bookedTime = t;
 		bookedSeat = s;
 		bookingID = i;
+		setMoviePrice(m.getPrice());
 	}
 
 	// Getters and Setters
@@ -65,6 +69,14 @@ public class Booking {
 
 	public void setBookingID(int bookingID) {
 		this.bookingID = bookingID;
+	}
+	
+	public double getMoviePrice() {
+		return moviePrice;
+	}
+
+	public void setMoviePrice(double moviePrice) {
+		this.moviePrice = moviePrice;
 	}
 
 }
