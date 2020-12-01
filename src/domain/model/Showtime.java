@@ -8,6 +8,9 @@ import domain.model.Seat;
 public class Showtime {
 	private int showtimeID;
 	private Date showDate;
+
+	private int hour;
+	private int minutes;
 	private Auditorium auditorium;
 	private int row;
 	private int col;
@@ -17,11 +20,13 @@ public class Showtime {
 
 	private static int showtimeCounter = 0;
 
-	public Showtime(Date d, Auditorium a, Movie m) {
+	public Showtime(Date d, Auditorium a, Movie mov, int h, int m) {
 		showtimeID = showtimeCounter++;
 		showDate = d;
 		auditorium = a;
-		movie = m;
+		hour = h;
+		minutes = m;
+		movie = mov;
 		row = a.getNum_of_rows();
 		col = a.getNum_of_cols();
 		seats = new Seat[row][col];
@@ -33,11 +38,13 @@ public class Showtime {
 		totalAvaliableSeats = row * col;
 	}
 
-	public Showtime(int day, int month, int year, Auditorium a, Movie m) {
+	public Showtime(int day, int month, int year, Auditorium a, Movie mov, int h, int m) {
 		showtimeID = showtimeCounter++;
 		showDate = new Date(day, month, year);
 		auditorium = a;
-		movie = m;
+		movie = mov;
+		hour = h;
+		minutes = m;
 		row = a.getNum_of_rows();
 		col = a.getNum_of_cols();
 		seats = new Seat[row][col];
@@ -122,6 +129,14 @@ public class Showtime {
 	public int getTotalAvaliableSeats() {
 		return this.totalAvaliableSeats;
 	}
+
+	public int getHour() { return hour; }
+
+	public void setHour(int hour) { this.hour = hour; }
+
+	public int getMinutes() { return minutes; }
+
+	public void setMinutes(int minutes) { this.minutes = minutes; }
 
 	@Override
 	public String toString() {

@@ -83,29 +83,29 @@ public class DatabasePopulator {
 		Date d3 = new Date(1, 12, 2020);
 		Date d4 = new Date(19, 12, 2020);
 		
-		s1 = new Showtime(d1, x.get(0), spiderverse);
-		Showtime s11 = new Showtime(d3, x.get(0), spiderverse);
+		s1 = new Showtime(d1, x.get(0), spiderverse, 13, 0);
+		Showtime s11 = new Showtime(d3, x.get(0), spiderverse, 8,30);
 		
-		s2 = new Showtime(d2, x.get(1), getout);
-		Showtime s12 = new Showtime(d4, x.get(0), getout);
+		s2 = new Showtime(d2, x.get(1), getout, 9,15);
+		Showtime s12 = new Showtime(d4, x.get(0), getout, 11,45);
 		
-		Showtime s3 = new Showtime(d3, x.get(0), hereditary);
-		Showtime s13 = new Showtime(d1, x.get(1), hereditary);
+		Showtime s3 = new Showtime(d3, x.get(0), hereditary, 14,0);
+		Showtime s13 = new Showtime(d1, x.get(1), hereditary, 16,30);
 		
-		Showtime s4 = new Showtime(d4, x.get(1), paddington);
-		Showtime s9 = new Showtime(d2, x.get(1), paddington);
+		Showtime s4 = new Showtime(d4, x.get(1), paddington, 20,30);
+		Showtime s9 = new Showtime(d2, x.get(1), paddington,16,15);
 		
-		Showtime s5 = new Showtime(d1, y.get(0), spiderverse);
-		Showtime s10 = new Showtime(d3, y.get(1), spiderverse);
+		Showtime s5 = new Showtime(d1, y.get(0), spiderverse,17,45);
+		Showtime s10 = new Showtime(d3, y.get(1), spiderverse,12,00);
 		
-		Showtime s6 = new Showtime(d2, y.get(1), getout);
-		Showtime s14 = new Showtime(d3, y.get(1), getout);
+		Showtime s6 = new Showtime(d2, y.get(1), getout,16,15);
+		Showtime s14 = new Showtime(d3, y.get(1), getout,9,15);
 		
-		Showtime s7 = new Showtime(d3, y.get(0), hereditary);
-		Showtime s15 = new Showtime(d1, y.get(1), hereditary);
+		Showtime s7 = new Showtime(d3, y.get(0), hereditary,8,0);
+		Showtime s15 = new Showtime(d1, y.get(1), hereditary,14,0);
 		
-		Showtime s8 = new Showtime(d4, y.get(1), paddington);
-		Showtime s16 = new Showtime(d2, y.get(1), paddington);
+		Showtime s8 = new Showtime(d4, y.get(1), paddington,14,15);
+		Showtime s16 = new Showtime(d2, y.get(1), paddington,15,0);
 
 		dbController.addShowtime(s1);
 		dbController.addShowtime(s2);
@@ -132,8 +132,8 @@ public class DatabasePopulator {
 		Payment p2 = new Payment(2, 15.99, b2);
 		Ticket t1 = new Ticket(12, p1, s1.getMovie(), s1, s1.getSeats()[1][2]);
 		Ticket t2 = new Ticket(13, p2, s2.getMovie(), s2, s2.getSeats()[3][3]);
-		s1.getSeats()[1][2].bookSeat();
-		s2.getSeats()[3][3].bookSeat();
+		s1.bookSeat(2,3);
+		s2.bookSeat(3,1);
 
 		dbController.addTicket(t1);
 		dbController.addTicket(t2);

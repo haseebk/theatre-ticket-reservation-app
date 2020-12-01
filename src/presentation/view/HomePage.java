@@ -286,7 +286,8 @@ public class HomePage extends JPanel {
 					currentShowtime = backend.getDataController().findShowtime(currentMovie, currentTheatre, tempDate);
 					if (currentShowtime != null) {
 						System.out.println("Showtime found");
-						showtimeDetailsLabel.setText("Auditorium: " + currentShowtime.getAuditorium().getAuditoriumID()
+						showtimeDetailsLabel.setText("Time: " + currentShowtime.getHour() + ":" + currentShowtime.getMinutes()
+								+ "\nAuditorium: " + currentShowtime.getAuditorium().getAuditoriumID()
 								+ "\nNumber of Avaliable Seats: " + currentShowtime.getTotalAvaliableSeats());
 						showtimeDetailsLabel.setVisible(true);
 						rowTextField.setVisible(true);
