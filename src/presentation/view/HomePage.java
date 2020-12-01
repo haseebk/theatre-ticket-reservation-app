@@ -75,15 +75,18 @@ public class HomePage extends JPanel {
 		noMovieSelectedLabel.setVisible(true);
 		add(noMovieSelectedLabel);
 
-		// CREATE ADD TO CART BUTTON
+		// CREATE CANCEL TICKET BUTTON
 		JLabel cancelTicketButton = new JLabel("Cancel Ticket");
 		cancelTicketButton.setToolTipText("Cancel Ticket");
 		cancelTicketButton.setForeground(Color.WHITE);
 		cancelTicketButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		/**
+		 * When cancel ticket button is pressed, change the view to cancel ticket page
+		 */
 		cancelTicketButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				CancelTicketPage cancelTicketPage = new CancelTicketPage(frame,backend);
+				CancelTicketPage cancelTicketPage = new CancelTicketPage(frame, backend);
 				frame.setContentPane(cancelTicketPage);
 				frame.revalidate();
 
@@ -148,6 +151,11 @@ public class HomePage extends JPanel {
 		AddToCartButton.setToolTipText("Add To Cart");
 		AddToCartButton.setForeground(Color.WHITE);
 		AddToCartButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		/**
+		 * When add to cart button is pressed, pull all information from fields and
+		 * verify if user input was valid. If valid and unique inputs, add the selected
+		 * showtime combo to user cart.
+		 */
 		AddToCartButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -273,6 +281,10 @@ public class HomePage extends JPanel {
 		showtimeSelectComboBox.setBounds(900, 180, 200, 28);
 		showtimeSelectComboBox.setOpaque(true);
 		showtimeSelectComboBox.setVisible(false);
+		/**
+		 * From the dropdown menu, save what the user has selected and update the screen
+		 * accordingly
+		 */
 		showtimeSelectComboBox.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -286,9 +298,10 @@ public class HomePage extends JPanel {
 					currentShowtime = backend.getDataController().findShowtime(currentMovie, currentTheatre, tempDate);
 					if (currentShowtime != null) {
 						System.out.println("Showtime found");
-						showtimeDetailsLabel.setText("Time: " + currentShowtime.getHour() + ":" + currentShowtime.getMinutes()
-								+ "\nAuditorium: " + currentShowtime.getAuditorium().getAuditoriumID()
-								+ "\nNumber of Avaliable Seats: " + currentShowtime.getTotalAvaliableSeats());
+						showtimeDetailsLabel
+								.setText("Time: " + currentShowtime.getHour() + ":" + currentShowtime.getMinutes()
+										+ "\nAuditorium: " + currentShowtime.getAuditorium().getAuditoriumID()
+										+ "\nNumber of Avaliable Seats: " + currentShowtime.getTotalAvaliableSeats());
 						showtimeDetailsLabel.setVisible(true);
 						rowTextField.setVisible(true);
 						colTextField.setVisible(true);
@@ -375,6 +388,10 @@ public class HomePage extends JPanel {
 		theatreSelectComboBox.setBounds(600, 180, 200, 28);
 		theatreSelectComboBox.setOpaque(true);
 		theatreSelectComboBox.setVisible(false);
+		/**
+		 * From the dropdown menu, save what the user has selected and update the screen
+		 * accordingly
+		 */
 		theatreSelectComboBox.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -467,6 +484,10 @@ public class HomePage extends JPanel {
 		movieSelectComboBox.setBackground(Color.WHITE);
 		movieSelectComboBox.setBounds(85, 180, 311, 28);
 		movieSelectComboBox.setOpaque(true);
+		/**
+		 * From the dropdown menu, save what the user has selected and update the screen
+		 * accordingly
+		 */
 		movieSelectComboBox.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -524,6 +545,10 @@ public class HomePage extends JPanel {
 		logoutButton = new JLabel("");
 		logoutButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		logoutButton.setToolTipText("Logout");
+		/**
+		 * When the logout button is pressed, sign the user out and change the view to
+		 * the login page
+		 */
 		logoutButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -541,6 +566,9 @@ public class HomePage extends JPanel {
 		cartButton = new JLabel("");
 		cartButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		cartButton.setToolTipText("View Cart");
+		/**
+		 * When the cart button is pressed, change the view to the cart page
+		 */
 		cartButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

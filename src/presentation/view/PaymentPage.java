@@ -127,6 +127,9 @@ public class PaymentPage extends JPanel {
 		// CREATE BACK BUTTON
 		backButton = new JLabel("");
 		backButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		/**
+		 * When back button is pressed, set the view to cart page
+		 */
 		backButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -188,7 +191,7 @@ public class PaymentPage extends JPanel {
 		nameTextField.setColumns(10);
 		nameTextField.setOpaque(true);
 		add(nameTextField);
-		
+
 		// CREATE EMAIL TEXT FIELD
 		emailTextField = new JTextField();
 		emailTextField.setBounds(561, 235, 254, 28);
@@ -201,7 +204,7 @@ public class PaymentPage extends JPanel {
 		emailTextField.setColumns(10);
 		emailTextField.setOpaque(true);
 		add(emailTextField);
-		
+
 		// CREATE CARDSVS TEXT FIELD
 		cardSVSPasswordField = new JPasswordField();
 		cardSVSPasswordField.setBounds(901, 350, 50, 28);
@@ -237,6 +240,7 @@ public class PaymentPage extends JPanel {
 		cardNumberLabel.setForeground(Color.WHITE);
 		cardNumberLabel.setFont(new Font("Arial", Font.PLAIN, 16));
 		add(cardNumberLabel);
+
 		// CREATE VOUCHER CODE TEXT LABEL
 		voucherLabel = new JLabel("Voucher Code");
 		voucherLabel.setBounds(634, 435, 108, 14);
@@ -244,6 +248,7 @@ public class PaymentPage extends JPanel {
 		voucherLabel.setForeground(Color.WHITE);
 		voucherLabel.setFont(new Font("Arial", Font.PLAIN, 16));
 		add(voucherLabel);
+
 		// CREATE CustomerName CODE TEXT LABEL
 		nameLabel = new JLabel("Full Name");
 		nameLabel.setBounds(634, 280, 108, 14);
@@ -251,6 +256,7 @@ public class PaymentPage extends JPanel {
 		nameLabel.setForeground(Color.WHITE);
 		nameLabel.setFont(new Font("Arial", Font.PLAIN, 16));
 		add(nameLabel);
+
 		// CREATE email CODE TEXT LABEL
 		emailLabel = new JLabel("Email ID");
 		emailLabel.setBounds(634, 220, 108, 14);
@@ -258,6 +264,7 @@ public class PaymentPage extends JPanel {
 		emailLabel.setForeground(Color.WHITE);
 		emailLabel.setFont(new Font("Arial", Font.PLAIN, 16));
 		add(emailLabel);
+
 		// CREATE CARD SVS TEXT LABEL
 		cardSVSLabel = new JLabel("CCV");
 		cardSVSLabel.setBounds(901, 335, 50, 14);
@@ -265,6 +272,7 @@ public class PaymentPage extends JPanel {
 		cardSVSLabel.setForeground(Color.WHITE);
 		cardSVSLabel.setFont(new Font("Arial", Font.PLAIN, 16));
 		add(cardSVSLabel);
+
 		// CREATE CARDEXPIRATIONDATE TEXT LABEL
 		cardExpirationDateLabel = new JLabel("EXP");
 		cardExpirationDateLabel.setBounds(840, 335, 38, 14);
@@ -272,13 +280,15 @@ public class PaymentPage extends JPanel {
 		cardExpirationDateLabel.setForeground(Color.WHITE);
 		cardExpirationDateLabel.setFont(new Font("Arial", Font.PLAIN, 16));
 		add(cardExpirationDateLabel);
+
 		// CREATE CARD ERROR TEXT LABEL
 		JLabel invalidCardErrorLabel = new JLabel("<html>" + "The card was declined." + "</html>");
 		invalidCardErrorLabel.setBounds(565, 236, 254, 45);
 		invalidCardErrorLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		invalidCardErrorLabel.setForeground(Color.RED);
 		invalidCardErrorLabel.setFont(new Font("Arial", Font.PLAIN, 13));
-		add(invalidCardErrorLabel);		
+		add(invalidCardErrorLabel);
+
 		// CREATE VOUCHER ERROR TEXT LABEL
 		JLabel invalidVoucherErrorLabel = new JLabel("<html>" + "The voucher was declined." + "</html>");
 		invalidVoucherErrorLabel.setBounds(565, 236, 254, 45);
@@ -294,11 +304,16 @@ public class PaymentPage extends JPanel {
 		registerButton = new JLabel("");
 		registerButton.setToolTipText("Payment");
 		registerButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		/**
+		 * When register button is pressed, pull all payment information from text
+		 * fields. Validate all user input and then switch to the home screen after
+		 * confirming purchase.
+		 */
 		registerButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				System.out.println("Payment details entered");
-				String cardType = (String)cardTypeSelectComboBox.getSelectedItem();
+				String cardType = (String) cardTypeSelectComboBox.getSelectedItem();
 				String cardNum = cardNumberTextField.getText();
 				String cardExp = cardExpirationDateTextField.getText();
 				String cardCCV = String.valueOf(cardSVSPasswordField.getPassword());
@@ -309,48 +324,48 @@ public class PaymentPage extends JPanel {
 				boolean cardValid = false;
 				invalidCardErrorLabel.setVisible(false);
 				invalidVoucherErrorLabel.setVisible(false);
-				//ArrayList<Ticket> ticketsCreated = new ArrayList<Ticket>();
-				
+				// ArrayList<Ticket> ticketsCreated = new ArrayList<Ticket>();
+
 				// Validate Card info
-				if(backend.getDataController().getInst().verifyCardInfo(name, cardType, cardNum, cardCCV, cardExp)) {
+				if (backend.getDataController().getInst().verifyCardInfo(name, cardType, cardNum, cardCCV, cardExp)) {
 					cardValid = true;
-				}
-				else {
+				} else {
 					invalidCardErrorLabel.setVisible(true);
 				}
 				// Validate voucher
-				if(voucher != "") {
-					for(int i=0; i<backend.getDataController().getVoucherList().size(); i++) {
-						if(voucher == backend.getDataController().getVoucherList().get(i).getVoucherCode()) {
-							if(!backend.getDataController().getVoucherList().get(i).isUsed()) {
+				if (voucher != "") {
+					for (int i = 0; i < backend.getDataController().getVoucherList().size(); i++) {
+						if (voucher == backend.getDataController().getVoucherList().get(i).getVoucherCode()) {
+							if (!backend.getDataController().getVoucherList().get(i).isUsed()) {
 								voucherValid = true;
-							}
-							else {
+							} else {
 								invalidVoucherErrorLabel.setVisible(true);
 							}
 						}
 					}
-				}
-				else {
+				} else {
 					voucherValid = true;
 				}
-				
+
 				// All information is valid
-				if(voucherValid && cardValid) {
+				if (voucherValid && cardValid) {
 					System.out.println("entered payment");
-					//Cart c = backend.getCurrentUser().getCart();
-					backend.getCurrentUser().getCart().setPayment(new Payment(backend.getCurrentUser().getCart().getPayment().getAmount(), new BankingInfo(name, cardType, cardNum, cardCCV, cardExp)));
-					for(int i=0; i<backend.getCurrentUser().getCart().getItems_in_cart().size(); i++) {
+					// Cart c = backend.getCurrentUser().getCart();
+					backend.getCurrentUser().getCart()
+							.setPayment(new Payment(backend.getCurrentUser().getCart().getPayment().getAmount(),
+									new BankingInfo(name, cardType, cardNum, cardCCV, cardExp)));
+					for (int i = 0; i < backend.getCurrentUser().getCart().getItems_in_cart().size(); i++) {
 						Movie movie = backend.getCurrentUser().getCart().getItems_in_cart().get(i).getBookedMovie();
-						Showtime showtime = backend.getCurrentUser().getCart().getItems_in_cart().get(i).getBookedTime();
+						Showtime showtime = backend.getCurrentUser().getCart().getItems_in_cart().get(i)
+								.getBookedTime();
 						Seat seat = backend.getCurrentUser().getCart().getItems_in_cart().get(i).getBookedSeat();
 						Ticket t = new Ticket(backend.getCurrentUser().getCart().getPayment(), movie, showtime, seat);
-						//ticketsCreated.add(t);
+						// ticketsCreated.add(t);
 						t.emailTicket(email);
 						backend.getDataController().addTicket(t);
-					}						
-					/* Add prompt to show ticket and success message*/
-					
+					}
+					/* Add prompt to show ticket and success message */
+
 					HomePage homePanel = new HomePage(frame, backend);
 					frame.setContentPane(homePanel);
 				}

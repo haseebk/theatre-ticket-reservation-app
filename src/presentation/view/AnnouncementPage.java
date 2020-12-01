@@ -62,10 +62,7 @@ public class AnnouncementPage extends JPanel {
 		add(welcomeLabel);
 
 		// CREATE MOVIE CARD VIEW
-		JPanel imagePanels = new JPanel();
-//		imagePanels.setBounds(20, 87, 1304, 560);
-		
-
+		JPanel imagePanels = new JPanel();		
 		ArrayList<Announcement> announcementItems = backend.getDataController().getAnnouncementList();
 		JLabel[] announcementCard = new JLabel[announcementItems.size()];
 		JLabel[] announcementDetails = new JLabel[announcementItems.size()];

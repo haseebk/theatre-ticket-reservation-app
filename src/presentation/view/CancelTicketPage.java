@@ -32,7 +32,7 @@ public class CancelTicketPage extends JPanel {
 	/**
 	 * ticketCodeTextField text field
 	 */
-	private JTextField ticketCodeTextField ;
+	private JTextField ticketCodeTextField;
 	/**
 	 * Display text label "cardNumberField"
 	 */
@@ -49,6 +49,9 @@ public class CancelTicketPage extends JPanel {
 		// CREATE BACK BUTTON
 		backButton = new JLabel("");
 		backButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		/**
+		 * When the back button is pressed, change the view to the home page
+		 */
 		backButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -72,9 +75,7 @@ public class CancelTicketPage extends JPanel {
 		add(ticketCodeTextField);
 
 		// CREATE CANCEL SUCCESS LABEL
-		cancelSuccessLabel = new JLabel("<html>"
-				+ "Successfully cancelled the ticket"
-				+ "</html>");
+		cancelSuccessLabel = new JLabel("<html>" + "Successfully cancelled the ticket" + "</html>");
 		cancelSuccessLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		cancelSuccessLabel.setForeground(Color.RED);
 		cancelSuccessLabel.setFont(new Font("Arial", Font.PLAIN, 13));
@@ -83,9 +84,7 @@ public class CancelTicketPage extends JPanel {
 		add(cancelSuccessLabel);
 
 		// CREATE CANCEL ERROR LABEL
-		cancelErrorLabel = new JLabel("<html>"
-				+ "Could not find the ticket"
-				+ "</html>");
+		cancelErrorLabel = new JLabel("<html>" + "Could not find the ticket" + "</html>");
 		cancelErrorLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		cancelErrorLabel.setForeground(Color.RED);
 		cancelErrorLabel.setFont(new Font("Arial", Font.PLAIN, 13));
@@ -109,6 +108,12 @@ public class CancelTicketPage extends JPanel {
 		registerButton = new JLabel("");
 		registerButton.setToolTipText("Cancel Ticket");
 		registerButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		/**
+		 * When the cancel ticket button is pressed, verify the user code and find a
+		 * matching ticket to cancel. If a ticket is found, then cancel and provide the
+		 * user with a voucher. If no ticket is found, accordingly output an error
+		 * message.
+		 */
 		registerButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -116,16 +121,18 @@ public class CancelTicketPage extends JPanel {
 				cancelSuccessLabel.setVisible(false);
 				cancelErrorLabel.setVisible(false);
 				int t = backend.getDataController().checkTicket(Integer.parseInt(temp));
-				if(t != -1) {
-					if(backend.getCurrentGuestUser() != null){
-						Voucher newVoucher = new Voucher(backend.getDataController().getTicketList().get(t).getPayment().getAmount()*0.85);
+				if (t != -1) {
+					if (backend.getCurrentGuestUser() != null) {
+						Voucher newVoucher = new Voucher(
+								backend.getDataController().getTicketList().get(t).getPayment().getAmount() * 0.85);
 						backend.getDataController().addVoucher(newVoucher);
-						JOptionPane.showMessageDialog(frame,"Here is your voucher code: " + newVoucher.getVoucherCode() + " redeemable for $" + newVoucher.getAmount());
+						JOptionPane.showMessageDialog(frame, "Here is your voucher code: " + newVoucher.getVoucherCode()
+								+ " redeemable for $" + newVoucher.getAmount());
 					}
 					backend.getDataController().getTicketList().get(t).getSeat().vacateSeat();
 					backend.getDataController().removeTicket(backend.getDataController().getTicketList().get(t));
 					cancelSuccessLabel.setVisible(true);
-				}else{
+				} else {
 					cancelErrorLabel.setVisible(true);
 				}
 				frame.validate();
