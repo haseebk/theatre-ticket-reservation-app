@@ -3,6 +3,7 @@ package domain.model;
 import database.DataController;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 public class BackEnd implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -42,8 +43,6 @@ public class BackEnd implements Serializable {
 	public void userLogout() {
 		currentUser = null;
 	}
-<<<<<<< HEAD
-=======
 	
 	public void registerUser(String username, String password, String f_name, String l_name, String email, String name, String cardType, String cardNum, String cardSVS, String expirationDate) {
 		LocalDate todaysDate = LocalDate.now();
@@ -60,8 +59,6 @@ public class BackEnd implements Serializable {
 		}
 		return false;
 	}
-
->>>>>>> d3dc2c3ec2fe3566c7dcdcc94436918732b44c1b
 
 	// Getters and setters
 	public RegisteredUser getCurrentUser() {
