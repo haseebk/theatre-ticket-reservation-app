@@ -634,6 +634,7 @@ public class HomePage extends JPanel {
 				selectTheatreLabel.setVisible(true);
 				noTheatreSelectedLabel.setVisible(true);
 				posterCard.setVisible(true);
+				movieSynopsisLabel.setVisible(true);
 
 				DefaultComboBoxModel model = (DefaultComboBoxModel) theatreSelectComboBox.getModel();
 				model.removeAllElements();

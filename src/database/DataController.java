@@ -416,6 +416,20 @@ public class DataController {
 		return -1;
 	}
 
+	public Voucher redeemVoucher(String voucherCode){
+		for (int i = 0; i < getVoucherList().size(); i++) {
+			if (voucherCode.compareTo(getVoucherList().get(i).getVoucherCode()) == 0) {
+				if (!getVoucherList().get(i).isUsed()) {
+					getVoucherList().get(i).setUsed(true);
+					return getVoucherList().get(i);
+				} else {
+					return null;
+				}
+			}
+		}
+		return null;
+	}
+
 	public FinancialInstitution getInst() {
 		return inst;
 	}

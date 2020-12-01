@@ -9,6 +9,7 @@ public class Cart {
 
 	public Cart() {
 		items_in_cart = new ArrayList<Booking>();
+		payment = null;
 		cartCost = 0;
 	}
 

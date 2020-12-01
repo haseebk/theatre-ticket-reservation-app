@@ -63,7 +63,7 @@ public class CartPage extends JPanel {
 		cartTotalLabel.setForeground(Color.WHITE);
 		cartTotalLabel.setFont(new Font("Arial", Font.PLAIN, 25));
 		cartTotalLabel.setBounds(26, 679, 571, 50);
-		cartTotalLabel.setText("Cart total: $" + backend.getCurrentUser().getCart().calculateCartCost());
+		cartTotalLabel.setText("Cart total: $" + String.format("%.2f",backend.getCurrentUser().getCart().calculateCartCost()));
 		add(cartTotalLabel);
 
 		// CREATE CHECKOUT BUTTON
@@ -83,6 +83,11 @@ public class CartPage extends JPanel {
 				frame.revalidate();
 			}
 		});
+		if(backend.getCurrentUser().getCart().getItems_in_cart().size() == 0){
+			checkoutButton.setVisible(false);
+		}else{
+			checkoutButton.setVisible(true);
+		}
 		add(checkoutButton);
 
 		// CREATE MOVIE CARD VIEW

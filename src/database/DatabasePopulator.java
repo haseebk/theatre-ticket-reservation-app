@@ -38,8 +38,8 @@ public class DatabasePopulator {
 		loadTheatres();
 		// loadShowtimes();
 		loadAnnouncements();
-		loadUsers();
 		loadTickets();
+		loadUsers();
 		loadVouchers();
 		loadInst();
 	}
@@ -52,6 +52,7 @@ public class DatabasePopulator {
 		inst.addAccount(b3);
 		inst.addAccount(b4);
 		inst.addAccount(b5);
+		dbController.setInst(inst);
 	}
 	
 	public void loadMovies() {
@@ -156,8 +157,6 @@ public class DatabasePopulator {
 	}
 
 	public void loadUsers() {
-		//b1 = new BankingInfo("Vaibhav Kapoor", "MASTER", "1111111111111111", "111", "01/22");
-		//b2 = new BankingInfo("William Kerr", "VISA", "2222222222222222", "222", "02/22");
 		b3 = new BankingInfo("Eddie Kim", "VISA", "3333333333333333", "333", "03/22");
 		b4 = new BankingInfo("Haseeb Khan", "MASTER", "4444444444444444", "444", "04/22");
 		Date d1 = new Date(1, 4, 2020);

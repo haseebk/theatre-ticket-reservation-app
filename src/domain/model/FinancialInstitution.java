@@ -30,10 +30,17 @@ public class FinancialInstitution {
 	}
 	
 	public boolean verifyCardInfo(String name, String type, String num, String svs, String exp) {
-		Iterator<BankingInfo> it = bankAccounts.iterator(); 
+		Iterator<BankingInfo> it = bankAccounts.iterator();
+		System.out.println("Verifying Card: " +  bankAccounts.size());
         while (it.hasNext()) {
         	BankingInfo currentAccount = (BankingInfo)it.next();
-            if(name == currentAccount.getCustomerName() && type == currentAccount.getCardType() && num == currentAccount.getCardNumber() && svs == currentAccount.getCardSVS() && exp == currentAccount.getCardExpirationDate()) {
+        	System.out.println("\nVerifying...");
+        	System.out.println(name.compareTo(currentAccount.getCustomerName())+ ", " + type.compareTo(currentAccount.getCardType())
+					+ ", " + num.compareTo(currentAccount.getCardNumber())+ ", " + svs.compareTo(currentAccount.getCardSVS() )
+					+ ", " + exp.compareTo(currentAccount.getCardExpirationDate()));
+            if(name.compareTo(currentAccount.getCustomerName()) == 0 && type.compareTo(currentAccount.getCardType()) == 0
+					&& num.compareTo(currentAccount.getCardNumber()) == 0 && svs.compareTo(currentAccount.getCardSVS() ) == 0
+					&& exp.compareTo(currentAccount.getCardExpirationDate()) == 0) {
             	return true;
             }
         }

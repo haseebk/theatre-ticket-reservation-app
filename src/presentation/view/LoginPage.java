@@ -31,6 +31,11 @@ public class LoginPage extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Title Text Field
+	 */
+	private JLabel titleLabel;
 	/**
 	 * User name text field for user login input
 	 */
@@ -59,6 +64,14 @@ public class LoginPage extends JPanel {
 	 */
 	public LoginPage(JFrame frame, BackEnd backend) {
 		setLayout(null);
+
+		// CREATE TITLE TEXT LABEL
+		titleLabel = new JLabel("MOVIE THEATRE TITLE");
+		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		titleLabel.setForeground(Color.WHITE);
+		titleLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+		titleLabel.setBounds(500, 250, 350, 30);
+		add(titleLabel);
 
 		// CREATE GUEST LOGIN BUTTON
 		guestButton = new JLabel("CONTINUE AS GUEST");
