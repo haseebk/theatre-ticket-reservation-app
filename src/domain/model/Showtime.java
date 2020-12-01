@@ -140,6 +140,6 @@ public class Showtime {
 
 	@Override
 	public String toString() {
-		return String.format(showDate.month + " " + showDate.day + ", " + showDate.year);
+		return String.format(showDate.toString());
 	}
 }

@@ -177,9 +177,11 @@ public class DatabasePopulator {
 
 	public void loadAnnouncements() {
 		Date da1 = new Date(29, 11, 2020);
-		Date da2 = new Date(8, 12, 2020);
-		Announcement an1 = new Announcement(da1, "This is the first announcement.");
-		Announcement an2 = new Announcement(da2, "This is the second announcement.");
+		Date da2 = new Date(20, 12, 2020);
+		Date da3 = new Date(15, 11, 2020);
+		Date da4 = new Date(27, 11, 2020);
+		Announcement an1 = new Announcement(da1,da2, "This is the first announcement.");
+		Announcement an2 = new Announcement(da3,da4, "This is the second announcement.");
 
 		dbController.addAnnouncement(an1);
 		dbController.addAnnouncement(an2);
