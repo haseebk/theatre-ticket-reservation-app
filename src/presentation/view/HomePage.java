@@ -89,9 +89,9 @@ public class HomePage extends JPanel {
 
 			}
 		});
-		cancelTicketButton.setBounds(1100, 5, 100, 50);
+		cancelTicketButton.setBounds(1366 - 32 - 90 - 60, 14, 32, 32);
 		cancelTicketButton.setVisible(true);
-		cancelTicketButton.setIcon(new ImageIcon(LoginPage.class.getResource("/enterButton.png")));
+		cancelTicketButton.setIcon(new ImageIcon(LoginPage.class.getResource("/refundButton.png")));
 		add(cancelTicketButton);
 
 		// =========================================
