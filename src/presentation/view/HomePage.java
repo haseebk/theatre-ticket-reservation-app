@@ -89,9 +89,9 @@ public class HomePage extends JPanel {
 
 			}
 		});
-		cancelTicketButton.setBounds(1100, 5, 100, 50);
+		cancelTicketButton.setBounds(1366 - 32 - 90 - 60, 14, 32, 32);
 		cancelTicketButton.setVisible(true);
-		cancelTicketButton.setIcon(new ImageIcon(LoginPage.class.getResource("/enterButton.png")));
+		cancelTicketButton.setIcon(new ImageIcon(LoginPage.class.getResource("/refundButton.png")));
 		add(cancelTicketButton);
 
 		// =========================================
@@ -155,15 +155,16 @@ public class HomePage extends JPanel {
 					int tempRow = Integer.parseInt(rowTextField.getText());
 					int tempCol = Integer.parseInt(colTextField.getText());
 					if (tempRow < currentShowtime.getRow() && tempCol < currentShowtime.getCol()) {
-						//boolean booking = currentShowtime.bookSeat(tempRow, tempCol);
-						boolean avaliable = currentShowtime.getSeatAvaliability(tempRow,tempCol);
+						// boolean booking = currentShowtime.bookSeat(tempRow, tempCol);
+						boolean avaliable = currentShowtime.getSeatAvaliability(tempRow, tempCol);
 						if (avaliable == false) {
 							System.out.println("Added ticket To Cart for:\nMovie: " + currentMovie.getTitle()
 									+ "\nTheatre: " + currentTheatre.getT_name() + "\nDate: "
-									+ currentShowtime.getShowDate().getDate() + "\nSeat Row: " + tempRow
+									+ currentShowtime.getShowDate().toString() + "\nSeat Row: " + tempRow
 									+ ", Seat Column: " + tempCol);
 
-							backend.getCurrentUser().getCart().addToCart(new Booking(currentMovie,currentShowtime,currentShowtime.getSeats()[tempRow][tempCol]));
+							backend.getCurrentUser().getCart().addToCart(new Booking(currentMovie, currentShowtime,
+									currentShowtime.getSeats()[tempRow][tempCol]));
 
 							String tempGraphic = "";
 							for (int i = 0; i < currentShowtime.getRow(); i++) {
@@ -172,15 +173,20 @@ public class HomePage extends JPanel {
 										tempGraphic += "X  ";
 									} else if (backend.getCurrentUser() != null) {
 										boolean tempFlag = false;
-										for(int k = 0; k < backend.getCurrentUser().getCart().getItems_in_cart().size(); k++) {
-											if (backend.getCurrentUser().getCart().getItems_in_cart().get(k).getBookedSeat().getRow() == i &&
-													backend.getCurrentUser().getCart().getItems_in_cart().get(k).getBookedSeat().getSeatNum() == j &&
-													backend.getCurrentUser().getCart().getItems_in_cart().get(k).getBookedTime().getShowtimeID() == currentShowtime.getShowtimeID()) {
+										for (int k = 0; k < backend.getCurrentUser().getCart().getItems_in_cart()
+												.size(); k++) {
+											if (backend.getCurrentUser().getCart().getItems_in_cart().get(k)
+													.getBookedSeat().getRow() == i
+													&& backend.getCurrentUser().getCart().getItems_in_cart().get(k)
+															.getBookedSeat().getSeatNum() == j
+													&& backend.getCurrentUser().getCart().getItems_in_cart().get(k)
+															.getBookedTime()
+															.getShowtimeID() == currentShowtime.getShowtimeID()) {
 												tempGraphic += "-  ";
 												tempFlag = true;
 											}
 										}
-										if(tempFlag == false){
+										if (tempFlag == false) {
 											tempGraphic += "O  ";
 										}
 									} else {
@@ -205,7 +211,7 @@ public class HomePage extends JPanel {
 		});
 		AddToCartButton.setBounds(797, 625, 254, 50);
 		AddToCartButton.setVisible(false);
-		AddToCartButton.setIcon(new ImageIcon(LoginPage.class.getResource("/enterButton.png")));
+		AddToCartButton.setIcon(new ImageIcon(LoginPage.class.getResource("/addToCartButton.png")));
 		add(AddToCartButton);
 
 		// ==========================================
@@ -275,12 +281,13 @@ public class HomePage extends JPanel {
 				noShowTimeSelectedLabel.setVisible(false);
 				if (tempString != null) {
 					String[] tempStringArray = tempString.split("/");
-					Date tempDate = new Date(Integer.parseInt(tempStringArray[1]), tempStringArray[0],
+					Date tempDate = new Date(Integer.parseInt(tempStringArray[0]), Integer.parseInt(tempStringArray[1]),
 							Integer.parseInt(tempStringArray[2]));
 					currentShowtime = backend.getDataController().findShowtime(currentMovie, currentTheatre, tempDate);
 					if (currentShowtime != null) {
 						System.out.println("Showtime found");
-						showtimeDetailsLabel.setText("Auditorium: " + currentShowtime.getAuditorium().getAuditoriumID()
+						showtimeDetailsLabel.setText("Time: " + currentShowtime.getHour() + ":" + currentShowtime.getMinutes()
+								+ "\nAuditorium: " + currentShowtime.getAuditorium().getAuditoriumID()
 								+ "\nNumber of Avaliable Seats: " + currentShowtime.getTotalAvaliableSeats());
 						showtimeDetailsLabel.setVisible(true);
 						rowTextField.setVisible(true);
@@ -294,17 +301,22 @@ public class HomePage extends JPanel {
 							for (int j = 0; j < currentShowtime.getCol(); j++) {
 								if (currentShowtime.getSeatAvaliability(i, j) == true) {
 									tempGraphic += "X  ";
-								}else if (backend.getCurrentUser() != null) {
+								} else if (backend.getCurrentUser() != null) {
 									boolean tempFlag = false;
-									for(int k = 0; k < backend.getCurrentUser().getCart().getItems_in_cart().size(); k++) {
-										if (backend.getCurrentUser().getCart().getItems_in_cart().get(k).getBookedSeat().getRow() == i &&
-												backend.getCurrentUser().getCart().getItems_in_cart().get(k).getBookedSeat().getSeatNum() == j &&
-												backend.getCurrentUser().getCart().getItems_in_cart().get(k).getBookedTime().getShowtimeID() == currentShowtime.getShowtimeID()) {
+									for (int k = 0; k < backend.getCurrentUser().getCart().getItems_in_cart()
+											.size(); k++) {
+										if (backend.getCurrentUser().getCart().getItems_in_cart().get(k).getBookedSeat()
+												.getRow() == i
+												&& backend.getCurrentUser().getCart().getItems_in_cart().get(k)
+														.getBookedSeat().getSeatNum() == j
+												&& backend.getCurrentUser().getCart().getItems_in_cart().get(k)
+														.getBookedTime()
+														.getShowtimeID() == currentShowtime.getShowtimeID()) {
 											tempGraphic += "-  ";
 											tempFlag = true;
 										}
 									}
-									if(tempFlag == false){
+									if (tempFlag == false) {
 										tempGraphic += "O  ";
 									}
 								} else {
@@ -385,8 +397,8 @@ public class HomePage extends JPanel {
 						ArrayList<Showtime> showtimeList = backend.getDataController().findAllShowtime(currentMovie,
 								currentTheatre);
 						for (int i = 0; i < showtimeList.size(); i++) {
-							System.out.println(showtimeList.get(i).getShowDate().getDate());
-							model2.addElement(showtimeList.get(i).getShowDate().getDate());
+							System.out.println(showtimeList.get(i).getShowDate().toString());
+							model2.addElement(showtimeList.get(i).getShowDate().toString());
 						}
 						showtimeSelectComboBox.setModel(model2);
 						showtimeSelectComboBox.setVisible(true);
@@ -500,7 +512,7 @@ public class HomePage extends JPanel {
 			welcomeLabel = new JLabel("Welcome, " + backend.getCurrentRegisteredUser().getF_name() + " "
 					+ backend.getCurrentRegisteredUser().getL_name() + "!");
 		} else {
-			welcomeLabel = new JLabel("Welcome Guest!");
+			welcomeLabel = new JLabel("Welcome, Guest!");
 		}
 		welcomeLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		welcomeLabel.setForeground(Color.WHITE);
@@ -550,6 +562,9 @@ public class HomePage extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				System.out.println("Announcement");
+				AnnouncementPage announcementPanel = new AnnouncementPage(frame, backend);
+				frame.setContentPane(announcementPanel);
+				frame.revalidate();
 			}
 		});
 		announcementButton.setBounds(1366 - 32 - 90, 14, 32, 32);

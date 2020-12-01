@@ -3,25 +3,19 @@ package domain.model;
 import domain.model.Date;
 
 public class Announcement {
-	private Date announceDate;
+	private Date privateAnnounceDate;
+
+	private Date publicAnnounceDate;
 	private String announceMessage;
 
-	public Announcement(Date d, String m) {
-		announceDate = d;
+	private Movie movieAnnouncement;
+
+	public Announcement(Date privateD, Date publicD, String m, Movie mov) {
+		privateAnnounceDate = privateD;
+		publicAnnounceDate = publicD;
 		announceMessage = m;
-	}
-
-	public Announcement(int day, String month, int year, String m) {
-		announceDate = new Date(day, month, year);
-		announceMessage = m;
-	}
-
-	public Date getAnnounceDate() {
-		return announceDate;
-	}
-
-	public void setAnnounceDate(Date d) {
-		announceDate = d;
+		movieAnnouncement = mov;
+		mov.setMovieAnnouncement(this);
 	}
 
 	public String getAnnounceMessage() {
@@ -31,4 +25,24 @@ public class Announcement {
 	public void setAnnounceMessage(String m) {
 		announceMessage = m;
 	}
+
+	public Date getPrivateAnnounceDate() { return privateAnnounceDate; }
+
+	public void setPrivateAnnounceDate(Date privateAnnounceDate) { this.privateAnnounceDate = privateAnnounceDate; }
+
+	public Date getPublicAnnounceDate() { return publicAnnounceDate; }
+
+	public void setPublicAnnounceDate(Date publicAnnounceDate) { this.publicAnnounceDate = publicAnnounceDate; }
+	
+	@Override
+	public String toString() {
+		if(publicAnnounceDate.beforeCurrentDate() == true) {
+			return String.format(getPublicAnnounceDate().toString() + "        Public Announcement: " + getAnnounceMessage());
+
+		}else if(privateAnnounceDate.beforeCurrentDate() == true) {
+			return String.format(getPrivateAnnounceDate().toString() + "        Private Announcement: " + getAnnounceMessage());
+		}
+		return "Not yet announced";
+	}
+	
 }

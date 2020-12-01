@@ -2,12 +2,20 @@ package database;
 
 import domain.model.Movie;
 import domain.model.RegisteredUser;
+import domain.model.Seat;
 import domain.model.BankingInfo;
 import domain.model.Date;
 import domain.model.FinancialInstitution;
 import domain.model.Showtime;
 import domain.model.Theatre;
 import domain.model.Auditorium;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import domain.model.Ticket;
 import domain.model.Announcement;
@@ -16,176 +24,238 @@ import domain.model.Voucher;
 
 public class DatabasePopulator {
 	DataController dbController;
-	private Movie spiderverse;
+	/*private Movie spiderverse;
 	private Movie getout;
 	private Movie hereditary;
 	private Movie paddington;
 	private Showtime s1;
 	private Showtime s2;
-	private FinancialInstitution inst;
-	private BankingInfo b1;
-	private BankingInfo b2;
-	private BankingInfo b3;
-	private BankingInfo b4;
-	
+	private FinancialInstitution inst;*/
 
 	public DatabasePopulator() {
 		dbController = DataController.getOnlyInstance();
 	}
 
-	public void loadDatabase() {
+	public void loadDatabase() throws IOException{
 		loadMovies();
 		loadTheatres();
-		// loadShowtimes();
+		loadShowtimes();
 		loadAnnouncements();
-		loadUsers();
+		loadBankAccount();
+		loadUsers(); 
 		loadTickets();
 		loadVouchers();
-		loadInst();
 	}
 
-	public void loadInst() {
-		inst = new FinancialInstitution("Cash Money Bank");
-		BankingInfo b5 = new BankingInfo("Random Person", "VISA", "5555555555555555", "555", "05/22");
-		inst.addAccount(b1);
-		inst.addAccount(b2);
-		inst.addAccount(b3);
-		inst.addAccount(b4);
-		inst.addAccount(b5);
-	}
-	
-	public void loadMovies() {
-		String s= "After gaining superpowers from a spider bite, Miles Morales protects the cirty as Spider-Man. Soon, he meets alternate version of himself and gets embroiled in an epic battle to save the multiverse.";
-		String g = "Chris, an African-American man, decides to visit his Caucasian girlfriend's parents during a weekend getaway. Although they seem normal at first, he is not prepared to experience the horrors ahead.";
-		String h = "When the matriarch of the Graham family passes away, her daughter and grandchildren begin to unravel cryptic and increasingly terrifying secrets about their ancestry, tyring to outrun the sinister fate they have inherited.";
-		String p = "Paddington takes up a job to accumulate enough money to buy the perfect gift for his anunt on her 100th birthday, but it gets stolen.";
-		spiderverse = new Movie("Spider-Man: Into the Spider-Verse", "Action", 2018, "Peter Ramsey", 116, 8.4,
-				"spm-poster-183x268", 12.99, s);
-		getout = new Movie("Get Out", "Thriller", 2017, "Peter Ramsey", 104, 7.7, "get-poster-183x268", 12.99, g);
-		hereditary = new Movie("Hereditary", "Horror", 2018, "Ari Aster", 127, 7.3, "her-poster-183x268",12.99, h);
-		paddington = new Movie("Paddington 2", "Adventure", 2017, "Paul King", 104, 7.8, "pd2-poster-183x268",12.99, p);
-
-		dbController.addMovie(spiderverse);
-		dbController.addMovie(getout);
-		dbController.addMovie(hereditary);
-		dbController.addMovie(paddington);
+	public void loadMovies() throws IOException {
+		
+		FileInputStream fstream = new FileInputStream("data/movie_data.txt");
+		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+		
+		String line;
+		ArrayList<String> argList = new ArrayList<String>();
+		
+		while((line = br.readLine()) != null) {
+			argList.add(line);
+		}
+		fstream.close();
+		
+		for(int i = 0; i < argList.size(); i+=9) {
+			Movie tempMovie = new Movie(argList.get(i), argList.get(i+1), Integer.parseInt(argList.get(i+2)), argList.get(i+3), Integer.parseInt(argList.get(i+4)), 
+												Double.parseDouble(argList.get(i+5)), argList.get(i+6), Double.parseDouble(argList.get(i+7)), argList.get(i+8));
+			dbController.addMovie(tempMovie);
+		}
+		
 	}
 
-	public void loadTheatres() {
+	public void loadTheatres() throws IOException {
 
-		ArrayList<Auditorium> a1 = new ArrayList<Auditorium>(2);
-		ArrayList<Auditorium> a2 = new ArrayList<Auditorium>(2);
-		a1.add(new Auditorium(4, 6));
-		a1.add(new Auditorium(6, 6));
-		a2.add(new Auditorium(9, 7));
-		a2.add(new Auditorium(7, 8));
-
-		Theatre t1 = new Theatre("Theatre 1", 1, a1, "123456789", " Some Address 1");
-		Theatre t2 = new Theatre("Theatre 2", 2, a2, "987654321", "Some Address 2");
-		loadShowtimes(a1, a2);
-
-		a1.get(0).setTheatre(t1);
-		a1.get(1).setTheatre(t1);
-		a2.get(0).setTheatre(t2);
-		a2.get(1).setTheatre(t2);
-
-		dbController.addTheatre(t1);
-		dbController.addTheatre(t2);
+		FileInputStream fstream = new FileInputStream("data/auditorium_data.txt");
+		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+		
+		String line;
+		ArrayList<String> argList = new ArrayList<String>();
+		while((line = br.readLine()) != null) {
+			argList.add(line);
+		}
+		fstream.close();
+		for(int i = 0; i < argList.size(); i+=2) {
+			Auditorium a = new Auditorium(Integer.parseInt(argList.get(i)), Integer.parseInt(argList.get(i+1)));
+			dbController.addAuditorium(a);
+		}
+		argList.clear();
+		
+		fstream = new FileInputStream("data/theatre_data.txt");
+		br = new BufferedReader(new InputStreamReader(fstream));
+		while((line = br.readLine()) != null) {
+			argList.add(line);
+		}
+		fstream.close();
+		for(int i = 0; i < argList.size(); i+=3) {
+			ArrayList<Auditorium> a1 = dbController.getAuditoriumList();
+			Theatre t = new Theatre(argList.get(i),1000+i, a1, argList.get(i+1), argList.get(i+2));
+			dbController.addTheatre(t);
+		}
 	}
 
-	public void loadShowtimes(ArrayList<Auditorium> x, ArrayList<Auditorium> y) {
-		Date d1 = new Date(10, "December", 2020);
-		Date d2 = new Date(12, "December", 2020);
-		Date d3 = new Date(14, "December", 2020);
-		Date d4 = new Date(16, "December", 2020);
+	public void loadShowtimes() throws IOException {
 		
-		s1 = new Showtime(d1, x.get(0), spiderverse);
-		Showtime s11 = new Showtime(d3, x.get(0), spiderverse);
+		ArrayList<Date> d = new ArrayList<Date>();
+		FileInputStream fstream = new FileInputStream("data/showtime_date.txt");
+		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 		
-		s2 = new Showtime(d2, x.get(1), getout);
-		Showtime s12 = new Showtime(d4, x.get(0), getout);
+		String line;
+		ArrayList<String> argList = new ArrayList<String>();
+		while((line = br.readLine()) != null) {
+			argList.add(line);
+		}
+		fstream.close();
+		for(int i = 0; i < argList.size(); i+=3) {
+			Date setD = new Date(Integer.parseInt(argList.get(i)), Integer.parseInt(argList.get(i+1)), Integer.parseInt(argList.get(i+2)));
+			d.add(setD);
+		}
+		argList.clear();
+		fstream = new FileInputStream("data/showtime_data.txt");
+		br = new BufferedReader(new InputStreamReader(fstream));
+		while((line = br.readLine()) != null) {
+			argList.add(line);
+		}
+		fstream.close();
 		
-		Showtime s3 = new Showtime(d3, x.get(0), hereditary);
-		Showtime s13 = new Showtime(d1, x.get(1), hereditary);
-		
-		Showtime s4 = new Showtime(d4, x.get(1), paddington);
-		Showtime s9 = new Showtime(d2, x.get(1), paddington);
-		
-		Showtime s5 = new Showtime(d1, y.get(0), spiderverse);
-		Showtime s10 = new Showtime(d3, y.get(1), spiderverse);
-		
-		Showtime s6 = new Showtime(d2, y.get(1), getout);
-		Showtime s14 = new Showtime(d3, y.get(1), getout);
-		
-		Showtime s7 = new Showtime(d3, y.get(0), hereditary);
-		Showtime s15 = new Showtime(d1, y.get(1), hereditary);
-		
-		Showtime s8 = new Showtime(d4, y.get(1), paddington);
-		Showtime s16 = new Showtime(d2, y.get(1), paddington);
-
-		dbController.addShowtime(s1);
-		dbController.addShowtime(s2);
-		dbController.addShowtime(s3);
-		dbController.addShowtime(s4);
-		dbController.addShowtime(s5);
-		dbController.addShowtime(s6);
-		dbController.addShowtime(s7);
-		dbController.addShowtime(s8);
-		dbController.addShowtime(s9);
-		dbController.addShowtime(s10);
-		dbController.addShowtime(s11);
-		dbController.addShowtime(s12);
-		dbController.addShowtime(s13);
-		dbController.addShowtime(s14);
-		dbController.addShowtime(s15);
-		dbController.addShowtime(s16);
+		for(int i = 0; i < dbController.getMovieList().size() ; i++) {
+			for(int j = 0; j < dbController.getAuditoriumList().size(); j++) {
+				for(int k = 0; k < d.size(); k++) {
+				Showtime s = new Showtime(d.get(k), dbController.getAuditoriumList().get(j), dbController.getMovieList().get(i), 
+										Integer.parseInt(argList.get(2*k)), Integer.parseInt(argList.get(2*k+1)));
+				dbController.addShowtime(s);
+				}
+			}
+		}
 	}
 
-	public void loadTickets() {
-		b1 = new BankingInfo("Vaibhav Kapoor", "MASTER", "1111111111111111", "111", "01/22");
-		b2 = new BankingInfo("William Kerr", "VISA", "2222222222222222", "222", "02/22");
-		Payment p1 = new Payment(1, 13.99, b1);
-		Payment p2 = new Payment(2, 15.99, b2);
-		Ticket t1 = new Ticket(12, p1, s1.getMovie(), s1, s1.getSeats()[1][2]);
-		Ticket t2 = new Ticket(13, p2, s2.getMovie(), s2, s2.getSeats()[3][3]);
-		s1.getSeats()[1][2].bookSeat();
-		s2.getSeats()[3][3].bookSeat();
+	public void loadTickets() throws IOException {
 
-		dbController.addTicket(t1);
-		dbController.addTicket(t2);
-	}
-
-	public void loadUsers() {
-		//b1 = new BankingInfo("Vaibhav Kapoor", "MASTER", "1111111111111111", "111", "01/22");
-		//b2 = new BankingInfo("William Kerr", "VISA", "2222222222222222", "222", "02/22");
-		b3 = new BankingInfo("Eddie Kim", "VISA", "3333333333333333", "333", "03/22");
-		b4 = new BankingInfo("Haseeb Khan", "MASTER", "4444444444444444", "444", "04/22");
-		Date d1 = new Date(1, "April", 2020);
-		Date d2 = new Date(2, "May", 2020);
-		Date d3 = new Date(3, "June", 2020);
-		Date d4 = new Date(4, "July", 2020);
-		RegisteredUser u1 = new RegisteredUser("V.Kapoor", "1234", "Vaibhav", "Kapoor", "vk@email.com", b1, d1);
-		RegisteredUser u2 = new RegisteredUser("W.Kerr", "1234", "William", "Kerr", "wk@email.com", b2, d2);
-		RegisteredUser u3 = new RegisteredUser("E.Kim", "1234", "Eddie", "Kim", "ek@email.com", b3, d3);
-		RegisteredUser u4 = new RegisteredUser("H.Khan", "1234", "Haseeb", "Khan", "hk@email.com", b4, d4);
-
-		dbController.addUser(u1);
-		dbController.addUser(u2);
-		dbController.addUser(u3);
-		dbController.addUser(u4);
-	}
-
-	public void loadAnnouncements() {
-		Date da1 = new Date(7, "December", 2020);
-		Date da2 = new Date(8, "December", 2020);
-		Announcement an1 = new Announcement(da1, "This is the first announcement.");
-		Announcement an2 = new Announcement(da2, "This is the second announcement.");
-
-		dbController.addAnnouncement(an1);
-		dbController.addAnnouncement(an2);
+		ArrayList<Payment> pList = new ArrayList<Payment>();
+		FileInputStream fstream = new FileInputStream("data/payment_data.txt");
+		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+		
+		String line;
+		ArrayList<String> argList = new ArrayList<String>();
+		while((line = br.readLine()) != null) {
+			argList.add(line);
+		}
+		fstream.close();
+		for(int i = 0; i < argList.size(); i++) {
+			Payment p = new Payment(Double.parseDouble(argList.get(i)), dbController.getInst().getBankAccounts().get(i));
+			pList.add(p);
+		}
+		argList.clear();
+		fstream = new FileInputStream("data/ticket_data.txt");
+		br = new BufferedReader(new InputStreamReader(fstream));
+		while((line = br.readLine()) != null) {
+			argList.add(line);
+		}
+		for(int i = 0; i < pList.size(); i++) {
+			Seat s = new Seat(Integer.parseInt(argList.get(2*i)),Integer.parseInt(argList.get(2*i+1)));
+			Ticket t = new Ticket(pList.get(i), dbController.getMovieList().get(i), dbController.getShowtimeList().get(i), s);
+			dbController.addTicket(t);
+		}
 	}
 	
-	public void loadVouchers() {
+	public void loadBankAccount() throws IOException{
+		FileInputStream fstream = new FileInputStream("data/banking_data.txt");
+		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 		
+		String line;
+		ArrayList<String> argList = new ArrayList<String>();
+		while((line = br.readLine()) != null) {
+			argList.add(line);
+		}
+		fstream.close();
+		for(int i = 0; i < argList.size(); i+=5) {
+			BankingInfo b = new BankingInfo(argList.get(i), argList.get(i+1), argList.get(i+2), argList.get(i+3), argList.get(i+4));
+			dbController.getInst().addAccount(b);
+		}
+	}
+
+	public void loadUsers() throws IOException {
+
+		ArrayList<Date> dList = new ArrayList<Date>();
+		FileInputStream fstream = new FileInputStream("data/Registration_date.txt");
+		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+		
+		String line;
+		ArrayList<String> argList = new ArrayList<String>();
+		while((line = br.readLine()) != null) {
+			argList.add(line);
+		}
+		fstream.close();
+		for(int i = 0; i < argList.size(); i+=3) {
+			Date d = new Date(Integer.parseInt(argList.get(i)), Integer.parseInt(argList.get(i+1)), Integer.parseInt(argList.get(i+2)));
+			dList.add(d);
+		}
+		argList.clear();
+		
+		fstream = new FileInputStream("data/registration_data.txt");
+		br = new BufferedReader(new InputStreamReader(fstream));
+		while((line = br.readLine()) != null) {
+			argList.add(line);
+		}
+		fstream.close();
+		int c = 0;
+		for(int i = 0; i < argList.size(); i+=5) {
+			RegisteredUser u = new RegisteredUser(argList.get(i), argList.get(i+1), argList.get(i+2), 
+					argList.get(i+3), argList.get(i+4), dbController.getInst().getBankAccounts().get(c), dList.get(c));
+			dbController.addUser(u);
+			c++;
+		}
+	}
+
+	public void loadAnnouncements() throws IOException {
+		ArrayList<Date> dList = new ArrayList<Date>();
+		ArrayList<Date> dList2 = new ArrayList<Date>();
+		FileInputStream fstream = new FileInputStream("data/announcement_date.txt");
+		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+		
+		String line;
+		ArrayList <String> argList = new ArrayList<String>();
+		while((line = br.readLine()) != null) {
+			argList.add(line);
+		}
+		fstream.close();
+		for(int i = 0; i < argList.size(); i+=3) {
+			Date d = new Date(Integer.parseInt(argList.get(i)), Integer.parseInt(argList.get(i+1)), Integer.parseInt(argList.get(i+2)));
+			dList.add(d);
+			Date d2 = new Date(Integer.parseInt(argList.get(i+3)), Integer.parseInt(argList.get(i+4)), Integer.parseInt(argList.get(i+5)));
+			dList2.add(d2);
+		}
+		argList.clear();
+		fstream = new FileInputStream("data/announcement_data.txt");
+		br = new BufferedReader(new InputStreamReader(fstream));
+		while((line = br.readLine()) != null) {
+			argList.add(line);
+		}
+		fstream.close();
+		for(int i =0; i < argList.size(); i++) {
+			Announcement a = new Announcement(dList.get(i), dList2.get(i), argList.get(i), dbController.getMovieList().get(i));
+			dbController.addAnnouncement(a);
+		}
+		
+	}
+	
+	public void loadVouchers() throws IOException {
+		FileInputStream fstream = new FileInputStream("data/voucher_data.txt");
+		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+		
+		String line;
+		ArrayList <String> argList = new ArrayList<String>();
+		while((line = br.readLine()) != null) {
+			argList.add(line);
+		}
+		fstream.close();
+		for(int i = 0; i < argList.size(); i++) {
+			Voucher v= new Voucher(Double.parseDouble(argList.get(i)));
+			dbController.addVoucher(v);
+		}
 	}
 }

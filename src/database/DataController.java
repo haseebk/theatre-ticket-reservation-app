@@ -32,6 +32,8 @@ public class DataController {
 		setUserList(new ArrayList<RegisteredUser>());
 		setAnnouncementList(new ArrayList<Announcement>());
 		setAuditoriumList(new ArrayList<Auditorium>());
+		setVoucherList(new ArrayList<Voucher>());
+		inst = new FinancialInstitution("");
 	}
 
 	/**
@@ -139,7 +141,7 @@ public class DataController {
 		for (int i = 0; i < showtimeList.size(); i++) {
 			if (showtimeList.get(i).getMovie() == searchMovie
 					&& showtimeList.get(i).getAuditorium().getTheatre() == searchTheatre
-					&& showtimeList.get(i).getShowDate().getDate().compareTo(date.getDate()) == 0) {
+					&& showtimeList.get(i).getShowDate().toString().compareTo(date.toString()) == 0) {
 				return showtimeList.get(i);
 			}
 		}
@@ -303,7 +305,6 @@ public class DataController {
 	public void removeTicket(Ticket ticket) {
 		ticketList.remove(ticket);
 	}
-	
 
 	/**
 	 * Getter for list of users
@@ -390,39 +391,31 @@ public class DataController {
 		return voucherList;
 	}
 	
+	public void setVoucherList(ArrayList<Voucher> voucherList) {
+		this.voucherList = voucherList;
+	}
+	
 	public void removeVoucher(Voucher voucher) {
 		voucherList.remove(voucher);
 	}
-	
-	public Boolean checkvoucher(int id) {
-		
-		
-		
-		return false;
-	}
-	
-	public Boolean checkTicketID() {
-		
-		return false;
-	}
-	
-	public FinancialInstitution getInst() {
-		return inst;
-	}
 
-	public void setInst(FinancialInstitution instList) {
-		this.inst = instList;
-	}
-	
 	public int checkTicket(int id) {
-		
+
 		for(int i = 0; i < ticketList.size(); i++) {
 			if(ticketList.get(i).getTicketID() == id) {
 				return i;
 			}
 		}
-		
+
 		return -1;
+	}
+
+	public FinancialInstitution getInst() {
+		return inst;
+	}
+
+	public void setInst(FinancialInstitution inst) {
+		this.inst = inst;
 	}
 
 }

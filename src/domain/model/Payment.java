@@ -3,10 +3,12 @@ package domain.model;
 public class Payment {
 	private int paymentID;
 	private double amount;
-	BankingInfo card;
+	private BankingInfo card;
+	
+	private static int pCounter = 0;
 
-	public Payment(int pId, double a, BankingInfo c) {
-		paymentID = pId;
+	public Payment(double a, BankingInfo c) {
+		paymentID = pCounter++;
 		amount = a;
 		card = c;
 	}
