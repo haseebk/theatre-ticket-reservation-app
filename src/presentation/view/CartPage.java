@@ -66,7 +66,7 @@ public class CartPage extends JPanel {
 		cartTotalLabel.setForeground(Color.WHITE);
 		cartTotalLabel.setFont(new Font("Arial", Font.PLAIN, 25));
 		cartTotalLabel.setBounds(26, 679, 571, 50);
-		cartTotalLabel.setText("Cart total: $" + backend.getCurrentUser().getCart().getCartCost());
+		cartTotalLabel.setText("Cart total: $" + backend.getCurrentUser().getCart().calculateCartCost());
 		add(cartTotalLabel);
 
 		// CREATE CHECKOUT BUTTON
@@ -78,6 +78,8 @@ public class CartPage extends JPanel {
 		checkoutButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				PaymentPage paymentPanel = new PaymentPage(frame, backend);
+				frame.setContentPane(paymentPanel);
 				frame.revalidate();
 			}
 		});
@@ -114,8 +116,8 @@ public class CartPage extends JPanel {
 
 			ticketDetails[i] = new JLabel("");
 			ticketDetails[i].setHorizontalAlignment(SwingConstants.LEFT);
-			ticketDetails[i].setText(cartItems.get(i).getBookedMovie() + "        " + cartItems.get(i).getBookedTime()
-					+ "        " + cartItems.get(i).getBookedSeat());
+			ticketDetails[i].setText(cartItems.get(i).getBookedTime() + "        " + cartItems.get(i).getBookedSeat()
+					+ "        " + cartItems.get(i).getBookedMovie());
 			ticketDetails[i].setForeground(Color.WHITE);
 			ticketDetails[i].setFont(new Font("Arial", Font.PLAIN, 20));
 			ticketDetails[i].setBounds(60, 70 + (170 * i), 1000, 32);

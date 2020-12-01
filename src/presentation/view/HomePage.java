@@ -136,15 +136,16 @@ public class HomePage extends JPanel {
 					int tempRow = Integer.parseInt(rowTextField.getText());
 					int tempCol = Integer.parseInt(colTextField.getText());
 					if (tempRow < currentShowtime.getRow() && tempCol < currentShowtime.getCol()) {
-						//boolean booking = currentShowtime.bookSeat(tempRow, tempCol);
-						boolean avaliable = currentShowtime.getSeatAvaliability(tempRow,tempCol);
+						// boolean booking = currentShowtime.bookSeat(tempRow, tempCol);
+						boolean avaliable = currentShowtime.getSeatAvaliability(tempRow, tempCol);
 						if (avaliable == false) {
 							System.out.println("Added ticket To Cart for:\nMovie: " + currentMovie.getTitle()
 									+ "\nTheatre: " + currentTheatre.getT_name() + "\nDate: "
 									+ currentShowtime.getShowDate().getDate() + "\nSeat Row: " + tempRow
 									+ ", Seat Column: " + tempCol);
 
-							backend.getCurrentUser().getCart().addToCart(new Booking(currentMovie,currentShowtime,currentShowtime.getSeats()[tempRow][tempCol]));
+							backend.getCurrentUser().getCart().addToCart(new Booking(currentMovie, currentShowtime,
+									currentShowtime.getSeats()[tempRow][tempCol]));
 
 							String tempGraphic = "";
 							for (int i = 0; i < currentShowtime.getRow(); i++) {
@@ -153,15 +154,20 @@ public class HomePage extends JPanel {
 										tempGraphic += "X  ";
 									} else if (backend.getCurrentUser() != null) {
 										boolean tempFlag = false;
-										for(int k = 0; k < backend.getCurrentUser().getCart().getItems_in_cart().size(); k++) {
-											if (backend.getCurrentUser().getCart().getItems_in_cart().get(k).getBookedSeat().getRow() == i &&
-													backend.getCurrentUser().getCart().getItems_in_cart().get(k).getBookedSeat().getSeatNum() == j &&
-													backend.getCurrentUser().getCart().getItems_in_cart().get(k).getBookedTime().getShowtimeID() == currentShowtime.getShowtimeID()) {
+										for (int k = 0; k < backend.getCurrentUser().getCart().getItems_in_cart()
+												.size(); k++) {
+											if (backend.getCurrentUser().getCart().getItems_in_cart().get(k)
+													.getBookedSeat().getRow() == i
+													&& backend.getCurrentUser().getCart().getItems_in_cart().get(k)
+															.getBookedSeat().getSeatNum() == j
+													&& backend.getCurrentUser().getCart().getItems_in_cart().get(k)
+															.getBookedTime()
+															.getShowtimeID() == currentShowtime.getShowtimeID()) {
 												tempGraphic += "-  ";
 												tempFlag = true;
 											}
 										}
-										if(tempFlag == false){
+										if (tempFlag == false) {
 											tempGraphic += "O  ";
 										}
 									} else {
@@ -275,17 +281,22 @@ public class HomePage extends JPanel {
 							for (int j = 0; j < currentShowtime.getCol(); j++) {
 								if (currentShowtime.getSeatAvaliability(i, j) == true) {
 									tempGraphic += "X  ";
-								}else if (backend.getCurrentUser() != null) {
+								} else if (backend.getCurrentUser() != null) {
 									boolean tempFlag = false;
-									for(int k = 0; k < backend.getCurrentUser().getCart().getItems_in_cart().size(); k++) {
-										if (backend.getCurrentUser().getCart().getItems_in_cart().get(k).getBookedSeat().getRow() == i &&
-												backend.getCurrentUser().getCart().getItems_in_cart().get(k).getBookedSeat().getSeatNum() == j &&
-												backend.getCurrentUser().getCart().getItems_in_cart().get(k).getBookedTime().getShowtimeID() == currentShowtime.getShowtimeID()) {
+									for (int k = 0; k < backend.getCurrentUser().getCart().getItems_in_cart()
+											.size(); k++) {
+										if (backend.getCurrentUser().getCart().getItems_in_cart().get(k).getBookedSeat()
+												.getRow() == i
+												&& backend.getCurrentUser().getCart().getItems_in_cart().get(k)
+														.getBookedSeat().getSeatNum() == j
+												&& backend.getCurrentUser().getCart().getItems_in_cart().get(k)
+														.getBookedTime()
+														.getShowtimeID() == currentShowtime.getShowtimeID()) {
 											tempGraphic += "-  ";
 											tempFlag = true;
 										}
 									}
-									if(tempFlag == false){
+									if (tempFlag == false) {
 										tempGraphic += "O  ";
 									}
 								} else {
