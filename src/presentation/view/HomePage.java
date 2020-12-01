@@ -530,7 +530,14 @@ public class HomePage extends JPanel {
 		// Combobox for selecting desired movie
 		Vector<String> movieList = new Vector<String>();
 		for (int i = 0; i < backend.getDataController().getMovieList().size(); i++) {
-			movieList.add(backend.getDataController().getMovieList().get(i).getTitle());
+			if(backend.getCurrentRegisteredUser() != null){
+				if(!backend.getDataController().getMovieList().get(i).getMovieAnnouncement().getPrivateAnnounceDate().beforeCurrentDate())
+					movieList.add(backend.getDataController().getMovieList().get(i).getTitle());
+			}else{
+				if(!backend.getDataController().getMovieList().get(i).getMovieAnnouncement().getPublicAnnounceDate().beforeCurrentDate())
+					movieList.add(backend.getDataController().getMovieList().get(i).getTitle());
+			}
+
 		}
 		movieSelectComboBox = new JComboBox(movieList);
 		movieSelectComboBox.setToolTipText("Select Movie");

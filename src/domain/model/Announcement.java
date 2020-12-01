@@ -18,6 +18,14 @@ public class Announcement {
 		mov.setMovieAnnouncement(this);
 	}
 
+	public Announcement(Date privateD, Date publicD, Movie mov) {
+		privateAnnounceDate = privateD;
+		publicAnnounceDate = publicD;
+		announceMessage = mov.getTitle() + " avaliable in Theatres: " + publicAnnounceDate.toString();
+		movieAnnouncement = mov;
+		mov.setMovieAnnouncement(this);
+	}
+
 	public String getAnnounceMessage() {
 		return announceMessage;
 	}
@@ -36,10 +44,10 @@ public class Announcement {
 	
 	@Override
 	public String toString() {
-		if(publicAnnounceDate.beforeCurrentDate() == true) {
+		if(publicAnnounceDate.beforeCurrentDate() == false) {
 			return String.format(getPublicAnnounceDate().toString() + "        Public Announcement: " + getAnnounceMessage());
 
-		}else if(privateAnnounceDate.beforeCurrentDate() == true) {
+		}else if(privateAnnounceDate.beforeCurrentDate() == false) {
 			return String.format(getPrivateAnnounceDate().toString() + "        Private Announcement: " + getAnnounceMessage());
 		}
 		return "Not yet announced";

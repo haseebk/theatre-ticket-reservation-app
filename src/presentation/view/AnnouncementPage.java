@@ -68,9 +68,9 @@ public class AnnouncementPage extends JPanel {
 		JLabel[] announcementDetails = new JLabel[announcementItems.size()];
 		int j = 0;
 		for (int i = 0; i < announcementItems.size(); i++) {
-			if(announcementItems.get(i).getPrivateAnnounceDate().beforeCurrentDate()){
+			if(!announcementItems.get(i).getPrivateAnnounceDate().beforeCurrentDate()){
 				if(backend.getCurrentRegisteredUser() != null ||
-						(backend.getCurrentGuestUser() != null && announcementItems.get(i).getPublicAnnounceDate().beforeCurrentDate())){
+						(backend.getCurrentGuestUser() != null && !announcementItems.get(i).getPublicAnnounceDate().beforeCurrentDate())){
 					announcementDetails[i] = new JLabel("");
 					announcementDetails[i].setHorizontalAlignment(SwingConstants.LEFT);
 					announcementDetails[i].setText(announcementItems.get(i).toString());

@@ -178,13 +178,21 @@ public class DatabasePopulator {
 	public void loadAnnouncements() {
 		Date da1 = new Date(29, 11, 2020);
 		Date da2 = new Date(20, 12, 2020);
-		Date da3 = new Date(15, 11, 2020);
-		Date da4 = new Date(27, 11, 2020);
-		Announcement an1 = new Announcement(da1,da2, "This is the first announcement.", spiderverse);
-		Announcement an2 = new Announcement(da3,da4, "This is the second announcement.", hereditary);
+		Date da3 = new Date(15, 12, 2020);
+		Date da4 = new Date(27, 12, 2020);
+		Date da5 = new Date(20, 11, 2020);
+		Date da6 = new Date(29, 11, 2020);
+		Date da7 = new Date(15, 11, 2020);
+		Date da8 = new Date(27, 11, 2020);
+		Announcement an1 = new Announcement(da1,da2, spiderverse);
+		Announcement an2 = new Announcement(da3,da4, hereditary);
+		Announcement an3 = new Announcement(da5,da6, getout);
+		Announcement an4 = new Announcement(da7,da8, paddington);
 
 		dbController.addAnnouncement(an1);
 		dbController.addAnnouncement(an2);
+		dbController.addAnnouncement(an3);
+		dbController.addAnnouncement(an4);
 	}
 	
 	public void loadVouchers() {
