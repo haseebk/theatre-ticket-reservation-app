@@ -14,7 +14,8 @@ import domain.model.*;
 import java.awt.Dimension;
 import java.awt.BorderLayout;
 
-public class CartPage extends JPanel {
+public class AnnouncementPage extends JPanel {
+
 	/**
 	 * 
 	 */
@@ -26,7 +27,7 @@ public class CartPage extends JPanel {
 	/**
 	 * Announcement button
 	 */
-	private JLabel announcementButton;
+	private JLabel cartButton;
 
 	/**
 	 * Current movie being chosen
@@ -43,7 +44,7 @@ public class CartPage extends JPanel {
 	 */
 	private Showtime currentShowtime;
 
-	public CartPage(JFrame frame, BackEnd backend) {
+	public AnnouncementPage(JFrame frame, BackEnd backend) {
 		setLayout(null);
 
 		// CREATE WELCOME TEXT LABEL
@@ -59,31 +60,6 @@ public class CartPage extends JPanel {
 		welcomeLabel.setFont(new Font("Arial", Font.PLAIN, 25));
 		welcomeLabel.setBounds(140, 5, 571, 50);
 		add(welcomeLabel);
-
-		// CREATE TOTAL CART COST TEXT LABEL
-		JLabel cartTotalLabel = new JLabel("");
-		cartTotalLabel.setHorizontalAlignment(SwingConstants.LEFT);
-		cartTotalLabel.setForeground(Color.WHITE);
-		cartTotalLabel.setFont(new Font("Arial", Font.PLAIN, 25));
-		cartTotalLabel.setBounds(26, 679, 571, 50);
-		cartTotalLabel.setText("Cart total: $" + backend.getCurrentUser().getCart().calculateCartCost());
-		add(cartTotalLabel);
-
-		// CREATE CHECKOUT BUTTON
-		JLabel checkoutButton = new JLabel("");
-		checkoutButton.setIcon(new ImageIcon(LoginPage.class.getResource("/enterButton.png")));
-		checkoutButton.setBounds(1082, 679, 254, 50);
-		checkoutButton.setToolTipText("Checkout");
-		checkoutButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		checkoutButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				PaymentPage paymentPanel = new PaymentPage(frame, backend);
-				frame.setContentPane(paymentPanel);
-				frame.revalidate();
-			}
-		});
-		add(checkoutButton);
 
 		// CREATE MOVIE CARD VIEW
 		JPanel imagePanels = new JPanel();
@@ -110,7 +86,6 @@ public class CartPage extends JPanel {
 					frame.revalidate();
 				}
 			});
-
 			deleteTicket[i].setBounds(1185, 65 + (170 * i), 32, 32);
 			imagePanels.add(deleteTicket[i]);
 
@@ -160,22 +135,22 @@ public class CartPage extends JPanel {
 		backButton.setIcon(new ImageIcon(HomePage.class.getResource("/backButton.png")));
 		add(backButton);
 
-		// CREATE ACCOUNCEMENT BUTTON
-		announcementButton = new JLabel("");
-		announcementButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		announcementButton.setToolTipText("View Announcements");
-		announcementButton.addMouseListener(new MouseAdapter() {
+		// CREATE CART BUTTON
+		cartButton = new JLabel("");
+		cartButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		cartButton.setToolTipText("View Announcements");
+		cartButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.out.println("Announcement");
-				AnnouncementPage announcementPanel = new AnnouncementPage(frame, backend);
-				frame.setContentPane(announcementPanel);
+				System.out.println("View Cart");
+				CartPage cartPanel = new CartPage(frame, backend);
+				frame.setContentPane(cartPanel);
 				frame.revalidate();
 			}
 		});
-		announcementButton.setBounds(1366 - 32 - 30, 14, 32, 32);
-		announcementButton.setIcon(new ImageIcon(HomePage.class.getResource("/megaphoneButton.png")));
-		add(announcementButton);
+		cartButton.setBounds(1366 - 32 - 30, 14, 32, 32);
+		cartButton.setIcon(new ImageIcon(HomePage.class.getResource("/cartButton.png")));
+		add(cartButton);
 
 		// CREATE BACKGROUND VIEW
 		JLabel homeBackground = new JLabel("");
@@ -183,4 +158,5 @@ public class CartPage extends JPanel {
 		homeBackground.setIcon(new ImageIcon(HomePage.class.getResource("/backgroundD.png")));
 		add(homeBackground);
 	}
+
 }

@@ -561,6 +561,9 @@ public class HomePage extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				System.out.println("Announcement");
+				AnnouncementPage announcementPanel = new AnnouncementPage(frame, backend);
+				frame.setContentPane(announcementPanel);
+				frame.revalidate();
 			}
 		});
 		announcementButton.setBounds(1366 - 32 - 90, 14, 32, 32);
