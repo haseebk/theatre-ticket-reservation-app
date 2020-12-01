@@ -3,6 +3,8 @@ package domain.model;
 import database.DataController;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.Month;
 
 public class BackEnd implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -38,6 +40,22 @@ public class BackEnd implements Serializable{
 	//Clears the current user
 	public void userLogout(){
 		currentUser = null;
+	}
+	
+	public void registerUser(String username, String password, String f_name, String l_name, String email) {
+		LocalDate todaysDate = LocalDate.now();
+		BankingInfo bankInfo;
+		dataController.getUserList().add(new RegisteredUser(username, password, f_name, l_name, email, null, new Date(todaysDate.getDayOfMonth(), todaysDate.getMonth().toString(), todaysDate.getYear())));
+	}
+	
+	public boolean checkExisting(String username) {
+		for(int i = 0; i < dataController.getUserList().size(); i++){
+			System.out.println("The system's info: " + dataController.getUserList().get(i).username);
+			if(dataController.getUserList().get(i).username.compareTo(username) == 0){
+				return true;
+			}
+		}
+		return false;
 	}
 
 
