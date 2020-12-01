@@ -274,14 +274,14 @@ public class PaymentPage extends JPanel {
 		add(cardExpirationDateLabel);
 		// CREATE CARD ERROR TEXT LABEL
 		JLabel invalidCardErrorLabel = new JLabel("<html>" + "The card was declined." + "</html>");
-		invalidCardErrorLabel.setBounds(565, 236, 254, 45);
+		invalidCardErrorLabel.setBounds(565, 100, 254, 45);
 		invalidCardErrorLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		invalidCardErrorLabel.setForeground(Color.RED);
 		invalidCardErrorLabel.setFont(new Font("Arial", Font.PLAIN, 13));
 		add(invalidCardErrorLabel);		
 		// CREATE VOUCHER ERROR TEXT LABEL
 		JLabel invalidVoucherErrorLabel = new JLabel("<html>" + "The voucher was declined." + "</html>");
-		invalidVoucherErrorLabel.setBounds(565, 236, 254, 45);
+		invalidVoucherErrorLabel.setBounds(565, 100, 254, 45);
 		invalidVoucherErrorLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		invalidVoucherErrorLabel.setForeground(Color.RED);
 		invalidVoucherErrorLabel.setFont(new Font("Arial", Font.PLAIN, 13));
@@ -311,6 +311,7 @@ public class PaymentPage extends JPanel {
 				invalidVoucherErrorLabel.setVisible(false);
 				//ArrayList<Ticket> ticketsCreated = new ArrayList<Ticket>();
 				System.out.println(name + " " + cardType + " " + cardCCV + " " + cardNum + " " + cardExp);
+				
 				// Validate Card info
 				if(backend.getDataController().getInst().verifyCardInfo(name, cardType, cardNum, cardCCV, cardExp)) {
 					cardValid = true;
@@ -321,14 +322,17 @@ public class PaymentPage extends JPanel {
 					invalidCardErrorLabel.setVisible(true);
 					System.out.println("invalid card");
 				}
+				String voucherDetails = "";
 				// Validate voucher
 				if(voucher != "") {
 					for(int i=0; i<backend.getDataController().getVoucherList().size(); i++) {
+						System.out.println("voucher validation");
 						if(voucher == backend.getDataController().getVoucherList().get(i).getVoucherCode()) {
 							if(!backend.getDataController().getVoucherList().get(i).isUsed()) {
 								voucherValid = true;
 								System.out.println("valid voucher");
 								backend.getCurrentUser().getCart().setCartCost((float)(backend.getCurrentUser().getCart().getCartCost() - backend.getDataController().getVoucherList().get(i).getAmount()));
+								voucherDetails += "Voucher: "+ voucher + " was accepted";
 								break;
 							}
 							else {
@@ -344,11 +348,11 @@ public class PaymentPage extends JPanel {
 					voucherValid = true;
 				}
 				
-				// All information is valid
-				if(voucherValid && cardValid) {
+				// card information is valid
+				if(cardValid) {
 					System.out.println("valid details");
 					//Cart c = backend.getCurrentUser().getCart();
-					backend.getCurrentUser().getCart().setPayment(new Payment(backend.getCurrentUser().getCart().getPayment().getAmount(), new BankingInfo(name, cardType, cardNum, cardCCV, cardExp)));
+					//backend.getCurrentUser().getCart().setPayment(new Payment(backend.getCurrentUser().getCart().getPayment().getAmount(), new BankingInfo(name, cardType, cardNum, cardCCV, cardExp)));
 					for(int i=0; i<backend.getCurrentUser().getCart().getItems_in_cart().size(); i++) {
 						Movie movie = backend.getCurrentUser().getCart().getItems_in_cart().get(i).getBookedMovie();
 						Showtime showtime = backend.getCurrentUser().getCart().getItems_in_cart().get(i).getBookedTime();
@@ -360,10 +364,17 @@ public class PaymentPage extends JPanel {
 						System.out.println("entered payment");
 					}						
 					/* Add prompt to show ticket and success message*/
+					String message = "Transaction Successful! Your Tickets have been emailed to you. " + voucherDetails;
 					
+					//int input = JOptionPane.showOptionDialog(null, message, "Transaction Alert", JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
+					JOptionPane.showMessageDialog(frame, message);
+		
 					HomePage homePanel = new HomePage(frame, backend);
 					frame.setContentPane(homePanel);
+					
+					
 				}
+				frame.revalidate();
 			}
 		});
 		registerButton.setBounds(565, 539, 254, 50);

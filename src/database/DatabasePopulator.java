@@ -52,6 +52,7 @@ public class DatabasePopulator {
 		//inst.addAccount(b3);
 		//inst.addAccount(b4);
 		inst.addAccount(b5);
+		dbController.setInst(inst);
 	}
 	
 	public void loadMovies() {

@@ -336,7 +336,7 @@ public class RegisterPage extends JPanel {
 				String pass = String.valueOf(passwordField.getPassword());
 				String confirmPass = String.valueOf(passwordField2.getPassword());
 				String email = emailTextField.getText();
-				String cardType = cardTypeTextField.getText();
+				String cardType = (String)cardTypeSelectComboBox.getSelectedItem();
 				String cardNum = cardNumberTextField.getText();
 				String cardSVS = String.valueOf(cardSVSPasswordField.getPassword());
 				String cardExp = cardExpirationDateTextField.getText();
