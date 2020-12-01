@@ -69,21 +69,30 @@ public class AnnouncementPage extends JPanel {
 		ArrayList<Announcement> announcementItems = backend.getDataController().getAnnouncementList();
 		JLabel[] announcementCard = new JLabel[announcementItems.size()];
 		JLabel[] announcementDetails = new JLabel[announcementItems.size()];
+		int j = 0;
 		for (int i = 0; i < announcementItems.size(); i++) {
-			announcementDetails[i] = new JLabel("");
-			announcementDetails[i].setHorizontalAlignment(SwingConstants.LEFT);
-			announcementDetails[i].setText(announcementItems.get(i).toString());
-			announcementDetails[i].setForeground(Color.WHITE);
-			announcementDetails[i].setFont(new Font("Arial", Font.PLAIN, 20));
-			announcementDetails[i].setBounds(60, 70 + (170 * i), 1000, 32);
-			imagePanels.add(announcementDetails[i]);
+			if(announcementItems.get(i).getPrivateAnnounceDate().beforeCurrentDate()){
+				if(backend.getCurrentRegisteredUser() != null ||
+						(backend.getCurrentGuestUser() != null && announcementItems.get(i).getPublicAnnounceDate().beforeCurrentDate())){
+					announcementDetails[i] = new JLabel("");
+					announcementDetails[i].setHorizontalAlignment(SwingConstants.LEFT);
+					announcementDetails[i].setText(announcementItems.get(i).toString());
+					announcementDetails[i].setForeground(Color.WHITE);
+					announcementDetails[i].setFont(new Font("Arial", Font.PLAIN, 20));
+					announcementDetails[i].setBounds(60, 70 + (170 * j), 1000, 32);
+					imagePanels.add(announcementDetails[i]);
 
-			announcementCard[i] = new JLabel("");
-			announcementCard[i].setVerticalAlignment(SwingConstants.TOP);
-			announcementCard[i].setHorizontalAlignment(SwingConstants.LEFT);
-			announcementCard[i].setBounds(0, 5 + (170 * i), 1285, 164);
-			announcementCard[i].setIcon(new ImageIcon(HomePage.class.getResource("/ticketCard.png")));
-			imagePanels.add(announcementCard[i]);
+					announcementCard[i] = new JLabel("");
+					announcementCard[i].setVerticalAlignment(SwingConstants.TOP);
+					announcementCard[i].setHorizontalAlignment(SwingConstants.LEFT);
+					announcementCard[i].setBounds(0, 5 + (170 * j), 1285, 164);
+					announcementCard[i].setIcon(new ImageIcon(HomePage.class.getResource("/ticketCard.png")));
+					imagePanels.add(announcementCard[i]);
+					j++;
+				}
+
+			}
+
 		}
 		add(imagePanels);
 		imagePanels.setLayout(new BorderLayout(0, 0));
