@@ -18,6 +18,7 @@ public class DataController {
 	private ArrayList<RegisteredUser> userList;
 	private ArrayList<Announcement> announcementList;
 	private ArrayList<Auditorium> auditoriumList;
+	private ArrayList<Voucher> voucherList;
 
 	/**
 	 * Methods to create instances
@@ -377,6 +378,18 @@ public class DataController {
 
 	public void removeAuditorium(Auditorium auditorium) {
 		auditoriumList.remove(auditorium);
+	}
+	
+	public void addVoucher(Voucher voucher) {
+		voucherList.add(voucher);
+	}
+	
+	public ArrayList<Voucher> getVoucherList() {
+		return voucherList;
+	}
+	
+	public void removeVoucher(Voucher voucher) {
+		voucherList.remove(voucher);
 	}
 
 }

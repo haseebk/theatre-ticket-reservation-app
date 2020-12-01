@@ -122,4 +122,9 @@ public class Showtime {
 	public int getTotalAvaliableSeats() {
 		return this.totalAvaliableSeats;
 	}
+
+	@Override
+	public String toString() {
+		return String.format(showDate.month + " " + showDate.day + ", " + showDate.year);
+	}
 }

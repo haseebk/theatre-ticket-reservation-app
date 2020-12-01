@@ -11,6 +11,8 @@ import javax.swing.*;
 import javax.swing.border.MatteBorder;
 
 import domain.model.*;
+import java.awt.Dimension;
+import java.awt.BorderLayout;
 
 public class CartPage extends JPanel {
 	/**
@@ -45,7 +47,6 @@ public class CartPage extends JPanel {
 		setLayout(null);
 
 		// CREATE WELCOME TEXT LABEL
-
 		JLabel welcomeLabel = new JLabel("");
 		if (backend.getCurrentRegisteredUser() != null) {
 			welcomeLabel = new JLabel("Welcome, " + backend.getCurrentRegisteredUser().getF_name() + " "
@@ -59,31 +60,89 @@ public class CartPage extends JPanel {
 		welcomeLabel.setBounds(140, 5, 571, 50);
 		add(welcomeLabel);
 
+		// CREATE WELCOME TEXT LABEL
+		JLabel cartTotalLabel = new JLabel("");
+		cartTotalLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		cartTotalLabel.setForeground(Color.WHITE);
+		cartTotalLabel.setFont(new Font("Arial", Font.PLAIN, 25));
+		cartTotalLabel.setBounds(26, 679, 571, 50);
+		cartTotalLabel.setText("Cart total: $" + backend.getCurrentUser().getCart().calculateCartCost());
+		add(cartTotalLabel);
+
+		// CREATE CHECKOUT BUTTON
+		JLabel checkoutButton = new JLabel("");
+		checkoutButton.setIcon(new ImageIcon(LoginPage.class.getResource("/enterButton.png")));
+		checkoutButton.setBounds(1082, 679, 254, 50);
+		checkoutButton.setToolTipText("Checkout");
+		checkoutButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		checkoutButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				PaymentPage paymentPanel = new PaymentPage(frame, backend);
+				frame.setContentPane(paymentPanel);
+				frame.revalidate();
+			}
+		});
+		add(checkoutButton);
+
 		// CREATE MOVIE CARD VIEW
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(39, 87, 1285, 560);
+		JPanel imagePanels = new JPanel();
+		imagePanels.setBounds(20, 87, 1304, 560);
 
 		ArrayList<Booking> cartItems = backend.getCurrentUser().getCart().getItems_in_cart();
 
 		JLabel[] ticketCards = new JLabel[cartItems.size()];
-		JLabel[] movieDetails = new JLabel[cartItems.size()];
+		JLabel[] deleteTicket = new JLabel[cartItems.size()];
+		JLabel[] ticketDetails = new JLabel[cartItems.size()];
 		for (int i = 0; i < cartItems.size(); i++) {
+			deleteTicket[i] = new JLabel("");
+			deleteTicket[i].setVerticalAlignment(SwingConstants.TOP);
+			deleteTicket[i].setHorizontalAlignment(SwingConstants.LEFT);
+			deleteTicket[i].setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			deleteTicket[i].setIcon(new ImageIcon(HomePage.class.getResource("/deleteButton.png")));
+			deleteTicket[i].addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					int y = e.getComponent().getY();
+					backend.getCurrentUser().getCart().removeFromCart(cartItems.get((y - 65) / 170));
+					CartPage cartPanel = new CartPage(frame, backend);
+					frame.setContentPane(cartPanel);
+					frame.revalidate();
+				}
+			});
+
+			deleteTicket[i].setBounds(1185, 65 + (170 * i), 32, 32);
+			imagePanels.add(deleteTicket[i]);
+
+			ticketDetails[i] = new JLabel("");
+			ticketDetails[i].setHorizontalAlignment(SwingConstants.LEFT);
+			ticketDetails[i].setText(cartItems.get(i).getBookedTime() + "        " + cartItems.get(i).getBookedSeat()
+					+ "        " + cartItems.get(i).getBookedMovie());
+			ticketDetails[i].setForeground(Color.WHITE);
+			ticketDetails[i].setFont(new Font("Arial", Font.PLAIN, 20));
+			ticketDetails[i].setBounds(60, 70 + (170 * i), 1000, 32);
+			imagePanels.add(ticketDetails[i]);
+
 			ticketCards[i] = new JLabel("");
 			ticketCards[i].setVerticalAlignment(SwingConstants.TOP);
 			ticketCards[i].setHorizontalAlignment(SwingConstants.LEFT);
-			ticketCards[i].setBounds(39, 100 + (170 * i), 1285, 164);
+			ticketCards[i].setBounds(0, 5 + (170 * i), 1285, 164);
 			ticketCards[i].setIcon(new ImageIcon(HomePage.class.getResource("/ticketCard.png")));
-			scrollPane.add(ticketCards[i]);
-
-			movieDetails[i] = new JLabel("");
-			movieDetails[i].setVerticalAlignment(SwingConstants.TOP);
-			movieDetails[i].setHorizontalAlignment(SwingConstants.LEFT);
-			movieDetails[i].setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			movieDetails[i].setIcon(new ImageIcon(HomePage.class.getResource("/deleteButton.png")));
-			movieDetails[i].setBounds(39, 100 + (170 * i), 1285, 164);
-			scrollPane.add(movieDetails[i]);
-
+			imagePanels.add(ticketCards[i]);
 		}
+		add(imagePanels);
+		imagePanels.setLayout(new BorderLayout(0, 0));
+		imagePanels.setOpaque(false);
+
+		JScrollPane scrollPane = new JScrollPane(imagePanels);
+
+		scrollPane.setPreferredSize(new Dimension(1304, 560));
+		scrollPane.setBounds(20, 87, 1304, 560);
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane.setOpaque(false);
+		scrollPane.getViewport().setOpaque(false);
+		add(scrollPane);
 
 		// CREATE BACK BUTTON
 		backButton = new JLabel("");
@@ -115,20 +174,10 @@ public class CartPage extends JPanel {
 		announcementButton.setIcon(new ImageIcon(HomePage.class.getResource("/megaphoneButton.png")));
 		add(announcementButton);
 
-		// CREATE MOVIE CARD VIEW
-		JLabel ticketCard = new JLabel("");
-		ticketCard.setVerticalAlignment(SwingConstants.TOP);
-		ticketCard.setHorizontalAlignment(SwingConstants.LEFT);
-		ticketCard.setBounds(39, 100, 1285, 164);
-		ticketCard.setIcon(new ImageIcon(HomePage.class.getResource("/ticketCard.png")));
-		scrollPane.add(ticketCard);
-
 		// CREATE BACKGROUND VIEW
 		JLabel homeBackground = new JLabel("");
 		homeBackground.setBounds(-2, -1, 1366, 768);
 		homeBackground.setIcon(new ImageIcon(HomePage.class.getResource("/backgroundD.png")));
 		add(homeBackground);
-
-		add(scrollPane);
 	}
 }

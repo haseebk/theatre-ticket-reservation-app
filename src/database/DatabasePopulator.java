@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import domain.model.Ticket;
 import domain.model.Announcement;
 import domain.model.Payment;
+import domain.model.Voucher;
 
 public class DatabasePopulator {
 	DataController dbController;
@@ -34,14 +35,19 @@ public class DatabasePopulator {
 		loadAnnouncements();
 		loadUsers();
 		loadTickets();
+		loadVouchers();
 	}
 
 	public void loadMovies() {
+		String s= "After gaining superpowers from a spider bite, Miles Morales protects the cirty as Spider-Man. Soon, he meets alternate version of himself and gets embroiled in an epic battle to save the multiverse.";
+		String g = "Chris, an African-American man, decides to visit his Caucasian girlfriend's parents during a weekend getaway. Although they seem normal at first, he is not prepared to experience the horrors ahead.";
+		String h = "When the matriarch of the Graham family passes away, her daughter and grandchildren begin to unravel cryptic and increasingly terrifying secrets about their ancestry, tyring to outrun the sinister fate they have inherited.";
+		String p = "Paddington takes up a job to accumulate enough money to buy the perfect gift for his anunt on her 100th birthday, but it gets stolen.";
 		spiderverse = new Movie("Spider-Man: Into the Spider-Verse", "Action", 2018, "Peter Ramsey", 116, 8.4,
-				"spm-poster-183x268", 12.99);
-		getout = new Movie("Get Out", "Thriller", 2017, "Peter Ramsey", 104, 7.7, "get-poster-183x268", 12.99);
-		hereditary = new Movie("Hereditary", "Horror", 2018, "Ari Aster", 127, 7.3, "her-poster-183x268",12.99);
-		paddington = new Movie("Paddington 2", "Adventure", 2017, "Paul King", 104, 7.8, "pd2-poster-183x268",12.99);
+				"spm-poster-183x268", 12.99, s);
+		getout = new Movie("Get Out", "Thriller", 2017, "Peter Ramsey", 104, 7.7, "get-poster-183x268", 12.99, g);
+		hereditary = new Movie("Hereditary", "Horror", 2018, "Ari Aster", 127, 7.3, "her-poster-183x268",12.99, h);
+		paddington = new Movie("Paddington 2", "Adventure", 2017, "Paul King", 104, 7.8, "pd2-poster-183x268",12.99, p);
 
 		dbController.addMovie(spiderverse);
 		dbController.addMovie(getout);
@@ -161,5 +167,9 @@ public class DatabasePopulator {
 
 		dbController.addAnnouncement(an1);
 		dbController.addAnnouncement(an2);
+	}
+	
+	public void loadVouchers() {
+		
 	}
 }
