@@ -60,8 +60,11 @@ public class CartPage extends JPanel {
 		add(welcomeLabel);
 
 		// CREATE MOVIE CARD VIEW
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(39, 87, 1285, 560);
+
 		ArrayList<Booking> cartItems = backend.getCurrentUser().getCart().getItems_in_cart();
-		
+
 		JLabel[] ticketCards = new JLabel[cartItems.size()];
 		JLabel[] movieDetails = new JLabel[cartItems.size()];
 		for (int i = 0; i < cartItems.size(); i++) {
@@ -70,29 +73,18 @@ public class CartPage extends JPanel {
 			ticketCards[i].setHorizontalAlignment(SwingConstants.LEFT);
 			ticketCards[i].setBounds(39, 100 + (170 * i), 1285, 164);
 			ticketCards[i].setIcon(new ImageIcon(HomePage.class.getResource("/ticketCard.png")));
-			add(ticketCards[i]);
-			
+			scrollPane.add(ticketCards[i]);
+
 			movieDetails[i] = new JLabel("");
 			movieDetails[i].setVerticalAlignment(SwingConstants.TOP);
 			movieDetails[i].setHorizontalAlignment(SwingConstants.LEFT);
 			movieDetails[i].setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			movieDetails[i].setIcon(new ImageIcon(HomePage.class.getResource("/deleteButton.png")));
 			movieDetails[i].setBounds(39, 100 + (170 * i), 1285, 164);
-			
-			
-//			private Movie bookedMovie;
-//			/**
-//			 * The show time that's being booked
-//			 */
-//			private Showtime bookedTime;
-//			/**
-//			 * The seat that's being booked
-//			 */
-//			private Seat bookedSeat;
+			scrollPane.add(movieDetails[i]);
+
 		}
-		
-		
-		
+
 		// CREATE BACK BUTTON
 		backButton = new JLabel("");
 		backButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -129,13 +121,14 @@ public class CartPage extends JPanel {
 		ticketCard.setHorizontalAlignment(SwingConstants.LEFT);
 		ticketCard.setBounds(39, 100, 1285, 164);
 		ticketCard.setIcon(new ImageIcon(HomePage.class.getResource("/ticketCard.png")));
-		add(ticketCard);
+		scrollPane.add(ticketCard);
 
 		// CREATE BACKGROUND VIEW
 		JLabel homeBackground = new JLabel("");
 		homeBackground.setBounds(-2, -1, 1366, 768);
 		homeBackground.setIcon(new ImageIcon(HomePage.class.getResource("/backgroundD.png")));
 		add(homeBackground);
-	}
 
+		add(scrollPane);
+	}
 }
