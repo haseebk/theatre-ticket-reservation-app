@@ -55,6 +55,12 @@ public class HomePage extends JPanel {
 	// Label displaying Taken Seat was Selected
 	private JLabel takenSeatErrorLabel;
 
+	// Label displaying Selected Seat was Selected Error
+	private JLabel selectedSeatErrorLabel;
+
+	// Label displaying Selected Seat was Selected Error
+	private JLabel privateMovieBookingErrorLabel;
+
 	// Label displaying Added to Cart
 	private JLabel addedToCartLabel;
 
@@ -226,6 +232,26 @@ public class HomePage extends JPanel {
 		takenSeatErrorLabel.setVisible(false);
 		add(takenSeatErrorLabel);
 
+		// CREATE TAKEN SEAT ERROR TEXT LABEL
+		// Label displaying Selected Seat was Selected Error
+		selectedSeatErrorLabel = new JLabel("<html>" + "The Seat Selected is already Selected" + "</html>");
+		selectedSeatErrorLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		selectedSeatErrorLabel.setForeground(Color.RED);
+		selectedSeatErrorLabel.setFont(new Font("HelveticaNeue", Font.PLAIN, 15));
+		selectedSeatErrorLabel.setBounds(1100, 500, 192, 45);
+		selectedSeatErrorLabel.setVisible(false);
+		add(selectedSeatErrorLabel);
+
+		// CREATE TAKEN SEAT ERROR TEXT LABEL
+		// Label displaying Selected Seat was Selected Error
+		privateMovieBookingErrorLabel = new JLabel("<html>" + "The Current Private Movie Listing Has Hit the Maximum Number of Booking for the Private Announcement" + "</html>");
+		privateMovieBookingErrorLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		privateMovieBookingErrorLabel.setForeground(Color.RED);
+		privateMovieBookingErrorLabel.setFont(new Font("HelveticaNeue", Font.PLAIN, 15));
+		privateMovieBookingErrorLabel.setBounds(1100, 500, 192, 100);
+		privateMovieBookingErrorLabel.setVisible(false);
+		add(privateMovieBookingErrorLabel);
+
 		// CREATE ADDED TO CART TEXT LABEL
 		// Label displaying Added to Cart
 		addedToCartLabel = new JLabel("<html>" + "Added To Cart" + "</html>");
@@ -259,19 +285,55 @@ public class HomePage extends JPanel {
 					invalidSeatErrorLabel.setVisible(false);
 					takenSeatErrorLabel.setVisible(false);
 					addedToCartLabel.setVisible(false);
+					selectedSeatErrorLabel.setVisible(false);
+					privateMovieBookingErrorLabel.setVisible(false);
 					// If user entered a valid row and column
 					if (userRow < currentShowtime.getRow() && userCol < currentShowtime.getCol()) {
 						boolean available = currentShowtime.getSeatAvaliability(userRow, userCol);
 						if (available == false) {
-							System.out.println("Added ticket To Cart for:\nMovie: " + currentMovie.getTitle()
-									+ "\nTheatre: " + currentTheatre.getT_name() + "\nDate: "
-									+ currentShowtime.getShowDate().toString() + "\nSeat Row: " + userRow
-									+ ", Seat Column: " + userCol);
+							System.out.println("Public: " + currentShowtime.getMovie().getMovieAnnouncement().isPublic());
+							System.out.println("Private: " + currentShowtime.getMovie().getMovieAnnouncement().isPrivateOnly());
+							boolean selectFlag = false;
 
-							backend.getCurrentUser().getCart().addToCart(new Booking(currentMovie, currentShowtime,
-									currentShowtime.getSeats()[userRow][userCol]));
-							addedToCartLabel.setVisible(true);
-							createSeatGraphic(frame,backend);
+							//If already selected
+							for (int k = 0; k < backend.getCurrentUser().getCart().getItems_in_cart().size(); k++) {
+								if (backend.getCurrentUser().getCart().getItems_in_cart().get(k).getBookedSeat().getRow() == userRow
+										&& backend.getCurrentUser().getCart().getItems_in_cart().get(k).getBookedSeat().getSeatNum() == userCol
+										&& backend.getCurrentUser().getCart().getItems_in_cart().get(k).getBookedTime().getShowtimeID() == currentShowtime.getShowtimeID()) {
+									System.out.println("Already selected");
+									selectedSeatErrorLabel.setVisible(true);
+									selectFlag = true;
+								}
+							}
+							if (!selectFlag) {
+								if (currentShowtime.getMovie().getMovieAnnouncement().isPrivateOnly()) {
+									System.out.println("Total: " + currentShowtime.getRow() * currentShowtime.getCol());
+									int numSelectedSeats = 0;
+									for (int i = 0; i < backend.getCurrentUser().getCart().getItems_in_cart().size(); i++) {
+										if (currentMovie.getTitle().compareTo(backend.getCurrentUser().getCart().getItems_in_cart().get(i).getBookedMovie().getTitle()) == 0) {
+											numSelectedSeats++;
+										}
+									}
+									System.out.println("Selected: " + (numSelectedSeats + 1));
+									System.out.println("Booked: " + (currentShowtime.getTotalAvaliableSeats() - (numSelectedSeats + 1)));
+									System.out.println("90% of seats: " + currentShowtime.getRow() * currentShowtime.getCol() * 0.9);
+									if((currentShowtime.getTotalAvaliableSeats() - (numSelectedSeats + 1) > (currentShowtime.getRow() * currentShowtime.getCol() * 0.9))){
+										backend.getCurrentUser().getCart().addToCart(new Booking(currentMovie, currentShowtime,
+												currentShowtime.getSeats()[userRow][userCol]));
+										addedToCartLabel.setVisible(true);
+										createSeatGraphic(frame, backend);
+									}else{
+										System.out.println("max booked seats");
+										privateMovieBookingErrorLabel.setVisible(true);
+									}
+
+								} else {
+									backend.getCurrentUser().getCart().addToCart(new Booking(currentMovie, currentShowtime,
+											currentShowtime.getSeats()[userRow][userCol]));
+									addedToCartLabel.setVisible(true);
+									createSeatGraphic(frame, backend);
+								}
+							}
 						} else {
 							//Seat already taken
 							System.out.println("Seat already taken");
@@ -367,6 +429,8 @@ public class HomePage extends JPanel {
 				invalidSeatErrorLabel.setVisible(false);
 				takenSeatErrorLabel.setVisible(false);
 				addedToCartLabel.setVisible(false);
+				selectedSeatErrorLabel.setVisible(false);
+				privateMovieBookingErrorLabel.setVisible(false);
 				if (tempString != null) {
 					String[] tempStringArray = tempString.split("/");
 					Date tempDate = new Date(Integer.parseInt(tempStringArray[0]), Integer.parseInt(tempStringArray[1]),
@@ -454,6 +518,7 @@ public class HomePage extends JPanel {
 							+ currentTheatre.getAddress() + "\nPhone: " + currentTheatre.getPhoneNumber());
 					currentTheatre = backend.getDataController()
 							.findTheatre((String) theatreSelectComboBox.getSelectedItem());
+					currentShowtime = null;
 					if (currentTheatre != null) {
 						theatreDetailsLabel.setText("Name: " + currentTheatre.getT_name() + "\nAddress: "
 								+ currentTheatre.getAddress() + "\nPhone: " + currentTheatre.getPhoneNumber());
@@ -464,7 +529,6 @@ public class HomePage extends JPanel {
 						ArrayList<Showtime> showtimeList = backend.getDataController().findAllShowtime(currentMovie,
 								currentTheatre);
 						for (int i = 0; i < showtimeList.size(); i++) {
-							System.out.println(showtimeList.get(i).getShowDate().toString());
 							model2.addElement(showtimeList.get(i).getShowDate().toString());
 						}
 						showtimeSelectComboBox.setModel(model2);
@@ -537,7 +601,6 @@ public class HomePage extends JPanel {
 				if(!backend.getDataController().getMovieList().get(i).getMovieAnnouncement().getPublicAnnounceDate().beforeCurrentDate())
 					movieList.add(backend.getDataController().getMovieList().get(i).getTitle());
 			}
-
 		}
 		movieSelectComboBox = new JComboBox(movieList);
 		movieSelectComboBox.setToolTipText("Select Movie");
@@ -554,11 +617,11 @@ public class HomePage extends JPanel {
 		movieSelectComboBox.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Movie Combo Box Pressed: " + movieSelectComboBox.getSelectedItem());
 				String temp = (String) movieSelectComboBox.getSelectedItem();
 
 				currentMovie = backend.getDataController().findMovie(temp);
 				currentTheatre = null;
+				currentShowtime = null;
 
 				movieDetailsLabel.setText(currentMovie.getTitle() + "\n\nGenre: " + currentMovie.getGenre()
 						+ "\n\nYear: " + currentMovie.getYear() + "\n\nDirector: " + currentMovie.getDirector()
@@ -576,7 +639,6 @@ public class HomePage extends JPanel {
 				model.removeAllElements();
 				ArrayList<Theatre> theatreList = backend.getDataController().findTheatresPlayingMovie(currentMovie);
 				for (int i = 0; i < theatreList.size(); i++) {
-					System.out.println(theatreList.get(i).getT_name());
 					model.addElement(theatreList.get(i).getT_name());
 				}
 				theatreSelectComboBox.setModel(model);

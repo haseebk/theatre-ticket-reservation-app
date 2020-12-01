@@ -34,6 +34,16 @@ public class Announcement {
 		announceMessage = m;
 	}
 
+	//returns true if it is private
+	public boolean isPrivateOnly(){
+		return (!privateAnnounceDate.beforeCurrentDate() && publicAnnounceDate.beforeCurrentDate());
+	}
+
+	//returns true if it is public
+	public boolean isPublic(){
+		return !publicAnnounceDate.beforeCurrentDate();
+	}
+
 	public Date getPrivateAnnounceDate() { return privateAnnounceDate; }
 
 	public void setPrivateAnnounceDate(Date privateAnnounceDate) { this.privateAnnounceDate = privateAnnounceDate; }

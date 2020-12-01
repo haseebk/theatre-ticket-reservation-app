@@ -148,8 +148,8 @@ public class DatabasePopulator {
 		Payment p2 = new Payment(15.99, b2);
 		Ticket t1 = new Ticket(p1, s1.getMovie(), s1, s1.getSeats()[1][2]);
 		Ticket t2 = new Ticket(p2, s2.getMovie(), s2, s2.getSeats()[3][3]);
-		s1.getSeats()[1][2].bookSeat();
-		s2.getSeats()[3][3].bookSeat();
+		s1.bookSeat(1,2);
+		s2.bookSeat(3,3);
 
 		dbController.addTicket(t1);
 		dbController.addTicket(t2);
