@@ -150,7 +150,7 @@ public class HomePage extends JPanel {
 							for (int i = 0; i < currentShowtime.getRow(); i++) {
 								for (int j = 0; j < currentShowtime.getCol(); j++) {
 									if (currentShowtime.getSeatAvaliability(i, j) == true) {
-										tempGraphic += "X   ";
+										tempGraphic += "X  ";
 									} else if (backend.getCurrentUser() != null) {
 										boolean tempFlag = false;
 										for(int k = 0; k < backend.getCurrentUser().getCart().getItems_in_cart().size(); k++) {
@@ -165,7 +165,7 @@ public class HomePage extends JPanel {
 											tempGraphic += "O  ";
 										}
 									} else {
-										tempGraphic += "O   ";
+										tempGraphic += "O  ";
 									}
 								}
 								tempGraphic += "\n";
@@ -274,7 +274,7 @@ public class HomePage extends JPanel {
 						for (int i = 0; i < currentShowtime.getRow(); i++) {
 							for (int j = 0; j < currentShowtime.getCol(); j++) {
 								if (currentShowtime.getSeatAvaliability(i, j) == true) {
-									tempGraphic += "X   ";
+									tempGraphic += "X  ";
 								}else if (backend.getCurrentUser() != null) {
 									boolean tempFlag = false;
 									for(int k = 0; k < backend.getCurrentUser().getCart().getItems_in_cart().size(); k++) {
@@ -289,7 +289,7 @@ public class HomePage extends JPanel {
 										tempGraphic += "O  ";
 									}
 								} else {
-									tempGraphic += "O   ";
+									tempGraphic += "O  ";
 								}
 							}
 							tempGraphic += "\n";
