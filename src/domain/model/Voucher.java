@@ -2,9 +2,15 @@ package domain.model;
 
 public class Voucher {
 	private String voucherCode;
-	private boolean used;
 
-	public Voucher() {
+	private double amount;
+	private boolean used;
+	private static int voucherCounter = 1000;
+
+	public Voucher(double value) {
+		voucherCode = Integer.toString(voucherCounter++);
+		amount = value;
+		used = false;
 	}
 
 	// This method sets the voucher as used = true
@@ -40,4 +46,8 @@ public class Voucher {
 	public void setUsed(boolean used) {
 		this.used = used;
 	}
+
+	public double getAmount() { return amount; }
+
+	public void setAmount(double amount) { this.amount = amount; }
 }

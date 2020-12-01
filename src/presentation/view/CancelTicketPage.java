@@ -1,6 +1,7 @@
 package presentation.view;
 
 import domain.model.BackEnd;
+import domain.model.Voucher;
 
 import javax.swing.*;
 import javax.swing.border.MatteBorder;
@@ -21,9 +22,13 @@ public class CancelTicketPage extends JPanel {
 	 */
 	private JLabel registerButton;
 	/**
-	 * Display text label "CardType"
+	 * Display text label on Successful Cancel
 	 */
-	private JLabel cardTypeLabel;
+	private JLabel cancelSuccessLabel;
+	/**
+	 * Display text label on Error Cancel
+	 */
+	private JLabel cancelErrorLabel;
 	/**
 	 * ticketCodeTextField text field
 	 */
@@ -32,22 +37,6 @@ public class CancelTicketPage extends JPanel {
 	 * Display text label "cardNumberField"
 	 */
 	private JLabel cardNumberLabel;
-	/**
-	 * cardSVS password field
-	 */
-	private JPasswordField cardSVSPasswordField;
-	/**
-	 * Display text label "cardSVSField"
-	 */
-	private JLabel cardSVSLabel;
-	/**
-	 * cardExpirationDate text field
-	 */
-	private JTextField cardExpirationDateTextField;
-	/**
-	 * Display text label "cardExpirationDate"
-	 */
-	private JLabel cardExpirationDateLabel;
 	/**
 	 * Back button
 	 */
@@ -82,6 +71,28 @@ public class CancelTicketPage extends JPanel {
 		ticketCodeTextField.setOpaque(true);
 		add(ticketCodeTextField);
 
+		// CREATE CANCEL SUCCESS LABEL
+		cancelSuccessLabel = new JLabel("<html>"
+				+ "Successfully cancelled the ticket"
+				+ "</html>");
+		cancelSuccessLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		cancelSuccessLabel.setForeground(Color.RED);
+		cancelSuccessLabel.setFont(new Font("Arial", Font.PLAIN, 13));
+		cancelSuccessLabel.setBounds(564, 235, 254, 45);
+		cancelSuccessLabel.setVisible(false);
+		add(cancelSuccessLabel);
+
+		// CREATE CANCEL ERROR LABEL
+		cancelErrorLabel = new JLabel("<html>"
+				+ "Could not find the ticket"
+				+ "</html>");
+		cancelErrorLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		cancelErrorLabel.setForeground(Color.RED);
+		cancelErrorLabel.setFont(new Font("Arial", Font.PLAIN, 13));
+		cancelErrorLabel.setBounds(564, 235, 254, 45);
+		cancelErrorLabel.setVisible(false);
+		add(cancelErrorLabel);
+
 		// CREATE CARDNUMBER TEXT LABEL
 		cardNumberLabel = new JLabel("Ticket Code");
 		cardNumberLabel.setBounds(634, 335, 108, 14);
@@ -102,11 +113,22 @@ public class CancelTicketPage extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				String temp = ticketCodeTextField.getText();
+				cancelSuccessLabel.setVisible(false);
+				cancelErrorLabel.setVisible(false);
 				int t = backend.getDataController().checkTicket(Integer.parseInt(temp));
 				if(t != -1) {
+					if(backend.getCurrentGuestUser() != null){
+						Voucher newVoucher = new Voucher(backend.getDataController().getTicketList().get(t).getPayment().getAmount()*0.85);
+						backend.getDataController().addVoucher(newVoucher);
+						JOptionPane.showMessageDialog(frame,"Here is your voucher code: " + newVoucher.getVoucherCode() + " redeemable for $" + newVoucher.getAmount());
+					}
 					backend.getDataController().getTicketList().get(t).getSeat().vacateSeat();
 					backend.getDataController().removeTicket(backend.getDataController().getTicketList().get(t));
+					cancelSuccessLabel.setVisible(true);
+				}else{
+					cancelErrorLabel.setVisible(true);
 				}
+				frame.validate();
 			}
 		});
 		registerButton.setBounds(565, 539, 254, 50);

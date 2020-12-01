@@ -31,6 +31,7 @@ public class DataController {
 		setUserList(new ArrayList<RegisteredUser>());
 		setAnnouncementList(new ArrayList<Announcement>());
 		setAuditoriumList(new ArrayList<Auditorium>());
+		setVoucherList(new ArrayList<Voucher>());
 	}
 
 	/**
@@ -387,9 +388,22 @@ public class DataController {
 	public ArrayList<Voucher> getVoucherList() {
 		return voucherList;
 	}
+
+	public void setVoucherList(ArrayList<Voucher> v) {
+		voucherList = v;
+	}
 	
 	public void removeVoucher(Voucher voucher) {
 		voucherList.remove(voucher);
 	}
 
+    public int checkTicket(int id) {
+		for(int i = 0; i < ticketList.size(); i++) {
+			if(ticketList.get(i).getTicketID() == id) {
+				return i;
+			}
+		}
+
+		return -1;
+    }
 }
