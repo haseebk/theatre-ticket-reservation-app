@@ -60,7 +60,7 @@ public class CancelTicketPage extends JPanel {
 
 		// CREATE TICKET CODE TEXT FIELD
 		ticketCodeTextField = new JTextField();
-		ticketCodeTextField.setBounds(561, 350, 254, 28);
+		ticketCodeTextField.setBounds(554, 350, 254, 28);
 		ticketCodeTextField.setToolTipText("Enter your card number.");
 		ticketCodeTextField.setFont(new Font("Arial", Font.PLAIN, 13));
 		ticketCodeTextField.setBorder(new MatteBorder(0, 0, 3, 0, (Color) Color.LIGHT_GRAY));
@@ -78,7 +78,7 @@ public class CancelTicketPage extends JPanel {
 		cancelSuccessLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		cancelSuccessLabel.setForeground(Color.RED);
 		cancelSuccessLabel.setFont(new Font("Arial", Font.PLAIN, 13));
-		cancelSuccessLabel.setBounds(564, 235, 254, 45);
+		cancelSuccessLabel.setBounds(581, 235, 196, 45);
 		cancelSuccessLabel.setVisible(false);
 		add(cancelSuccessLabel);
 
@@ -89,13 +89,13 @@ public class CancelTicketPage extends JPanel {
 		cancelErrorLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		cancelErrorLabel.setForeground(Color.RED);
 		cancelErrorLabel.setFont(new Font("Arial", Font.PLAIN, 13));
-		cancelErrorLabel.setBounds(564, 235, 254, 45);
+		cancelErrorLabel.setBounds(611, 235, 137, 45);
 		cancelErrorLabel.setVisible(false);
 		add(cancelErrorLabel);
 
 		// CREATE CARDNUMBER TEXT LABEL
 		cardNumberLabel = new JLabel("Ticket Code");
-		cardNumberLabel.setBounds(634, 335, 108, 14);
+		cardNumberLabel.setBounds(627, 335, 108, 14);
 		cardNumberLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		cardNumberLabel.setForeground(Color.WHITE);
 		cardNumberLabel.setFont(new Font("Arial", Font.PLAIN, 16));
@@ -131,7 +131,7 @@ public class CancelTicketPage extends JPanel {
 				frame.validate();
 			}
 		});
-		registerButton.setBounds(565, 539, 254, 50);
+		registerButton.setBounds(554, 420, 254, 50);
 		registerButton.setIcon(new ImageIcon(CancelTicketPage.class.getResource("/enterButton.png")));
 		add(registerButton);
 

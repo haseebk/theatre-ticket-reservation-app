@@ -211,7 +211,7 @@ public class HomePage extends JPanel {
 		});
 		AddToCartButton.setBounds(797, 625, 254, 50);
 		AddToCartButton.setVisible(false);
-		AddToCartButton.setIcon(new ImageIcon(LoginPage.class.getResource("/enterButton.png")));
+		AddToCartButton.setIcon(new ImageIcon(LoginPage.class.getResource("/addToCartButton.png")));
 		add(AddToCartButton);
 
 		// ==========================================
@@ -512,7 +512,7 @@ public class HomePage extends JPanel {
 			welcomeLabel = new JLabel("Welcome, " + backend.getCurrentRegisteredUser().getF_name() + " "
 					+ backend.getCurrentRegisteredUser().getL_name() + "!");
 		} else {
-			welcomeLabel = new JLabel("Welcome Guest!");
+			welcomeLabel = new JLabel("Welcome, Guest!");
 		}
 		welcomeLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		welcomeLabel.setForeground(Color.WHITE);
