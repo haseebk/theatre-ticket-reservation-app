@@ -4,7 +4,8 @@ public class User {
 	/**
 	 * Type of User
 	 */
-	String userType;
+	private String userType;
+	private Cart cart;
 	
 	/**
 	 * Constructor to set the type of user
@@ -12,6 +13,7 @@ public class User {
 	 */
 	User(String t){
 		this.userType = t;
+		this.cart = new Cart();
 	}
 	
 	// Getters and Setters
@@ -21,5 +23,13 @@ public class User {
 	
 	public void setUserType(String userType) {
 		this.userType = userType;
+	}
+
+	public Cart getCart() {
+		return cart;
+	}
+
+	public void setCart(Cart cart) {
+		this.cart = cart;
 	}
 }
