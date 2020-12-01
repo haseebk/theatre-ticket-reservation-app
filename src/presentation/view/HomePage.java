@@ -53,7 +53,7 @@ public class HomePage extends JPanel {
 		noTheatreSelectedLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		noTheatreSelectedLabel.setForeground(Color.RED);
 		noTheatreSelectedLabel.setFont(new Font("HelveticaNeue", Font.PLAIN, 15));
-		noTheatreSelectedLabel.setBounds(798, 392, 254, 45);
+		noTheatreSelectedLabel.setBounds(840, 392, 170, 45);
 		noTheatreSelectedLabel.setVisible(false);
 		add(noTheatreSelectedLabel);
 
@@ -62,7 +62,7 @@ public class HomePage extends JPanel {
 		noShowTimeSelectedLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		noShowTimeSelectedLabel.setForeground(Color.RED);
 		noShowTimeSelectedLabel.setFont(new Font("HelveticaNeue", Font.PLAIN, 15));
-		noShowTimeSelectedLabel.setBounds(798, 392, 254, 45);
+		noShowTimeSelectedLabel.setBounds(829, 392, 192, 45);
 		noShowTimeSelectedLabel.setVisible(false);
 		add(noShowTimeSelectedLabel);
 
@@ -171,7 +171,7 @@ public class HomePage extends JPanel {
 				}
 			}
 		});
-		AddToCartButton.setBounds(1100, 420, 254, 50);
+		AddToCartButton.setBounds(797, 625, 254, 50);
 		AddToCartButton.setVisible(false);
 		AddToCartButton.setIcon(new ImageIcon(LoginPage.class.getResource("/enterButton.png")));
 		add(AddToCartButton);
@@ -380,6 +380,17 @@ public class HomePage extends JPanel {
 		movieDetailsLabel.setEditable(false);
 		add(movieDetailsLabel);
 
+		JTextArea movieSynopsisLabel = new JTextArea("");
+		movieSynopsisLabel.setForeground(Color.WHITE);
+		movieSynopsisLabel.setFont(new Font("Arial", Font.PLAIN, 15));
+		movieSynopsisLabel.setBounds(85, 525, 311, 134);
+		movieSynopsisLabel.setVisible(false);
+		movieSynopsisLabel.setLineWrap(true);
+		movieSynopsisLabel.setWrapStyleWord(true);
+		movieSynopsisLabel.setOpaque(false);
+		movieSynopsisLabel.setEditable(false);
+		add(movieSynopsisLabel);
+
 		// CREATE POSTER CARD VIEW
 		JLabel posterCard = new JLabel("");
 		posterCard.setBounds(85, 235, 182, 268);
@@ -408,10 +419,11 @@ public class HomePage extends JPanel {
 				currentMovie = backend.getDataController().findMovie(temp);
 				currentTheatre = null;
 
-				movieDetailsLabel.setText(currentMovie.getTitle() + "\n\nGenre: "
-						+ currentMovie.getGenre() + "\n\nYear: " + currentMovie.getYear() + "\n\nDirector: "
-						+ currentMovie.getDirector() + "\n\nMovie Length: " + currentMovie.getMovieLength()
-						+ " mins\n\nRating: " + currentMovie.getRating());
+				movieDetailsLabel.setText(currentMovie.getTitle() + "\n\nGenre: " + currentMovie.getGenre()
+						+ "\n\nYear: " + currentMovie.getYear() + "\n\nDirector: " + currentMovie.getDirector()
+						+ "\n\nMovie Length: " + currentMovie.getMovieLength() + " mins\n\nRating: "
+						+ currentMovie.getRating());
+
 				posterCard.setIcon(new ImageIcon(HomePage.class.getResource("/" + currentMovie.getPoster() + ".jpg")));
 
 				movieDetailsLabel.setVisible(true);
@@ -440,15 +452,15 @@ public class HomePage extends JPanel {
 		// CREATE WELCOME TEXT LABEL
 		JLabel welcomeLabel;
 		if (backend.getCurrentUser() == null) {
-			welcomeLabel = new JLabel("Welcome Guest");
+			welcomeLabel = new JLabel("Welcome, Guest!");
 		} else {
-			welcomeLabel = new JLabel(
-					"Welcome " + backend.getCurrentUser().getF_name() + " " + backend.getCurrentUser().getL_name());
+			welcomeLabel = new JLabel("Welcome, " + backend.getCurrentUser().getF_name() + " "
+					+ backend.getCurrentUser().getL_name() + "!");
 		}
 		welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		welcomeLabel.setForeground(Color.WHITE);
-		welcomeLabel.setFont(new Font("HelveticaNeue", Font.PLAIN, 25));
-		welcomeLabel.setBounds(20, 20, 500, 20);
+		welcomeLabel.setFont(new Font("Arial", Font.PLAIN, 25));
+		welcomeLabel.setBounds(140, 5, 541, 50);
 		add(welcomeLabel);
 
 		// CREATE LOGOUT BUTTON
@@ -476,6 +488,9 @@ public class HomePage extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				System.out.println("View Cart");
+				CartPage cartPanel = new CartPage(frame, backend);
+				frame.setContentPane(cartPanel);
+				frame.revalidate();
 			}
 		});
 		cartButton.setBounds(1366 - 32 - 30, 14, 32, 32);

@@ -6,7 +6,6 @@ import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -204,7 +203,7 @@ public class RegisterPage extends JPanel {
 				Boolean validName = true;
 				Boolean samePasswords = true;
 				Boolean uniqueUser = true;
-				
+
 				/**
 				 * verify sign up details and update backend + database
 				 */
@@ -212,7 +211,7 @@ public class RegisterPage extends JPanel {
 				LoginPage loginPanel = new LoginPage(frame, backend);
 				frame.setContentPane(loginPanel);
 				frame.revalidate();
-				
+
 			}
 		});
 		registerButton.setBounds(565, 539, 254, 50);

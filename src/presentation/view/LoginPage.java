@@ -153,10 +153,10 @@ public class LoginPage extends JPanel {
 				String user = usernameTextField.getText();
 				String pass = String.valueOf(passwordField.getPassword());
 				System.out.println("User inputed:" + user + " " + pass);
-				if(backend.verifyLogin(user,pass) != null) {
+				if (backend.verifyLogin(user, pass) != null) {
 					HomePage homePanel = new HomePage(frame, backend);
 					frame.setContentPane(homePanel);
-				}else{
+				} else {
 					invalidLoginErrorLabel.setVisible(true);
 				}
 				frame.revalidate();

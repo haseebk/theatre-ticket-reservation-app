@@ -40,7 +40,7 @@ public class FrontEnd extends JFrame {
 	}
 
 	public void displayGUI() {
-		getMainFrame().setVisible(true);		
+		getMainFrame().setVisible(true);
 	}
 
 }

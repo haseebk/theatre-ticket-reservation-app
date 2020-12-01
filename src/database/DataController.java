@@ -65,15 +65,16 @@ public class DataController {
 
 	/**
 	 * Finds the movie with the desired title
+	 * 
 	 * @param title Title of desired movie
 	 * @return Returns the movie if found, null if not found
 	 */
-	public Movie findMovie(String title){
-		if(title == null){
+	public Movie findMovie(String title) {
+		if (title == null) {
 			return null;
 		}
-		for(int i = 0; i < movieList.size(); i++){
-			if(movieList.get(i).getTitle().compareTo(title) == 0){
+		for (int i = 0; i < movieList.size(); i++) {
+			if (movieList.get(i).getTitle().compareTo(title) == 0) {
 				return movieList.get(i);
 			}
 		}
@@ -82,15 +83,16 @@ public class DataController {
 
 	/**
 	 * Finds the theatre with the desired name
+	 * 
 	 * @param name Name of desired theatre
 	 * @return Returns the theatre if found, null if not found
 	 */
-	public Theatre findTheatre(String name){
-		if(name == null){
+	public Theatre findTheatre(String name) {
+		if (name == null) {
 			return null;
 		}
-		for(int i = 0; i < theatreList.size(); i++){
-			if(theatreList.get(i).getT_name().compareTo(name) == 0){
+		for (int i = 0; i < theatreList.size(); i++) {
+			if (theatreList.get(i).getT_name().compareTo(name) == 0) {
 				return theatreList.get(i);
 			}
 		}
@@ -99,17 +101,19 @@ public class DataController {
 
 	/**
 	 * Finds the all showtimes with playing the movies and the specific theatre
-	 * @param searchMovie desired movie
+	 * 
+	 * @param searchMovie   desired movie
 	 * @param searchTheatre desired theatre
 	 * @return List of all showtimes playing the movie at the theatre
 	 */
-	public ArrayList<Showtime> findAllShowtime(Movie searchMovie, Theatre searchTheatre){
-		if(searchTheatre == null || searchMovie == null){
+	public ArrayList<Showtime> findAllShowtime(Movie searchMovie, Theatre searchTheatre) {
+		if (searchTheatre == null || searchMovie == null) {
 			return null;
 		}
 		ArrayList<Showtime> tempShowtime = new ArrayList<>();
-		for(int i = 0; i < showtimeList.size(); i++){
-			if(showtimeList.get(i).getMovie() == searchMovie && showtimeList.get(i).getAuditorium().getTheatre() == searchTheatre){
+		for (int i = 0; i < showtimeList.size(); i++) {
+			if (showtimeList.get(i).getMovie() == searchMovie
+					&& showtimeList.get(i).getAuditorium().getTheatre() == searchTheatre) {
 				tempShowtime.add(showtimeList.get(i));
 			}
 		}
@@ -117,20 +121,23 @@ public class DataController {
 	}
 
 	/**
-	 * Finds the specific with playing the movies and the specific theatre on the specific date
-	 * @param searchMovie desired movie
+	 * Finds the specific with playing the movies and the specific theatre on the
+	 * specific date
+	 * 
+	 * @param searchMovie   desired movie
 	 * @param searchTheatre desired theatre
-	 * @param date desired date
+	 * @param date          desired date
 	 * @return List of all showtimes playing the movie at the theatre
 	 */
-	public Showtime findShowtime(Movie searchMovie, Theatre searchTheatre, Date date){
-		if(searchTheatre == null || searchMovie == null){
+	public Showtime findShowtime(Movie searchMovie, Theatre searchTheatre, Date date) {
+		if (searchTheatre == null || searchMovie == null) {
 			return null;
 		}
 		ArrayList<Showtime> tempShowtime = new ArrayList<>();
-		for(int i = 0; i < showtimeList.size(); i++){
-			if(showtimeList.get(i).getMovie() == searchMovie && showtimeList.get(i).getAuditorium().getTheatre() == searchTheatre &&
-				showtimeList.get(i).getShowDate().getDate().compareTo(date.getDate()) == 0){
+		for (int i = 0; i < showtimeList.size(); i++) {
+			if (showtimeList.get(i).getMovie() == searchMovie
+					&& showtimeList.get(i).getAuditorium().getTheatre() == searchTheatre
+					&& showtimeList.get(i).getShowDate().getDate().compareTo(date.getDate()) == 0) {
 				return showtimeList.get(i);
 			}
 		}
@@ -139,18 +146,20 @@ public class DataController {
 
 	/**
 	 * Finds the theatres are currently playing this movie
-	 * @param searchMovie movie we are searching which theatres are currently playing
+	 * 
+	 * @param searchMovie movie we are searching which theatres are currently
+	 *                    playing
 	 * @return all the theatres playing the movie
 	 */
-	public ArrayList<Theatre> findTheatresPlayingMovie(Movie searchMovie){
-		if(searchMovie == null){
+	public ArrayList<Theatre> findTheatresPlayingMovie(Movie searchMovie) {
+		if (searchMovie == null) {
 			return null;
 		}
 		ArrayList<Theatre> searchList = new ArrayList<Theatre>();
-		for(int i = 0; i < showtimeList.size(); i++){
+		for (int i = 0; i < showtimeList.size(); i++) {
 			System.out.println(showtimeList.get(i).getMovie().getTitle());
-			if(showtimeList.get(i).getMovie() == searchMovie){
-				if(!searchList.contains(showtimeList.get(i).getAuditorium().getTheatre())){
+			if (showtimeList.get(i).getMovie() == searchMovie) {
+				if (!searchList.contains(showtimeList.get(i).getAuditorium().getTheatre())) {
 					searchList.add(showtimeList.get(i).getAuditorium().getTheatre());
 				}
 			}
@@ -229,103 +238,115 @@ public class DataController {
 	public ArrayList<Theatre> getTheatreList() {
 		return theatreList;
 	}
-	
+
 	/**
 	 * Setter for list of theatres
+	 * 
 	 * @param theatreList arraylist of theatres
 	 */
 	public void setTheatreList(ArrayList<Theatre> theatreList) {
 		this.theatreList = theatreList;
 	}
-	
+
 	/**
 	 * Add theatre to list of theatres
+	 * 
 	 * @param theatre theatre to be added
 	 */
 	public void addTheatre(Theatre theatre) {
 		theatreList.add(theatre);
 	}
-	
+
 	/**
 	 * Remove theatre from list of theatres
+	 * 
 	 * @param theatre theatre to be removed
 	 */
 	public void removeTheatre(Theatre theatre) {
 		theatreList.remove(theatre);
 	}
-	
+
 	/**
 	 * Getter for list of tickets
+	 * 
 	 * @return arraylist of tickets
 	 */
 	public ArrayList<Ticket> getTicketList() {
 		return ticketList;
 	}
-	
+
 	/**
 	 * Setter for list of tickets
+	 * 
 	 * @param ticketList arraylist of tickets
 	 */
 	public void setTicketList(ArrayList<Ticket> ticketList) {
 		this.ticketList = ticketList;
 	}
-	
+
 	/**
 	 * Add ticket to list of tickets
+	 * 
 	 * @param ticket ticket to be added
 	 */
 	public void addTicket(Ticket ticket) {
 		ticketList.add(ticket);
 	}
-	
+
 	/**
 	 * Remove ticket from list of tickets
+	 * 
 	 * @param ticket ticket to be removed
 	 */
 	public void removeTicket(Ticket ticket) {
 		ticketList.remove(ticket);
 	}
-	
+
 	/**
 	 * Getter for list of users
+	 * 
 	 * @return arraylist of users
 	 */
 	public ArrayList<RegisteredUser> getUserList() {
 		return userList;
 	}
-	
+
 	/**
 	 * Setter for list of users
+	 * 
 	 * @param userList arraylist of users
 	 */
 	public void setUserList(ArrayList<RegisteredUser> userList) {
 		this.userList = userList;
 	}
-	
+
 	/**
 	 * Add user to list of users
+	 * 
 	 * @param user user to be added
 	 */
 	public void addUser(RegisteredUser user) {
 		userList.add(user);
 	}
-	
+
 	/**
 	 * Remove user from list of users
+	 * 
 	 * @param user user to be removed
 	 */
 	public void removeUser(RegisteredUser user) {
 		userList.remove(user);
 	}
-	
+
 	/**
 	 * Getter for list of announcements
+	 * 
 	 * @return list of announcements
 	 */
 	public ArrayList<Announcement> getAnnouncementList() {
 		return announcementList;
 	}
-	
+
 	/**
 	 * 
 	 * @param announcementList

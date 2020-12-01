@@ -19,12 +19,11 @@ public class Seat {
 	public void bookSeat() {
 		seatTaken = true;
 	}
-	
+
 	public void vacateSeat() {
 		seatTaken = false;
 	}
-	
-	
+
 	// Getters and Setters
 	public int getRow() {
 		return row;
