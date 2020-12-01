@@ -141,7 +141,7 @@ public class DataController {
 		for (int i = 0; i < showtimeList.size(); i++) {
 			if (showtimeList.get(i).getMovie() == searchMovie
 					&& showtimeList.get(i).getAuditorium().getTheatre() == searchTheatre
-					&& showtimeList.get(i).getShowDate().getDate().compareTo(date.getDate()) == 0) {
+					&& showtimeList.get(i).getShowDate().toString().compareTo(date.toString()) == 0) {
 				return showtimeList.get(i);
 			}
 		}
@@ -398,9 +398,16 @@ public class DataController {
 	public void removeVoucher(Voucher voucher) {
 		voucherList.remove(voucher);
 	}
-	public Boolean checkTicketID() {
-		
-		return false;
+
+	public int checkTicket(int id) {
+
+		for(int i = 0; i < ticketList.size(); i++) {
+			if(ticketList.get(i).getTicketID() == id) {
+				return i;
+			}
+		}
+
+		return -1;
 	}
 
 	public FinancialInstitution getInst() {
