@@ -4,6 +4,7 @@ import domain.model.Movie;
 import domain.model.RegisteredUser;
 import domain.model.BankingInfo;
 import domain.model.Date;
+import domain.model.FinancialInstitution;
 import domain.model.Showtime;
 import domain.model.Theatre;
 import domain.model.Auditorium;
@@ -20,6 +21,7 @@ public class DatabasePopulator {
 	private Movie paddington;
 	private Showtime s1;
 	private Showtime s2;
+	private FinancialInstitution inst;
 
 	public DatabasePopulator() {
 		dbController = DataController.getOnlyInstance();
@@ -141,9 +143,9 @@ public class DatabasePopulator {
 		Date d3 = new Date(3, "June", 2020);
 		Date d4 = new Date(4, "July", 2020);
 		RegisteredUser u1 = new RegisteredUser("V.Kapoor", "1234", "Vaibhav", "Kapoor", "vk@email.com", b1, d1);
-		RegisteredUser u2 = new RegisteredUser("W.Kerr", "1235", "William", "Kerr", "wk@email.com", b2, d2);
-		RegisteredUser u3 = new RegisteredUser("E.Kim", "1236", "Eddie", "Kim", "ek@email.com", b3, d3);
-		RegisteredUser u4 = new RegisteredUser("H.Khan", "1237", "Haseeb", "Khan", "hk@email.com", b4, d4);
+		RegisteredUser u2 = new RegisteredUser("W.Kerr", "1234", "William", "Kerr", "wk@email.com", b2, d2);
+		RegisteredUser u3 = new RegisteredUser("E.Kim", "1234", "Eddie", "Kim", "ek@email.com", b3, d3);
+		RegisteredUser u4 = new RegisteredUser("H.Khan", "1234", "Haseeb", "Khan", "hk@email.com", b4, d4);
 
 		dbController.addUser(u1);
 		dbController.addUser(u2);
