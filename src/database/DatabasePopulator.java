@@ -56,8 +56,8 @@ public class DatabasePopulator {
 		a2.add(new Auditorium(9, 7));
 		a2.add(new Auditorium(7, 8));
 
-		Theatre t1 = new Theatre("Theatre 1", 1, a1, "123456789");
-		Theatre t2 = new Theatre("Theatre 2", 2, a2, "987654321");
+		Theatre t1 = new Theatre("Theatre 1", 1, a1, "123456789", " Some Address 1");
+		Theatre t2 = new Theatre("Theatre 2", 2, a2, "987654321", "Some Address 2");
 		loadShowtimes(a1, a2);
 
 		a1.get(0).setTheatre(t1);
@@ -92,6 +92,8 @@ public class DatabasePopulator {
 		Payment p2 = new Payment(2, 15.99, b2);
 		Ticket t1 = new Ticket(12, p1, s1.getMovie(), s1, s1.getSeats()[1][2]);
 		Ticket t2 = new Ticket(13, p2, s2.getMovie(), s2, s2.getSeats()[3][3]);
+		s1.getSeats()[1][2].bookSeat();
+		s2.getSeats()[3][3].bookSeat();
 
 		dbController.addTicket(t1);
 		dbController.addTicket(t2);
