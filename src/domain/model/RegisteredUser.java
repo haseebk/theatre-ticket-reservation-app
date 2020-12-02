@@ -23,6 +23,16 @@ public class RegisteredUser extends User {
 		bankInfo = b;
 		adminFeeDate = a;
 	}
+	public RegisteredUser(int id,String u, String p, String f, String l, String e, BankingInfo b, Date a) {
+		super(id,"Registered");
+		username = u;
+		password = p;
+		f_name = f;
+		l_name = l;
+		email = e;
+		bankInfo = b;
+		adminFeeDate = a;
+	}
 
 	// Getters and Setters
 	public String getUsername() {

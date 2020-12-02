@@ -163,7 +163,7 @@ public class DatabasePopulator{
 		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 
 		String line;
-		String[] argList = new String[9];
+		String[] argList = new String[10];
 
 		while((line = br.readLine()) != null) {
 			argList = line.split(":");
@@ -171,30 +171,32 @@ public class DatabasePopulator{
 				System.out.println(argList[i]);
 			}
 
-			Date foundDate = new Date(Integer.parseInt(argList[6]),Integer.parseInt(argList[7]),Integer.parseInt(argList[8]));
-			dbController.addUser(new RegisteredUser(argList[0],argList[1],argList[2],argList[3],argList[4],dbController.searchBankingInfo(Integer.parseInt(argList[5])),foundDate));
+			Date foundDate = new Date(Integer.parseInt(argList[7]),Integer.parseInt(argList[8]),Integer.parseInt(argList[9]));
+			dbController.addUser(new RegisteredUser(Integer.parseInt(argList[0]),argList[1],argList[2],argList[3],argList[4],argList[5],dbController.searchBankingInfo(Integer.parseInt(argList[6])),foundDate));
 		}
 		fstream.close();
 	}
 
-	public void loadAnnouncements() {
-		Date da1 = new Date(29, 11, 2020);
-		Date da2 = new Date(20, 12, 2020);
-		Date da3 = new Date(15, 12, 2020);
-		Date da4 = new Date(27, 12, 2020);
-		Date da5 = new Date(20, 11, 2020);
-		Date da6 = new Date(29, 11, 2020);
-		Date da7 = new Date(15, 11, 2020);
-		Date da8 = new Date(27, 11, 2020);
-		Announcement an1 = new Announcement(da1,da2, spiderverse);
-		Announcement an2 = new Announcement(da3,da4, hereditary);
-		Announcement an3 = new Announcement(da5,da6, getout);
-		Announcement an4 = new Announcement(da7,da8, paddington);
+	public void loadAnnouncements() throws IOException{
+		FileInputStream fstream = new FileInputStream("data/announcement_data.txt");
+		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 
-		dbController.addAnnouncement(an1);
-		dbController.addAnnouncement(an2);
-		dbController.addAnnouncement(an3);
-		dbController.addAnnouncement(an4);
+		String line;
+		String[] argList = new String[8];
+
+		while((line = br.readLine()) != null) {
+			argList = line.split(":");
+			for(int i = 0; i < argList.length; i++){
+				System.out.println(argList[i]);
+			}
+			Date foundDate1 = new Date(Integer.parseInt(argList[1]),Integer.parseInt(argList[2]),Integer.parseInt(argList[3]));
+			Date foundDate2 = new Date(Integer.parseInt(argList[4]),Integer.parseInt(argList[5]),Integer.parseInt(argList[6]));
+			Movie foundMovie = dbController.searchMovie(Integer.parseInt(argList[7]));
+			Announcement temp = new Announcement(Integer.parseInt(argList[0]),foundDate1,foundDate2,foundMovie);
+			dbController.addAnnouncement(temp);
+			foundMovie.setMovieAnnouncement(temp);
+		}
+		fstream.close();
 	}
 
 	public void loadBankInfo() throws IOException{
