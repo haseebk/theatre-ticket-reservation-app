@@ -15,7 +15,11 @@ public class Voucher {
 
 	public Voucher(int id, double value, boolean use) {
 		voucherCode = Integer.toString(voucherCounter++);
-		voucherCounter++;
+		if(id > voucherCounter){
+			voucherCounter = id+1;
+		}else {
+			voucherCounter++;
+		}
 		amount = value;
 		used = use;
 	}

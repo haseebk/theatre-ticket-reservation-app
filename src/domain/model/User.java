@@ -28,7 +28,11 @@ public class User {
 	 */
 	User(int id, String t) {
 		this.userID = id;
-		userCounter++;
+		if(id > userCounter){
+			userCounter = id+1;
+		}else {
+			userCounter++;
+		}
 		this.userType = t;
 		this.cart = new Cart();
 	}

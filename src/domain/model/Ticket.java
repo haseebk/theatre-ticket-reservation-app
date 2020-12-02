@@ -21,7 +21,11 @@ public class Ticket {
 
 	public Ticket(int id, Payment p, Movie m, Showtime s, Seat s1, Receipt r) {
 		ticketID = id;
-		ticketCounter++;
+		if(id> ticketCounter){
+			ticketCounter = id+1;
+		}else {
+			ticketCounter++;
+		}
 		payment = p;
 		the_movie = m;
 		showtime = s;

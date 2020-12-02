@@ -453,6 +453,7 @@ public class PaymentPage extends JPanel {
 		//Creates Receipt
 		Date nowDate = new Date(LocalDate.now().getDayOfMonth(),LocalDate.now().getMonthValue(),LocalDate.now().getYear());
 		Receipt r = new Receipt(backend.getCurrentUser().getCart().getPayment(),nowDate,ticketList);
+		backend.getDataController().addReceipt(r);
 
 		if(backend.getCurrentRegisteredUser() != null){
 			r.emailReceipt(backend.getCurrentRegisteredUser().getEmail());

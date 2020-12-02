@@ -522,6 +522,8 @@ public class DataController {
 
 	public void addReceipt(Receipt receiptList) { this.receiptList.add(receiptList); }
 
+	public void removeReceipt(Receipt receiptList) { this.receiptList.remove(receiptList); }
+
 
 	public int checkTicket(int id) {
 

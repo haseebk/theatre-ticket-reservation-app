@@ -1,6 +1,8 @@
 package presentation.view;
 
 import domain.model.BackEnd;
+import domain.model.Showtime;
+import domain.model.Ticket;
 import domain.model.Voucher;
 
 import javax.swing.*;
@@ -164,7 +166,11 @@ public class CancelTicketPage extends JPanel {
 								+ " redeemable for $" + newVoucher.getAmount());
 					}
 					backend.getDataController().getTicketList().get(t).getSeat().vacateSeat();
-					backend.getDataController().removeTicket(backend.getDataController().getTicketList().get(t));
+					Ticket tempTicket = backend.getDataController().getTicketList().get(t);
+					tempTicket.getShowtime().vacantSeat(tempTicket.getSeat().getRow(),tempTicket.getSeat().getSeatNum());
+					tempTicket.getShowtime().setTotalAvaliableSeats(tempTicket.getShowtime().getTotalAvaliableSeats() + 1);
+					backend.getDataController().removeReceipt(tempTicket.getReceipt());
+					backend.getDataController().removeTicket(tempTicket);
 					cancelSuccessLabel.setVisible(true);
 				} else {
 					//Couldn't find ticket

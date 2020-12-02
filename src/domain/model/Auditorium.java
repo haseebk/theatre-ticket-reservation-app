@@ -12,6 +12,11 @@ public class Auditorium {
 
 	public Auditorium(int aID, int r, int c, Theatre theatre) {
 		auditoriumID = aID;
+		if(aID > auditoriumCounter){
+			auditoriumCounter = aID+1;
+		}else {
+			auditoriumCounter++;
+		}
 		num_of_rows = r;
 		num_of_cols = c;
 		totalAvaliableSeats = r * c;

@@ -25,7 +25,11 @@ public class Showtime {
 
 	public Showtime(int id, Movie mov, Auditorium a, Date d , int h, int m) {
 		showtimeID = id++;
-		showtimeCounter++;
+		if(id> showtimeCounter){
+			showtimeCounter = id+1;
+		}else {
+			showtimeCounter++;
+		}
 		showDate = d;
 		auditorium = a;
 		hour = h;
@@ -198,6 +202,8 @@ public class Showtime {
 	public int getMinutes() { return minutes; }
 
 	public void setMinutes(int minutes) { this.minutes = minutes; }
+
+	public void setTotalAvaliableSeats(int totalAvaliableSeats) { this.totalAvaliableSeats = totalAvaliableSeats; }
 
 	@Override
 	public String toString() {
