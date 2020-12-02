@@ -8,6 +8,7 @@ public class RegisteredUser extends User {
 	String email;
 	BankingInfo bankInfo;
 	Date adminFeeDate;
+	boolean feePayed;
 
 	public RegisteredUser() {
 		super("Registered");
@@ -22,6 +23,7 @@ public class RegisteredUser extends User {
 		email = e;
 		bankInfo = b;
 		adminFeeDate = a;
+		feePayed = false;
 	}
 	public RegisteredUser(int id,String u, String p, String f, String l, String e, BankingInfo b, Date a) {
 		super(id,"Registered");
@@ -89,5 +91,13 @@ public class RegisteredUser extends User {
 
 	public void setAdminFeeDate(Date a) {
 		this.adminFeeDate = a;
+	}
+
+	public boolean isFeePayed() {
+		return feePayed;
+	}
+
+	public void setFeePayed(boolean feePayed) {
+		this.feePayed = feePayed;
 	}
 }

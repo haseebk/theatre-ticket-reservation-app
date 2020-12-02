@@ -83,9 +83,9 @@ public class CartPage extends JPanel {
 				frame.revalidate();
 			}
 		});
-		if(backend.getCurrentUser().getCart().getItems_in_cart().size() == 0){
+		if (backend.getCurrentUser().getCart().getItems_in_cart().size() == 0){
 			checkoutButton.setVisible(false);
-		}else{
+		} else{
 			checkoutButton.setVisible(true);
 		}
 		add(checkoutButton);
