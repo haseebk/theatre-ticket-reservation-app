@@ -1,6 +1,7 @@
 package domain.model;
 
 public class User {
+
 	private int userID;
 	private static int userCounter = 0;
 	/**
@@ -48,4 +49,8 @@ public class User {
 	public void setCart(Cart cart) {
 		this.cart = cart;
 	}
+
+	public int getUserID() { return userID; }
+
+	public void setUserID(int userID) { this.userID = userID; }
 }
