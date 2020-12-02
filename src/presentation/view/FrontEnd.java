@@ -3,8 +3,11 @@ package presentation.view;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 
 import javax.swing.JFrame;
+
+import database.DatabaseWriter;
 import domain.model.BackEnd;
 import presentation.view.LoginPage;
 
@@ -25,7 +28,13 @@ public class FrontEnd extends JFrame {
 		getMainFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getMainFrame().addWindowListener(new WindowAdapter(){
             public void windowClosing(WindowEvent e){
-                System.out.println("Closing application");
+				DatabaseWriter dw = new DatabaseWriter();
+				try {
+					dw.writeDatabase();
+				} catch (IOException ex) {
+					ex.printStackTrace();
+				}
+				System.out.println("Closing application");
             }
         });
 		getMainFrame().setSize(1366, 768);

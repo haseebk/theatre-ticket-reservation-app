@@ -26,11 +26,19 @@ public class Showtime {
 <<<<<<< HEAD
 	public Showtime(int id, Movie mov, Auditorium a, Date d , int h, int m) {
 		showtimeID = id++;
+<<<<<<< HEAD
 		showtimeCounter++;
 =======
 	public Showtime(Date d, Auditorium a, Movie mov, int h, int m) {
 		showtimeID = showtimeCounter++;
 >>>>>>> 1ea21d7878daeedbfd7d436f93d9e56a8138bceb
+=======
+		if(id> showtimeCounter){
+			showtimeCounter = id+1;
+		}else {
+			showtimeCounter++;
+		}
+>>>>>>> experimental-w
 		showDate = d;
 		auditorium = a;
 		hour = h;
@@ -213,6 +221,8 @@ public class Showtime {
 	public int getMinutes() { return minutes; }
 
 	public void setMinutes(int minutes) { this.minutes = minutes; }
+
+	public void setTotalAvaliableSeats(int totalAvaliableSeats) { this.totalAvaliableSeats = totalAvaliableSeats; }
 
 	@Override
 	public String toString() {

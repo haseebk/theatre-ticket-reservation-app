@@ -32,12 +32,16 @@ public class BankingInfo {
 
 	public BankingInfo(int i, String c, String ct, String cn, String cs, String ce) {
 		this.bankID = i;
+		if(i > bankInfoCounter){
+			bankInfoCounter = i+1;
+		}else {
+			bankInfoCounter++;
+		}
 		customerName = c;
 		cardType = ct;
 		cardNumber = cn;
 		cardSVS = cs;
 		cardExpirationDate = ce;
-		bankInfoCounter++;
 	}
 	public BankingInfo( String c, String ct, String cn, String cs, String ce) {
 		this.bankID = bankInfoCounter++;

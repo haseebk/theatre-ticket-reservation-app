@@ -19,6 +19,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Vector;
+import java.time.LocalDate;
 
 public class PaymentPage extends JPanel {
 
@@ -26,6 +27,8 @@ public class PaymentPage extends JPanel {
 	 *
 	 */
 	private static final long serialVersionUID = 1L;
+
+
 
 	/**
 	 * Display register button
@@ -552,25 +555,34 @@ public class PaymentPage extends JPanel {
 		System.out.println("entered payment");
 		// Cart c = backend.getCurrentUser().getCart();
 		backend.getCurrentUser().getCart().setPayment(new Payment(costAmount, bankingInfo));
-		String ticketNumbers = "";
+		ArrayList<Ticket> ticketList = new ArrayList<Ticket>();
 		for (int i = 0; i < backend.getCurrentUser().getCart().getItems_in_cart().size(); i++) {
 			Movie movie = backend.getCurrentUser().getCart().getItems_in_cart().get(i).getBookedMovie();
 			Showtime showtime = backend.getCurrentUser().getCart().getItems_in_cart().get(i).getBookedTime();
 			Seat seat = backend.getCurrentUser().getCart().getItems_in_cart().get(i).getBookedSeat();
 			showtime.bookSeat(seat.getRow(), seat.getSeatNum());
 			Ticket t = new Ticket(backend.getCurrentUser().getCart().getPayment(), movie, showtime, seat);
-			ticketNumbers += "Ticket Number: " + t.getTicketID() + ", Movie: " + t.getThe_movie().getTitle()
-					+ ", Theatre: " + t.getShowtime().getAuditorium().getTheatre().getT_name() + ", Auditorium: "
-					+ t.getShowtime().getAuditorium().getAuditoriumID() + ", Seat: " + t.getSeat() + "\n";
-			// ticketsCreated.add(t);
-			t.emailTicket(backend.getCurrentRegisteredUser().getEmail());
+			ticketList.add(t);
+			if(backend.getCurrentRegisteredUser() != null){
+				t.emailTicket(backend.getCurrentRegisteredUser().getEmail());
+			}else {
+				t.emailTicket(emailTextField.getText());
+			}
 			backend.getDataController().addTicket(t);
 		}
+
+		//Creates Receipt
+		Date nowDate = new Date(LocalDate.now().getDayOfMonth(),LocalDate.now().getMonthValue(),LocalDate.now().getYear());
+		Receipt r = new Receipt(backend.getCurrentUser().getCart().getPayment(),nowDate,ticketList);
+		backend.getDataController().addReceipt(r);
+
+		if(backend.getCurrentRegisteredUser() != null){
+			r.emailReceipt(backend.getCurrentRegisteredUser().getEmail());
+		}else {
+			r.emailReceipt(emailTextField.getText());
+		}
 		/* Add prompt to show ticket and success message */
-		JOptionPane.showMessageDialog(null,
-				"Ticket has been successfully purchased. Purchase Cost: "
-						+ String.format("%.2f", backend.getCurrentUser().getCart().getPayment().getAmount())
-						+ "\nThe following tickets have been emailed to the email provided:\n" + ticketNumbers,
+		JOptionPane.showMessageDialog(null, r.receiptToString(),
 				"Ticket Has Been Purchased", JOptionPane.INFORMATION_MESSAGE);
 		backend.getCurrentUser().setCart(new Cart());
 		HomePage homePanel = new HomePage(frame, backend);

@@ -66,11 +66,11 @@ public class LoginPage extends JPanel {
 		setLayout(null);
 
 		// CREATE TITLE TEXT LABEL
-		titleLabel = new JLabel("MOVIE THEATRE TITLE");
+		titleLabel = new JLabel("MOVIE REGISTRATION APP");
 		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		titleLabel.setForeground(Color.WHITE);
 		titleLabel.setFont(new Font("Arial", Font.PLAIN, 20));
-		titleLabel.setBounds(500, 250, 350, 30);
+		titleLabel.setBounds(515, 250, 350, 30);
 		add(titleLabel);
 
 		// CREATE GUEST LOGIN BUTTON

@@ -57,7 +57,7 @@ public class Movie {
 	}
 >>>>>>> 1ea21d7878daeedbfd7d436f93d9e56a8138bceb
 
-	public Movie(String title, String genre, int year, String director, int movieLength, double rating, String poster, double p, String syn) {
+	public Movie(String title, String genre, int year, String director, double movieLength, double rating, String poster, double p, String syn) {
 		this.movieID = movieCounter++;
 		this.title = title;
 		this.genre = genre;
@@ -71,7 +71,7 @@ public class Movie {
 		this.movieAnnouncement = null;
 	}
 
-	public Movie(int id,String title, String genre, int year, String director, int movieLength, double rating, String poster, double p, String syn) {
+	public Movie(int id,String title, String genre, int year, String director, double movieLength, double rating, String poster, double p, String syn) {
 		this.movieID = id;
 		movieCounter++;
 		this.title = title;
