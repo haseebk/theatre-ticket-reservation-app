@@ -114,6 +114,9 @@ public class RegisterPage extends JPanel {
 		// CREATE BACK BUTTON
 		backButton = new JLabel("");
 		backButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		/**
+		 * When back button is pressed, change screen to login screen
+		 */
 		backButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -122,6 +125,9 @@ public class RegisterPage extends JPanel {
 				frame.revalidate();
 			}
 		});
+		backButton.setBounds(30, 30, 50, 50);
+		backButton.setIcon(new ImageIcon(RegisterPage.class.getResource("/backButton.png")));
+		add(backButton);
 
 		// CREATE FULL NAME TEXT FIELD
 		fullNameTextField = new JTextField();
@@ -249,6 +255,7 @@ public class RegisterPage extends JPanel {
 		emailLabel.setForeground(Color.WHITE);
 		emailLabel.setFont(new Font("Arial", Font.PLAIN, 16));
 		add(emailLabel);
+
 		// CREATE CARDTYPE TEXT LABEL
 		cardTypeLabel = new JLabel("Type");
 		cardTypeLabel.setBounds(464, 449, 57, 14);
@@ -256,6 +263,7 @@ public class RegisterPage extends JPanel {
 		cardTypeLabel.setForeground(Color.WHITE);
 		cardTypeLabel.setFont(new Font("Arial", Font.PLAIN, 16));
 		add(cardTypeLabel);
+
 		// CREATE CARDNUMBER TEXT LABEL
 		cardNumberLabel = new JLabel("Card Number");
 		cardNumberLabel.setBounds(634, 449, 108, 14);
@@ -263,6 +271,7 @@ public class RegisterPage extends JPanel {
 		cardNumberLabel.setForeground(Color.WHITE);
 		cardNumberLabel.setFont(new Font("Arial", Font.PLAIN, 16));
 		add(cardNumberLabel);
+
 		// CREATE CARD SVS TEXT LABEL
 		cardSVSLabel = new JLabel("CCV");
 		cardSVSLabel.setBounds(901, 449, 50, 14);
@@ -270,6 +279,7 @@ public class RegisterPage extends JPanel {
 		cardSVSLabel.setForeground(Color.WHITE);
 		cardSVSLabel.setFont(new Font("Arial", Font.PLAIN, 16));
 		add(cardSVSLabel);
+
 		// CREATE CARDEXPIRATIONDATE TEXT LABEL
 		cardExpirationDateLabel = new JLabel("EXP");
 		cardExpirationDateLabel.setBounds(840, 449, 38, 14);
@@ -277,6 +287,7 @@ public class RegisterPage extends JPanel {
 		cardExpirationDateLabel.setForeground(Color.WHITE);
 		cardExpirationDateLabel.setFont(new Font("Arial", Font.PLAIN, 16));
 		add(cardExpirationDateLabel);
+
 		// CREATE PASSWORD TEXT LABEL
 		passwordLabel = new JLabel("Password");
 		passwordLabel.setBounds(522, 345, 77, 14);
@@ -284,6 +295,7 @@ public class RegisterPage extends JPanel {
 		passwordLabel.setForeground(Color.WHITE);
 		passwordLabel.setFont(new Font("Arial", Font.PLAIN, 16));
 		add(passwordLabel);
+
 		// CREATE PASSWORD TEXT LABEL
 		passwordLabel2 = new JLabel("Confirm Password");
 		passwordLabel2.setBounds(757, 345, 134, 14);
@@ -291,6 +303,7 @@ public class RegisterPage extends JPanel {
 		passwordLabel2.setForeground(Color.WHITE);
 		passwordLabel2.setFont(new Font("Arial", Font.PLAIN, 16));
 		add(passwordLabel2);
+
 		// CREATE USERNAME ERROR TEXT LABEL
 		JLabel invalidUsernameErrorLabel = new JLabel("<html>"
 				+ "The username you have entered is either too short or too long, or is already taken." + "</html>");
@@ -299,6 +312,7 @@ public class RegisterPage extends JPanel {
 		invalidUsernameErrorLabel.setForeground(Color.RED);
 		invalidUsernameErrorLabel.setFont(new Font("Arial", Font.PLAIN, 13));
 		add(invalidUsernameErrorLabel);
+
 		// CREATE PASSWORD ERROR TEXT LABEL
 		JLabel invalidPasswordErrorLabel = new JLabel(
 				"<html>" + "The passwords you have entered do not match." + "</html>");
@@ -307,6 +321,7 @@ public class RegisterPage extends JPanel {
 		invalidPasswordErrorLabel.setForeground(Color.RED);
 		invalidPasswordErrorLabel.setFont(new Font("Arial", Font.PLAIN, 13));
 		add(invalidPasswordErrorLabel);
+
 		// CREATE NAME ERROR TEXT LABEL
 		JLabel invalidNameErrorLabel = new JLabel(
 				"<html>" + "Please make sure you entered your first and last name." + "</html>");
@@ -319,14 +334,15 @@ public class RegisterPage extends JPanel {
 		invalidUsernameErrorLabel.setVisible(false);
 		add(invalidNameErrorLabel);
 
-		backButton.setBounds(30, 30, 50, 50);
-		backButton.setIcon(new ImageIcon(RegisterPage.class.getResource("/backButton.png")));
-		add(backButton);
-
 		// CREATE SUBMIT REGISTER BUTTON
 		registerButton = new JLabel("");
 		registerButton.setToolTipText("Login");
 		registerButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		/**
+		 * When submit register button is pressed, pull data from all text fields and
+		 * verify user inputs. If all inputs are valid, then confirm registration and
+		 * switch to login screen
+		 */
 		registerButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

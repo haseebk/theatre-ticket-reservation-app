@@ -11,7 +11,6 @@ import javax.swing.*;
 import domain.model.*;
 import java.awt.Dimension;
 
-
 public class CartPage extends JPanel {
 	/**
 	 * 
@@ -64,7 +63,7 @@ public class CartPage extends JPanel {
 		cartTotalLabel.setForeground(Color.WHITE);
 		cartTotalLabel.setFont(new Font("Arial", Font.PLAIN, 25));
 		cartTotalLabel.setBounds(26, 679, 571, 50);
-		cartTotalLabel.setText("Cart total: $" + backend.getCurrentUser().getCart().calculateCartCost());
+		cartTotalLabel.setText("Cart total: $" + String.format("%.2f",backend.getCurrentUser().getCart().calculateCartCost()));
 		add(cartTotalLabel);
 
 		// CREATE CHECKOUT BUTTON
@@ -73,6 +72,9 @@ public class CartPage extends JPanel {
 		checkoutButton.setBounds(1082, 679, 254, 50);
 		checkoutButton.setToolTipText("Checkout");
 		checkoutButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		/**
+		 * When the checkout button is pressed, set the view to the payment page
+		 */
 		checkoutButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -81,6 +83,11 @@ public class CartPage extends JPanel {
 				frame.revalidate();
 			}
 		});
+		if(backend.getCurrentUser().getCart().getItems_in_cart().size() == 0){
+			checkoutButton.setVisible(false);
+		}else{
+			checkoutButton.setVisible(true);
+		}
 		add(checkoutButton);
 
 		// CREATE MOVIE CARD VIEW
@@ -97,6 +104,10 @@ public class CartPage extends JPanel {
 			deleteTicket[i].setHorizontalAlignment(SwingConstants.LEFT);
 			deleteTicket[i].setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			deleteTicket[i].setIcon(new ImageIcon(HomePage.class.getResource("/deleteButton.png")));
+			/**
+			 * When the delete ticket button is pressed, remove the corresponding ticket
+			 * from user cart and update cart accordingly by reseting the view
+			 */
 			deleteTicket[i].addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -119,7 +130,7 @@ public class CartPage extends JPanel {
 			ticketDetails[i].setFont(new Font("Arial", Font.PLAIN, 20));
 			ticketDetails[i].setBounds(60, 70 + (170 * i), 1000, 32);
 			imagePanels.add(ticketDetails[i]);
-			
+
 			ticketCards[i] = new JLabel("");
 			ticketCards[i].setVerticalAlignment(SwingConstants.TOP);
 			ticketCards[i].setHorizontalAlignment(SwingConstants.LEFT);
@@ -143,6 +154,9 @@ public class CartPage extends JPanel {
 		backButton = new JLabel("");
 		backButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		backButton.setToolTipText("Back");
+		/**
+		 * When the back button is pressed, change the view to the home page
+		 */
 		backButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -159,6 +173,10 @@ public class CartPage extends JPanel {
 		announcementButton = new JLabel("");
 		announcementButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		announcementButton.setToolTipText("View Announcements");
+		/**
+		 * When the announcement button is pressed, change the view to the announcement
+		 * page
+		 */
 		announcementButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

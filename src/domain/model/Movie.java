@@ -38,6 +38,8 @@ public class Movie {
 	
 	private String synopsis;
 
+	private Announcement movieAnnouncement;
+
 	private Movie() {
 		this.title = "";
 		this.genre = "";
@@ -46,6 +48,7 @@ public class Movie {
 		this.movieLength = 0;
 		this.rating = 0.0;
 		this.setPoster("");
+		this.movieAnnouncement = null;
 	}
 
 	public Movie(String title, String genre, int year, String director, int movieLength, double rating, String poster, double p, String syn) {
@@ -132,4 +135,14 @@ public class Movie {
 	public void setSynopsis(String synopsis) {
 		this.synopsis = synopsis;
 	}
+
+	public Announcement getMovieAnnouncement() { return movieAnnouncement; }
+
+	public void setMovieAnnouncement(Announcement movieAnnouncement) { this.movieAnnouncement = movieAnnouncement; }
+
+	@Override
+	public String toString() {
+		return String.format(title);
+	}
+
 };

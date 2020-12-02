@@ -31,6 +31,11 @@ public class LoginPage extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Title Text Field
+	 */
+	private JLabel titleLabel;
 	/**
 	 * User name text field for user login input
 	 */
@@ -60,6 +65,14 @@ public class LoginPage extends JPanel {
 	public LoginPage(JFrame frame, BackEnd backend) {
 		setLayout(null);
 
+		// CREATE TITLE TEXT LABEL
+		titleLabel = new JLabel("MOVIE THEATRE TITLE");
+		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		titleLabel.setForeground(Color.WHITE);
+		titleLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+		titleLabel.setBounds(500, 250, 350, 30);
+		add(titleLabel);
+
 		// CREATE GUEST LOGIN BUTTON
 		guestButton = new JLabel("CONTINUE AS GUEST");
 		guestButton.setHorizontalAlignment(SwingConstants.CENTER);
@@ -67,6 +80,10 @@ public class LoginPage extends JPanel {
 		guestButton.setFont(new Font("Arial", Font.BOLD, 11));
 		guestButton.setBounds(632, 502, 118, 14);
 		guestButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		/**
+		 * When guest button is pressed, set user status to Guest and switch view to
+		 * home page.
+		 */
 		guestButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -81,6 +98,9 @@ public class LoginPage extends JPanel {
 		// CREATE REGISTER BUTTON
 		registerButton = new JLabel("CREATE ACCOUNT");
 		registerButton.setHorizontalAlignment(SwingConstants.CENTER);
+		/**
+		 * When register button is pressed, switch view to register page
+		 */
 		registerButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -147,6 +167,11 @@ public class LoginPage extends JPanel {
 		submitLoginButton = new JLabel("");
 		submitLoginButton.setToolTipText("Login");
 		submitLoginButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		/**
+		 * When submit login button is pressed, pull all text field inputs and verify
+		 * login details. If matching credentials are found, log the user in and change
+		 * the view to home page. Otherwise, display error message appropriately.
+		 */
 		submitLoginButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

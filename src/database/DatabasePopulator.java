@@ -38,8 +38,8 @@ public class DatabasePopulator {
 		loadTheatres();
 		// loadShowtimes();
 		loadAnnouncements();
-		loadUsers();
 		loadTickets();
+		loadUsers();
 		loadVouchers();
 		loadInst();
 	}
@@ -47,10 +47,10 @@ public class DatabasePopulator {
 	public void loadInst() {
 		inst = new FinancialInstitution("Cash Money Bank");
 		BankingInfo b5 = new BankingInfo("Random Person", "VISA", "5555555555555555", "555", "05/22");
-		//inst.addAccount(b1);
-		//inst.addAccount(b2);
-		//inst.addAccount(b3);
-		//inst.addAccount(b4);
+		inst.addAccount(b1);
+		inst.addAccount(b2);
+		inst.addAccount(b3);
+		inst.addAccount(b4);
 		inst.addAccount(b5);
 		dbController.setInst(inst);
 	}
@@ -96,8 +96,8 @@ public class DatabasePopulator {
 
 	public void loadShowtimes(ArrayList<Auditorium> x, ArrayList<Auditorium> y) {
 		Date d1 = new Date(29, 11, 2020);
-		Date d2 = new Date(1, 12, 2020);
-		Date d3 = new Date(2, 12, 2020);
+		Date d2 = new Date(2, 12, 2020);
+		Date d3 = new Date(29, 11, 2020);
 		Date d4 = new Date(17, 12, 2020);
 		
 		s1 = new Showtime(d1, x.get(0), spiderverse, 7, 15);
@@ -149,16 +149,14 @@ public class DatabasePopulator {
 		Payment p2 = new Payment(15.99, b2);
 		Ticket t1 = new Ticket(p1, s1.getMovie(), s1, s1.getSeats()[1][2]);
 		Ticket t2 = new Ticket(p2, s2.getMovie(), s2, s2.getSeats()[3][3]);
-		s1.getSeats()[1][2].bookSeat();
-		s2.getSeats()[3][3].bookSeat();
+		s1.bookSeat(1,2);
+		s2.bookSeat(3,3);
 
 		dbController.addTicket(t1);
 		dbController.addTicket(t2);
 	}
 
 	public void loadUsers() {
-		//b1 = new BankingInfo("Vaibhav Kapoor", "MASTER", "1111111111111111", "111", "01/22");
-		//b2 = new BankingInfo("William Kerr", "VISA", "2222222222222222", "222", "02/22");
 		b3 = new BankingInfo("Eddie Kim", "VISA", "3333333333333333", "333", "03/22");
 		b4 = new BankingInfo("Haseeb Khan", "MASTER", "4444444444444444", "444", "04/22");
 		Date d1 = new Date(1, 4, 2020);
@@ -178,12 +176,22 @@ public class DatabasePopulator {
 
 	public void loadAnnouncements() {
 		Date da1 = new Date(29, 11, 2020);
-		Date da2 = new Date(8, 12, 2020);
-		Announcement an1 = new Announcement(da1, "This is the first announcement.");
-		Announcement an2 = new Announcement(da2, "This is the second announcement.");
+		Date da2 = new Date(20, 12, 2020);
+		Date da3 = new Date(15, 12, 2020);
+		Date da4 = new Date(27, 12, 2020);
+		Date da5 = new Date(20, 11, 2020);
+		Date da6 = new Date(29, 11, 2020);
+		Date da7 = new Date(15, 11, 2020);
+		Date da8 = new Date(27, 11, 2020);
+		Announcement an1 = new Announcement(da1,da2, spiderverse);
+		Announcement an2 = new Announcement(da3,da4, hereditary);
+		Announcement an3 = new Announcement(da5,da6, getout);
+		Announcement an4 = new Announcement(da7,da8, paddington);
 
 		dbController.addAnnouncement(an1);
 		dbController.addAnnouncement(an2);
+		dbController.addAnnouncement(an3);
+		dbController.addAnnouncement(an4);
 	}
 	
 	public void loadVouchers() {

@@ -403,11 +403,31 @@ public class DataController {
 
 		for(int i = 0; i < ticketList.size(); i++) {
 			if(ticketList.get(i).getTicketID() == id) {
-				return i;
+				if(ticketList.get(i).getShowtime().getShowDate().beforeCurrentDate() && !ticketList.get(i).getShowtime().is72HoursBefore()){
+					return -2;
+				}else if(ticketList.get(i).getShowtime().getShowDate().beforeCurrentDate()){
+					return i;
+				}else{
+					return -3;
+				}
 			}
 		}
 
 		return -1;
+	}
+
+	public Voucher redeemVoucher(String voucherCode){
+		for (int i = 0; i < getVoucherList().size(); i++) {
+			if (voucherCode.compareTo(getVoucherList().get(i).getVoucherCode()) == 0) {
+				if (!getVoucherList().get(i).isUsed()) {
+					getVoucherList().get(i).setUsed(true);
+					return getVoucherList().get(i);
+				} else {
+					return null;
+				}
+			}
+		}
+		return null;
 	}
 
 	public FinancialInstitution getInst() {

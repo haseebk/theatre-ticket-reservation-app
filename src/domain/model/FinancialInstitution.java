@@ -21,7 +21,7 @@ public class FinancialInstitution {
 		Iterator<BankingInfo> it = bankAccounts.iterator();
 		while (it.hasNext()) {
 			BankingInfo currentAccount = (BankingInfo) it.next();
-			if (ba.getCustomerName().compareTo(currentAccount.getCustomerName()) == 0) {
+			if (ba.getCustomerName() == currentAccount.getCustomerName()) {
 				it.remove();
 				return;
 			}
@@ -30,17 +30,17 @@ public class FinancialInstitution {
 	}
 	
 	public boolean verifyCardInfo(String name, String type, String num, String svs, String exp) {
-		Iterator<BankingInfo> it = bankAccounts.iterator(); 
-		System.out.println(bankAccounts.size());
+		Iterator<BankingInfo> it = bankAccounts.iterator();
+		System.out.println("Verifying Card: " +  bankAccounts.size());
         while (it.hasNext()) {
         	BankingInfo currentAccount = (BankingInfo)it.next();
-        	System.out.println("Testing: name, type, num, svs, exp");
-        	System.out.println(name.compareTo(currentAccount.getCustomerName()) == 0);
-            System.out.println(type.compareTo(currentAccount.getCardType()) == 0);
-            System.out.println(num.compareTo(currentAccount.getCardNumber()) == 0 );
-            System.out.println(svs.compareTo(currentAccount.getCardSVS()) == 0 );
-            System.out.println(exp.compareTo(currentAccount.getCardExpirationDate()) == 0);
-            if(name.compareTo(currentAccount.getCustomerName()) == 0 && type.compareTo(currentAccount.getCardType()) == 0 && num.compareTo(currentAccount.getCardNumber()) == 0 && svs.compareTo(currentAccount.getCardSVS()) == 0 && exp.compareTo(currentAccount.getCardExpirationDate()) == 0) {
+        	System.out.println("\nVerifying...");
+        	System.out.println(name.compareTo(currentAccount.getCustomerName())+ ", " + type.compareTo(currentAccount.getCardType())
+					+ ", " + num.compareTo(currentAccount.getCardNumber())+ ", " + svs.compareTo(currentAccount.getCardSVS() )
+					+ ", " + exp.compareTo(currentAccount.getCardExpirationDate()));
+            if(name.compareTo(currentAccount.getCustomerName()) == 0 && type.compareTo(currentAccount.getCardType()) == 0
+					&& num.compareTo(currentAccount.getCardNumber()) == 0 && svs.compareTo(currentAccount.getCardSVS() ) == 0
+					&& exp.compareTo(currentAccount.getCardExpirationDate()) == 0) {
             	return true;
             }
         }
