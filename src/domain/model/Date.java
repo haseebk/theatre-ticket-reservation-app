@@ -34,22 +34,18 @@ public class Date {
 	 */
 	public boolean beforeCurrentDate() {
 		LocalDate todaysDate = LocalDate.now();
-		// System.out.println("Before Current Date: " + year + " vs. " +
-		// todaysDate.getYear());
 		if (year > todaysDate.getYear()) {
 			return true;
 		}
 		if (year < todaysDate.getYear()) {
 			return false;
 		}
-		// System.out.println(todaysDate.getMonthValue() + " vs. " + month);
 		if (month > todaysDate.getMonthValue()) {
 			return true;
 		}
 		if (month < todaysDate.getMonthValue()) {
 			return false;
 		}
-		// System.out.println(todaysDate.getDayOfMonth() + " vs. " + day);
 		if (day > todaysDate.getDayOfMonth()) {
 			return true;
 		}

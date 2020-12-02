@@ -1,15 +1,14 @@
 package presentation.view;
 
-import domain.model.BackEnd;
-import domain.model.Showtime;
-import domain.model.Ticket;
-import domain.model.Voucher;
+import domain.model.*;
 
 import javax.swing.*;
 import javax.swing.border.MatteBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Vector;
 
 public class CancelTicketPage extends JPanel {
@@ -164,6 +163,22 @@ public class CancelTicketPage extends JPanel {
 						backend.getDataController().addVoucher(newVoucher);
 						JOptionPane.showMessageDialog(frame, "Here is your voucher code: " + newVoucher.getVoucherCode()
 								+ " redeemable for $" + newVoucher.getAmount());
+					}else{
+						Ticket tempTicket = null;
+						for(int i = 0; i < backend.getDataController().getTicketList().size(); i++){
+							if(backend.getDataController().getTicketList().get(i).getTicketID() == Integer.parseInt(temp)){
+								tempTicket = backend.getDataController().getTicketList().get(i);
+							}
+						}
+						Payment tempPayment = new Payment(tempTicket.getPayment().getAmount() * (-1),backend.getCurrentRegisteredUser().getBankInfo());
+						LocalDate today = LocalDate.now();
+						Date todayDay = new Date(today.getDayOfMonth(),today.getMonthValue(),today.getYear());
+						ArrayList<Ticket> tempTicketList = new ArrayList<Ticket>();
+						tempTicketList.add(tempTicket);
+						Receipt refundReceipt = new Receipt(tempPayment,todayDay,tempTicketList);
+						refundReceipt.emailReceipt(backend.getCurrentRegisteredUser().getEmail());
+						backend.getDataController().addReceipt(refundReceipt);
+						backend.getDataController().addPayment(tempPayment);
 					}
 					backend.getDataController().getTicketList().get(t).getSeat().vacateSeat();
 					Ticket tempTicket = backend.getDataController().getTicketList().get(t);

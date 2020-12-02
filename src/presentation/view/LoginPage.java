@@ -177,7 +177,6 @@ public class LoginPage extends JPanel {
 			public void mouseClicked(MouseEvent e) {
 				String user = usernameTextField.getText().toLowerCase();
 				String pass = String.valueOf(passwordField.getPassword());
-				System.out.println("User inputed:" + user + " " + pass);
 				if (backend.verifyLogin(user, pass) != null) {
 					HomePage homePanel = new HomePage(frame, backend);
 					frame.setContentPane(homePanel);

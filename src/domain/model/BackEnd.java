@@ -29,10 +29,7 @@ public class BackEnd implements Serializable {
 	// and will return the User's ID;
 	// If the login failed return null;
 	public RegisteredUser verifyLogin(String username, String password) {
-		System.out.println("verify login" + dataController.getUserList().size());
 		for (int i = 0; i < dataController.getUserList().size(); i++) {
-			System.out.println("The system's info: " + dataController.getUserList().get(i).username + " "
-					+ dataController.getUserList().get(i).password);
 			if (dataController.getUserList().get(i).username.toLowerCase().compareTo(username.toLowerCase()) == 0
 					&& dataController.getUserList().get(i).password.compareTo(password) == 0) {
 				currentRegisteredUser = dataController.getUserList().get(i);
@@ -60,7 +57,6 @@ public class BackEnd implements Serializable {
 
 	public boolean checkExisting(String username) {
 		for (int i = 0; i < dataController.getUserList().size(); i++) {
-			System.out.println("The system's info: " + dataController.getUserList().get(i).username);
 			if (dataController.getUserList().get(i).username.compareTo(username) == 0) {
 				return true;
 			}

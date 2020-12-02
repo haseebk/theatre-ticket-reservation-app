@@ -34,7 +34,6 @@ public class FrontEnd extends JFrame {
 				} catch (IOException ex) {
 					ex.printStackTrace();
 				}
-				System.out.println("Closing application");
             }
         });
 		getMainFrame().setSize(1366, 768);

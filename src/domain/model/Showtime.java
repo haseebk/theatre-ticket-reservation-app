@@ -113,35 +113,30 @@ public class Showtime {
 		}
 
 		//Check it is before the 72 hours before
-		System.out.println(todaysDate.getYear() + " vs. " + beforeDate72.getYear());
 		if(beforeDate72.getYear() > todaysDate.getYear()){
 			return true;
 		}
 		if(beforeDate72.getYear() < todaysDate.getYear()){
 			return false;
 		}
-		System.out.println(todaysDate.getMonthValue() + " vs. " + beforeDate72.getMonth());
 		if(beforeDate72.getMonth() > todaysDate.getMonthValue()){
 			return true;
 		}
 		if(beforeDate72.getMonth() < todaysDate.getMonthValue()){
 			return false;
 		}
-		System.out.println(todaysDate.getDayOfMonth() + " vs. " + beforeDate72.getDay());
 		if(beforeDate72.getDay() > todaysDate.getDayOfMonth()){
 			return true;
 		}
 		if(beforeDate72.getDay() < todaysDate.getDayOfMonth()){
 			return false;
 		}
-		System.out.println(todaysTime.getHour() + " vs. " + getHour());
 		if(todaysTime.getHour() > this.getHour()){
 			return true;
 		}
 		if(todaysTime.getHour() < this.getHour()){
 			return false;
 		}
-		System.out.println(todaysTime.getMinute() + " vs. " + getMinutes());
 		if(todaysTime.getMinute() > this.getMinutes()){
 			return true;
 		}

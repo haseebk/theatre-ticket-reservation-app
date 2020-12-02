@@ -328,11 +328,9 @@ public class PaymentPage extends JPanel {
 							voucherValue = redeemedVoucher.getAmount();
 						}
 					} else {
-						System.out.println("No Voucher entered");
 						voucherValid = true;
 					}
 
-					System.out.println("verifying: " + cardValid + " " + voucherValid);
 					// All information is valid
 					if (voucherValid && cardValid) {
 						double finalTotal = backend.getCurrentUser().getCart().getCartCost() - voucherValue;
@@ -368,7 +366,6 @@ public class PaymentPage extends JPanel {
 		registerButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.out.println("Payment details entered");
 				String cardType = (String) cardTypeSelectComboBox.getSelectedItem();
 				String cardNum = cardNumberTextField.getText();
 				String cardExp = cardExpirationDateTextField.getText();
@@ -431,7 +428,6 @@ public class PaymentPage extends JPanel {
 	}
 
 	public void processPayment(JFrame frame, BackEnd backend, double costAmount, BankingInfo bankingInfo) {
-		System.out.println("entered payment");
 		// Cart c = backend.getCurrentUser().getCart();
 		backend.getCurrentUser().getCart().setPayment(new Payment(costAmount, bankingInfo));
 		ArrayList<Ticket> ticketList = new ArrayList<Ticket>();

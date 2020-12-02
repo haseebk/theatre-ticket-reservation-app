@@ -167,7 +167,6 @@ public class DataController {
 		}
 		ArrayList<Theatre> searchList = new ArrayList<Theatre>();
 		for (int i = 0; i < showtimeList.size(); i++) {
-			System.out.println(showtimeList.get(i).getMovie().getTitle());
 			if (showtimeList.get(i).getMovie() == searchMovie) {
 				if (!searchList.contains(showtimeList.get(i).getAuditorium().getTheatre())) {
 					searchList.add(showtimeList.get(i).getAuditorium().getTheatre());
