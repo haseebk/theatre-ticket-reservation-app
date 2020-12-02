@@ -23,7 +23,7 @@ public class RegisteredUser extends User {
 		email = e;
 		bankInfo = b;
 		adminFeeDate = a;
-		setFeePayed(false);
+		feePayed = false;
 	}
 
 	// Getters and Setters

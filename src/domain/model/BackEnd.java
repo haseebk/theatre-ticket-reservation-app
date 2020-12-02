@@ -54,7 +54,7 @@ public class BackEnd implements Serializable {
 		LocalDate todaysDate = LocalDate.now();
 		BankingInfo bankInfo = new BankingInfo(name, cardType, cardNum, cardSVS, expirationDate);
 		dataController.getUserList().add(new RegisteredUser(username, password, f_name, l_name, email, bankInfo,
-				new Date(todaysDate.getDayOfMonth(), todaysDate.getMonthValue(), todaysDate.getYear())));
+				new Date(todaysDate.getDayOfMonth(), todaysDate.getMonthValue(), todaysDate.getYear() + 1)));
 	}
 
 	public boolean checkExisting(String username) {

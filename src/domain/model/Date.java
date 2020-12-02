@@ -13,6 +13,18 @@ public class Date {
 		month = m;
 		year = y;
 	}
+	
+	public boolean checkIfCurrentDate(Date compareDate) {
+        LocalDate todaysDate = LocalDate.now();
+        if (todaysDate.getYear() == compareDate.getYear()){
+            if (todaysDate.getMonthValue() == compareDate.getMonth()) {
+                if (todaysDate.getDayOfMonth() == compareDate.getDay()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
 	/**
 	 * Sees if the date is before the current date
