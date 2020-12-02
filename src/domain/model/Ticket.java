@@ -7,7 +7,11 @@ public class Ticket {
 	private Showtime showtime;
 	private Seat seat;
 	
+<<<<<<< HEAD
 	private static int ticketCounter = 100;
+=======
+	private static int ticketCounter = 0;
+>>>>>>> 1ea21d7878daeedbfd7d436f93d9e56a8138bceb
 
 	public Ticket(Payment p, Movie m, Showtime s, Seat s1) {
 		ticketID = ticketCounter++;

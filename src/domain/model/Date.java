@@ -1,6 +1,10 @@
 package domain.model;
 
+<<<<<<< HEAD
 import java.text.DecimalFormat;
+=======
+import java.io.Serializable;
+>>>>>>> 1ea21d7878daeedbfd7d436f93d9e56a8138bceb
 import java.time.LocalDate;
 
 public class Date {
@@ -14,6 +18,7 @@ public class Date {
 		year = y;
 	}
 
+<<<<<<< HEAD
 	public boolean checkIfCurrentDate(Date compareDate) {
 		LocalDate todaysDate = LocalDate.now();
 		if (todaysDate.getYear() == compareDate.getYear()) {
@@ -54,6 +59,33 @@ public class Date {
 			return true;
 		}
 		if (day < todaysDate.getDayOfMonth()) {
+=======
+	/**
+	 * Sees if the date is before the current date
+	 * @return true if it is before the current date or the same as the current date, false if it is after the current date
+	 */
+	public boolean beforeCurrentDate(){
+		LocalDate todaysDate = LocalDate.now();
+		System.out.println(todaysDate.getYear() + " vs. " + year);
+		if(year < todaysDate.getYear()){
+			return true;
+		}
+		if(year > todaysDate.getYear()){
+			return false;
+		}
+		System.out.println(todaysDate.getMonthValue() + " vs. " + month);
+		if(month < todaysDate.getMonthValue()){
+			return true;
+		}
+		if(month > todaysDate.getMonthValue()){
+			return false;
+		}
+		System.out.println(todaysDate.getDayOfMonth() + " vs. " + day);
+		if(day < todaysDate.getDayOfMonth()){
+			return true;
+		}
+		if(day > todaysDate.getDayOfMonth()){
+>>>>>>> 1ea21d7878daeedbfd7d436f93d9e56a8138bceb
 			return false;
 		}
 		return true;
@@ -65,6 +97,7 @@ public class Date {
 		year = y;
 	}
 
+<<<<<<< HEAD
 	// Getters and setters
 	public int getDay() {
 		return day;
@@ -97,6 +130,11 @@ public class Date {
 		String monthFormat = formatter.format(month);
 		String yearFormat = formatter.format(year);
 		return (dayFormat + "/" + monthFormat + "/" + yearFormat);
+=======
+	@Override
+	public String toString() {
+		return (day + "/" + month + "/" + year);
+>>>>>>> 1ea21d7878daeedbfd7d436f93d9e56a8138bceb
 	}
 
 }

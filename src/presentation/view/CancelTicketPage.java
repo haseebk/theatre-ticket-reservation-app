@@ -25,11 +25,19 @@ public class CancelTicketPage extends JPanel {
 	 * Display text label on Successful Cancel
 	 */
 	private JLabel cancelSuccessLabel;
+<<<<<<< HEAD
+=======
+	/**
+	 * Display text label on Error Cancel
+	 */
+	private JLabel cancelErrorLabel;
+>>>>>>> 1ea21d7878daeedbfd7d436f93d9e56a8138bceb
 	/**
 	 * Display text label on Error Cancel
 	 */
 	private JLabel cancelErrorLabel;
 	/**
+<<<<<<< HEAD
 	 * Display text label on Too Late to Cancel
 	 */
 	private JLabel cancelTooLateLabel;
@@ -46,6 +54,8 @@ public class CancelTicketPage extends JPanel {
 	 */
 	private JLabel cardNumberLabel;
 	/**
+=======
+>>>>>>> 1ea21d7878daeedbfd7d436f93d9e56a8138bceb
 	 * Back button
 	 */
 	private JLabel backButton;
@@ -83,7 +93,13 @@ public class CancelTicketPage extends JPanel {
 		add(ticketCodeTextField);
 
 		// CREATE CANCEL SUCCESS LABEL
+<<<<<<< HEAD
 		cancelSuccessLabel = new JLabel("<html>" + "Successfully cancelled the ticket" + "</html>");
+=======
+		cancelSuccessLabel = new JLabel("<html>"
+				+ "Successfully cancelled the ticket"
+				+ "</html>");
+>>>>>>> 1ea21d7878daeedbfd7d436f93d9e56a8138bceb
 		cancelSuccessLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		cancelSuccessLabel.setForeground(Color.RED);
 		cancelSuccessLabel.setFont(new Font("Arial", Font.PLAIN, 13));
@@ -91,6 +107,7 @@ public class CancelTicketPage extends JPanel {
 		cancelSuccessLabel.setVisible(false);
 		add(cancelSuccessLabel);
 
+<<<<<<< HEAD
 		// CREATE UNDER 72 HOURS LABEL
 		cancelTooLateLabel = new JLabel("<html>" + "It is under 72 Hours before the Showtime, cannot cancel" + "</html>");
 		cancelTooLateLabel.setHorizontalAlignment(SwingConstants.LEFT);
@@ -111,6 +128,12 @@ public class CancelTicketPage extends JPanel {
 
 		// CREATE CANCEL ERROR LABEL
 		cancelErrorLabel = new JLabel("<html>" + "Could not find the ticket" + "</html>");
+=======
+		// CREATE CANCEL ERROR LABEL
+		cancelErrorLabel = new JLabel("<html>"
+				+ "Could not find the ticket"
+				+ "</html>");
+>>>>>>> 1ea21d7878daeedbfd7d436f93d9e56a8138bceb
 		cancelErrorLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		cancelErrorLabel.setForeground(Color.RED);
 		cancelErrorLabel.setFont(new Font("Arial", Font.PLAIN, 13));
@@ -146,6 +169,7 @@ public class CancelTicketPage extends JPanel {
 				String temp = ticketCodeTextField.getText();
 				cancelSuccessLabel.setVisible(false);
 				cancelErrorLabel.setVisible(false);
+<<<<<<< HEAD
 				cancelTooLateLabel.setVisible(false);
 				cancelTicketUsedLabel.setVisible(false);
 				int t = backend.getDataController().checkTicket(Integer.parseInt(temp));
@@ -162,12 +186,24 @@ public class CancelTicketPage extends JPanel {
 						backend.getDataController().addVoucher(newVoucher);
 						JOptionPane.showMessageDialog(frame, "Here is your voucher code: " + newVoucher.getVoucherCode()
 								+ " redeemable for $" + newVoucher.getAmount());
+=======
+				int t = backend.getDataController().checkTicket(Integer.parseInt(temp));
+				if(t != -1) {
+					if(backend.getCurrentGuestUser() != null){
+						Voucher newVoucher = new Voucher(backend.getDataController().getTicketList().get(t).getPayment().getAmount()*0.85);
+						backend.getDataController().addVoucher(newVoucher);
+						JOptionPane.showMessageDialog(frame,"Here is your voucher code: " + newVoucher.getVoucherCode() + " redeemable for $" + newVoucher.getAmount());
+>>>>>>> 1ea21d7878daeedbfd7d436f93d9e56a8138bceb
 					}
 					backend.getDataController().getTicketList().get(t).getSeat().vacateSeat();
 					backend.getDataController().removeTicket(backend.getDataController().getTicketList().get(t));
 					cancelSuccessLabel.setVisible(true);
+<<<<<<< HEAD
 				} else {
 					//Couldn't find ticket
+=======
+				}else{
+>>>>>>> 1ea21d7878daeedbfd7d436f93d9e56a8138bceb
 					cancelErrorLabel.setVisible(true);
 				}
 				frame.validate();

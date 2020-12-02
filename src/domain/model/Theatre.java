@@ -44,7 +44,12 @@ public class Theatre {
 		this.address = ad;
 	}
 
+<<<<<<< HEAD
 	public Theatre(int theatreID, String theatreName, ArrayList<Auditorium> auditoriums, String phoneNumber, String ad) {
+=======
+	public Theatre(String theatreName, int theatreID, ArrayList<Auditorium> auditoriums, String phoneNumber,
+			String ad) {
+>>>>>>> 1ea21d7878daeedbfd7d436f93d9e56a8138bceb
 		this.t_name = theatreName;
 		this.theatreID = theatreID;
 		this.setAuditoriums(auditoriums);

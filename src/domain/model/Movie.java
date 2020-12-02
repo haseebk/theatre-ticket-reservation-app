@@ -42,6 +42,20 @@ public class Movie {
 	private String synopsis;
 
 	private Announcement movieAnnouncement;
+<<<<<<< HEAD
+=======
+
+	private Movie() {
+		this.title = "";
+		this.genre = "";
+		this.year = 0;
+		this.director = "";
+		this.movieLength = 0;
+		this.rating = 0.0;
+		this.setPoster("");
+		this.movieAnnouncement = null;
+	}
+>>>>>>> 1ea21d7878daeedbfd7d436f93d9e56a8138bceb
 
 	public Movie(String title, String genre, int year, String director, int movieLength, double rating, String poster, double p, String syn) {
 		this.movieID = movieCounter++;
@@ -149,6 +163,7 @@ public class Movie {
 
 	public void setMovieAnnouncement(Announcement movieAnnouncement) { this.movieAnnouncement = movieAnnouncement; }
 
+<<<<<<< HEAD
 	public int getMovieID() { return movieID; }
 
 	@Override
@@ -156,4 +171,6 @@ public class Movie {
 		return String.format(title);
 	}
 
+=======
+>>>>>>> 1ea21d7878daeedbfd7d436f93d9e56a8138bceb
 };

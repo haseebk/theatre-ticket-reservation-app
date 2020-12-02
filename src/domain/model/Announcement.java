@@ -3,6 +3,7 @@ package domain.model;
 import domain.model.Date;
 
 public class Announcement {
+<<<<<<< HEAD
 
 	private int announcementID;
 	private static int announcementCounter = 7000;
@@ -28,6 +29,19 @@ public class Announcement {
 		privateAnnounceDate = privateD;
 		publicAnnounceDate = publicD;
 		announceMessage = mov.getTitle() + " avaliable in Theatres: " + publicAnnounceDate.toString();
+=======
+	private Date privateAnnounceDate;
+
+	private Date publicAnnounceDate;
+	private String announceMessage;
+
+	private Movie movieAnnouncement;
+
+	public Announcement(Date privateD, Date publicD, String m, Movie mov) {
+		privateAnnounceDate = privateD;
+		publicAnnounceDate = publicD;
+		announceMessage = m;
+>>>>>>> 1ea21d7878daeedbfd7d436f93d9e56a8138bceb
 		movieAnnouncement = mov;
 		mov.setMovieAnnouncement(this);
 	}
@@ -40,6 +54,7 @@ public class Announcement {
 		announceMessage = m;
 	}
 
+<<<<<<< HEAD
 	//returns true if it is private
 	public boolean isPrivateOnly(){
 		return (!privateAnnounceDate.beforeCurrentDate() && publicAnnounceDate.beforeCurrentDate());
@@ -50,6 +65,8 @@ public class Announcement {
 		return !publicAnnounceDate.beforeCurrentDate();
 	}
 
+=======
+>>>>>>> 1ea21d7878daeedbfd7d436f93d9e56a8138bceb
 	public Date getPrivateAnnounceDate() { return privateAnnounceDate; }
 
 	public void setPrivateAnnounceDate(Date privateAnnounceDate) { this.privateAnnounceDate = privateAnnounceDate; }
@@ -57,6 +74,7 @@ public class Announcement {
 	public Date getPublicAnnounceDate() { return publicAnnounceDate; }
 
 	public void setPublicAnnounceDate(Date publicAnnounceDate) { this.publicAnnounceDate = publicAnnounceDate; }
+<<<<<<< HEAD
 
 	public int getAnnouncementID() { return announcementID; }
 	
@@ -66,6 +84,15 @@ public class Announcement {
 			return String.format(getPublicAnnounceDate().toString() + "        Public Announcement: " + getAnnounceMessage());
 
 		}else if(privateAnnounceDate.beforeCurrentDate() == false) {
+=======
+	
+	@Override
+	public String toString() {
+		if(publicAnnounceDate.beforeCurrentDate() == true) {
+			return String.format(getPublicAnnounceDate().toString() + "        Public Announcement: " + getAnnounceMessage());
+
+		}else if(privateAnnounceDate.beforeCurrentDate() == true) {
+>>>>>>> 1ea21d7878daeedbfd7d436f93d9e56a8138bceb
 			return String.format(getPrivateAnnounceDate().toString() + "        Private Announcement: " + getAnnounceMessage());
 		}
 		return "Not yet announced";

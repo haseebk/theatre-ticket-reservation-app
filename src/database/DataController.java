@@ -34,7 +34,10 @@ public class DataController {
 		setAnnouncementList(new ArrayList<Announcement>());
 		setAuditoriumList(new ArrayList<Auditorium>());
 		setVoucherList(new ArrayList<Voucher>());
+<<<<<<< HEAD
 		setBankList(new ArrayList<BankingInfo>());
+=======
+>>>>>>> 1ea21d7878daeedbfd7d436f93d9e56a8138bceb
 		inst = new FinancialInstitution("");
 	}
 
@@ -457,12 +460,15 @@ public class DataController {
 		voucherList.remove(voucher);
 	}
 
+<<<<<<< HEAD
 	public ArrayList<BankingInfo> getBankList() { return bankList; }
 
 	public void setBankList(ArrayList<BankingInfo> bankList) { this.bankList = bankList; }
 
 	public void addBankingInfo(BankingInfo b) { this.bankList.add(b); }
 
+=======
+>>>>>>> 1ea21d7878daeedbfd7d436f93d9e56a8138bceb
 	public int checkTicket(int id) {
 
 		for(int i = 0; i < ticketList.size(); i++) {
@@ -480,6 +486,7 @@ public class DataController {
 		return -1;
 	}
 
+<<<<<<< HEAD
 	public Voucher redeemVoucher(String voucherCode){
 		for (int i = 0; i < getVoucherList().size(); i++) {
 			if (voucherCode.compareTo(getVoucherList().get(i).getVoucherCode()) == 0) {
@@ -494,6 +501,8 @@ public class DataController {
 		return null;
 	}
 
+=======
+>>>>>>> 1ea21d7878daeedbfd7d436f93d9e56a8138bceb
 	public FinancialInstitution getInst() {
 		return inst;
 	}

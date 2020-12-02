@@ -15,11 +15,15 @@ public class User {
 	 * @param t the user type
 	 */
 	User(String t) {
+<<<<<<< HEAD
 		this.userID = userCounter++;
+=======
+>>>>>>> 1ea21d7878daeedbfd7d436f93d9e56a8138bceb
 		this.userType = t;
 		this.cart = new Cart();
 	}
 
+<<<<<<< HEAD
 	/**
 	 * Constructor to set the type of user
 	 *
@@ -32,6 +36,8 @@ public class User {
 		this.cart = new Cart();
 	}
 
+=======
+>>>>>>> 1ea21d7878daeedbfd7d436f93d9e56a8138bceb
 	// Getters and Setters
 	public String getUserType() {
 		return userType;

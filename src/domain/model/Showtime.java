@@ -23,9 +23,14 @@ public class Showtime {
 
 	private static int showtimeCounter = 4000;
 
+<<<<<<< HEAD
 	public Showtime(int id, Movie mov, Auditorium a, Date d , int h, int m) {
 		showtimeID = id++;
 		showtimeCounter++;
+=======
+	public Showtime(Date d, Auditorium a, Movie mov, int h, int m) {
+		showtimeID = showtimeCounter++;
+>>>>>>> 1ea21d7878daeedbfd7d436f93d9e56a8138bceb
 		showDate = d;
 		auditorium = a;
 		hour = h;
@@ -42,13 +47,23 @@ public class Showtime {
 		totalAvaliableSeats = row * col;
 	}
 
+<<<<<<< HEAD
 	public Showtime(Date d, Auditorium a, Movie mov, int h, int m) {
+=======
+	public Showtime(int day, int month, int year, Auditorium a, Movie mov, int h, int m) {
+>>>>>>> 1ea21d7878daeedbfd7d436f93d9e56a8138bceb
 		showtimeID = showtimeCounter++;
 		showDate = d;
 		auditorium = a;
+<<<<<<< HEAD
 		hour = h;
 		minutes = m;
 		movie = mov;
+=======
+		movie = mov;
+		hour = h;
+		minutes = m;
+>>>>>>> 1ea21d7878daeedbfd7d436f93d9e56a8138bceb
 		row = a.getNum_of_rows();
 		col = a.getNum_of_cols();
 		seats = new Seat[row][col];

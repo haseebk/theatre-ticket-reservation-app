@@ -62,15 +62,28 @@ public class AnnouncementPage extends JPanel {
 		add(welcomeLabel);
 
 		// CREATE MOVIE CARD VIEW
+<<<<<<< HEAD
 		JPanel imagePanels = new JPanel();		
+=======
+		JPanel imagePanels = new JPanel();
+//		imagePanels.setBounds(20, 87, 1304, 560);
+		
+
+>>>>>>> 1ea21d7878daeedbfd7d436f93d9e56a8138bceb
 		ArrayList<Announcement> announcementItems = backend.getDataController().getAnnouncementList();
 		JLabel[] announcementCard = new JLabel[announcementItems.size()];
 		JLabel[] announcementDetails = new JLabel[announcementItems.size()];
 		int j = 0;
 		for (int i = 0; i < announcementItems.size(); i++) {
+<<<<<<< HEAD
 			if(!announcementItems.get(i).getPrivateAnnounceDate().beforeCurrentDate()){
 				if(backend.getCurrentRegisteredUser() != null ||
 						(backend.getCurrentGuestUser() != null && !announcementItems.get(i).getPublicAnnounceDate().beforeCurrentDate())){
+=======
+			if(announcementItems.get(i).getPrivateAnnounceDate().beforeCurrentDate()){
+				if(backend.getCurrentRegisteredUser() != null ||
+						(backend.getCurrentGuestUser() != null && announcementItems.get(i).getPublicAnnounceDate().beforeCurrentDate())){
+>>>>>>> 1ea21d7878daeedbfd7d436f93d9e56a8138bceb
 					announcementDetails[i] = new JLabel("");
 					announcementDetails[i].setHorizontalAlignment(SwingConstants.LEFT);
 					announcementDetails[i].setText(announcementItems.get(i).toString());

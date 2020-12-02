@@ -167,6 +167,28 @@ public class HomePage extends JPanel {
 		noMovieSelectedLabel.setVisible(false);
 		add(noMovieSelectedLabel);
 
+<<<<<<< HEAD
+=======
+		// CREATE ADD TO CART BUTTON
+		JLabel cancelTicketButton = new JLabel("Cancel Ticket");
+		cancelTicketButton.setToolTipText("Cancel Ticket");
+		cancelTicketButton.setForeground(Color.WHITE);
+		cancelTicketButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		cancelTicketButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				CancelTicketPage cancelTicketPage = new CancelTicketPage(frame,backend);
+				frame.setContentPane(cancelTicketPage);
+				frame.revalidate();
+
+			}
+		});
+		cancelTicketButton.setBounds(1366 - 32 - 90 - 60, 14, 32, 32);
+		cancelTicketButton.setVisible(true);
+		cancelTicketButton.setIcon(new ImageIcon(LoginPage.class.getResource("/refundButton.png")));
+		add(cancelTicketButton);
+
+>>>>>>> 1ea21d7878daeedbfd7d436f93d9e56a8138bceb
 		// =========================================
 		// SELECT SEAT
 		// =========================================
@@ -286,6 +308,7 @@ public class HomePage extends JPanel {
 		AddToCartButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+<<<<<<< HEAD
 				if (backend.getCurrentUser().getUserType().compareTo("Registered") == 0
 						&& backend.getCurrentRegisteredUser().isFeePayed()) {
 					try {
@@ -348,6 +371,45 @@ public class HomePage extends JPanel {
 										} else {
 											System.out.println("max booked seats");
 											privateMovieBookingErrorLabel.setVisible(true);
+=======
+				try {
+					int tempRow = Integer.parseInt(rowTextField.getText());
+					int tempCol = Integer.parseInt(colTextField.getText());
+					if (tempRow < currentShowtime.getRow() && tempCol < currentShowtime.getCol()) {
+						// boolean booking = currentShowtime.bookSeat(tempRow, tempCol);
+						boolean avaliable = currentShowtime.getSeatAvaliability(tempRow, tempCol);
+						if (avaliable == false) {
+							System.out.println("Added ticket To Cart for:\nMovie: " + currentMovie.getTitle()
+									+ "\nTheatre: " + currentTheatre.getT_name() + "\nDate: "
+									+ currentShowtime.getShowDate().toString() + "\nSeat Row: " + tempRow
+									+ ", Seat Column: " + tempCol);
+
+							backend.getCurrentUser().getCart().addToCart(new Booking(currentMovie, currentShowtime,
+									currentShowtime.getSeats()[tempRow][tempCol]));
+
+							String tempGraphic = "";
+							for (int i = 0; i < currentShowtime.getRow(); i++) {
+								for (int j = 0; j < currentShowtime.getCol(); j++) {
+									if (currentShowtime.getSeatAvaliability(i, j) == true) {
+										tempGraphic += "X  ";
+									} else if (backend.getCurrentUser() != null) {
+										boolean tempFlag = false;
+										for (int k = 0; k < backend.getCurrentUser().getCart().getItems_in_cart()
+												.size(); k++) {
+											if (backend.getCurrentUser().getCart().getItems_in_cart().get(k)
+													.getBookedSeat().getRow() == i
+													&& backend.getCurrentUser().getCart().getItems_in_cart().get(k)
+															.getBookedSeat().getSeatNum() == j
+													&& backend.getCurrentUser().getCart().getItems_in_cart().get(k)
+															.getBookedTime()
+															.getShowtimeID() == currentShowtime.getShowtimeID()) {
+												tempGraphic += "-  ";
+												tempFlag = true;
+											}
+										}
+										if (tempFlag == false) {
+											tempGraphic += "O  ";
+>>>>>>> 1ea21d7878daeedbfd7d436f93d9e56a8138bceb
 										}
 									} else {
 										backend.getCurrentUser().getCart().addToCart(new Booking(currentMovie,
@@ -590,11 +652,17 @@ public class HomePage extends JPanel {
 					currentShowtime = backend.getDataController().findShowtime(currentMovie, currentTheatre, tempDate);
 					if (currentShowtime != null) {
 						System.out.println("Showtime found");
+<<<<<<< HEAD
 						showtimeDetailsLabel
 								.setText("Time: " + currentShowtime.getHour() + ":" + currentShowtime.getMinutes()
 										+ "\nAuditorium: " + currentShowtime.getAuditorium().getAuditoriumID()
 										+ "\nNumber of Avaliable Seats: " + currentShowtime.getTotalAvaliableSeats());
 
+=======
+						showtimeDetailsLabel.setText("Time: " + currentShowtime.getHour() + ":" + currentShowtime.getMinutes()
+								+ "\nAuditorium: " + currentShowtime.getAuditorium().getAuditoriumID()
+								+ "\nNumber of Avaliable Seats: " + currentShowtime.getTotalAvaliableSeats());
+>>>>>>> 1ea21d7878daeedbfd7d436f93d9e56a8138bceb
 						showtimeDetailsLabel.setVisible(true);
 						rowTextField.setVisible(true);
 						colTextField.setVisible(true);
@@ -602,7 +670,41 @@ public class HomePage extends JPanel {
 						selectColLabel.setVisible(true);
 						AddToCartButton.setVisible(true);
 
+<<<<<<< HEAD
 						createSeatGraphic(frame, backend);
+=======
+						String tempGraphic = "";
+						for (int i = 0; i < currentShowtime.getRow(); i++) {
+							for (int j = 0; j < currentShowtime.getCol(); j++) {
+								if (currentShowtime.getSeatAvaliability(i, j) == true) {
+									tempGraphic += "X  ";
+								} else if (backend.getCurrentUser() != null) {
+									boolean tempFlag = false;
+									for (int k = 0; k < backend.getCurrentUser().getCart().getItems_in_cart()
+											.size(); k++) {
+										if (backend.getCurrentUser().getCart().getItems_in_cart().get(k).getBookedSeat()
+												.getRow() == i
+												&& backend.getCurrentUser().getCart().getItems_in_cart().get(k)
+														.getBookedSeat().getSeatNum() == j
+												&& backend.getCurrentUser().getCart().getItems_in_cart().get(k)
+														.getBookedTime()
+														.getShowtimeID() == currentShowtime.getShowtimeID()) {
+											tempGraphic += "-  ";
+											tempFlag = true;
+										}
+									}
+									if (tempFlag == false) {
+										tempGraphic += "O  ";
+									}
+								} else {
+									tempGraphic += "O  ";
+								}
+							}
+							tempGraphic += "\n";
+						}
+						seatGraphicLabel.setText(tempGraphic);
+						seatGraphicLabel.setVisible(true);
+>>>>>>> 1ea21d7878daeedbfd7d436f93d9e56a8138bceb
 						selectSeatLabel.setVisible(true);
 					} else {
 						System.out.println("No showtime found");
@@ -681,6 +783,10 @@ public class HomePage extends JPanel {
 						ArrayList<Showtime> showtimeList = backend.getDataController().findAllShowtime(currentMovie,
 								currentTheatre);
 						for (int i = 0; i < showtimeList.size(); i++) {
+<<<<<<< HEAD
+=======
+							System.out.println(showtimeList.get(i).getShowDate().toString());
+>>>>>>> 1ea21d7878daeedbfd7d436f93d9e56a8138bceb
 							model2.addElement(showtimeList.get(i).getShowDate().toString());
 						}
 						showtimeSelectComboBox.setModel(model2);

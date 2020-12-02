@@ -1,6 +1,16 @@
 package presentation.view;
 
+<<<<<<< HEAD
 import domain.model.*;
+=======
+import domain.model.BackEnd;
+import domain.model.BankingInfo;
+import domain.model.Movie;
+import domain.model.Payment;
+import domain.model.Seat;
+import domain.model.Showtime;
+import domain.model.Ticket;
+>>>>>>> 1ea21d7878daeedbfd7d436f93d9e56a8138bceb
 
 import javax.swing.*;
 import javax.swing.border.MatteBorder;
@@ -154,6 +164,7 @@ public class PaymentPage extends JPanel {
 		voucherTextField.setColumns(10);
 		voucherTextField.setOpaque(true);
 		add(voucherTextField);
+<<<<<<< HEAD
 
 		// CREATE NAME TEXT FIELD
 		nameTextField = new JTextField();
@@ -180,7 +191,35 @@ public class PaymentPage extends JPanel {
 		emailTextField.setColumns(10);
 		emailTextField.setOpaque(true);
 		add(emailTextField);
+=======
+>>>>>>> 1ea21d7878daeedbfd7d436f93d9e56a8138bceb
 
+		// CREATE NAME TEXT FIELD
+		nameTextField = new JTextField();
+		nameTextField.setBounds(561, 295, 254, 28);
+		nameTextField.setToolTipText("Enter your Fullname.");
+		nameTextField.setFont(new Font("Arial", Font.PLAIN, 13));
+		nameTextField.setBorder(new MatteBorder(0, 0, 3, 0, (Color) Color.LIGHT_GRAY));
+		nameTextField.setForeground(Color.DARK_GRAY);
+		nameTextField.setBackground(Color.WHITE);
+		nameTextField.setOpaque(true);
+		nameTextField.setColumns(10);
+		nameTextField.setOpaque(true);
+		add(nameTextField);
+		
+		// CREATE EMAIL TEXT FIELD
+		emailTextField = new JTextField();
+		emailTextField.setBounds(561, 235, 254, 28);
+		emailTextField.setToolTipText("Enter your emailID.");
+		emailTextField.setFont(new Font("Arial", Font.PLAIN, 13));
+		emailTextField.setBorder(new MatteBorder(0, 0, 3, 0, (Color) Color.LIGHT_GRAY));
+		emailTextField.setForeground(Color.DARK_GRAY);
+		emailTextField.setBackground(Color.WHITE);
+		emailTextField.setOpaque(true);
+		emailTextField.setColumns(10);
+		emailTextField.setOpaque(true);
+		add(emailTextField);
+		
 		// CREATE CARDSVS TEXT FIELD
 		cardSVSPasswordField = new JPasswordField();
 		cardSVSPasswordField.setBounds(901, 350, 50, 28);
@@ -224,7 +263,10 @@ public class PaymentPage extends JPanel {
 		voucherLabel.setForeground(Color.WHITE);
 		voucherLabel.setFont(new Font("Arial", Font.PLAIN, 16));
 		add(voucherLabel);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1ea21d7878daeedbfd7d436f93d9e56a8138bceb
 		// CREATE CustomerName CODE TEXT LABEL
 		nameLabel = new JLabel("Full Name");
 		nameLabel.setBounds(634, 280, 108, 14);
@@ -232,7 +274,10 @@ public class PaymentPage extends JPanel {
 		nameLabel.setForeground(Color.WHITE);
 		nameLabel.setFont(new Font("Arial", Font.PLAIN, 16));
 		add(nameLabel);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1ea21d7878daeedbfd7d436f93d9e56a8138bceb
 		// CREATE email CODE TEXT LABEL
 		emailLabel = new JLabel("Email ID");
 		emailLabel.setBounds(634, 220, 108, 14);
@@ -240,7 +285,10 @@ public class PaymentPage extends JPanel {
 		emailLabel.setForeground(Color.WHITE);
 		emailLabel.setFont(new Font("Arial", Font.PLAIN, 16));
 		add(emailLabel);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1ea21d7878daeedbfd7d436f93d9e56a8138bceb
 		// CREATE CARD SVS TEXT LABEL
 		cardSVSLabel = new JLabel("CCV");
 		cardSVSLabel.setBounds(901, 335, 50, 14);
@@ -256,6 +304,7 @@ public class PaymentPage extends JPanel {
 		cardExpirationDateLabel.setForeground(Color.WHITE);
 		cardExpirationDateLabel.setFont(new Font("Arial", Font.PLAIN, 16));
 		add(cardExpirationDateLabel);
+<<<<<<< HEAD
 
 		// CREATE CARD ERROR TEXT LABEL
 		JLabel invalidCardErrorLabel = new JLabel("<html>" + "The card was declined." + "</html>");
@@ -276,6 +325,22 @@ public class PaymentPage extends JPanel {
 		add(invalidVoucherErrorLabel);
 
 		// CREATE BACK BUTTON
+=======
+		// CREATE CARD ERROR TEXT LABEL
+		JLabel invalidCardErrorLabel = new JLabel("<html>" + "The card was declined." + "</html>");
+		invalidCardErrorLabel.setBounds(565, 236, 254, 45);
+		invalidCardErrorLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		invalidCardErrorLabel.setForeground(Color.RED);
+		invalidCardErrorLabel.setFont(new Font("Arial", Font.PLAIN, 13));
+		add(invalidCardErrorLabel);		
+		// CREATE VOUCHER ERROR TEXT LABEL
+		JLabel invalidVoucherErrorLabel = new JLabel("<html>" + "The voucher was declined." + "</html>");
+		invalidVoucherErrorLabel.setBounds(565, 236, 254, 45);
+		invalidVoucherErrorLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		invalidVoucherErrorLabel.setForeground(Color.RED);
+		invalidVoucherErrorLabel.setFont(new Font("Arial", Font.PLAIN, 13));
+		add(invalidVoucherErrorLabel);
+>>>>>>> 1ea21d7878daeedbfd7d436f93d9e56a8138bceb
 		backButton.setBounds(30, 30, 50, 50);
 		backButton.setIcon(new ImageIcon(PaymentPage.class.getResource("/backButton.png")));
 		add(backButton);
@@ -366,12 +431,17 @@ public class PaymentPage extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				System.out.println("Payment details entered");
+<<<<<<< HEAD
 				String cardType = (String) cardTypeSelectComboBox.getSelectedItem();
+=======
+				String cardType = (String)cardTypeSelectComboBox.getSelectedItem();
+>>>>>>> 1ea21d7878daeedbfd7d436f93d9e56a8138bceb
 				String cardNum = cardNumberTextField.getText();
 				String cardExp = cardExpirationDateTextField.getText();
 				String cardCCV = String.valueOf(cardSVSPasswordField.getPassword());
 				String voucher = voucherTextField.getText();
 				String name = nameTextField.getText();
+<<<<<<< HEAD
 				boolean voucherValid = false;
 				boolean cardValid = false;
 				Voucher redeemedVoucher = null;
@@ -412,6 +482,57 @@ public class PaymentPage extends JPanel {
 					invalidCardErrorLabel.setVisible(true);
 				} else if (voucherValid == false) {
 					invalidVoucherErrorLabel.setVisible(true);
+=======
+				String email = emailTextField.getText();
+				boolean voucherValid = false;
+				boolean cardValid = false;
+				invalidCardErrorLabel.setVisible(false);
+				invalidVoucherErrorLabel.setVisible(false);
+				//ArrayList<Ticket> ticketsCreated = new ArrayList<Ticket>();
+				
+				// Validate Card info
+				if(backend.getDataController().getInst().verifyCardInfo(name, cardType, cardNum, cardCCV, cardExp)) {
+					cardValid = true;
+				}
+				else {
+					invalidCardErrorLabel.setVisible(true);
+				}
+				// Validate voucher
+				if(voucher != "") {
+					for(int i=0; i<backend.getDataController().getVoucherList().size(); i++) {
+						if(voucher == backend.getDataController().getVoucherList().get(i).getVoucherCode()) {
+							if(!backend.getDataController().getVoucherList().get(i).isUsed()) {
+								voucherValid = true;
+							}
+							else {
+								invalidVoucherErrorLabel.setVisible(true);
+							}
+						}
+					}
+				}
+				else {
+					voucherValid = true;
+				}
+				
+				// All information is valid
+				if(voucherValid && cardValid) {
+					System.out.println("entered payment");
+					//Cart c = backend.getCurrentUser().getCart();
+					backend.getCurrentUser().getCart().setPayment(new Payment(backend.getCurrentUser().getCart().getPayment().getAmount(), new BankingInfo(name, cardType, cardNum, cardCCV, cardExp)));
+					for(int i=0; i<backend.getCurrentUser().getCart().getItems_in_cart().size(); i++) {
+						Movie movie = backend.getCurrentUser().getCart().getItems_in_cart().get(i).getBookedMovie();
+						Showtime showtime = backend.getCurrentUser().getCart().getItems_in_cart().get(i).getBookedTime();
+						Seat seat = backend.getCurrentUser().getCart().getItems_in_cart().get(i).getBookedSeat();
+						Ticket t = new Ticket(backend.getCurrentUser().getCart().getPayment(), movie, showtime, seat);
+						//ticketsCreated.add(t);
+						t.emailTicket(email);
+						backend.getDataController().addTicket(t);
+					}						
+					/* Add prompt to show ticket and success message*/
+					
+					HomePage homePanel = new HomePage(frame, backend);
+					frame.setContentPane(homePanel);
+>>>>>>> 1ea21d7878daeedbfd7d436f93d9e56a8138bceb
 				}
 			}
 		});
