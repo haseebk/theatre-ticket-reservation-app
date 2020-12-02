@@ -172,15 +172,16 @@ public class CancelTicketPage extends JPanel {
 								tempTicket = backend.getDataController().getTicketList().get(i);
 							}
 						}
-						Payment tempPayment = new Payment(tempTicket.getPayment().getAmount() * (0-1),
-								backend.getCurrentRegisteredUser().getBankInfo());
+						double tempAmount = tempTicket.getPayment().getAmount() * (-1);
+						Payment tempPayment = new Payment(tempAmount, backend.getCurrentRegisteredUser().getBankInfo());
 						LocalDate today = LocalDate.now();
 						Date todayDay = new Date(today.getDayOfMonth(), today.getMonthValue(), today.getYear());
 						ArrayList<Ticket> tempTicketList = new ArrayList<Ticket>();
 						tempTicketList.add(tempTicket);
 						Receipt refundReceipt = new Receipt(tempPayment, todayDay, tempTicketList);
 						refundReceipt.emailReceipt(backend, refundReceipt.receiptToString() + "\nRefund Amount: $"
-								+ tempTicket.getPayment().getAmount());
+								+ String.format("%.2f", tempPayment.getAmount()));
+
 						backend.getDataController().addReceipt(refundReceipt);
 						backend.getDataController().addPayment(tempPayment);
 					}

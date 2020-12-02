@@ -453,7 +453,7 @@ public class PaymentPage extends JPanel {
 		
 
 		if(backend.getCurrentRegisteredUser() != null){
-			r.emailReceipt(backend, r.receiptToString());
+			r.emailReceipt(backend, r.receiptToString() + "\nPurchase Total: $" + String.format("%.2f",r.getPayment().getAmount()));
 		} 
 			
 		/* Add prompt to show ticket and success message */
