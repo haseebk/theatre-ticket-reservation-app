@@ -10,10 +10,7 @@ import java.util.Vector;
 import javax.swing.*;
 import domain.model.*;
 import java.awt.Dimension;
-<<<<<<< HEAD
-=======
 
->>>>>>> 1ea21d7878daeedbfd7d436f93d9e56a8138bceb
 
 public class CartPage extends JPanel {
 	/**
@@ -67,11 +64,7 @@ public class CartPage extends JPanel {
 		cartTotalLabel.setForeground(Color.WHITE);
 		cartTotalLabel.setFont(new Font("Arial", Font.PLAIN, 25));
 		cartTotalLabel.setBounds(26, 679, 571, 50);
-<<<<<<< HEAD
 		cartTotalLabel.setText("Cart total: $" + String.format("%.2f",backend.getCurrentUser().getCart().calculateCartCost()));
-=======
-		cartTotalLabel.setText("Cart total: $" + backend.getCurrentUser().getCart().calculateCartCost());
->>>>>>> 1ea21d7878daeedbfd7d436f93d9e56a8138bceb
 		add(cartTotalLabel);
 
 		// CREATE CHECKOUT BUTTON
@@ -80,12 +73,10 @@ public class CartPage extends JPanel {
 		checkoutButton.setBounds(1082, 679, 254, 50);
 		checkoutButton.setToolTipText("Checkout");
 		checkoutButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-<<<<<<< HEAD
+
 		/**
 		 * When the checkout button is pressed, set the view to the payment page
 		 */
-=======
->>>>>>> 1ea21d7878daeedbfd7d436f93d9e56a8138bceb
 		checkoutButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -94,14 +85,12 @@ public class CartPage extends JPanel {
 				frame.revalidate();
 			}
 		});
-<<<<<<< HEAD
 		if (backend.getCurrentUser().getCart().getItems_in_cart().size() == 0){
 			checkoutButton.setVisible(false);
 		} else{
 			checkoutButton.setVisible(true);
 		}
-=======
->>>>>>> 1ea21d7878daeedbfd7d436f93d9e56a8138bceb
+
 		add(checkoutButton);
 
 		// CREATE MOVIE CARD VIEW
@@ -118,13 +107,10 @@ public class CartPage extends JPanel {
 			deleteTicket[i].setHorizontalAlignment(SwingConstants.LEFT);
 			deleteTicket[i].setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			deleteTicket[i].setIcon(new ImageIcon(HomePage.class.getResource("/deleteButton.png")));
-<<<<<<< HEAD
 			/**
 			 * When the delete ticket button is pressed, remove the corresponding ticket
 			 * from user cart and update cart accordingly by reseting the view
 			 */
-=======
->>>>>>> 1ea21d7878daeedbfd7d436f93d9e56a8138bceb
 			deleteTicket[i].addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -147,11 +133,7 @@ public class CartPage extends JPanel {
 			ticketDetails[i].setFont(new Font("Arial", Font.PLAIN, 20));
 			ticketDetails[i].setBounds(60, 70 + (170 * i), 1000, 32);
 			imagePanels.add(ticketDetails[i]);
-<<<<<<< HEAD
 
-=======
-			
->>>>>>> 1ea21d7878daeedbfd7d436f93d9e56a8138bceb
 			ticketCards[i] = new JLabel("");
 			ticketCards[i].setVerticalAlignment(SwingConstants.TOP);
 			ticketCards[i].setHorizontalAlignment(SwingConstants.LEFT);

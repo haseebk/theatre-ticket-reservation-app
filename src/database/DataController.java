@@ -20,6 +20,7 @@ public class DataController {
 	private ArrayList<Announcement> announcementList;
 	private ArrayList<Auditorium> auditoriumList;
 	private ArrayList<Voucher> voucherList;
+	private ArrayList<Payment> paymentList;
 	private FinancialInstitution inst;
 
 	/**
@@ -34,10 +35,9 @@ public class DataController {
 		setAnnouncementList(new ArrayList<Announcement>());
 		setAuditoriumList(new ArrayList<Auditorium>());
 		setVoucherList(new ArrayList<Voucher>());
-<<<<<<< HEAD
 		setBankList(new ArrayList<BankingInfo>());
-=======
->>>>>>> 1ea21d7878daeedbfd7d436f93d9e56a8138bceb
+
+		setPaymentList(new ArrayList<Payment>());
 		inst = new FinancialInstitution("");
 	}
 
@@ -178,12 +178,13 @@ public class DataController {
 
 	/**
 	 * Search movie based on ID
+	 * 
 	 * @param id search ID
 	 * @return returns the movie if found, null if not
 	 */
-	public Movie searchMovie(int id){
-		for(int i = 0; i < getMovieList().size(); i++){
-			if(id == getMovieList().get(i).getMovieID()){
+	public Movie searchMovie(int id) {
+		for (int i = 0; i < getMovieList().size(); i++) {
+			if (id == getMovieList().get(i).getMovieID()) {
 				return getMovieList().get(i);
 			}
 		}
@@ -192,12 +193,13 @@ public class DataController {
 
 	/**
 	 * Search theatre based on ID
+	 * 
 	 * @param id search ID
 	 * @return returns the theatre if found, null if not
 	 */
-	public Theatre searchTheatre(int id){
-		for(int i = 0; i < getTheatreList().size(); i++){
-			if(id == getTheatreList().get(i).getTheatreID()){
+	public Theatre searchTheatre(int id) {
+		for (int i = 0; i < getTheatreList().size(); i++) {
+			if (id == getTheatreList().get(i).getTheatreID()) {
 				return getTheatreList().get(i);
 			}
 		}
@@ -206,12 +208,13 @@ public class DataController {
 
 	/**
 	 * Search auditorium based on ID
+	 * 
 	 * @param id search ID
 	 * @return returns the auditorium if found, null if not
 	 */
-	public Auditorium searchAuditorium(int id){
-		for(int i = 0; i < getAuditoriumList().size(); i++){
-			if(id == getAuditoriumList().get(i).getAuditoriumID()){
+	public Auditorium searchAuditorium(int id) {
+		for (int i = 0; i < getAuditoriumList().size(); i++) {
+			if (id == getAuditoriumList().get(i).getAuditoriumID()) {
 				return getAuditoriumList().get(i);
 			}
 		}
@@ -220,13 +223,44 @@ public class DataController {
 
 	/**
 	 * Search bankingInfo based on ID
+	 * 
 	 * @param id search ID
 	 * @return returns the bankingInfo if found, null if not
 	 */
-	public BankingInfo searchBankingInfo(int id){
-		for(int i = 0; i < getBankList().size(); i++){
-			if(id == getBankList().get(i).getBankID()){
+	public BankingInfo searchBankingInfo(int id) {
+		for (int i = 0; i < getBankList().size(); i++) {
+			if (id == getBankList().get(i).getBankID()) {
 				return getBankList().get(i);
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Search payment based on ID
+	 * 
+	 * @param id search ID
+	 * @return returns the payment if found, null if not
+	 */
+	public Payment searchPaymentInfo(int id) {
+		for (int i = 0; i < getPaymentList().size(); i++) {
+			if (id == getPaymentList().get(i).getPaymentID()) {
+				return getPaymentList().get(i);
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Search Showtime based on ID
+	 * 
+	 * @param id search ID
+	 * @return returns the Showtime if found, null if not
+	 */
+	public Showtime searchShowtimeInfo(int id) {
+		for (int i = 0; i < getShowtimeList().size(); i++) {
+			if (id == getShowtimeList().get(i).getShowtimeID()) {
+				return getShowtimeList().get(i);
 			}
 		}
 		return null;
@@ -443,41 +477,57 @@ public class DataController {
 	public void removeAuditorium(Auditorium auditorium) {
 		auditoriumList.remove(auditorium);
 	}
-	
+
 	public void addVoucher(Voucher voucher) {
 		voucherList.add(voucher);
 	}
-	
+
 	public ArrayList<Voucher> getVoucherList() {
 		return voucherList;
 	}
-	
+
 	public void setVoucherList(ArrayList<Voucher> voucherList) {
 		this.voucherList = voucherList;
 	}
-	
+
 	public void removeVoucher(Voucher voucher) {
 		voucherList.remove(voucher);
 	}
 
-<<<<<<< HEAD
-	public ArrayList<BankingInfo> getBankList() { return bankList; }
+	public ArrayList<BankingInfo> getBankList() {
+		return bankList;
+	}
 
-	public void setBankList(ArrayList<BankingInfo> bankList) { this.bankList = bankList; }
+	public void setBankList(ArrayList<BankingInfo> bankList) {
+		this.bankList = bankList;
+	}
 
-	public void addBankingInfo(BankingInfo b) { this.bankList.add(b); }
+	public void addBankingInfo(BankingInfo b) {
+		this.bankList.add(b);
+	}
 
-=======
->>>>>>> 1ea21d7878daeedbfd7d436f93d9e56a8138bceb
+	public void setPaymentList(ArrayList<Payment> paymentList) {
+		this.paymentList = paymentList;
+	}
+
+	public ArrayList<Payment> getPaymentList() {
+		return paymentList;
+	}
+
+	public void addPayment(Payment p) {
+		this.paymentList.add(p);
+	}
+
 	public int checkTicket(int id) {
 
-		for(int i = 0; i < ticketList.size(); i++) {
-			if(ticketList.get(i).getTicketID() == id) {
-				if(ticketList.get(i).getShowtime().getShowDate().beforeCurrentDate() && !ticketList.get(i).getShowtime().is72HoursBefore()){
+		for (int i = 0; i < ticketList.size(); i++) {
+			if (ticketList.get(i).getTicketID() == id) {
+				if (ticketList.get(i).getShowtime().getShowDate().beforeCurrentDate()
+						&& !ticketList.get(i).getShowtime().is72HoursBefore()) {
 					return -2;
-				}else if(ticketList.get(i).getShowtime().getShowDate().beforeCurrentDate()){
+				} else if (ticketList.get(i).getShowtime().getShowDate().beforeCurrentDate()) {
 					return i;
-				}else{
+				} else {
 					return -3;
 				}
 			}
@@ -486,8 +536,7 @@ public class DataController {
 		return -1;
 	}
 
-<<<<<<< HEAD
-	public Voucher redeemVoucher(String voucherCode){
+	public Voucher redeemVoucher(String voucherCode) {
 		for (int i = 0; i < getVoucherList().size(); i++) {
 			if (voucherCode.compareTo(getVoucherList().get(i).getVoucherCode()) == 0) {
 				if (!getVoucherList().get(i).isUsed()) {
@@ -501,8 +550,6 @@ public class DataController {
 		return null;
 	}
 
-=======
->>>>>>> 1ea21d7878daeedbfd7d436f93d9e56a8138bceb
 	public FinancialInstitution getInst() {
 		return inst;
 	}

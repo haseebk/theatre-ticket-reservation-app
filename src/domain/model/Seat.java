@@ -11,6 +11,12 @@ public class Seat {
 		seatTaken = false;
 	}
 
+	public Seat(int row, int seatNum, int booked) {
+		this.row = row;
+		this.seatNum = seatNum;
+		seatTaken = true;
+	}
+
 	// This method shows the seat selection?
 	public void showSeatSelection() {
 		// To be implemented
