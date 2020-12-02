@@ -50,6 +50,8 @@ public class DatabasePopulator{
 	}
 
 	public void loadInst() {
+		System.out.println("\n****LOADING FINANCIAL INSTITUTIONS****");
+
 		inst = new FinancialInstitution("Cash Money Bank");
 		BankingInfo b5 = new BankingInfo("Random Person", "VISA", "5555555555555555", "555", "05/22");
 		inst.addAccount(b1);
@@ -61,6 +63,8 @@ public class DatabasePopulator{
 	}
 	
 	public void loadMovies() throws IOException {
+		System.out.println("\n****LOADING MOVIES****");
+
 		FileInputStream fstream = new FileInputStream("data/movie_data.txt");
 		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 
@@ -81,6 +85,8 @@ public class DatabasePopulator{
 	}
 
 	public void loadTheatres() throws IOException{
+		System.out.println("\n****LOADING THEATRES****");
+
 		FileInputStream fstream = new FileInputStream("data/theatre_data.txt");
 		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 
@@ -99,6 +105,8 @@ public class DatabasePopulator{
 	}
 
 	public void loadAuditoriums() throws IOException {
+		System.out.println("\n****LOADING AUDITORIUMS****");
+
 		FileInputStream fstream = new FileInputStream("data/auditorium_data.txt");
 		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 
@@ -120,6 +128,8 @@ public class DatabasePopulator{
 
 
 	public void loadShowtimes() throws IOException{
+		System.out.println("\n****LOADING SHOW TIMES****");
+
 		FileInputStream fstream = new FileInputStream("data/showtime_data.txt");
 		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 
@@ -145,6 +155,8 @@ public class DatabasePopulator{
 	}
 
 	public void loadTickets() {
+		System.out.println("\n****LOADING TICKETS****");
+
 		b1 = new BankingInfo("Vaibhav Kapoor", "MASTER", "1111111111111111", "111", "01/22");
 		b2 = new BankingInfo("William Kerr", "VISA", "2222222222222222", "222", "02/22");
 		Payment p1 = new Payment(13.99, b1);
@@ -159,6 +171,8 @@ public class DatabasePopulator{
 	}
 
 	public void loadUsers() throws IOException{
+		System.out.println("\n****LOADING USERS****");
+
 		FileInputStream fstream = new FileInputStream("data/registered_user_data.txt");
 		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 
@@ -178,6 +192,8 @@ public class DatabasePopulator{
 	}
 
 	public void loadAnnouncements() throws IOException{
+		System.out.println("\n****LOADING ANNOUNCEMENTS****");
+
 		FileInputStream fstream = new FileInputStream("data/announcement_data.txt");
 		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 
@@ -200,6 +216,7 @@ public class DatabasePopulator{
 	}
 
 	public void loadBankInfo() throws IOException{
+		System.out.println("\n****LOADING BANKING INFO****");
 		FileInputStream fstream = new FileInputStream("data/banking_data.txt");
 		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 

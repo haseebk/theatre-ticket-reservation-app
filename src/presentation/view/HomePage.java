@@ -895,18 +895,18 @@ public class HomePage extends JPanel {
 						if (backend.getDataController().getInst().verifyCardInfo(name, ct, cn, cvs, exp)) {
 							System.out.println("fee payment successful");
 							JOptionPane.showMessageDialog(null,
-									"Purchase Cost: $20 - Annual Fee has been successfully paid!",
+									"Annual Fee has been successfully payed. Purchase Cost: $20",
 									(String) "Annual Fee Payment", JOptionPane.INFORMATION_MESSAGE);
 							backend.getCurrentRegisteredUser().setFeePayed(true);
 						} else {
-							System.out.println("Error: Fee payment unsuccessful!");
-							JOptionPane.showMessageDialog(null, "Error: Fee payment unsuccessful!",
+							System.out.println("fee payment unsuccessful");
+							JOptionPane.showMessageDialog(null, "Annual Fee payment was unsuccessful.",
 									(String) "Annual Fee Payment", JOptionPane.INFORMATION_MESSAGE);
 						}
 						// HomePage homePanel = new HomePage(frame, backend);
 						// frame.setContentPane(homePanel);
 					} else {
-						System.out.println("Annual fee has already been paid.");
+						System.out.println("fee has already been payed");
 						JOptionPane.showMessageDialog(null, "Annual Fee has been already payed.",
 								(String) "Annual Fee Payment", JOptionPane.INFORMATION_MESSAGE);
 					}
