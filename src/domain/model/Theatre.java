@@ -27,6 +27,15 @@ public class Theatre {
 	 */
 	private String address;
 
+	public Theatre(int theatreID, String theatreName, String phoneNumber, String ad) {
+		this.t_name = theatreName;
+		this.theatreID = theatreID;
+		this.setAuditoriums(new ArrayList<Auditorium>());
+		this.phoneNumber = phoneNumber;
+		this.address = ad;
+		theatreCounter++;
+	}
+
 	public Theatre(String theatreName, ArrayList<Auditorium> auditoriums, String phoneNumber, String ad) {
 		this.t_name = theatreName;
 		this.theatreID = theatreCounter++;
@@ -41,6 +50,7 @@ public class Theatre {
 		this.setAuditoriums(auditoriums);
 		this.phoneNumber = phoneNumber;
 		this.address = ad;
+		theatreCounter++;
 	}
 
 	// Getters and Setters

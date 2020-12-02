@@ -10,12 +10,21 @@ public class Auditorium {
 
 	private static int auditoriumCounter = 3000;
 
-	public Auditorium(int r, int c) {
+	public Auditorium(int aID, int r, int c, Theatre theatre) {
+		auditoriumID = aID;
+		num_of_rows = r;
+		num_of_cols = c;
+		totalAvaliableSeats = r * c;
+		this.theatre = theatre;
+		auditoriumCounter++;
+	}
+
+	public Auditorium(int r, int c, Theatre theatre) {
 		auditoriumID = auditoriumCounter++;
 		num_of_rows = r;
 		num_of_cols = c;
 		totalAvaliableSeats = r * c;
-		theatre = null;
+		this.theatre = theatre;
 	}
 
 	public int getAuditoriumID() {

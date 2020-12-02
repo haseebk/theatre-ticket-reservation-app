@@ -80,34 +80,43 @@ public class DatabasePopulator{
 	}
 
 	public void loadTheatres() throws IOException{
+		FileInputStream fstream = new FileInputStream("data/theatre_data.txt");
+		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 
-		ArrayList<Auditorium> a1 = new ArrayList<Auditorium>(2);
-		ArrayList<Auditorium> a2 = new ArrayList<Auditorium>(2);
-		a1.add(new Auditorium(4, 6));
-		a1.add(new Auditorium(6, 6));
-		a2.add(new Auditorium(9, 7));
-		a2.add(new Auditorium(7, 8));
+		String line;
+		String[] argList = new String[4];
 
-		dbController.addAuditorium(a1.get(0));
-		dbController.addAuditorium(a1.get(1));
-		dbController.addAuditorium(a2.get(0));
-		dbController.addAuditorium(a2.get(1));
+		while((line = br.readLine()) != null) {
+			argList = line.split(":");
+			for(int i = 0; i < argList.length; i++){
+				System.out.println(argList[i]);
+			}
+			dbController.addTheatre(new Theatre(Integer.parseInt(argList[0]), argList[1], argList[2], argList[3]));
+		}
+		fstream.close();
+		loadAuditoriums();
+	}
 
+	public void loadAuditoriums() throws IOException {
+		FileInputStream fstream = new FileInputStream("data/auditorium_data.txt");
+		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 
-		Theatre t1 = new Theatre(2000, "Theatre 1", a1, "123456789", "Some Address 1");
-		Theatre t2 = new Theatre(2001, "Theatre 2", a2, "987654321", "Some Address 2");
-		dbController.addTheatre(t1);
-		dbController.addTheatre(t2);
+		String line;
+		String[] argList = new String[4];
+
+		while((line = br.readLine()) != null) {
+			argList = line.split(":");
+			for(int i = 0; i < argList.length; i++){
+				System.out.println(argList[i]);
+			}
+			dbController.addAuditorium(new Auditorium(Integer.parseInt(argList[0]), Integer.parseInt(argList[1]), Integer.parseInt(argList[2]), dbController.searchTheatre(Integer.parseInt(argList[3]))));
+		}
+		fstream.close();
 
 		loadShowtimes();
-
-		a1.get(0).setTheatre(t1);
-		a1.get(1).setTheatre(t1);
-		a2.get(0).setTheatre(t2);
-		a2.get(1).setTheatre(t2);
-
-
 	}
+
+
 
 	public void loadShowtimes() throws IOException{
 		FileInputStream fstream = new FileInputStream("data/showtime_data.txt");
