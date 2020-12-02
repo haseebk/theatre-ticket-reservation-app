@@ -93,7 +93,8 @@ public class CancelTicketPage extends JPanel {
 		add(cancelSuccessLabel);
 
 		// CREATE UNDER 72 HOURS LABEL
-		cancelTooLateLabel = new JLabel("<html>" + "It is under 72 Hours before the Showtime, cannot cancel" + "</html>");
+		cancelTooLateLabel = new JLabel(
+				"<html>" + "It is under 72 Hours before the Showtime, cannot cancel" + "</html>");
 		cancelTooLateLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		cancelTooLateLabel.setForeground(Color.RED);
 		cancelTooLateLabel.setFont(new Font("Arial", Font.PLAIN, 13));
@@ -150,11 +151,11 @@ public class CancelTicketPage extends JPanel {
 				cancelTooLateLabel.setVisible(false);
 				cancelTicketUsedLabel.setVisible(false);
 				int t = backend.getDataController().checkTicket(Integer.parseInt(temp));
-				if (t == -2){
-					//Showtime is under 72 hours away
+				if (t == -2) {
+					// Showtime is under 72 hours away
 					cancelTooLateLabel.setVisible(true);
 				} else if (t == -3) {
-					//Showtime has already passed
+					// Showtime has already passed
 					cancelTicketUsedLabel.setVisible(true);
 				} else if (t != -1) {
 					if (backend.getCurrentGuestUser() != null) {
@@ -163,32 +164,37 @@ public class CancelTicketPage extends JPanel {
 						backend.getDataController().addVoucher(newVoucher);
 						JOptionPane.showMessageDialog(frame, "Here is your voucher code: " + newVoucher.getVoucherCode()
 								+ " redeemable for $" + newVoucher.getAmount());
-					}else{
+					} else {
 						Ticket tempTicket = null;
-						for(int i = 0; i < backend.getDataController().getTicketList().size(); i++){
-							if(backend.getDataController().getTicketList().get(i).getTicketID() == Integer.parseInt(temp)){
+						for (int i = 0; i < backend.getDataController().getTicketList().size(); i++) {
+							if (backend.getDataController().getTicketList().get(i).getTicketID() == Integer
+									.parseInt(temp)) {
 								tempTicket = backend.getDataController().getTicketList().get(i);
 							}
 						}
-						Payment tempPayment = new Payment(tempTicket.getPayment().getAmount() * (-1),backend.getCurrentRegisteredUser().getBankInfo());
+						Payment tempPayment = new Payment(tempTicket.getPayment().getAmount() * (0-1),
+								backend.getCurrentRegisteredUser().getBankInfo());
 						LocalDate today = LocalDate.now();
-						Date todayDay = new Date(today.getDayOfMonth(),today.getMonthValue(),today.getYear());
+						Date todayDay = new Date(today.getDayOfMonth(), today.getMonthValue(), today.getYear());
 						ArrayList<Ticket> tempTicketList = new ArrayList<Ticket>();
 						tempTicketList.add(tempTicket);
-						Receipt refundReceipt = new Receipt(tempPayment,todayDay,tempTicketList);
-						refundReceipt.emailReceipt(backend, refundReceipt.receiptToString());
+						Receipt refundReceipt = new Receipt(tempPayment, todayDay, tempTicketList);
+						refundReceipt.emailReceipt(backend, refundReceipt.receiptToString() + "\nRefund Amount: $"
+								+ tempTicket.getPayment().getAmount());
 						backend.getDataController().addReceipt(refundReceipt);
 						backend.getDataController().addPayment(tempPayment);
 					}
 					backend.getDataController().getTicketList().get(t).getSeat().vacateSeat();
 					Ticket tempTicket = backend.getDataController().getTicketList().get(t);
-					tempTicket.getShowtime().vacantSeat(tempTicket.getSeat().getRow(),tempTicket.getSeat().getSeatNum());
-					tempTicket.getShowtime().setTotalAvaliableSeats(tempTicket.getShowtime().getTotalAvaliableSeats() + 1);
+					tempTicket.getShowtime().vacantSeat(tempTicket.getSeat().getRow(),
+							tempTicket.getSeat().getSeatNum());
+					tempTicket.getShowtime()
+							.setTotalAvaliableSeats(tempTicket.getShowtime().getTotalAvaliableSeats() + 1);
 					backend.getDataController().removeReceipt(tempTicket.getReceipt());
 					backend.getDataController().removeTicket(tempTicket);
 					cancelSuccessLabel.setVisible(true);
 				} else {
-					//Couldn't find ticket
+					// Couldn't find ticket
 					cancelErrorLabel.setVisible(true);
 				}
 				frame.validate();
