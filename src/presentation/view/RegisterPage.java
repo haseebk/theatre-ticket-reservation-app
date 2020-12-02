@@ -170,8 +170,8 @@ public class RegisterPage extends JPanel {
 
 		// CREATE CARDTYPE TEXT FIELD
 		Vector<String> cardTypes = new Vector<String>();
-		cardTypes.add("MasterCard");
-		cardTypes.add("Visa");
+		cardTypes.add("MASTERCARD");
+		cardTypes.add("VISA");
 		JComboBox cardTypeSelectComboBox = new JComboBox(cardTypes);
 		cardTypeSelectComboBox.setBounds(433, 463, 118, 28);
 		cardTypeSelectComboBox.setToolTipText("Select Card Type");
@@ -312,6 +312,16 @@ public class RegisterPage extends JPanel {
 		invalidUsernameErrorLabel.setForeground(Color.RED);
 		invalidUsernameErrorLabel.setFont(new Font("Arial", Font.PLAIN, 13));
 		add(invalidUsernameErrorLabel);
+		
+		// CARD ERROR TEXT LABEL
+		JLabel invalidCardErrorLabel = new JLabel("<html>"
+				+ "Card information was declined by " + backend.getDataController().getInst().getName() + "." + "</html>");
+		invalidCardErrorLabel.setBounds(565, 236, 254, 45);
+		invalidCardErrorLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		invalidCardErrorLabel.setForeground(Color.RED);
+		invalidCardErrorLabel.setFont(new Font("Arial", Font.PLAIN, 13));
+		invalidCardErrorLabel.setVisible(false);
+		add(invalidCardErrorLabel);
 
 		// CREATE PASSWORD ERROR TEXT LABEL
 		JLabel invalidPasswordErrorLabel = new JLabel(
@@ -356,16 +366,17 @@ public class RegisterPage extends JPanel {
 				String cardNum = cardNumberTextField.getText();
 				String cardSVS = String.valueOf(cardSVSPasswordField.getPassword());
 				String cardExp = cardExpirationDateTextField.getText();
-
+	
 				// Dont need these for now
 				Boolean validName = true;
 				Boolean samePasswords = true;
 				Boolean uniqueUser = true;
 
 				// Clear previous error messages
+				invalidCardErrorLabel.setVisible(false);
 				invalidNameErrorLabel.setVisible(false);
 				invalidPasswordErrorLabel.setVisible(false);
-				invalidUsernameErrorLabel.setVisible(false);
+				invalidUsernameErrorLabel.setVisible(false);				
 
 				/**
 				 * verify sign up details and update backend + database
@@ -373,11 +384,16 @@ public class RegisterPage extends JPanel {
 				// Check if username is available
 				if (!backend.checkExisting(user)) {
 					if (pass.matches(confirmPass)) {
-						if (name.length == 2) {
-							backend.registerUser(user, pass, name[0], name[1], email, fullname, cardType, cardNum,
-									cardSVS, cardExp);
-							LoginPage loginPanel = new LoginPage(frame, backend);
-							frame.setContentPane(loginPanel);
+						if (name.length == 2) {							
+							if(backend.getDataController().getInst().verifyCardInfo(fullname, cardType, cardNum, cardSVS, cardExp)) {
+								backend.registerUser(user, pass, name[0], name[1], email, fullname, cardType, cardNum,
+										cardSVS, cardExp);
+								LoginPage loginPanel = new LoginPage(frame, backend);
+								frame.setContentPane(loginPanel);
+							}
+							else {
+								invalidCardErrorLabel.setVisible(true);
+							}							
 						} else {
 							invalidNameErrorLabel.setVisible(true);
 						}
