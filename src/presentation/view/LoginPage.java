@@ -70,7 +70,7 @@ public class LoginPage extends JPanel {
 		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		titleLabel.setForeground(Color.WHITE);
 		titleLabel.setFont(new Font("Arial", Font.PLAIN, 20));
-		titleLabel.setBounds(515, 250, 350, 30);
+		titleLabel.setBounds(515, 200, 350, 30);
 		add(titleLabel);
 
 		// CREATE GUEST LOGIN BUTTON
