@@ -5,12 +5,19 @@ public class Payment {
 	private double amount;
 	private BankingInfo card;
 	
-	private static int pCounter = 5000;
+	private static int pCounter = 9000;
 
 	public Payment(double a, BankingInfo c) {
 		paymentID = pCounter++;
 		amount = a;
 		card = c;
+	}
+
+	public Payment(int i, double a, BankingInfo c) {
+		paymentID = i;
+		amount = a;
+		card = c;
+		pCounter++;
 	}
 
 	// Getters and Setters

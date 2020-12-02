@@ -5,12 +5,19 @@ public class Voucher {
 
 	private double amount;
 	private boolean used;
-	private static int voucherCounter = 1000;
+	private static int voucherCounter = 8000;
 
 	public Voucher(double value) {
 		voucherCode = Integer.toString(voucherCounter++);
 		amount = value;
 		used = false;
+	}
+
+	public Voucher(int id, double value, boolean use) {
+		voucherCode = Integer.toString(voucherCounter++);
+		voucherCounter++;
+		amount = value;
+		used = use;
 	}
 
 	// This method sets the voucher as used = true

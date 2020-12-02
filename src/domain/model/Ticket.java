@@ -7,10 +7,19 @@ public class Ticket {
 	private Showtime showtime;
 	private Seat seat;
 	
-	private static int ticketCounter = 100;
+	private static int ticketCounter = 10000;
 
 	public Ticket(Payment p, Movie m, Showtime s, Seat s1) {
 		ticketID = ticketCounter++;
+		payment = p;
+		the_movie = m;
+		showtime = s;
+		seat = s1;
+	}
+
+	public Ticket(int id, Payment p, Movie m, Showtime s, Seat s1) {
+		ticketID = id;
+		ticketCounter++;
 		payment = p;
 		the_movie = m;
 		showtime = s;

@@ -20,6 +20,7 @@ public class DataController {
 	private ArrayList<Announcement> announcementList;
 	private ArrayList<Auditorium> auditoriumList;
 	private ArrayList<Voucher> voucherList;
+	private ArrayList<Payment> paymentList;
 	private FinancialInstitution inst;
 
 	/**
@@ -35,6 +36,7 @@ public class DataController {
 		setAuditoriumList(new ArrayList<Auditorium>());
 		setVoucherList(new ArrayList<Voucher>());
 		setBankList(new ArrayList<BankingInfo>());
+		setPaymentList(new ArrayList<Payment>());
 		inst = new FinancialInstitution("");
 	}
 
@@ -224,6 +226,34 @@ public class DataController {
 		for(int i = 0; i < getBankList().size(); i++){
 			if(id == getBankList().get(i).getBankID()){
 				return getBankList().get(i);
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Search payment based on ID
+	 * @param id search ID
+	 * @return returns the payment if found, null if not
+	 */
+	public Payment searchPaymentInfo(int id){
+		for(int i = 0; i < getPaymentList().size(); i++){
+			if(id == getPaymentList().get(i).getPaymentID()){
+				return getPaymentList().get(i);
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Search Showtime based on ID
+	 * @param id search ID
+	 * @return returns the Showtime if found, null if not
+	 */
+	public Showtime searchShowtimeInfo(int id){
+		for(int i = 0; i < getShowtimeList().size(); i++){
+			if(id == getShowtimeList().get(i).getShowtimeID()){
+				return getShowtimeList().get(i);
 			}
 		}
 		return null;
@@ -462,6 +492,12 @@ public class DataController {
 	public void setBankList(ArrayList<BankingInfo> bankList) { this.bankList = bankList; }
 
 	public void addBankingInfo(BankingInfo b) { this.bankList.add(b); }
+
+	public void setPaymentList(ArrayList<Payment> paymentList) { this.paymentList = paymentList; }
+
+	public ArrayList<Payment> getPaymentList() { return paymentList; }
+
+	public void addPayment(Payment p) { this.paymentList.add(p); }
 
 	public int checkTicket(int id) {
 
