@@ -6,6 +6,7 @@ public class Ticket {
 	private Movie the_movie;
 	private Showtime showtime;
 	private Seat seat;
+	private Receipt receipt;
 	
 	private static int ticketCounter = 10000;
 
@@ -15,15 +16,18 @@ public class Ticket {
 		the_movie = m;
 		showtime = s;
 		seat = s1;
+		receipt = null;
 	}
 
-	public Ticket(int id, Payment p, Movie m, Showtime s, Seat s1) {
+	public Ticket(int id, Payment p, Movie m, Showtime s, Seat s1, Receipt r) {
 		ticketID = id;
 		ticketCounter++;
 		payment = p;
 		the_movie = m;
 		showtime = s;
 		seat = s1;
+		receipt = r;
+		r.addTicket(this);
 	}
 
 	// This method sends the voucher code to the
@@ -72,5 +76,9 @@ public class Ticket {
 	public void setSeat(Seat seat) {
 		this.seat = seat;
 	}
+
+	public Receipt getReceipt() { return receipt; }
+
+	public void setReceipt(Receipt receipt) { this.receipt = receipt; }
 
 }

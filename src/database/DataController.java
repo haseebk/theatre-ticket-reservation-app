@@ -21,6 +21,7 @@ public class DataController {
 	private ArrayList<Auditorium> auditoriumList;
 	private ArrayList<Voucher> voucherList;
 	private ArrayList<Payment> paymentList;
+	private ArrayList<Receipt> receiptList;
 	private FinancialInstitution inst;
 
 	/**
@@ -37,6 +38,7 @@ public class DataController {
 		setVoucherList(new ArrayList<Voucher>());
 		setBankList(new ArrayList<BankingInfo>());
 		setPaymentList(new ArrayList<Payment>());
+		setReceiptList(new ArrayList<Receipt>());
 		inst = new FinancialInstitution("");
 	}
 
@@ -258,6 +260,21 @@ public class DataController {
 		}
 		return null;
 	}
+
+	/**
+	 * Search Showtime based on ID
+	 * @param id search ID
+	 * @return returns the Showtime if found, null if not
+	 */
+	public Receipt searchReceipt(int id){
+		for(int i = 0; i < getReceiptList().size(); i++){
+			if(id == getReceiptList().get(i).getReceiptID()){
+				return getReceiptList().get(i);
+			}
+		}
+		return null;
+	}
+
 
 	/**
 	 * Setter for list of movies
@@ -498,6 +515,13 @@ public class DataController {
 	public ArrayList<Payment> getPaymentList() { return paymentList; }
 
 	public void addPayment(Payment p) { this.paymentList.add(p); }
+
+	public ArrayList<Receipt> getReceiptList() { return receiptList; }
+
+	public void setReceiptList(ArrayList<Receipt> receiptList) { this.receiptList = receiptList; }
+
+	public void addReceipt(Receipt receiptList) { this.receiptList.add(receiptList); }
+
 
 	public int checkTicket(int id) {
 

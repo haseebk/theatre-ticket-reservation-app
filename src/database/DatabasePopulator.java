@@ -20,10 +20,11 @@ public class DatabasePopulator{
 		loadMovies();
 		loadTheatres();
 		loadAnnouncements();
-		loadTickets();
 		loadInst();
 		loadBankInfo();
 		loadPayment();
+		loadReceipts();
+		loadTickets();
 		loadUsers();
 		loadVouchers();
 	}
@@ -108,7 +109,6 @@ public class DatabasePopulator{
 			dbController.addAuditorium(new Auditorium(Integer.parseInt(argList[0]), Integer.parseInt(argList[1]), Integer.parseInt(argList[2]), dbController.searchTheatre(Integer.parseInt(argList[3]))));
 		}
 		fstream.close();
-
 		loadShowtimes();
 	}
 
@@ -147,7 +147,7 @@ public class DatabasePopulator{
 		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 
 		String line;
-		String[] argList = new String[11];
+		String[] argList = new String[4];
 
 		while ((line = br.readLine()) != null) {
 			argList = line.split(":");
@@ -158,7 +158,7 @@ public class DatabasePopulator{
 			Seat bookedSeat = new Seat(Integer.parseInt(argList[4]), Integer.parseInt(argList[5]), 0);
 			foundShowtime.bookSeat(bookedSeat.getRow(), bookedSeat.getSeatNum());
 			dbController.addTicket(new Ticket(Integer.parseInt(argList[0]), dbController.searchPaymentInfo(Integer.parseInt(argList[1])),
-					dbController.searchMovie(Integer.parseInt(argList[2])), foundShowtime, bookedSeat));
+					dbController.searchMovie(Integer.parseInt(argList[2])), foundShowtime, bookedSeat,dbController.searchReceipt(Integer.parseInt(argList[6]))));
 		}
 		fstream.close();
 	}
@@ -278,6 +278,23 @@ public class DatabasePopulator{
 			dbController.addVoucher(new Voucher(Integer.parseInt(argList[0]), Double.parseDouble(argList[1]), use));
 		}
 		fstream.close();
-		loadAuditoriums();
+	}
+
+	public void loadReceipts() throws IOException {
+		FileInputStream fstream = new FileInputStream("data/receipt_data.txt");
+		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+
+		String line;
+		String[] argList = new String[2];
+
+		while((line = br.readLine()) != null) {
+			argList = line.split(":");
+			if(argList[0].compareTo("") == 0){
+				break;
+			}
+			Date foundDate = new Date(Integer.parseInt(argList[2]),Integer.parseInt(argList[3]),Integer.parseInt(argList[4]));
+			dbController.addReceipt(new Receipt(Integer.parseInt(argList[0]),dbController.searchPaymentInfo(Integer.parseInt(argList[1])),foundDate));
+		}
+		fstream.close();
 	}
 }
