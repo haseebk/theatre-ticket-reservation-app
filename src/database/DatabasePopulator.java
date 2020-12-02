@@ -43,6 +43,7 @@ public class DatabasePopulator{
 		loadTheatres();
 		loadAnnouncements();
 		loadTickets();
+		loadBankInfo();
 		loadUsers();
 		loadVouchers();
 		loadInst();
@@ -171,7 +172,7 @@ public class DatabasePopulator{
 			}
 
 			Date foundDate = new Date(Integer.parseInt(argList[6]),Integer.parseInt(argList[7]),Integer.parseInt(argList[8]));
-			dbController.addUser(new RegisteredUser(argList[0],argList[1],argList[2],argList[3],argList[4],b1,foundDate));
+			dbController.addUser(new RegisteredUser(argList[0],argList[1],argList[2],argList[3],argList[4],dbController.searchBankingInfo(Integer.parseInt(argList[5])),foundDate));
 		}
 		fstream.close();
 	}
@@ -194,6 +195,22 @@ public class DatabasePopulator{
 		dbController.addAnnouncement(an2);
 		dbController.addAnnouncement(an3);
 		dbController.addAnnouncement(an4);
+	}
+
+	public void loadBankInfo() throws IOException{
+		FileInputStream fstream = new FileInputStream("data/banking_data.txt");
+		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+
+		String line;
+		String[] argList = new String[8];
+
+		while((line = br.readLine()) != null) {
+			argList = line.split(":");
+			for(int i = 0; i < argList.length; i++){
+				System.out.println(argList[i]);
+			}
+			dbController.addBankingInfo(new BankingInfo(Integer.parseInt(argList[0]), argList[1], argList[2], argList[3], argList[4], argList[5]));
+		}
 	}
 	
 	public void loadVouchers() {
