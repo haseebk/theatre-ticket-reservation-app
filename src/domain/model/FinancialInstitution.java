@@ -30,7 +30,7 @@ public class FinancialInstitution {
 	}
 	
 	public boolean verifyCardInfo(String name, String type, String num, String svs, String exp) {
-		Iterator<BankingInfo> it = bankAccounts.iterator();
+		Iterator<BankingInfo> it = bankAccounts.iterator();`
 		System.out.println("Verifying Card: " +  bankAccounts.size());
         while (it.hasNext()) {
         	BankingInfo currentAccount = (BankingInfo)it.next();

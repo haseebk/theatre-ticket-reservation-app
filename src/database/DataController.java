@@ -14,6 +14,7 @@ public class DataController {
 	private ArrayList<Movie> movieList;
 	private ArrayList<Showtime> showtimeList;
 	private ArrayList<Theatre> theatreList;
+	private ArrayList<BankingInfo> bankList;
 	private ArrayList<Ticket> ticketList;
 	private ArrayList<RegisteredUser> userList;
 	private ArrayList<Announcement> announcementList;
@@ -33,6 +34,7 @@ public class DataController {
 		setAnnouncementList(new ArrayList<Announcement>());
 		setAuditoriumList(new ArrayList<Auditorium>());
 		setVoucherList(new ArrayList<Voucher>());
+		setBankList(new ArrayList<BankingInfo>());
 		inst = new FinancialInstitution("");
 	}
 
@@ -169,6 +171,62 @@ public class DataController {
 			}
 		}
 		return searchList;
+	}
+
+	/**
+	 * Search movie based on ID
+	 * @param id search ID
+	 * @return returns the movie if found, null if not
+	 */
+	public Movie searchMovie(int id){
+		for(int i = 0; i < getMovieList().size(); i++){
+			if(id == getMovieList().get(i).getMovieID()){
+				return getMovieList().get(i);
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Search theatre based on ID
+	 * @param id search ID
+	 * @return returns the theatre if found, null if not
+	 */
+	public Theatre searchTheatre(int id){
+		for(int i = 0; i < getTheatreList().size(); i++){
+			if(id == getTheatreList().get(i).getTheatreID()){
+				return getTheatreList().get(i);
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Search auditorium based on ID
+	 * @param id search ID
+	 * @return returns the auditorium if found, null if not
+	 */
+	public Auditorium searchAuditorium(int id){
+		for(int i = 0; i < getAuditoriumList().size(); i++){
+			if(id == getAuditoriumList().get(i).getAuditoriumID()){
+				return getAuditoriumList().get(i);
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Search bankingInfo based on ID
+	 * @param id search ID
+	 * @return returns the bankingInfo if found, null if not
+	 */
+	public BankingInfo searchBankingInfo(int id){
+		for(int i = 0; i < getBankList().size(); i++){
+			if(id == getBankList().get(i).getBankID()){
+				return getBankList().get(i);
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -398,6 +456,12 @@ public class DataController {
 	public void removeVoucher(Voucher voucher) {
 		voucherList.remove(voucher);
 	}
+
+	public ArrayList<BankingInfo> getBankList() { return bankList; }
+
+	public void setBankList(ArrayList<BankingInfo> bankList) { this.bankList = bankList; }
+
+	public void addBankingInfo(BankingInfo b) { this.bankList.add(b); }
 
 	public int checkTicket(int id) {
 

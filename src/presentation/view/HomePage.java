@@ -136,7 +136,7 @@ public class HomePage extends JPanel {
 
 	public HomePage(JFrame frame, BackEnd backend) {
 		setLayout(null);
-		
+
 		// CREATE NO THEATRE SELECTED TEXT LABEL
 		// Label displaying No Theatre Selected
 		noTheatreSelectedLabel = new JLabel("<html>" + "Please select a theatre." + "</html>");
@@ -251,7 +251,9 @@ public class HomePage extends JPanel {
 
 		// CREATE TAKEN SEAT ERROR TEXT LABEL
 		// Label displaying Selected Seat was Selected Error
-		privateMovieBookingErrorLabel = new JLabel("<html>" + "The Current Private Movie Listing Has Hit the Maximum Number of Booking for the Private Announcement" + "</html>");
+		privateMovieBookingErrorLabel = new JLabel("<html>"
+				+ "The Current Private Movie Listing Has Hit the Maximum Number of Booking for the Private Announcement"
+				+ "</html>");
 		privateMovieBookingErrorLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		privateMovieBookingErrorLabel.setForeground(Color.RED);
 		privateMovieBookingErrorLabel.setFont(new Font("HelveticaNeue", Font.PLAIN, 15));
@@ -284,61 +286,13 @@ public class HomePage extends JPanel {
 		AddToCartButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				try {
-					// Get user entered row and column
-					int userRow = Integer.parseInt(rowTextField.getText());
-					int userCol = Integer.parseInt(colTextField.getText());
-
-					invalidSeatErrorLabel.setVisible(false);
-					takenSeatErrorLabel.setVisible(false);
-					addedToCartLabel.setVisible(false);
-					selectedSeatErrorLabel.setVisible(false);
-					privateMovieBookingErrorLabel.setVisible(false);
-					// If user entered a valid row and column
-					if (userRow < currentShowtime.getRow() && userCol < currentShowtime.getCol()) {
-						boolean available = currentShowtime.getSeatAvaliability(userRow, userCol);
-						if (available == false) {
-							System.out.println("Public: " + currentShowtime.getMovie().getMovieAnnouncement().isPublic());
-							System.out.println("Private: " + currentShowtime.getMovie().getMovieAnnouncement().isPrivateOnly());
-							boolean selectFlag = false;
-						}
-					}
-				}
-			}
-		}
-		// Only allow registered users to add movies to cart if they have payed the annual fee
-		
-			// CREATE ADDED TO CART TEXT LABEL
-			// Label displaying Added to Cart
-			addedToCartLabel = new JLabel("<html>" + "Added To Cart" + "</html>");
-			addedToCartLabel.setHorizontalAlignment(SwingConstants.LEFT);
-			addedToCartLabel.setForeground(Color.RED);
-			addedToCartLabel.setFont(new Font("HelveticaNeue", Font.PLAIN, 15));
-			addedToCartLabel.setBounds(1100, 500, 192, 45);
-			addedToCartLabel.setVisible(false);
-			add(addedToCartLabel);
-	
-			// CREATE ADD TO CART BUTTON
-			// Button that adds seat selection to Cart
-			seatGraphicLabel = new JTextArea("");
-			AddToCartButton = new JLabel("Add To Cart");
-			AddToCartButton.setToolTipText("Add To Cart");
-			AddToCartButton.setForeground(Color.WHITE);
-			AddToCartButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-			/**
-			 * When add to cart button is pressed, pull all information from fields and
-			 * verify if user input was valid. If valid and unique inputs, add the selected
-			 * showtime combo to user cart.
-			 */
-			AddToCartButton.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					if(backend.getCurrentUser().getUserType().compareTo("Registered") == 0 && backend.getCurrentRegisteredUser().isFeePayed()) {
+				if (backend.getCurrentUser().getUserType().compareTo("Registered") == 0
+						&& backend.getCurrentRegisteredUser().isFeePayed()) {
 					try {
 						// Get user entered row and column
 						int userRow = Integer.parseInt(rowTextField.getText());
 						int userCol = Integer.parseInt(colTextField.getText());
-	
+
 						invalidSeatErrorLabel.setVisible(false);
 						takenSeatErrorLabel.setVisible(false);
 						addedToCartLabel.setVisible(false);
@@ -348,74 +302,210 @@ public class HomePage extends JPanel {
 						if (userRow < currentShowtime.getRow() && userCol < currentShowtime.getCol()) {
 							boolean available = currentShowtime.getSeatAvaliability(userRow, userCol);
 							if (available == false) {
-							System.out.println("Public: " + currentShowtime.getMovie().getMovieAnnouncement().isPublic());
-							System.out.println("Private: " + currentShowtime.getMovie().getMovieAnnouncement().isPrivateOnly());
-							boolean selectFlag = false;
-							//If already selected
-							for (int k = 0; k < backend.getCurrentUser().getCart().getItems_in_cart().size(); k++) {
-								if (backend.getCurrentUser().getCart().getItems_in_cart().get(k).getBookedSeat().getRow() == userRow
-										&& backend.getCurrentUser().getCart().getItems_in_cart().get(k).getBookedSeat().getSeatNum() == userCol
-										&& backend.getCurrentUser().getCart().getItems_in_cart().get(k).getBookedTime().getShowtimeID() == currentShowtime.getShowtimeID()) {
-									System.out.println("Already selected");
-									selectedSeatErrorLabel.setVisible(true);
-									selectFlag = true;
-								}
-							}
-							if (!selectFlag) {
-								if (currentShowtime.getMovie().getMovieAnnouncement().isPrivateOnly()) {
-									System.out.println("Total: " + currentShowtime.getRow() * currentShowtime.getCol());
-									int numSelectedSeats = 0;
-									for (int i = 0; i < backend.getCurrentUser().getCart().getItems_in_cart().size(); i++) {
-										if (currentMovie.getTitle().compareTo(backend.getCurrentUser().getCart().getItems_in_cart().get(i).getBookedMovie().getTitle()) == 0) {
-											numSelectedSeats++;
-										}
+								System.out.println(
+										"Public: " + currentShowtime.getMovie().getMovieAnnouncement().isPublic());
+								System.out.println("Private: "
+										+ currentShowtime.getMovie().getMovieAnnouncement().isPrivateOnly());
+								boolean selectFlag = false;
+								// If already selected
+								for (int k = 0; k < backend.getCurrentUser().getCart().getItems_in_cart().size(); k++) {
+									if (backend.getCurrentUser().getCart().getItems_in_cart().get(k).getBookedSeat()
+											.getRow() == userRow
+											&& backend.getCurrentUser().getCart().getItems_in_cart().get(k)
+													.getBookedSeat().getSeatNum() == userCol
+											&& backend.getCurrentUser().getCart().getItems_in_cart().get(k)
+													.getBookedTime()
+													.getShowtimeID() == currentShowtime.getShowtimeID()) {
+										System.out.println("Already selected");
+										selectedSeatErrorLabel.setVisible(true);
+										selectFlag = true;
 									}
-									System.out.println("Selected: " + (numSelectedSeats + 1));
-									System.out.println("Booked: " + (currentShowtime.getTotalAvaliableSeats() - (numSelectedSeats + 1)));
-									System.out.println("90% of seats: " + currentShowtime.getRow() * currentShowtime.getCol() * 0.9);
-									if((currentShowtime.getTotalAvaliableSeats() - (numSelectedSeats + 1) > (currentShowtime.getRow() * currentShowtime.getCol() * 0.9))){
-										backend.getCurrentUser().getCart().addToCart(new Booking(currentMovie, currentShowtime,
-												currentShowtime.getSeats()[userRow][userCol]));
+								}
+								if (!selectFlag) {
+									if (currentShowtime.getMovie().getMovieAnnouncement().isPrivateOnly()) {
+										System.out.println(
+												"Total: " + currentShowtime.getRow() * currentShowtime.getCol());
+										int numSelectedSeats = 0;
+										for (int i = 0; i < backend.getCurrentUser().getCart().getItems_in_cart()
+												.size(); i++) {
+											if (currentMovie.getTitle().compareTo(backend.getCurrentUser().getCart()
+													.getItems_in_cart().get(i).getBookedMovie().getTitle()) == 0) {
+												numSelectedSeats++;
+											}
+										}
+										System.out.println("Selected: " + (numSelectedSeats + 1));
+										System.out.println("Booked: "
+												+ (currentShowtime.getTotalAvaliableSeats() - (numSelectedSeats + 1)));
+										System.out.println("90% of seats: "
+												+ currentShowtime.getRow() * currentShowtime.getCol() * 0.9);
+										if ((currentShowtime.getTotalAvaliableSeats()
+												- (numSelectedSeats + 1) > (currentShowtime.getRow()
+														* currentShowtime.getCol() * 0.9))) {
+											backend.getCurrentUser().getCart().addToCart(new Booking(currentMovie,
+													currentShowtime, currentShowtime.getSeats()[userRow][userCol]));
+											addedToCartLabel.setVisible(true);
+											createSeatGraphic(frame, backend);
+										} else {
+											System.out.println("max booked seats");
+											privateMovieBookingErrorLabel.setVisible(true);
+										}
+									} else {
+										backend.getCurrentUser().getCart().addToCart(new Booking(currentMovie,
+												currentShowtime, currentShowtime.getSeats()[userRow][userCol]));
 										addedToCartLabel.setVisible(true);
 										createSeatGraphic(frame, backend);
-									}else{
-										System.out.println("max booked seats");
-										privateMovieBookingErrorLabel.setVisible(true);
 									}
-
-								} else {
-									backend.getCurrentUser().getCart().addToCart(new Booking(currentMovie, currentShowtime,
-											currentShowtime.getSeats()[userRow][userCol]));
-									addedToCartLabel.setVisible(true);
-									createSeatGraphic(frame, backend);
 								}
+							} else {
+								// Seat already taken
+								System.out.println("Seat already taken");
+								takenSeatErrorLabel.setVisible(true);
 							}
 						} else {
-							//Seat already taken
-							System.out.println("Seat already taken");
-							takenSeatErrorLabel.setVisible(true);
+							// Invalid row or column
+							System.out.println("Invalid row or column value");
+							invalidSeatErrorLabel.setVisible(true);
 						}
-					} else {
-						//Invalid row or column
-						System.out.println("Invalid row or column value");
-						invalidSeatErrorLabel.setVisible(true);
+						frame.revalidate();
+					} catch (NumberFormatException f) {
+						System.out.println(f);
 					}
-					frame.revalidate();
-				} catch (NumberFormatException f) {
-					System.out.println(f);
+				} else {
+					System.out.println("User needs to pay annual fee");
+					JOptionPane.showMessageDialog(null, "Annual Fee needs to be payed to continue.",
+							(String) "Annual Fee Payment", JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
-			else {
-				System.out.println("User needs to pay annual fee");
-				JOptionPane.showMessageDialog(null, "Annual Fee needs to be payed to continue.", (String)"Annual Fee Payment", JOptionPane.INFORMATION_MESSAGE);
-			}
-		}
 		});
 		AddToCartButton.setBounds(1050, 425, 254, 50);
 		AddToCartButton.setVisible(false);
 		AddToCartButton.setIcon(new ImageIcon(LoginPage.class.getResource("/addToCartButton.png")));
 		add(AddToCartButton);
 
+		// Only allow registered users to add movies to cart if they have payed the
+		// annual fee
+
+		// CREATE ADDED TO CART TEXT LABEL
+		// Label displaying Added to Cart
+		addedToCartLabel = new JLabel("<html>" + "Added To Cart" + "</html>");
+		addedToCartLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		addedToCartLabel.setForeground(Color.RED);
+		addedToCartLabel.setFont(new Font("HelveticaNeue", Font.PLAIN, 15));
+		addedToCartLabel.setBounds(1100, 500, 192, 45);
+		addedToCartLabel.setVisible(false);
+		add(addedToCartLabel);
+
+		// CREATE ADD TO CART BUTTON
+		// Button that adds seat selection to Cart
+		seatGraphicLabel = new JTextArea("");
+		AddToCartButton = new JLabel("Add To Cart");
+		AddToCartButton.setToolTipText("Add To Cart");
+		AddToCartButton.setForeground(Color.WHITE);
+		AddToCartButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		/**
+		 * When add to cart button is pressed, pull all information from fields and
+		 * verify if user input was valid. If valid and unique inputs, add the selected
+		 * showtime combo to user cart.
+		 */
+		AddToCartButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (backend.getCurrentUser().getUserType().compareTo("Registered") == 0
+						&& backend.getCurrentRegisteredUser().isFeePayed()) {
+					try {
+						// Get user entered row and column
+						int userRow = Integer.parseInt(rowTextField.getText());
+						int userCol = Integer.parseInt(colTextField.getText());
+
+						invalidSeatErrorLabel.setVisible(false);
+						takenSeatErrorLabel.setVisible(false);
+						addedToCartLabel.setVisible(false);
+						selectedSeatErrorLabel.setVisible(false);
+						privateMovieBookingErrorLabel.setVisible(false);
+						// If user entered a valid row and column
+						if (userRow < currentShowtime.getRow() && userCol < currentShowtime.getCol()) {
+							boolean available = currentShowtime.getSeatAvaliability(userRow, userCol);
+							if (available == false) {
+								System.out.println(
+										"Public: " + currentShowtime.getMovie().getMovieAnnouncement().isPublic());
+								System.out.println("Private: "
+										+ currentShowtime.getMovie().getMovieAnnouncement().isPrivateOnly());
+								boolean selectFlag = false;
+								// If already selected
+								for (int k = 0; k < backend.getCurrentUser().getCart().getItems_in_cart().size(); k++) {
+									if (backend.getCurrentUser().getCart().getItems_in_cart().get(k).getBookedSeat()
+											.getRow() == userRow
+											&& backend.getCurrentUser().getCart().getItems_in_cart().get(k)
+													.getBookedSeat().getSeatNum() == userCol
+											&& backend.getCurrentUser().getCart().getItems_in_cart().get(k)
+													.getBookedTime()
+													.getShowtimeID() == currentShowtime.getShowtimeID()) {
+										System.out.println("Already selected");
+										selectedSeatErrorLabel.setVisible(true);
+										selectFlag = true;
+									}
+								}
+								if (!selectFlag) {
+									if (currentShowtime.getMovie().getMovieAnnouncement().isPrivateOnly()) {
+										System.out.println(
+												"Total: " + currentShowtime.getRow() * currentShowtime.getCol());
+										int numSelectedSeats = 0;
+										for (int i = 0; i < backend.getCurrentUser().getCart().getItems_in_cart()
+												.size(); i++) {
+											if (currentMovie.getTitle().compareTo(backend.getCurrentUser().getCart()
+													.getItems_in_cart().get(i).getBookedMovie().getTitle()) == 0) {
+												numSelectedSeats++;
+											}
+										}
+										System.out.println("Selected: " + (numSelectedSeats + 1));
+										System.out.println("Booked: "
+												+ (currentShowtime.getTotalAvaliableSeats() - (numSelectedSeats + 1)));
+										System.out.println("90% of seats: "
+												+ currentShowtime.getRow() * currentShowtime.getCol() * 0.9);
+										if ((currentShowtime.getTotalAvaliableSeats()
+												- (numSelectedSeats + 1) > (currentShowtime.getRow()
+														* currentShowtime.getCol() * 0.9))) {
+											backend.getCurrentUser().getCart().addToCart(new Booking(currentMovie,
+													currentShowtime, currentShowtime.getSeats()[userRow][userCol]));
+											addedToCartLabel.setVisible(true);
+											createSeatGraphic(frame, backend);
+										} else {
+											System.out.println("max booked seats");
+											privateMovieBookingErrorLabel.setVisible(true);
+										}
+
+									} else {
+										backend.getCurrentUser().getCart().addToCart(new Booking(currentMovie,
+												currentShowtime, currentShowtime.getSeats()[userRow][userCol]));
+										addedToCartLabel.setVisible(true);
+										createSeatGraphic(frame, backend);
+									}
+								}
+							} else {
+								// Seat already taken
+								System.out.println("Seat already taken");
+								takenSeatErrorLabel.setVisible(true);
+							}
+						} else {
+							// Invalid row or column
+							System.out.println("Invalid row or column value");
+							invalidSeatErrorLabel.setVisible(true);
+						}
+						frame.revalidate();
+					} catch (NumberFormatException f) {
+						System.out.println(f);
+					}
+				} else {
+					System.out.println("User needs to pay annual fee");
+					JOptionPane.showMessageDialog(null, "Annual Fee needs to be payed to continue.",
+							(String) "Annual Fee Payment", JOptionPane.INFORMATION_MESSAGE);
+				}
+			}
+		});
+		AddToCartButton.setBounds(1050, 425, 254, 50);
+		AddToCartButton.setVisible(false);
+		AddToCartButton.setIcon(new ImageIcon(LoginPage.class.getResource("/addToCartButton.png")));
+		add(AddToCartButton);
 
 		// CREATE SELECT SEAT TEXT
 		// Label displaying Select Seat
@@ -428,7 +518,8 @@ public class HomePage extends JPanel {
 		add(selectSeatLabel);
 
 		// CREATE SEAT GRAPHIC DETAILS TEXT
-		// TextArea which depicts the Graphic of Seat Avaliability, X if booked, O if avaliable, - if Selected
+		// TextArea which depicts the Graphic of Seat Avaliability, X if booked, O if
+		// avaliable, - if Selected
 		seatGraphicLabel.setForeground(Color.WHITE);
 		seatGraphicLabel.setFont(new Font("Courier New", Font.PLAIN, 15));
 		seatGraphicLabel.setBounds(600, 310, 500, 500);
@@ -438,7 +529,6 @@ public class HomePage extends JPanel {
 		seatGraphicLabel.setOpaque(false);
 		seatGraphicLabel.setEditable(false);
 		add(seatGraphicLabel);
-
 
 		// ==========================================
 		// SELECT SHOWTIME
@@ -512,7 +602,7 @@ public class HomePage extends JPanel {
 						selectColLabel.setVisible(true);
 						AddToCartButton.setVisible(true);
 
-						createSeatGraphic(frame,backend);
+						createSeatGraphic(frame, backend);
 						selectSeatLabel.setVisible(true);
 					} else {
 						System.out.println("No showtime found");
@@ -595,7 +685,7 @@ public class HomePage extends JPanel {
 						}
 						showtimeSelectComboBox.setModel(model2);
 						showtimeSelectComboBox.setVisible(true);
-						//noShowTimeSelectedLabel.setVisible(true);
+						// noShowTimeSelectedLabel.setVisible(true);
 						selectShowtimeLabel.setVisible(true);
 					} else {
 						System.out.println("No theatre found");
@@ -656,11 +746,13 @@ public class HomePage extends JPanel {
 		// Combobox for selecting desired movie
 		Vector<String> movieList = new Vector<String>();
 		for (int i = 0; i < backend.getDataController().getMovieList().size(); i++) {
-			if(backend.getCurrentRegisteredUser() != null){
-				if(!backend.getDataController().getMovieList().get(i).getMovieAnnouncement().getPrivateAnnounceDate().beforeCurrentDate())
+			if (backend.getCurrentRegisteredUser() != null) {
+				if (!backend.getDataController().getMovieList().get(i).getMovieAnnouncement().getPrivateAnnounceDate()
+						.beforeCurrentDate())
 					movieList.add(backend.getDataController().getMovieList().get(i).getTitle());
-			}else{
-				if(!backend.getDataController().getMovieList().get(i).getMovieAnnouncement().getPublicAnnounceDate().beforeCurrentDate())
+			} else {
+				if (!backend.getDataController().getMovieList().get(i).getMovieAnnouncement().getPublicAnnounceDate()
+						.beforeCurrentDate())
 					movieList.add(backend.getDataController().getMovieList().get(i).getTitle());
 			}
 		}
@@ -711,9 +803,9 @@ public class HomePage extends JPanel {
 		});
 		add(movieSelectComboBox);
 
-		//=======================================
+		// =======================================
 		// MENU BUTTONS AND LABELS
-		//=======================================
+		// =======================================
 
 		// CREATE WELCOME TEXT LABEL
 		// Label displaying Welcome to the User
@@ -774,10 +866,10 @@ public class HomePage extends JPanel {
 		logoutButton.setBounds(30, 5, 50, 50);
 		logoutButton.setIcon(new ImageIcon(HomePage.class.getResource("/backButton.png")));
 		add(logoutButton);
-		
+
 		// CREATE ANNUALFEE BUTTON
 		// Button to pay annual fee for registered users
-		if(backend.getCurrentUser().getUserType().compareTo("Registered") == 0) {
+		if (backend.getCurrentUser().getUserType().compareTo("Registered") == 0) {
 			annualFeeButton = new JLabel("");
 			annualFeeButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			annualFeeButton.setToolTipText("Pay Annual Fee");
@@ -788,32 +880,37 @@ public class HomePage extends JPanel {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					System.out.println("pay annual fee");
-					
+
 					// Check if annual fee hasn't been payed
-					if(backend.getCurrentRegisteredUser().getAdminFeeDate().beforeCurrentDate() && backend.getCurrentRegisteredUser().isFeePayed() == false) {
+					if (backend.getCurrentRegisteredUser().getAdminFeeDate().beforeCurrentDate()
+							&& backend.getCurrentRegisteredUser().isFeePayed() == false) {
 						// Verify card to process payment
-						String name = backend.getCurrentRegisteredUser().getF_name() + " " + backend.getCurrentRegisteredUser().getL_name();
+						String name = backend.getCurrentRegisteredUser().getF_name() + " "
+								+ backend.getCurrentRegisteredUser().getL_name();
 						String ct = backend.getCurrentRegisteredUser().getBankInfo().getCardType();
 						String cn = backend.getCurrentRegisteredUser().getBankInfo().getCardNumber();
 						String cvs = backend.getCurrentRegisteredUser().getBankInfo().getCardSVS();
-						String exp = backend.getCurrentRegisteredUser().getBankInfo().getCardExpirationDate().toString();
-						if(backend.getDataController().getInst().verifyCardInfo(name, ct, cn, cvs, exp)) {
+						String exp = backend.getCurrentRegisteredUser().getBankInfo().getCardExpirationDate()
+								.toString();
+						if (backend.getDataController().getInst().verifyCardInfo(name, ct, cn, cvs, exp)) {
 							System.out.println("fee payment successful");
-							JOptionPane.showMessageDialog(null, "Annual Fee has been successfully payed. Purchase Cost: $20", (String)"Annual Fee Payment", JOptionPane.INFORMATION_MESSAGE);
+							JOptionPane.showMessageDialog(null,
+									"Purchase Cost: $20 - Annual Fee has been successfully paid!",
+									(String) "Annual Fee Payment", JOptionPane.INFORMATION_MESSAGE);
 							backend.getCurrentRegisteredUser().setFeePayed(true);
+						} else {
+							System.out.println("Error: Fee payment unsuccessful!");
+							JOptionPane.showMessageDialog(null, "Error: Fee payment unsuccessful!",
+									(String) "Annual Fee Payment", JOptionPane.INFORMATION_MESSAGE);
 						}
-						else {
-							System.out.println("fee payment unsuccessful");
-							JOptionPane.showMessageDialog(null, "Annual Fee payment was unsuccessful.", (String)"Annual Fee Payment", JOptionPane.INFORMATION_MESSAGE);
-						}
-						//HomePage homePanel = new HomePage(frame, backend);
-						//frame.setContentPane(homePanel);
+						// HomePage homePanel = new HomePage(frame, backend);
+						// frame.setContentPane(homePanel);
+					} else {
+						System.out.println("Annual fee has already been paid.");
+						JOptionPane.showMessageDialog(null, "Annual Fee has been already payed.",
+								(String) "Annual Fee Payment", JOptionPane.INFORMATION_MESSAGE);
 					}
-					else {
-						System.out.println("fee has already been payed");
-						JOptionPane.showMessageDialog(null, "Annual Fee has been already payed.", (String)"Annual Fee Payment", JOptionPane.INFORMATION_MESSAGE);
-					}
-					
+
 					frame.revalidate();
 				}
 			});
@@ -882,40 +979,36 @@ public class HomePage extends JPanel {
 		homeBackground.setIcon(new ImageIcon(HomePage.class.getResource("/backgroundD.png")));
 		add(homeBackground);
 	}
-					
 
-	public void createSeatGraphic(JFrame frame, BackEnd backend){
+	public void createSeatGraphic(JFrame frame, BackEnd backend) {
 		String tempGraphic = "";
 		for (int i = 0; i < currentShowtime.getRow(); i++) {
-			if(i == 0){
+			if (i == 0) {
 				tempGraphic += "     ";
-				for(int j = 0; j < currentShowtime.getCol(); j++){
+				for (int j = 0; j < currentShowtime.getCol(); j++) {
 					tempGraphic += j + "  ";
 				}
 				tempGraphic += "Seat Num";
 				tempGraphic += "\n   --";
-				for(int j = 0; j < currentShowtime.getCol(); j++){
+				for (int j = 0; j < currentShowtime.getCol(); j++) {
 					tempGraphic += "---";
 				}
 				tempGraphic += "\n";
 			}
 			for (int j = 0; j < currentShowtime.getCol(); j++) {
-				if(j == 0){
+				if (j == 0) {
 					tempGraphic += i + "  | ";
 				}
 				if (currentShowtime.getSeatAvaliability(i, j) == true) {
 					tempGraphic += "X  ";
 				} else if (backend.getCurrentUser() != null) {
 					boolean tempFlag = false;
-					for (int k = 0; k < backend.getCurrentUser().getCart().getItems_in_cart()
-							.size(); k++) {
-						if (backend.getCurrentUser().getCart().getItems_in_cart().get(k)
-								.getBookedSeat().getRow() == i
-								&& backend.getCurrentUser().getCart().getItems_in_cart().get(k)
-								.getBookedSeat().getSeatNum() == j
-								&& backend.getCurrentUser().getCart().getItems_in_cart().get(k)
-								.getBookedTime()
-								.getShowtimeID() == currentShowtime.getShowtimeID()) {
+					for (int k = 0; k < backend.getCurrentUser().getCart().getItems_in_cart().size(); k++) {
+						if (backend.getCurrentUser().getCart().getItems_in_cart().get(k).getBookedSeat().getRow() == i
+								&& backend.getCurrentUser().getCart().getItems_in_cart().get(k).getBookedSeat()
+										.getSeatNum() == j
+								&& backend.getCurrentUser().getCart().getItems_in_cart().get(k).getBookedTime()
+										.getShowtimeID() == currentShowtime.getShowtimeID()) {
 							tempGraphic += "-  ";
 							tempFlag = true;
 						}
@@ -933,4 +1026,4 @@ public class HomePage extends JPanel {
 		seatGraphicLabel.setText(tempGraphic);
 		seatGraphicLabel.setVisible(true);
 	}
-					}
+}

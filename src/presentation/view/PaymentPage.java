@@ -91,7 +91,8 @@ public class PaymentPage extends JPanel {
 		setLayout(null);
 
 		// CREATE TITLE TEXT LABEL
-		titleLabel = new JLabel("PAYMENT TOTAL: $" + String.format("%.2f",backend.getCurrentUser().getCart().getCartCost()));
+		titleLabel = new JLabel(
+				"PAYMENT TOTAL: $" + String.format("%.2f", backend.getCurrentUser().getCart().getCartCost()));
 		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		titleLabel.setForeground(Color.WHITE);
 		titleLabel.setFont(new Font("Arial", Font.PLAIN, 17));
@@ -115,7 +116,8 @@ public class PaymentPage extends JPanel {
 
 		// CREATE CARDTYPE TEXT FIELD
 		Vector<String> cardTypes = new Vector<String>();
-		cardTypes.add("MASTERCARD");
+
+		cardTypes.add("MasterCard");
 		cardTypes.add("VISA");
 		JComboBox cardTypeSelectComboBox = new JComboBox(cardTypes);
 		cardTypeSelectComboBox.setBounds(433, 350, 118, 28);
@@ -286,7 +288,8 @@ public class PaymentPage extends JPanel {
 		userStoredBankingButton.setBounds(520, 502, 350, 14);
 		userStoredBankingButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		/**
-		 * When User Stored Banking Info button is pressed, it will use the User's banking info instead
+		 * When User Stored Banking Info button is pressed, it will use the User's
+		 * banking info instead
 		 */
 		userStoredBankingButton.addMouseListener(new MouseAdapter() {
 			@Override
@@ -297,7 +300,7 @@ public class PaymentPage extends JPanel {
 				Voucher redeemedVoucher;
 				double voucherValue = 0;
 				// Validate Card info
-				if(backend.getCurrentRegisteredUser() != null) {
+				if (backend.getCurrentRegisteredUser() != null) {
 					String name = backend.getCurrentRegisteredUser().getBankInfo().getCustomerName();
 					String cardType = backend.getCurrentRegisteredUser().getBankInfo().getCardType();
 					String cardNum = backend.getCurrentRegisteredUser().getBankInfo().getCardNumber();
@@ -306,7 +309,8 @@ public class PaymentPage extends JPanel {
 					invalidCardErrorLabel.setVisible(false);
 					invalidVoucherErrorLabel.setVisible(false);
 
-					if (backend.getDataController().getInst().verifyCardInfo(name, cardType, cardNum, cardCCV, cardExp)) {
+					if (backend.getDataController().getInst().verifyCardInfo(name, cardType, cardNum, cardCCV,
+							cardExp)) {
 						cardValid = true;
 					} else {
 						cardValid = false;
@@ -329,22 +333,22 @@ public class PaymentPage extends JPanel {
 					// All information is valid
 					if (voucherValid && cardValid) {
 						double finalTotal = backend.getCurrentUser().getCart().getCartCost() - voucherValue;
-						if(finalTotal < 0){
+						if (finalTotal < 0) {
 							finalTotal = 0;
 						}
-						processPayment(frame,backend, finalTotal);
-					}else if(cardValid == false){
+						processPayment(frame, backend, finalTotal, backend.getCurrentRegisteredUser().getBankInfo());
+					} else if (cardValid == false) {
 						invalidCardErrorLabel.setVisible(true);
-					}else if(voucherValid == false){
+					} else if (voucherValid == false) {
 						invalidVoucherErrorLabel.setVisible(true);
 					}
 				}
 				frame.revalidate();
 			}
 		});
-		if(backend.getCurrentRegisteredUser() != null){
+		if (backend.getCurrentRegisteredUser() != null) {
 			userStoredBankingButton.setVisible(true);
-		}else{
+		} else {
 			userStoredBankingButton.setVisible(false);
 		}
 		add(userStoredBankingButton);
@@ -386,9 +390,9 @@ public class PaymentPage extends JPanel {
 
 				if (voucher.compareTo("") != 0) {
 					redeemedVoucher = backend.getDataController().redeemVoucher(voucher);
-					if(redeemedVoucher == null){
+					if (redeemedVoucher == null) {
 						voucherValid = false;
-					}else{
+					} else {
 						voucherValid = true;
 						voucherValue = redeemedVoucher.getAmount();
 					}
@@ -399,13 +403,14 @@ public class PaymentPage extends JPanel {
 				// All information is valid
 				if (voucherValid && cardValid) {
 					double finalTotal = backend.getCurrentUser().getCart().getCartCost() - voucherValue;
-					if(finalTotal < 0){
+					if (finalTotal < 0) {
 						finalTotal = 0;
 					}
-					processPayment(frame,backend,finalTotal);
-				} else if(cardValid == false){
+					processPayment(frame, backend, finalTotal,
+							new BankingInfo(name, cardType, cardNum, cardCCV, cardExp));
+				} else if (cardValid == false) {
 					invalidCardErrorLabel.setVisible(true);
-				}else if(voucherValid == false){
+				} else if (voucherValid == false) {
 					invalidVoucherErrorLabel.setVisible(true);
 				}
 			}
@@ -422,28 +427,31 @@ public class PaymentPage extends JPanel {
 
 	}
 
-	public void processPayment(JFrame frame, BackEnd backend, double costAmount){
+	public void processPayment(JFrame frame, BackEnd backend, double costAmount, BankingInfo bankingInfo) {
 		System.out.println("entered payment");
 		// Cart c = backend.getCurrentUser().getCart();
-		backend.getCurrentUser().getCart()
-				.setPayment(new Payment(costAmount,
-						backend.getCurrentRegisteredUser().getBankInfo()));
+		backend.getCurrentUser().getCart().setPayment(new Payment(costAmount, bankingInfo));
 		String ticketNumbers = "";
 		for (int i = 0; i < backend.getCurrentUser().getCart().getItems_in_cart().size(); i++) {
 			Movie movie = backend.getCurrentUser().getCart().getItems_in_cart().get(i).getBookedMovie();
-			Showtime showtime = backend.getCurrentUser().getCart().getItems_in_cart().get(i)
-					.getBookedTime();
+			Showtime showtime = backend.getCurrentUser().getCart().getItems_in_cart().get(i).getBookedTime();
 			Seat seat = backend.getCurrentUser().getCart().getItems_in_cart().get(i).getBookedSeat();
-			showtime.bookSeat(seat.getRow(),seat.getSeatNum());
+			showtime.bookSeat(seat.getRow(), seat.getSeatNum());
 			Ticket t = new Ticket(backend.getCurrentUser().getCart().getPayment(), movie, showtime, seat);
-			ticketNumbers += "Ticket Number: " + t.getTicketID() + ", Movie: " + t.getThe_movie().getTitle() + ", Theatre: " +
-					t.getShowtime().getAuditorium().getTheatre().getT_name() + ", Auditorium: " + t.getShowtime().getAuditorium().getAuditoriumID() + ", Seat: " + t.getSeat() + "\n";
+			ticketNumbers += "Ticket Number: " + t.getTicketID() + ", Movie: " + t.getThe_movie().getTitle()
+					+ ", Theatre: " + t.getShowtime().getAuditorium().getTheatre().getT_name() + ", Auditorium: "
+					+ t.getShowtime().getAuditorium().getAuditoriumID() + ", Seat: " + t.getSeat() + "\n";
 			// ticketsCreated.add(t);
 			t.emailTicket(backend.getCurrentRegisteredUser().getEmail());
 			backend.getDataController().addTicket(t);
 		}
 		/* Add prompt to show ticket and success message */
-		JOptionPane.showMessageDialog(null, "Ticket has been successfully purchased. Purchase Cost: " + String.format("%.2f",backend.getCurrentUser().getCart().getPayment().getAmount()) +"\nThe following tickets have been emailed to the email provided:\n" + ticketNumbers, "Ticket Has Been Purchased", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null,
+				"Ticket has been successfully purchased. Purchase Cost: "
+						+ String.format("%.2f", backend.getCurrentUser().getCart().getPayment().getAmount())
+						+ "\nThe following tickets have been emailed to the email provided:\n" + ticketNumbers,
+				"Ticket Has Been Purchased", JOptionPane.INFORMATION_MESSAGE);
+		backend.getCurrentUser().setCart(new Cart());
 		HomePage homePanel = new HomePage(frame, backend);
 		frame.setContentPane(homePanel);
 		frame.revalidate();

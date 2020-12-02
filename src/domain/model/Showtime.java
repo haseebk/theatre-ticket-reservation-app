@@ -21,10 +21,11 @@ public class Showtime {
 	private int totalAvaliableSeats;
 	private Movie movie;
 
-	private static int showtimeCounter = 0;
+	private static int showtimeCounter = 4000;
 
-	public Showtime(Date d, Auditorium a, Movie mov, int h, int m) {
-		showtimeID = showtimeCounter++;
+	public Showtime(int id, Movie mov, Auditorium a, Date d , int h, int m) {
+		showtimeID = id++;
+		showtimeCounter++;
 		showDate = d;
 		auditorium = a;
 		hour = h;
@@ -41,13 +42,13 @@ public class Showtime {
 		totalAvaliableSeats = row * col;
 	}
 
-	public Showtime(int day, int month, int year, Auditorium a, Movie mov, int h, int m) {
+	public Showtime(Date d, Auditorium a, Movie mov, int h, int m) {
 		showtimeID = showtimeCounter++;
-		showDate = new Date(day, month, year);
+		showDate = d;
 		auditorium = a;
-		movie = mov;
 		hour = h;
 		minutes = m;
+		movie = mov;
 		row = a.getNum_of_rows();
 		col = a.getNum_of_cols();
 		seats = new Seat[row][col];

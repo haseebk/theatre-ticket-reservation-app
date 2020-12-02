@@ -2,6 +2,9 @@ package domain.model;
 
 public class Movie {
 
+	private int movieID;
+	private static int movieCounter = 1000;
+
 	/**
 	 * Movie title
 	 */
@@ -40,18 +43,8 @@ public class Movie {
 
 	private Announcement movieAnnouncement;
 
-	private Movie() {
-		this.title = "";
-		this.genre = "";
-		this.year = 0;
-		this.director = "";
-		this.movieLength = 0;
-		this.rating = 0.0;
-		this.setPoster("");
-		this.movieAnnouncement = null;
-	}
-
 	public Movie(String title, String genre, int year, String director, int movieLength, double rating, String poster, double p, String syn) {
+		this.movieID = movieCounter++;
 		this.title = title;
 		this.genre = genre;
 		this.year = year;
@@ -61,6 +54,22 @@ public class Movie {
 		this.setPoster(poster);
 		this.setPrice(p);
 		this.synopsis = syn;
+		this.movieAnnouncement = null;
+	}
+
+	public Movie(int id,String title, String genre, int year, String director, int movieLength, double rating, String poster, double p, String syn) {
+		this.movieID = id;
+		movieCounter++;
+		this.title = title;
+		this.genre = genre;
+		this.year = year;
+		this.director = director;
+		this.movieLength = movieLength;
+		this.rating = rating;
+		this.setPoster(poster);
+		this.setPrice(p);
+		this.synopsis = syn;
+		this.movieAnnouncement = null;
 	}
 
 	// Getters and Setters
@@ -139,6 +148,8 @@ public class Movie {
 	public Announcement getMovieAnnouncement() { return movieAnnouncement; }
 
 	public void setMovieAnnouncement(Announcement movieAnnouncement) { this.movieAnnouncement = movieAnnouncement; }
+
+	public int getMovieID() { return movieID; }
 
 	@Override
 	public String toString() {

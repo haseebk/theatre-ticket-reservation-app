@@ -2,6 +2,9 @@ package domain.model;
 
 public class BankingInfo {
 
+
+	private int bankID;
+	private static int bankInfoCounter = 6000;
 	/**
 	 * Name of the customer
 	 */
@@ -27,15 +30,17 @@ public class BankingInfo {
 	 */
 	private String cardExpirationDate;
 
-	public BankingInfo() {
-		customerName = "";
-		cardType = "";
-		cardNumber = "";
-		cardSVS = "";
-		cardExpirationDate = "";
+	public BankingInfo(int i, String c, String ct, String cn, String cs, String ce) {
+		this.bankID = i;
+		customerName = c;
+		cardType = ct;
+		cardNumber = cn;
+		cardSVS = cs;
+		cardExpirationDate = ce;
+		bankInfoCounter++;
 	}
-
-	public BankingInfo(String c, String ct, String cn, String cs, String ce) {
+	public BankingInfo( String c, String ct, String cn, String cs, String ce) {
+		this.bankID = bankInfoCounter++;
 		customerName = c;
 		cardType = ct;
 		cardNumber = cn;
@@ -83,4 +88,6 @@ public class BankingInfo {
 	public void setCustomerName(String customerName) {
 		this.customerName = customerName;
 	}
+
+	public int getBankID() { return bankID; }
 }

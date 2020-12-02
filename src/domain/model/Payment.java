@@ -5,7 +5,7 @@ public class Payment {
 	private double amount;
 	private BankingInfo card;
 	
-	private static int pCounter = 0;
+	private static int pCounter = 5000;
 
 	public Payment(double a, BankingInfo c) {
 		paymentID = pCounter++;
