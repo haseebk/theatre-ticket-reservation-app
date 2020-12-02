@@ -157,22 +157,23 @@ public class DatabasePopulator{
 		dbController.addTicket(t2);
 	}
 
-	public void loadUsers() {
-		b3 = new BankingInfo("Eddie Kim", "VISA", "3333333333333333", "333", "03/22");
-		b4 = new BankingInfo("Haseeb Khan", "MASTER", "4444444444444444", "444", "04/22");
-		Date d1 = new Date(1, 4, 2020);
-		Date d2 = new Date(2, 5, 2020);
-		Date d3 = new Date(3, 6, 2020);
-		Date d4 = new Date(4, 7, 2020);
-		RegisteredUser u1 = new RegisteredUser("V.Kapoor", "1234", "Vaibhav", "Kapoor", "vk@email.com", b1, d1);
-		RegisteredUser u2 = new RegisteredUser("W.Kerr", "1234", "William", "Kerr", "wk@email.com", b2, d2);
-		RegisteredUser u3 = new RegisteredUser("E.Kim", "1234", "Eddie", "Kim", "ek@email.com", b3, d3);
-		RegisteredUser u4 = new RegisteredUser("H.Khan", "1234", "Haseeb", "Khan", "hk@email.com", b4, d4);
+	public void loadUsers() throws IOException{
+		FileInputStream fstream = new FileInputStream("data/registered_user_data.txt");
+		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 
-		dbController.addUser(u1);
-		dbController.addUser(u2);
-		dbController.addUser(u3);
-		dbController.addUser(u4);
+		String line;
+		String[] argList = new String[9];
+
+		while((line = br.readLine()) != null) {
+			argList = line.split(":");
+			for(int i = 0; i < argList.length; i++){
+				System.out.println(argList[i]);
+			}
+
+			Date foundDate = new Date(Integer.parseInt(argList[6]),Integer.parseInt(argList[7]),Integer.parseInt(argList[8]));
+			dbController.addUser(new RegisteredUser(argList[0],argList[1],argList[2],argList[3],argList[4],b1,foundDate));
+		}
+		fstream.close();
 	}
 
 	public void loadAnnouncements() {
