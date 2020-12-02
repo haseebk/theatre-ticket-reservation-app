@@ -149,6 +149,8 @@ public class Movie {
 
 	public void setMovieAnnouncement(Announcement movieAnnouncement) { this.movieAnnouncement = movieAnnouncement; }
 
+	public int getMovieID() { return movieID; }
+
 	@Override
 	public String toString() {
 		return String.format(title);

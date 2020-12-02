@@ -172,6 +172,48 @@ public class DataController {
 	}
 
 	/**
+	 * Search movie based on ID
+	 * @param id search ID
+	 * @return returns the movie if found, null if not
+	 */
+	public Movie searchMovie(int id){
+		for(int i = 0; i < getMovieList().size(); i++){
+			if(id == getMovieList().get(i).getMovieID()){
+				return getMovieList().get(i);
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Search theatre based on ID
+	 * @param id search ID
+	 * @return returns the theatre if found, null if not
+	 */
+	public Theatre searchTheatre(int id){
+		for(int i = 0; i < getTheatreList().size(); i++){
+			if(id == getTheatreList().get(i).getTheatreID()){
+				return getTheatreList().get(i);
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Search auditorium based on ID
+	 * @param id search ID
+	 * @return returns the auditorium if found, null if not
+	 */
+	public Auditorium searchAuditorium(int id){
+		for(int i = 0; i < getAuditoriumList().size(); i++){
+			if(id == getAuditoriumList().get(i).getAuditoriumID()){
+				return getAuditoriumList().get(i);
+			}
+		}
+		return null;
+	}
+
+	/**
 	 * Setter for list of movies
 	 * 
 	 * @param movieList arraylist of movies

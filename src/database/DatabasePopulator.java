@@ -68,9 +68,6 @@ public class DatabasePopulator{
 
 		while((line = br.readLine()) != null) {
 			argList = line.split(":");
-			for(int i = 0; i < argList.length; i++){
-				System.out.println(argList[i]);
-			}
 			dbController.addMovie(new Movie(Integer.parseInt(argList[0]),argList[1],argList[2],Integer.parseInt(argList[3]),
 					argList[4],Integer.parseInt(argList[5]),Double.parseDouble(argList[6]),argList[7],Double.parseDouble(argList[8]),argList[9]));
 		}
@@ -82,7 +79,7 @@ public class DatabasePopulator{
 		paddington = dbController.getMovieList().get(3);
 	}
 
-	public void loadTheatres() {
+	public void loadTheatres() throws IOException{
 
 		ArrayList<Auditorium> a1 = new ArrayList<Auditorium>(2);
 		ArrayList<Auditorium> a2 = new ArrayList<Auditorium>(2);
@@ -91,65 +88,50 @@ public class DatabasePopulator{
 		a2.add(new Auditorium(9, 7));
 		a2.add(new Auditorium(7, 8));
 
-		Theatre t1 = new Theatre("Theatre 1", 1, a1, "123456789", " Some Address 1");
-		Theatre t2 = new Theatre("Theatre 2", 2, a2, "987654321", "Some Address 2");
-		loadShowtimes(a1, a2);
+		dbController.addAuditorium(a1.get(0));
+		dbController.addAuditorium(a1.get(1));
+		dbController.addAuditorium(a2.get(0));
+		dbController.addAuditorium(a2.get(1));
+
+
+		Theatre t1 = new Theatre(2000, "Theatre 1", a1, "123456789", "Some Address 1");
+		Theatre t2 = new Theatre(2001, "Theatre 2", a2, "987654321", "Some Address 2");
+		dbController.addTheatre(t1);
+		dbController.addTheatre(t2);
+
+		loadShowtimes();
 
 		a1.get(0).setTheatre(t1);
 		a1.get(1).setTheatre(t1);
 		a2.get(0).setTheatre(t2);
 		a2.get(1).setTheatre(t2);
 
-		dbController.addTheatre(t1);
-		dbController.addTheatre(t2);
+
 	}
 
-	public void loadShowtimes(ArrayList<Auditorium> x, ArrayList<Auditorium> y) {
-		Date d1 = new Date(29, 11, 2020);
-		Date d2 = new Date(2, 12, 2020);
-		Date d3 = new Date(29, 11, 2020);
-		Date d4 = new Date(17, 12, 2020);
-		
-		s1 = new Showtime(d1, x.get(0), spiderverse, 7, 15);
-		Showtime s11 = new Showtime(d3, x.get(0), spiderverse, 8 , 30);
-		
-		s2 = new Showtime(d2, x.get(1), getout, 9 , 45);
-		Showtime s12 = new Showtime(d4, x.get(0), getout, 11, 0);
-		
-		Showtime s3 = new Showtime(d3, x.get(0), hereditary, 15, 15);
-		Showtime s13 = new Showtime(d1, x.get(1), hereditary, 1, 30);
-		
-		Showtime s4 = new Showtime(d4, x.get(1), paddington, 18, 45);
-		Showtime s9 = new Showtime(d2, x.get(1), paddington, 20, 15);
-		
-		Showtime s5 = new Showtime(d1, y.get(0), spiderverse, 19, 30);
-		Showtime s10 = new Showtime(d3, y.get(1), spiderverse,14,45);
-		
-		Showtime s6 = new Showtime(d2, y.get(1), getout, 11,45);
-		Showtime s14 = new Showtime(d3, y.get(1), getout,12,30);
-		
-		Showtime s7 = new Showtime(d3, y.get(0), hereditary,12,00);
-		Showtime s15 = new Showtime(d1, y.get(1), hereditary,14,15);
-		
-		Showtime s8 = new Showtime(d4, y.get(1), paddington,13,45);
-		Showtime s16 = new Showtime(d2, y.get(1), paddington,14,30);
+	public void loadShowtimes() throws IOException{
+		FileInputStream fstream = new FileInputStream("data/showtime_data.txt");
+		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 
-		dbController.addShowtime(s1);
-		dbController.addShowtime(s2);
-		dbController.addShowtime(s3);
-		dbController.addShowtime(s4);
-		dbController.addShowtime(s5);
-		dbController.addShowtime(s6);
-		dbController.addShowtime(s7);
-		dbController.addShowtime(s8);
-		dbController.addShowtime(s9);
-		dbController.addShowtime(s10);
-		dbController.addShowtime(s11);
-		dbController.addShowtime(s12);
-		dbController.addShowtime(s13);
-		dbController.addShowtime(s14);
-		dbController.addShowtime(s15);
-		dbController.addShowtime(s16);
+		String line;
+		String[] argList = new String[8];
+
+		while((line = br.readLine()) != null) {
+			argList = line.split(":");
+			for(int i = 0; i < argList.length; i++){
+				System.out.println(argList[i]);
+			}
+
+			Movie foundMovie = dbController.searchMovie(Integer.parseInt(argList[1]));
+			Auditorium foundAuditorium = dbController.searchAuditorium(Integer.parseInt(argList[2]));
+			Date foundDate = new Date(Integer.parseInt(argList[3]),Integer.parseInt(argList[4]),Integer.parseInt(argList[5]));
+			dbController.addShowtime(new Showtime(Integer.parseInt(argList[0]),foundMovie,foundAuditorium,
+					foundDate,Integer.parseInt(argList[6]),Integer.parseInt(argList[7])));
+		}
+		fstream.close();
+
+		s1 = dbController.getShowtimeList().get(0);
+		s2 = dbController.getShowtimeList().get(1);
 	}
 
 	public void loadTickets() {

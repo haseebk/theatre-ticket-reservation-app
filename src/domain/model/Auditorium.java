@@ -8,7 +8,7 @@ public class Auditorium {
 
 	private Theatre theatre;
 
-	private static int auditoriumCounter = 0;
+	private static int auditoriumCounter = 3000;
 
 	public Auditorium(int r, int c) {
 		auditoriumID = auditoriumCounter++;
