@@ -882,8 +882,7 @@ public class HomePage extends JPanel {
 					System.out.println("pay annual fee");
 
 					// Check if annual fee hasn't been payed
-					if (backend.getCurrentRegisteredUser().getAdminFeeDate().beforeCurrentDate()
-							&& backend.getCurrentRegisteredUser().isFeePayed() == false) {
+					if (!backend.getCurrentRegisteredUser().getAdminFeeDate().beforeCurrentDate()) {
 						// Verify card to process payment
 						String name = backend.getCurrentRegisteredUser().getF_name() + " "
 								+ backend.getCurrentRegisteredUser().getL_name();
@@ -897,7 +896,9 @@ public class HomePage extends JPanel {
 							JOptionPane.showMessageDialog(null,
 									"Annual Fee has been successfully payed. Purchase Cost: $20",
 									(String) "Annual Fee Payment", JOptionPane.INFORMATION_MESSAGE);
-							backend.getCurrentRegisteredUser().setFeePayed(true);
+							LocalDate today = LocalDate.now();
+							Date date = new Date(today.getDayOfMonth(),today.getMonthValue(),today.getYear() + 1);
+							backend.getCurrentRegisteredUser().setAdminFeeDate(date);
 						} else {
 							System.out.println("fee payment unsuccessful");
 							JOptionPane.showMessageDialog(null, "Annual Fee payment was unsuccessful.",
