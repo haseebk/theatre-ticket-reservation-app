@@ -49,7 +49,7 @@ public class Email {
 			// Set Subject: header field
 			message.setSubject("VHEW Booking Confirmation");
 
-			String emailBody = "Thank you for shopping with VHEW! \n" + "Please find the receipt of your purchase below:" + email;
+			String emailBody = "Thank you for shopping with VHEW! \n" + "Please find the receipt of your purchase below:\n" + email;
 			
 			// Put the content of your message
 			message.setText(emailBody);
