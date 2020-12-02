@@ -916,7 +916,7 @@ public class HomePage extends JPanel {
 				}
 			});
 			annualFeeButton.setBounds(1366 - 32 - 210, 14, 32, 32);
-			annualFeeButton.setIcon(new ImageIcon(HomePage.class.getResource("/cartButton.png")));
+			annualFeeButton.setIcon(new ImageIcon(HomePage.class.getResource("/membershipButton.png")));
 			add(annualFeeButton);
 		}
 
