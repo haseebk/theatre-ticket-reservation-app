@@ -130,7 +130,6 @@ public class AnnouncementPage extends JPanel {
 		cartButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.out.println("View Cart");
 				CartPage cartPanel = new CartPage(frame, backend);
 				frame.setContentPane(cartPanel);
 				frame.revalidate();

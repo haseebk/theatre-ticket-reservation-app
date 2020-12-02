@@ -47,7 +47,6 @@ public class DatabasePopulator{
 	}
 	
 	public void loadMovies() throws IOException {
-		System.out.println("\n****LOADING MOVIES****");
 
 		FileInputStream fstream = new FileInputStream("data/movie_data.txt");
 		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
@@ -60,7 +59,6 @@ public class DatabasePopulator{
 			if(argList[0].compareTo("") == 0){
 				break;
 			}
-			System.out.println(argList[5]);
 			dbController.addMovie(new Movie(Integer.parseInt(argList[0]),argList[1],argList[2],Integer.parseInt(argList[3]),
 					argList[4],Double.parseDouble(argList[5]),Double.parseDouble(argList[6]),argList[7],Double.parseDouble(argList[8]),argList[9]));
 		}
@@ -68,7 +66,6 @@ public class DatabasePopulator{
 	}
 
 	public void loadTheatres() throws IOException{
-		System.out.println("\n****LOADING THEATRES****");
 
 		FileInputStream fstream = new FileInputStream("data/theatre_data.txt");
 		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
@@ -81,9 +78,6 @@ public class DatabasePopulator{
 			if(argList[0].compareTo("") == 0){
 				break;
 			}
-			for(int i = 0; i < argList.length; i++){
-				System.out.println(argList[i]);
-			}
 			dbController.addTheatre(new Theatre(Integer.parseInt(argList[0]), argList[1], argList[2], argList[3]));
 		}
 		fstream.close();
@@ -91,7 +85,6 @@ public class DatabasePopulator{
 	}
 
 	public void loadAuditoriums() throws IOException {
-		System.out.println("\n****LOADING AUDITORIUMS****");
 
 		FileInputStream fstream = new FileInputStream("data/auditorium_data.txt");
 		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
@@ -104,9 +97,6 @@ public class DatabasePopulator{
 			if(argList[0].compareTo("") == 0){
 				break;
 			}
-			for(int i = 0; i < argList.length; i++){
-				System.out.println(argList[i]);
-			}
 			dbController.addAuditorium(new Auditorium(Integer.parseInt(argList[0]), Integer.parseInt(argList[1]), Integer.parseInt(argList[2]), dbController.searchTheatre(Integer.parseInt(argList[3]))));
 		}
 		fstream.close();
@@ -116,7 +106,6 @@ public class DatabasePopulator{
 
 
 	public void loadShowtimes() throws IOException{
-		System.out.println("\n****LOADING SHOW TIMES****");
 
 		FileInputStream fstream = new FileInputStream("data/showtime_data.txt");
 		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
@@ -128,9 +117,6 @@ public class DatabasePopulator{
 			argList = line.split(":");
 			if(argList[0].compareTo("") == 0){
 				break;
-			}
-			for(int i = 0; i < argList.length; i++){
-				System.out.println(argList[i]);
 			}
 
 			Movie foundMovie = dbController.searchMovie(Integer.parseInt(argList[1]));
@@ -166,7 +152,6 @@ public class DatabasePopulator{
 
 
 	public void loadUsers() throws IOException{
-		System.out.println("\n****LOADING USERS****");
 
 		FileInputStream fstream = new FileInputStream("data/registered_user_data.txt");
 		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
@@ -179,9 +164,6 @@ public class DatabasePopulator{
 			if(argList[0].compareTo("") == 0){
 				break;
 			}
-			for(int i = 0; i < argList.length; i++){
-				System.out.println(argList[i]);
-			}
 
 			Date foundDate = new Date(Integer.parseInt(argList[7]),Integer.parseInt(argList[8]),Integer.parseInt(argList[9]));
 			dbController.addUser(new RegisteredUser(Integer.parseInt(argList[0]),argList[1],argList[2],argList[3],argList[4],argList[5],dbController.searchBankingInfo(Integer.parseInt(argList[6])),foundDate));
@@ -190,7 +172,6 @@ public class DatabasePopulator{
 	}
 
 	public void loadAnnouncements() throws IOException{
-		System.out.println("\n****LOADING ANNOUNCEMENTS****");
 
 		FileInputStream fstream = new FileInputStream("data/announcement_data.txt");
 		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
@@ -202,9 +183,6 @@ public class DatabasePopulator{
 			argList = line.split(":");
 			if(argList[0].compareTo("") == 0){
 				break;
-			}
-			for(int i = 0; i < argList.length; i++){
-				System.out.println(argList[i]);
 			}
 			Date foundDate1 = new Date(Integer.parseInt(argList[1]),Integer.parseInt(argList[2]),Integer.parseInt(argList[3]));
 			Date foundDate2 = new Date(Integer.parseInt(argList[4]),Integer.parseInt(argList[5]),Integer.parseInt(argList[6]));
@@ -218,7 +196,6 @@ public class DatabasePopulator{
 
 
 	public void loadBankInfo() throws IOException{
-		System.out.println("\n****LOADING BANKING INFO****");
 		FileInputStream fstream = new FileInputStream("data/banking_data.txt");
 		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 
@@ -229,9 +206,6 @@ public class DatabasePopulator{
 			argList = line.split(":");
 			if(argList[0].compareTo("") == 0){
 				break;
-			}
-			for(int i = 0; i < argList.length; i++){
-				System.out.println(argList[i]);
 			}
 			BankingInfo temp = new BankingInfo(Integer.parseInt(argList[0]), argList[1], argList[2], argList[3], argList[4], argList[5]);
 			dbController.addBankingInfo(temp);
@@ -251,9 +225,6 @@ public class DatabasePopulator{
 			if(argList[0].compareTo("") == 0){
 				break;
 			}
-			for(int i = 0; i < argList.length; i++){
-				System.out.println(argList[i]);
-			}
 			dbController.addPayment(new Payment(Integer.parseInt(argList[0]), Double.parseDouble(argList[1]), dbController.searchBankingInfo(Integer.parseInt(argList[2]))));
 		}
 	}
@@ -269,9 +240,6 @@ public class DatabasePopulator{
 			argList = line.split(":");
 			if(argList[0].compareTo("") == 0){
 				break;
-			}
-			for(int i = 0; i < argList.length; i++){
-				System.out.println(argList[i]);
 			}
 			boolean use = false;
 			if(argList[2].compareTo("true") == 0)
