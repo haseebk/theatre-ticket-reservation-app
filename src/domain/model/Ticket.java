@@ -36,8 +36,9 @@ public class Ticket {
 
 	// This method sends the voucher code to the
 	// email id in the argument
-	public void emailTicket(String email) {
-		// Needs to be implemented still
+	public void emailTicket(BackEnd backend, String voucherCode) {
+		Email send = new Email();
+		send.sendEmail(backend, voucherCode);
 	}
 
 	// Getters and Setters

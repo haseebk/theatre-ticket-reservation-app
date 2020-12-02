@@ -176,7 +176,7 @@ public class CancelTicketPage extends JPanel {
 						ArrayList<Ticket> tempTicketList = new ArrayList<Ticket>();
 						tempTicketList.add(tempTicket);
 						Receipt refundReceipt = new Receipt(tempPayment,todayDay,tempTicketList);
-						refundReceipt.emailReceipt(backend.getCurrentRegisteredUser().getEmail());
+						refundReceipt.emailReceipt(backend, refundReceipt.receiptToString());
 						backend.getDataController().addReceipt(refundReceipt);
 						backend.getDataController().addPayment(tempPayment);
 					}

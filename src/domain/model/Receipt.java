@@ -37,10 +37,12 @@ public class Receipt {
 	}
 
 	// This method emails the receipt created
-	public void emailReceipt(String email) {
+	public void emailReceipt(BackEnd backend, String email) {
+		Email send = new Email();
+		send.sendEmail(backend, email);
 		System.out.println("To: " + email + "\n" + receiptToString());
 	}
-
+	
 	// Receipt info printed to console
 	public String receiptToString() {
 		String receipt = "Reciept ID: " + getReceiptID() + "\n";

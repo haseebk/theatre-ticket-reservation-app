@@ -439,9 +439,9 @@ public class PaymentPage extends JPanel {
 			Ticket t = new Ticket(backend.getCurrentUser().getCart().getPayment(), movie, showtime, seat);
 			ticketList.add(t);
 			if(backend.getCurrentRegisteredUser() != null){
-				t.emailTicket(backend.getCurrentRegisteredUser().getEmail());
+//				t.emailTicket(backend);
 			}else {
-				t.emailTicket(emailTextField.getText());
+//				t.emailTicket(emailTextField.getText());
 			}
 			backend.getDataController().addTicket(t);
 		}
@@ -450,15 +450,16 @@ public class PaymentPage extends JPanel {
 		Date nowDate = new Date(LocalDate.now().getDayOfMonth(),LocalDate.now().getMonthValue(),LocalDate.now().getYear());
 		Receipt r = new Receipt(backend.getCurrentUser().getCart().getPayment(),nowDate,ticketList);
 		backend.getDataController().addReceipt(r);
+		
 
 		if(backend.getCurrentRegisteredUser() != null){
-			r.emailReceipt(backend.getCurrentRegisteredUser().getEmail());
-		}else {
-			r.emailReceipt(emailTextField.getText());
-		}
+			r.emailReceipt(backend, r.receiptToString());
+		} 
+			
 		/* Add prompt to show ticket and success message */
 		JOptionPane.showMessageDialog(null, r.receiptToString(),
 				"Ticket Has Been Purchased", JOptionPane.INFORMATION_MESSAGE);
+
 		backend.getCurrentUser().setCart(new Cart());
 		HomePage homePanel = new HomePage(frame, backend);
 		frame.setContentPane(homePanel);
