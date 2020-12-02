@@ -4,14 +4,18 @@ import java.util.ArrayList;
 
 public class Receipt {
 	private int receiptID;
-	private static int receiptCounter = 1100;
+	private static int receiptCounter = 11000;
 	private Payment payment;
 	private Date date;
 	private ArrayList<Ticket> ticket;
 
 	public Receipt(int receiptID, Payment payment, Date date) {
 		this.receiptID = receiptID;
-		receiptCounter++;
+		if(receiptID > receiptCounter){
+			receiptCounter = receiptID+1;
+		}else {
+			receiptCounter++;
+		}
 		this.payment = payment;
 		this.date = date;
 		this.ticket = new ArrayList<Ticket>();

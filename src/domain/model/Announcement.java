@@ -24,7 +24,11 @@ public class Announcement {
 	}
 	public Announcement(int id,Date privateD, Date publicD, Movie mov) {
 		announcementID = id;
-		announcementCounter++;
+		if(id > announcementCounter){
+			announcementCounter = id+1;
+		}else {
+			announcementCounter++;
+		}
 		privateAnnounceDate = privateD;
 		publicAnnounceDate = publicD;
 		announceMessage = mov.getTitle() + " avaliable in Theatres: " + publicAnnounceDate.toString();
@@ -59,6 +63,10 @@ public class Announcement {
 	public void setPublicAnnounceDate(Date publicAnnounceDate) { this.publicAnnounceDate = publicAnnounceDate; }
 
 	public int getAnnouncementID() { return announcementID; }
+	public Movie getMovieAnnouncement() { return movieAnnouncement; }
+
+	public void setMovieAnnouncement(Movie movieAnnouncement) { this.movieAnnouncement = movieAnnouncement; }
+
 	
 	@Override
 	public String toString() {

@@ -60,8 +60,9 @@ public class DatabasePopulator{
 			if(argList[0].compareTo("") == 0){
 				break;
 			}
+			System.out.println(argList[5]);
 			dbController.addMovie(new Movie(Integer.parseInt(argList[0]),argList[1],argList[2],Integer.parseInt(argList[3]),
-					argList[4],Integer.parseInt(argList[5]),Double.parseDouble(argList[6]),argList[7],Double.parseDouble(argList[8]),argList[9]));
+					argList[4],Double.parseDouble(argList[5]),Double.parseDouble(argList[6]),argList[7],Double.parseDouble(argList[8]),argList[9]));
 		}
 		fstream.close();
 	}
