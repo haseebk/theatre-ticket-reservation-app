@@ -3,6 +3,10 @@ package domain.model;
 import domain.model.Date;
 
 public class Announcement {
+
+	private int announcementID;
+	private static int announcementCounter = 7000;
+
 	private Date privateAnnounceDate;
 
 	private Date publicAnnounceDate;
@@ -10,15 +14,17 @@ public class Announcement {
 
 	private Movie movieAnnouncement;
 
-	public Announcement(Date privateD, Date publicD, String m, Movie mov) {
+	public Announcement(Date privateD, Date publicD, Movie mov) {
+		announcementID = announcementCounter++;
 		privateAnnounceDate = privateD;
 		publicAnnounceDate = publicD;
-		announceMessage = m;
+		announceMessage = mov.getTitle() + " avaliable in Theatres: " + publicAnnounceDate.toString();
 		movieAnnouncement = mov;
 		mov.setMovieAnnouncement(this);
 	}
-
-	public Announcement(Date privateD, Date publicD, Movie mov) {
+	public Announcement(int id,Date privateD, Date publicD, Movie mov) {
+		announcementID = id;
+		announcementCounter++;
 		privateAnnounceDate = privateD;
 		publicAnnounceDate = publicD;
 		announceMessage = mov.getTitle() + " avaliable in Theatres: " + publicAnnounceDate.toString();
@@ -51,6 +57,8 @@ public class Announcement {
 	public Date getPublicAnnounceDate() { return publicAnnounceDate; }
 
 	public void setPublicAnnounceDate(Date publicAnnounceDate) { this.publicAnnounceDate = publicAnnounceDate; }
+
+	public int getAnnouncementID() { return announcementID; }
 	
 	@Override
 	public String toString() {
