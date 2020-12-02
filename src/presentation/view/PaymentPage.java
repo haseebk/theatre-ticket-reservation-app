@@ -115,8 +115,8 @@ public class PaymentPage extends JPanel {
 
 		// CREATE CARDTYPE TEXT FIELD
 		Vector<String> cardTypes = new Vector<String>();
-		cardTypes.add("MasterCard");
-		cardTypes.add("Visa");
+		cardTypes.add("MASTERCARD");
+		cardTypes.add("VISA");
 		JComboBox cardTypeSelectComboBox = new JComboBox(cardTypes);
 		cardTypeSelectComboBox.setBounds(433, 350, 118, 28);
 		cardTypeSelectComboBox.setToolTipText("Select Card Type");
@@ -383,7 +383,8 @@ public class PaymentPage extends JPanel {
 					cardValid = false;
 				}
 				// Validate voucher
-				if (voucher != "") {
+
+				if (voucher.compareTo("") != 0) {
 					redeemedVoucher = backend.getDataController().redeemVoucher(voucher);
 					if(redeemedVoucher == null){
 						voucherValid = false;

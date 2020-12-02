@@ -10,6 +10,9 @@ import java.util.Vector;
 import javax.swing.*;
 import javax.swing.border.MatteBorder;
 
+import java.io.Serializable;
+import java.time.LocalDate;
+
 import domain.model.*;
 
 public class HomePage extends JPanel {
@@ -24,6 +27,9 @@ public class HomePage extends JPanel {
 
 	// Announcement button
 	private JLabel announcementButton;
+
+	// PayAnnualFee button
+	private JLabel annualFeeButton;
 
 	// Label displaying No Theatre Selected
 	private JLabel noTheatreSelectedLabel;
@@ -64,7 +70,8 @@ public class HomePage extends JPanel {
 	// Label displaying Added to Cart
 	private JLabel addedToCartLabel;
 
-	// TextArea which depicts the Graphic of Seat Avaliability, X if booked, O if avaliable, - if Selected
+	// TextArea which depicts the Graphic of Seat Avaliability, X if booked, O if
+	// avaliable, - if Selected
 	private JTextArea seatGraphicLabel;
 
 	// Button that adds seat selection to Cart
@@ -129,7 +136,7 @@ public class HomePage extends JPanel {
 
 	public HomePage(JFrame frame, BackEnd backend) {
 		setLayout(null);
-
+		
 		// CREATE NO THEATRE SELECTED TEXT LABEL
 		// Label displaying No Theatre Selected
 		noTheatreSelectedLabel = new JLabel("<html>" + "Please select a theatre." + "</html>");
@@ -156,7 +163,7 @@ public class HomePage extends JPanel {
 		noMovieSelectedLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		noMovieSelectedLabel.setForeground(Color.RED);
 		noMovieSelectedLabel.setFont(new Font("HelveticaNeue", Font.PLAIN, 15));
-		noMovieSelectedLabel.setBounds(156, 392, 168, 45); //
+		noMovieSelectedLabel.setBounds(156, 392, 168, 45);
 		noMovieSelectedLabel.setVisible(false);
 		add(noMovieSelectedLabel);
 
@@ -294,7 +301,56 @@ public class HomePage extends JPanel {
 							System.out.println("Public: " + currentShowtime.getMovie().getMovieAnnouncement().isPublic());
 							System.out.println("Private: " + currentShowtime.getMovie().getMovieAnnouncement().isPrivateOnly());
 							boolean selectFlag = false;
-
+						}
+					}
+				}
+			}
+		}
+		// Only allow registered users to add movies to cart if they have payed the annual fee
+		
+			// CREATE ADDED TO CART TEXT LABEL
+			// Label displaying Added to Cart
+			addedToCartLabel = new JLabel("<html>" + "Added To Cart" + "</html>");
+			addedToCartLabel.setHorizontalAlignment(SwingConstants.LEFT);
+			addedToCartLabel.setForeground(Color.RED);
+			addedToCartLabel.setFont(new Font("HelveticaNeue", Font.PLAIN, 15));
+			addedToCartLabel.setBounds(1100, 500, 192, 45);
+			addedToCartLabel.setVisible(false);
+			add(addedToCartLabel);
+	
+			// CREATE ADD TO CART BUTTON
+			// Button that adds seat selection to Cart
+			seatGraphicLabel = new JTextArea("");
+			AddToCartButton = new JLabel("Add To Cart");
+			AddToCartButton.setToolTipText("Add To Cart");
+			AddToCartButton.setForeground(Color.WHITE);
+			AddToCartButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			/**
+			 * When add to cart button is pressed, pull all information from fields and
+			 * verify if user input was valid. If valid and unique inputs, add the selected
+			 * showtime combo to user cart.
+			 */
+			AddToCartButton.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					if(backend.getCurrentUser().getUserType().compareTo("Registered") == 0 && backend.getCurrentRegisteredUser().isFeePayed()) {
+					try {
+						// Get user entered row and column
+						int userRow = Integer.parseInt(rowTextField.getText());
+						int userCol = Integer.parseInt(colTextField.getText());
+	
+						invalidSeatErrorLabel.setVisible(false);
+						takenSeatErrorLabel.setVisible(false);
+						addedToCartLabel.setVisible(false);
+						selectedSeatErrorLabel.setVisible(false);
+						privateMovieBookingErrorLabel.setVisible(false);
+						// If user entered a valid row and column
+						if (userRow < currentShowtime.getRow() && userCol < currentShowtime.getCol()) {
+							boolean available = currentShowtime.getSeatAvaliability(userRow, userCol);
+							if (available == false) {
+							System.out.println("Public: " + currentShowtime.getMovie().getMovieAnnouncement().isPublic());
+							System.out.println("Private: " + currentShowtime.getMovie().getMovieAnnouncement().isPrivateOnly());
+							boolean selectFlag = false;
 							//If already selected
 							for (int k = 0; k < backend.getCurrentUser().getCart().getItems_in_cart().size(); k++) {
 								if (backend.getCurrentUser().getCart().getItems_in_cart().get(k).getBookedSeat().getRow() == userRow
@@ -349,11 +405,17 @@ public class HomePage extends JPanel {
 					System.out.println(f);
 				}
 			}
+			else {
+				System.out.println("User needs to pay annual fee");
+				JOptionPane.showMessageDialog(null, "Annual Fee needs to be payed to continue.", (String)"Annual Fee Payment", JOptionPane.INFORMATION_MESSAGE);
+			}
+		}
 		});
 		AddToCartButton.setBounds(1050, 425, 254, 50);
 		AddToCartButton.setVisible(false);
 		AddToCartButton.setIcon(new ImageIcon(LoginPage.class.getResource("/addToCartButton.png")));
 		add(AddToCartButton);
+
 
 		// CREATE SELECT SEAT TEXT
 		// Label displaying Select Seat
@@ -712,6 +774,53 @@ public class HomePage extends JPanel {
 		logoutButton.setBounds(30, 5, 50, 50);
 		logoutButton.setIcon(new ImageIcon(HomePage.class.getResource("/backButton.png")));
 		add(logoutButton);
+		
+		// CREATE ANNUALFEE BUTTON
+		// Button to pay annual fee for registered users
+		if(backend.getCurrentUser().getUserType().compareTo("Registered") == 0) {
+			annualFeeButton = new JLabel("");
+			annualFeeButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			annualFeeButton.setToolTipText("Pay Annual Fee");
+			/**
+			 * When the annualFee button is pressed, process payment
+			 */
+			annualFeeButton.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					System.out.println("pay annual fee");
+					
+					// Check if annual fee hasn't been payed
+					if(backend.getCurrentRegisteredUser().getAdminFeeDate().beforeCurrentDate() && backend.getCurrentRegisteredUser().isFeePayed() == false) {
+						// Verify card to process payment
+						String name = backend.getCurrentRegisteredUser().getF_name() + " " + backend.getCurrentRegisteredUser().getL_name();
+						String ct = backend.getCurrentRegisteredUser().getBankInfo().getCardType();
+						String cn = backend.getCurrentRegisteredUser().getBankInfo().getCardNumber();
+						String cvs = backend.getCurrentRegisteredUser().getBankInfo().getCardSVS();
+						String exp = backend.getCurrentRegisteredUser().getBankInfo().getCardExpirationDate().toString();
+						if(backend.getDataController().getInst().verifyCardInfo(name, ct, cn, cvs, exp)) {
+							System.out.println("fee payment successful");
+							JOptionPane.showMessageDialog(null, "Annual Fee has been successfully payed. Purchase Cost: $20", (String)"Annual Fee Payment", JOptionPane.INFORMATION_MESSAGE);
+							backend.getCurrentRegisteredUser().setFeePayed(true);
+						}
+						else {
+							System.out.println("fee payment unsuccessful");
+							JOptionPane.showMessageDialog(null, "Annual Fee payment was unsuccessful.", (String)"Annual Fee Payment", JOptionPane.INFORMATION_MESSAGE);
+						}
+						//HomePage homePanel = new HomePage(frame, backend);
+						//frame.setContentPane(homePanel);
+					}
+					else {
+						System.out.println("fee has already been payed");
+						JOptionPane.showMessageDialog(null, "Annual Fee has been already payed.", (String)"Annual Fee Payment", JOptionPane.INFORMATION_MESSAGE);
+					}
+					
+					frame.revalidate();
+				}
+			});
+			annualFeeButton.setBounds(1366 - 32 - 210, 14, 32, 32);
+			annualFeeButton.setIcon(new ImageIcon(HomePage.class.getResource("/cartButton.png")));
+			add(annualFeeButton);
+		}
 
 		// CREATE CART BUTTON
 		// Button to view current cart
@@ -773,6 +882,7 @@ public class HomePage extends JPanel {
 		homeBackground.setIcon(new ImageIcon(HomePage.class.getResource("/backgroundD.png")));
 		add(homeBackground);
 	}
+					
 
 	public void createSeatGraphic(JFrame frame, BackEnd backend){
 		String tempGraphic = "";
@@ -823,4 +933,4 @@ public class HomePage extends JPanel {
 		seatGraphicLabel.setText(tempGraphic);
 		seatGraphicLabel.setVisible(true);
 	}
-}
+					}

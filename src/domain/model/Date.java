@@ -14,38 +14,9 @@ public class Date {
 		year = y;
 	}
 
-	/**
-	 * Sees if the date is before the current date
-	 * @return true if it is before the current date or the same as the current date, false if it is after the current date
-	 */
-	public boolean beforeCurrentDate(){
-		LocalDate todaysDate = LocalDate.now();
-		//System.out.println("Before Current Date: " + year + " vs. " + todaysDate.getYear());
-		if(year > todaysDate.getYear()){
-			return true;
-		}
-		if(year < todaysDate.getYear()){
-			return false;
-		}
-		//System.out.println(todaysDate.getMonthValue() + " vs. " + month);
-		if(month > todaysDate.getMonthValue()){
-			return true;
-		}
-		if(month < todaysDate.getMonthValue()){
-			return false;
-		}
-		//System.out.println(todaysDate.getDayOfMonth() + " vs. " + day);
-		if(day > todaysDate.getDayOfMonth()){
-			return true;
-		}
-		if(day < todaysDate.getDayOfMonth()){
-			return false;
-		}
-		return true;
-	}
 	public boolean checkIfCurrentDate(Date compareDate) {
 		LocalDate todaysDate = LocalDate.now();
-		if (todaysDate.getYear() == compareDate.getYear()){
+		if (todaysDate.getYear() == compareDate.getYear()) {
 			if (todaysDate.getMonthValue() == compareDate.getMonth()) {
 				if (todaysDate.getDayOfMonth() == compareDate.getDay()) {
 					return true;
@@ -53,7 +24,39 @@ public class Date {
 			}
 		}
 		return false;
-		
+	}
+
+	/**
+	 * Sees if the date is before the current date
+	 * 
+	 * @return true if it is before the current date or the same as the current
+	 *         date, false if it is after the current date
+	 */
+	public boolean beforeCurrentDate() {
+		LocalDate todaysDate = LocalDate.now();
+		// System.out.println("Before Current Date: " + year + " vs. " +
+		// todaysDate.getYear());
+		if (year > todaysDate.getYear()) {
+			return true;
+		}
+		if (year < todaysDate.getYear()) {
+			return false;
+		}
+		// System.out.println(todaysDate.getMonthValue() + " vs. " + month);
+		if (month > todaysDate.getMonthValue()) {
+			return true;
+		}
+		if (month < todaysDate.getMonthValue()) {
+			return false;
+		}
+		// System.out.println(todaysDate.getDayOfMonth() + " vs. " + day);
+		if (day > todaysDate.getDayOfMonth()) {
+			return true;
+		}
+		if (day < todaysDate.getDayOfMonth()) {
+			return false;
+		}
+		return true;
 	}
 
 	public void setDate(int d, int m, int y) {
@@ -62,19 +65,30 @@ public class Date {
 		year = y;
 	}
 
-	//Getters and setters
-	public int getDay() { return day; }
+	// Getters and setters
+	public int getDay() {
+		return day;
+	}
 
-	public int getMonth() { return month; }
+	public int getMonth() {
+		return month;
+	}
 
-	public int getYear() { return year; }
+	public int getYear() {
+		return year;
+	}
 
-	public void setDay(int day) { this.day = day; }
+	public void setDay(int day) {
+		this.day = day;
+	}
 
-	public void setMonth(int month) { this.month = month; }
+	public void setMonth(int month) {
+		this.month = month;
+	}
 
-	public void setYear(int year) { this.year = year; }
-
+	public void setYear(int year) {
+		this.year = year;
+	}
 
 	@Override
 	public String toString() {
